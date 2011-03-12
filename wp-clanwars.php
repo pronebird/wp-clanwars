@@ -6,7 +6,7 @@
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrew Mihaylov
  * Version: 1.1
- * $Id: wp-clanwars.php 432 2010-07-11 18:23:21Z and $
+ * $Id$
  * Tags: cybersport, clanwar, team, clan
  */
 
@@ -977,7 +977,7 @@ class WP_ClanWars {
                                 <input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction" id="wp-clanwars-doaction" class="button-secondary action" />
                             </div>
 
-                            <div class="alignright actions">
+                            <div class="alignright actions" style="display: none;">
                                 <label class="screen-reader-text" for="teams-search-input"><?php _e('Search Teams:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                                 <input id="teams-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
 
@@ -1639,7 +1639,7 @@ class WP_ClanWars {
                                 <input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction" id="wp-clanwars-doaction" class="button-secondary action" />
                             </div>
 
-                            <div class="alignright actions">
+                            <div class="alignright actions" style="display: none;">
                                 <label class="screen-reader-text" for="games-search-input"><?php _e('Search Teams:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                                 <input id="games-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
 
@@ -1878,7 +1878,7 @@ class WP_ClanWars {
                                 <input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction" id="wp-clanwars-doaction" class="button-secondary action" />
                             </div>
 
-                            <div class="alignright actions">
+                            <div class="alignright actions" style="display: none;">
                                 <label class="screen-reader-text" for="maps-search-input"><?php _e('Search Maps:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                                 <input id="maps-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
 
@@ -3304,7 +3304,7 @@ class WP_ClanWars {
                                 <input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction" id="wp-clanwars-doaction" class="button-secondary action" />
                             </div>
 
-                            <div class="alignright actions">
+                            <div class="alignright actions" style="display: none;">
                                 <label class="screen-reader-text" for="games-search-input"><?php _e('Search Teams:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                                 <input id="games-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
 
