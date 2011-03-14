@@ -811,7 +811,7 @@ class WP_ClanWars {
                 $data = (array)$t[0];
         }
 
-        extract($this->extract_args($_POST, $this->extract_args($data, $defaults)));
+        extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
 
         $this->print_notices();
         ?>
@@ -868,17 +868,11 @@ class WP_ClanWars {
 
         if(sizeof($_POST)) {
 
-            $defaults = array('title' => '', 'logo' => 0, 'country' => '', 'home_team' => 0);
-
-            $data = $this->extract_args($_POST, $defaults);
-
-            extract($data);
-
-            if(!empty($title)) {
+            if(isset($_POST['title']) && !empty($_POST['title'])) {
 
                 switch($act) {
                     case 'add':
-                        if($this->add_team($_POST)) {
+                        if($this->add_team(stripslashes_deep($_POST))) {
                             wp_redirect(admin_url('admin.php?page=wp-clanwars-teams&add=1'));
                             exit();
                         } else
@@ -886,7 +880,7 @@ class WP_ClanWars {
                     break;
 
                     case 'edit':
-                        if($this->update_team($id, $_POST) !== false) {
+                        if($this->update_team($id, stripslashes_deep($_POST)) !== false) {
                             wp_redirect(admin_url('admin.php?page=wp-clanwars-teams&update=1'));
                             exit();
                         } else
@@ -1419,7 +1413,7 @@ class WP_ClanWars {
                     case 'add':
 
                         $defaults = array('title' => '', 'abbr' => '', 'icon' => 0);
-                        $data = $this->extract_args($_POST, $defaults);
+                        $data = $this->extract_args(stripslashes_deep($_POST), $defaults);
                         extract($data);
 
                         if(!empty($title)) {
@@ -1446,7 +1440,7 @@ class WP_ClanWars {
 
                     case 'edit':
                         $defaults = array('title' => '', 'abbr' => '', 'delete_image' => false);
-                        $data = $this->extract_args($_POST, $defaults);
+                        $data = $this->extract_args(stripslashes_deep($_POST), $defaults);
                         extract($data);
 
 						unset($data['delete_image']);
@@ -1480,7 +1474,7 @@ class WP_ClanWars {
 						
                     case 'addmap':
                         $defaults = array('title' => '', 'game_id' => 0, 'id' => 0);
-                        $data = $this->extract_args($_POST, $defaults);
+                        $data = $this->extract_args(stripslashes_deep($_POST), $defaults);
                         extract($data);
 
                         if(!empty($title)) {
@@ -1508,7 +1502,7 @@ class WP_ClanWars {
                         
                     case 'editmap':
                         $defaults = array('title' => '', 'game_id' => 'all', 'id' => 0, 'delete_image' => false);
-                        $data = $this->extract_args($_POST, $defaults);
+                        $data = $this->extract_args(stripslashes_deep($_POST), $defaults);
                         extract($data);
 
                         $update_data = array('title' => $title);
@@ -1728,7 +1722,7 @@ class WP_ClanWars {
                 $data = (array)$t[0];
         }
 
-        extract($this->extract_args($_POST, $this->extract_args($data, $defaults)));
+        extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
 
         $this->print_notices();
 
@@ -2123,7 +2117,7 @@ class WP_ClanWars {
             }
         }
 
-        extract($this->extract_args($_POST, $this->extract_args($data, $defaults)));
+        extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
 
         $attach = wp_get_attachment_image($screenshot, 'thumbnail');
 
@@ -2768,7 +2762,7 @@ class WP_ClanWars {
         $games = $this->get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => asc));
         $teams = $this->get_team('id=all&orderby=title&order=asc');
 
-        extract($this->extract_args($_POST, $this->extract_args($data, $defaults)));
+        extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
         $date = $this->date_array2time_helper($date);
 
         $this->print_notices();
@@ -2940,7 +2934,7 @@ class WP_ClanWars {
 
                 case 'add':
 
-                    extract($this->extract_args($_POST, array(
+                    extract($this->extract_args(stripslashes_deep($_POST), array(
                         'game_id' => 0,
                         'title' => '',
 						'description' => '',
@@ -2997,7 +2991,7 @@ class WP_ClanWars {
 
             case 'edit':
 
-                    extract($this->extract_args($_POST, array(
+                    extract($this->extract_args(stripslashes_deep($_POST), array(
                         'id' => 0,
                         'game_id' => 0,
                         'title' => '',
