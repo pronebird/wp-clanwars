@@ -5,7 +5,7 @@
  * Plugin URI: http://www.codeispoetry.ru/?page_id=xxx
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrew Mikhailov
- * Version: 1.1
+ * Version: 1.2
  * $Id$
  * Tags: cybersport, clanwar, team, clan
  */
@@ -102,69 +102,81 @@ class WP_ClanWars {
     {
         global $wpdb;
 
-        $wpdb->query("CREATE TABLE IF NOT EXISTS `{$this->tables['games']}` (
-					  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-					  `title` varchar(200) NOT NULL,
-					  `abbr` varchar(20) DEFAULT NULL,
-					  `icon` bigint(20) unsigned DEFAULT NULL,
-					  PRIMARY KEY (`id`),
-					  KEY `icon` (`icon`)
-					)");
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-        $wpdb->query("CREATE TABLE IF NOT EXISTS `{$this->tables['maps']}` (
+        $dbstruct = '';
+
+        $dbstruct .= "CREATE TABLE `{$this->tables['games']}` (
+                      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+                      `title` varchar(200) NOT NULL,
+                      `abbr` varchar(20) DEFAULT NULL,
+                      `icon` bigint(20) unsigned DEFAULT NULL,
+                      PRIMARY KEY (`id`),
+                      KEY `icon` (`icon`),
+                      KEY `title` (`title`),
+                      KEY `abbr` (`abbr`)
+                    );";
+
+        $dbstruct .= "CREATE TABLE `{$this->tables['maps']}` (
 					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 					  `game_id` int(10) unsigned NOT NULL,
 					  `title` varchar(200) NOT NULL,
 					  `screenshot` bigint(20) unsigned DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  KEY `game_id` (`game_id`,`screenshot`)
-					)");
+					);";
 
-        $wpdb->query("CREATE TABLE IF NOT EXISTS `{$this->tables['matches']}` (
-					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-					  `title` varchar(200) DEFAULT NULL,
-					  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-					  `post_id` bigint(20) unsigned DEFAULT NULL,
-					  `team1` int(11) unsigned NOT NULL,
-					  `team2` int(11) unsigned NOT NULL,
-					  `game_id` int(11) unsigned NOT NULL,
-					  `match_status` tinyint(1) DEFAULT '0',
-					  `description` text NOT NULL,
-					  PRIMARY KEY (`id`),
-					  KEY `post_id` (`post_id`),
-					  KEY `post_title` (`title`),
-					  KEY `game_id` (`game_id`),
-					  KEY `team1` (`team1`),
-					  KEY `team2` (`team2`),
-					  KEY `match_status` (`match_status`)
-					)");
+        $dbstruct .= "CREATE TABLE `{$this->tables['matches']}` (
+                      `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                      `title` varchar(200) DEFAULT NULL,
+                      `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                      `post_id` bigint(20) unsigned DEFAULT NULL,
+                      `team1` int(11) unsigned NOT NULL,
+                      `team2` int(11) unsigned NOT NULL,
+                      `game_id` int(11) unsigned NOT NULL,
+                      `match_status` tinyint(1) DEFAULT '0',
+                      `description` text NOT NULL,
+                      `external_url` varchar(200) DEFAULT NULL,
+                      PRIMARY KEY (`id`),
+                      KEY `post_id` (`post_id`),
+                      KEY `post_title` (`title`),
+                      KEY `game_id` (`game_id`),
+                      KEY `team1` (`team1`),
+                      KEY `team2` (`team2`),
+                      KEY `match_status` (`match_status`),
+                      KEY `date` (`date`)
+                    );";
 
-        $wpdb->query("CREATE TABLE IF NOT EXISTS `{$this->tables['rounds']}` (
-					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-					  `match_id` int(10) unsigned NOT NULL,
-					  `group_n` int(11) NOT NULL,
-					  `map_id` int(10) unsigned NOT NULL,
-					  `tickets1` int(11) NOT NULL,
-					  `tickets2` int(11) NOT NULL,
-					  PRIMARY KEY (`id`),
-					  KEY `match_id` (`match_id`),
-					  KEY `group_n` (`group_n`)
-					)");
+        $dbstruct .= "CREATE TABLE `{$this->tables['rounds']}` (
+                      `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                      `match_id` int(10) unsigned NOT NULL,
+                      `group_n` int(11) NOT NULL,
+                      `map_id` int(10) unsigned NOT NULL,
+                      `tickets1` int(11) NOT NULL,
+                      `tickets2` int(11) NOT NULL,
+                      PRIMARY KEY (`id`),
+                      KEY `match_id` (`match_id`),
+                      KEY `group_n` (`group_n`),
+                      KEY `map_id` (`map_id`)
+                    );";
 
-        $wpdb->query("CREATE TABLE IF NOT EXISTS `{$this->tables['teams']}` (
-					  `id` int(11) NOT NULL AUTO_INCREMENT,
-					  `title` varchar(200) NOT NULL,
-					  `logo` bigint(20) unsigned DEFAULT NULL,
-					  `country` varchar(20) DEFAULT NULL,
-					  `home_team` tinyint(1) DEFAULT '0',
-					  PRIMARY KEY (`id`),
-					  KEY `country` (`country`),
-					  KEY `home_team` (`home_team`)
-					)");
+        $dbstruct .= "CREATE TABLE `{$this->tables['teams']}` (
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `title` varchar(200) NOT NULL,
+                      `logo` bigint(20) unsigned DEFAULT NULL,
+                      `country` varchar(20) DEFAULT NULL,
+                      `home_team` tinyint(1) DEFAULT '0',
+                      PRIMARY KEY (`id`),
+                      KEY `country` (`country`),
+                      KEY `home_team` (`home_team`),
+                      KEY `title` (`title`)
+                    );";
 
 		add_option(WP_CLANWARS_CATEGORY, -1);
 		add_option(WP_CLANWARS_ACL, array());
 
+        // update database
+        dbDelta($dbstruct);
     }
 
     /**
@@ -2456,16 +2468,29 @@ class WP_ClanWars {
 
 			$post_content .= '<h3>' . __('Match description', WP_CLANWARS_TEXTDOMAIN) . '</h3>';
 
-
-			$post_content .= '<p class="details"><span class="date">@ ' . $date . '</span>';
+            $post_content .= '<ul class="match-props">';
+			$post_content .= '<li class="date">' . $date . '</li>';
 
 			if(isset($this->match_status[$sn]))
-				$post_content .= ', <span class="status type-' . $sn . '">' . $this->match_status[$sn] . '</span>';
+				$post_content .= '<li class="status type-' . $sn . '">' . $this->match_status[$sn] . '</li>';
 
-			$post_content .= '</p>';
+            if(!empty($m->external_url))
+            {
+                $post_content .= '<li class="external_url">';
+                $post_content .= '<a href="' . esc_attr($m->external_url) . '" target="_blank">' . esc_url($m->external_url) . '</a>';
+                $post_content .= '</li>';
+            }
+
+            $post_content .= '</ul>'; // match-props
 
 			if(!empty($m->description))
-				$post_content .= '<p class="description">' . nl2br(esc_html($m->description)) . '</p>';
+            {
+                $description = nl2br(esc_html($m->description));
+                $description = make_clickable($description);
+                $description = wptexturize($description);
+                $description = convert_smilies($description);
+				$post_content .= '<p class="description">' . $description . '</p>';
+            }
 
 			$post_content .= '</div>'; // page
 
@@ -2526,7 +2551,8 @@ class WP_ClanWars {
             'team2' => '%d',
             'game_id' => '%d',
 			'match_status' => '%d',
-            'description' => '%s'
+            'description' => '%s',
+            'external_url' => '%s'
         );
 
         $data = wp_parse_args($p, array());
@@ -2539,6 +2565,11 @@ class WP_ClanWars {
                 $update_data[$fld] = $data[$fld];
                 $update_mask[] = $mask;
             }
+        }
+
+        // filter external_url field
+        if(isset($update_data['external_url'])) {
+            $update_data['external_url'] = esc_url_raw($update_data['external_url']);
         }
 
         $result = $wpdb->update($this->tables['matches'], $update_data, array('id' => $id), $update_mask, array('%d'));
@@ -2723,6 +2754,7 @@ class WP_ClanWars {
     {
         $data = array();
         $current_time = $this->current_time_fixed('timestamp', 0);
+        $post_id = 0;
 
         $defaults = array('game_id' => 0,
             'title' => '',
@@ -2732,6 +2764,7 @@ class WP_ClanWars {
 			'match_status' => 0,
             'action' => '',
 			'description' => '',
+            'external_url' => '',
             'date' => array('mm' => date('m', $current_time),
                             'yy' => date('Y', $current_time),
                             'jj' => date('j', $current_time),
@@ -2747,6 +2780,8 @@ class WP_ClanWars {
                 $data = (array)$t[0];
                 $data['date'] = strtotime($data['date']);
                 $data['scores'] = array();
+
+                $post_id = $data['post_id'];
 
                 $rounds = $this->get_rounds($data['id']);
 
@@ -2764,6 +2799,10 @@ class WP_ClanWars {
 
         extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
         $date = $this->date_array2time_helper($date);
+
+        if(isset($_GET['update'])) {
+            $this->add_notice(__('Match is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
+        }
 
         $this->print_notices();
         ?>
@@ -2784,7 +2823,17 @@ class WP_ClanWars {
         </script>
 
             <div class="wrap wp-cw-matcheditor">
-                <h2><?php echo $page_title; ?></h2>
+                
+                <h2 class="clear"><?php echo $page_title; ?>
+
+                <?php if($post_id) : ?>
+                <ul class="linkbar">
+                    <li class="post-link"><a href="<?php echo esc_attr(get_permalink($post_id)); ?>" target="_blank" class="icon-link"><?php echo $post_id; ?></a></li>
+                    <li class="post-comments"><a href="<?php echo get_comments_link($post_id); ?>" target="_blank"><?php echo get_comments_number($post_id); ?></a></li>
+                </ul>
+                <?php endif; ?>
+                
+                </h2>
 
                     <form name="match-editor" id="match-editor" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
 
@@ -2815,9 +2864,18 @@ class WP_ClanWars {
                         </tr>
 
                         <tr class="form-field">
-                            <th scope="row" valign="top"><label for="title"><?php _e('Description', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
+                            <th scope="row" valign="top"><label for="description"><?php _e('Description', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
                             <td>
                                 <textarea name="description" id="description"><?php echo esc_html($description); ?></textarea>
+                            </td>
+                        </tr>
+
+                        <tr class="form-field">
+                            <th scope="row" valign="top"><label for="external_url"><?php _e('External URL', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
+                            <td>
+                                <input type="text" name="external_url" id="external_url" value="<?php echo esc_attr($external_url); ?>" />
+
+                                <p class="description"><?php _e('Enter league URL or external match URL here.', WP_CLANWARS_TEXTDOMAIN); ?></p>
                             </td>
                         </tr>
 
@@ -2938,6 +2996,7 @@ class WP_ClanWars {
                         'game_id' => 0,
                         'title' => '',
 						'description' => '',
+                        'external_url' => '',
                         'date' => $this->current_time_fixed('timestamp', 0),
                         'team1' => 0,
                         'team2' => 0,
@@ -2996,6 +3055,7 @@ class WP_ClanWars {
                         'game_id' => 0,
                         'title' => '',
 						'description' => '',
+                        'external_url' => '',
                         'date' => $this->current_time_fixed('timestamp', 0),
                         'team1' => 0,
                         'team2' => 0,
@@ -3021,7 +3081,8 @@ class WP_ClanWars {
                             'team2' => $team2,
                             'game_id' => $game_id,
 							'match_status' => $match_status,
-                            'description' => $description
+                            'description' => $description,
+                            'external_url' => $external_url
                         ));
 
                     $rounds_not_in = array();
@@ -3051,7 +3112,7 @@ class WP_ClanWars {
 
 					$this->update_match_post($id);
 
-                    wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&update=1'));
+                    wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&act=edit&id=' . $id . '&update=1'));
                     exit();
 
                 break;
@@ -3261,10 +3322,6 @@ class WP_ClanWars {
 
         if(isset($_GET['add'])) {
             $this->add_notice(__('Match is successfully added.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-        }
-
-        if(isset($_GET['update'])) {
-            $this->add_notice(__('Match is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
         }
 
         if(isset($_GET['delete'])) {
