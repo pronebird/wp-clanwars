@@ -2489,6 +2489,10 @@ class WP_ClanWars {
                 $description = make_clickable($description);
                 $description = wptexturize($description);
                 $description = convert_smilies($description);
+
+                // add target=_blank to all links
+                $description = preg_replace('#(<a.*?)(>.*?</a>)#i', '$1 target="_blank"$2', $description);
+
 				$post_content .= '<p class="description">' . $description . '</p>';
             }
 
