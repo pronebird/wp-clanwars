@@ -2879,7 +2879,7 @@ class WP_ClanWars {
                             <td>
                                 <input type="text" name="external_url" id="external_url" value="<?php echo esc_attr($external_url); ?>" />
 
-                                <p class="description"><?php _e('Enter league URL or external match URL here.', WP_CLANWARS_TEXTDOMAIN); ?></p>
+                                <p class="description"><?php _e('Enter league URL or external match URL.', WP_CLANWARS_TEXTDOMAIN); ?></p>
                             </td>
                         </tr>
 
