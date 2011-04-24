@@ -27,6 +27,11 @@
 	background-color: #fff;
 }
 
+.wp-cw-matcheditor textarea#description {
+    height: 5em;
+    resize: vertical;
+}
+
 .wp-cw-matcheditor .match-results {
     margin: 20px 0;
     width: 400px;
@@ -139,4 +144,31 @@
 
 .available-games img {
 	vertical-align: middle;
+}
+
+.linkbar {
+    display: inline;
+    float: right;
+    font-family: Helvetica, Arial;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    margin: 0 40px 0 0;
+    padding: 0;
+}
+
+.linkbar li {
+    list-style: none;
+    float: left;
+    margin-left: 10px;
+    line-height: 35px;
+    padding-left: 20px;
+}
+
+.linkbar li.post-link {
+    background: transparent url(images/icon-link16.png) 0% 50% no-repeat;
+}
+
+.linkbar li.post-comments {
+    background: transparent url(images/icon-comments16.png) 0% 50% no-repeat;
 }
