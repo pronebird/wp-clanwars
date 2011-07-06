@@ -3,7 +3,7 @@
  * This is a part of  WP-ClanWars plugin
  * Description: WP-ClanWars Widget
  * Author: Andrew Mihaylov
- * $Id: wp-clanwars-widget.php 424 2010-07-06 17:35:30Z and $
+ * $Id$
 */
 
 /*
