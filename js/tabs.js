@@ -1,10 +1,3 @@
-/*
-    Document   : tabs
-    Created on : 05.04.2010, 18:14:07
-    Author     : and
-    Description:
-        Purpose of the javascript follows.
-*/
 
 jQuery(document).ready(function($){
 

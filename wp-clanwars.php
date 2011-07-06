@@ -7,7 +7,7 @@
  * Author: Andrew Mikhailov
  * Version: 1.3
  * $Id$
- * Tags: cybersport, clanwar, team, clan
+ * Tags: cybersport, clanwar, team, clan, cyber, sport, match
  */
 
 /*
@@ -84,7 +84,7 @@ class WP_ClanWars {
     {
         $revId = '';
 
-        if(preg_match('/\d+/', '$Rev: 432 $', $m))
+        if(preg_match('/\d+/', '$Rev$', $m))
             $revId = array_pop($m);
 
         define($var_base . '_REV', $revId);
@@ -298,17 +298,17 @@ class WP_ClanWars {
 
 	function register_cssjs() 
 	{	
-		wp_register_script('jquery-json', WP_CLANWARS_URL . '/jquery.json-2.2.min.js', array('jquery'), WP_CLANWARS_REV);
-        wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/matches.js', array('jquery', 'jquery-json', 'utils'), WP_CLANWARS_REV);
-        wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/admin.js', array('jquery', 'utils'), WP_CLANWARS_REV);
+		wp_register_script('jquery-json', WP_CLANWARS_URL . '/js/jquery.json-2.2.min.js', array('jquery'), WP_CLANWARS_REV);
+        wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery', 'jquery-json', 'utils'), WP_CLANWARS_REV);
+        wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery', 'utils'), WP_CLANWARS_REV);
 
-		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/admin.css', array(), WP_CLANWARS_REV);
-		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/flags.css', array(), '1.01');
+		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_REV);
+		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
 		
-		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/tipsy-0.1.7/src/javascripts/jquery.tipsy.js', array('jquery'), '0.1.7');
-		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/tipsy-0.1.7/src/stylesheets/tipsy.css', array(), '0.1.7');
+		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/jquery.tipsy.js', array('jquery'), '0.1.7');
+		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/tipsy.css', array(), '0.1.7');
 
-		wp_register_style('wp-cw-public', WP_CLANWARS_URL . '/public.js', array('jquery', 'jquery-tipsy'), WP_CLANWARS_REV);
+		wp_register_style('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery', 'jquery-tipsy'), WP_CLANWARS_REV);
 	}
 
 	function acl_user_can($action, $value = false, $user_id = false)
@@ -424,7 +424,6 @@ class WP_ClanWars {
 	}
 
 	function on_template_redirect() {
-		wp_enqueue_script('jquery-tipsy');
 		wp_enqueue_script('wp-cw-public');
 		wp_enqueue_style('jquery-tipsy');
 		wp_enqueue_style('wp-cw-flags');
