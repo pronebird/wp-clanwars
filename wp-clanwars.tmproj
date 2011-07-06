@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>dev/wp-clanwars/wp-clanwars.php</string>
+	<string>wp-clanwars.php</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,7 +21,7 @@
 	<integer>200</integer>
 	<key>metaData</key>
 	<dict>
-		<key>dev/wp-clanwars/countries.php</key>
+		<key>countries.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -35,7 +35,7 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>dev/wp-clanwars/css/admin.css</key>
+		<key>css/admin.css</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -49,7 +49,7 @@
 			<key>firstVisibleLine</key>
 			<integer>132</integer>
 		</dict>
-		<key>dev/wp-clanwars/js/matches.js</key>
+		<key>js/matches.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -63,7 +63,7 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>dev/wp-clanwars/js/public.js</key>
+		<key>js/public.js</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -77,7 +77,7 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>dev/wp-clanwars/wp-clanwars-widget.php</key>
+		<key>wp-clanwars-widget.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -91,7 +91,7 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>dev/wp-clanwars/wp-clanwars.php</key>
+		<key>wp-clanwars.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
@@ -108,12 +108,12 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>dev/wp-clanwars/wp-clanwars.php</string>
-		<string>dev/wp-clanwars/css/admin.css</string>
-		<string>dev/wp-clanwars/countries.php</string>
-		<string>dev/wp-clanwars/js/matches.js</string>
-		<string>dev/wp-clanwars/js/public.js</string>
-		<string>dev/wp-clanwars/wp-clanwars-widget.php</string>
+		<string>wp-clanwars.php</string>
+		<string>css/admin.css</string>
+		<string>countries.php</string>
+		<string>js/matches.js</string>
+		<string>js/public.js</string>
+		<string>wp-clanwars-widget.php</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
