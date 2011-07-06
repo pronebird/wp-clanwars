@@ -40,14 +40,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>35</integer>
+				<integer>20</integer>
 				<key>line</key>
-				<integer>172</integer>
+				<integer>23</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>132</integer>
+			<integer>8</integer>
 		</dict>
 		<key>js/matches.js</key>
 		<dict>
@@ -96,14 +96,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>128</integer>
 				<key>line</key>
-				<integer>81</integer>
+				<integer>281</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>64</integer>
+			<integer>247</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
@@ -118,6 +118,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{203, 54}, {1207, 824}}</string>
+	<string>{{203, 52}, {1207, 824}}</string>
 </dict>
 </plist>
