@@ -5,7 +5,7 @@
  * Plugin URI: http://www.codeispoetry.ru/?page_id=xxx
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrew Mikhailov
- * Version: 1.2
+ * Version: 1.3
  * $Id$
  * Tags: cybersport, clanwar, team, clan
  */
@@ -247,6 +247,8 @@ class WP_ClanWars {
         add_action('wp_ajax_get_maps', array($this, 'on_ajax_get_maps'));
 
 		add_shortcode('wp-clanwars', array($this, 'on_shortcode'));
+		
+		$this->register_cssjs();
     }
 
     /**
@@ -292,15 +294,22 @@ class WP_ClanWars {
 
         foreach($this->page_hooks as $page_hook)
 			add_action('load-' . $page_hook, array($this, 'on_load_any'));
+    }
 
-        wp_register_script('jquery-json', WP_CLANWARS_URL . '/jquery.json-2.2.min.js', array('jquery'), WP_CLANWARS_REV);
+	function register_cssjs() 
+	{	
+		wp_register_script('jquery-json', WP_CLANWARS_URL . '/jquery.json-2.2.min.js', array('jquery'), WP_CLANWARS_REV);
         wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/matches.js', array('jquery', 'jquery-json', 'utils'), WP_CLANWARS_REV);
         wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/admin.js', array('jquery', 'utils'), WP_CLANWARS_REV);
 
-
-
 		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/admin.css', array(), WP_CLANWARS_REV);
-    }
+		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/flags.css', array(), '1.01');
+		
+		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/tipsy-0.1.7/src/javascripts/jquery.tipsy.js', array('jquery'), '0.1.7');
+		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/tipsy-0.1.7/src/stylesheets/tipsy.css', array(), '0.1.7');
+
+		wp_register_style('wp-cw-public', WP_CLANWARS_URL . '/public.js', array('jquery', 'jquery-tipsy'), WP_CLANWARS_REV);
+	}
 
 	function acl_user_can($action, $value = false, $user_id = false)
 	{
@@ -415,15 +424,16 @@ class WP_ClanWars {
 	}
 
 	function on_template_redirect() {
-		wp_enqueue_script('jquery-tipsy', WP_CLANWARS_URL . '/tipsy-0.1.7/src/javascripts/jquery.tipsy.js', array('jquery'), '0.1.7');
-		wp_enqueue_style('jquery-tipsy', WP_CLANWARS_URL . '/tipsy-0.1.7/src/stylesheets/tipsy.css', array(), '0.1.7');
-
-		wp_enqueue_script('wp-cw-public', WP_CLANWARS_URL . '/public.js', array('jquery', 'jquery-tipsy'), WP_CLANWARS_REV);
+		wp_enqueue_script('jquery-tipsy');
+		wp_enqueue_script('wp-cw-public');
+		wp_enqueue_style('jquery-tipsy');
+		wp_enqueue_style('wp-cw-flags');
 
 	}
 
     function on_load_any() {
         wp_enqueue_style('wp-cw-admin');
+		wp_enqueue_style('wp-cw-flags');
 
 		wp_enqueue_script('wp-cw-admin');
         wp_localize_script('wp-cw-admin',
@@ -466,8 +476,8 @@ class WP_ClanWars {
         if(!empty($attrstr)) $attrstr = ' ' . $attrstr;
 
         echo '<select' . $attrstr . '>';
-        foreach($this->countries as $abbr => $data) :
-            echo '<option value="' . esc_attr($abbr) . '" style="background-image: url(\'' . WP_CLANWARS_URL . '/images/flags/' . $data['icon'] . '\'); background-position: 5px 50%; background-repeat: no-repeat; padding-left: 25px;"' . selected($abbr, $select, false) . '>' . esc_html($data['title']) . '</option>';
+        foreach($this->countries as $abbr => $title) :
+            echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
         endforeach;
         echo '</select>';
     }
@@ -619,17 +629,15 @@ class WP_ClanWars {
         return $rslt;
     }
 
-    function get_country_flag($country, $html = false) {
-        $url = WP_CLANWARS_URL . '/images/flags/' . $this->countries[$country]['icon'];
-        
-        if($html)
-            return '<img src="' .  $url . '" alt="" />';
-
-        return $url;
+    function get_country_flag($country, $deprecated = 0) {
+        return '<div class="flag ' . esc_attr($country) . '"><br/></div>';
     }
 
     function get_country_title($country) {
-        return $this->countries[$country]['title'];
+		if(isset($this->countries[$country]))
+        	return $this->countries[$country];
+
+		return false;
     }
 
     function get_team($p, $count = false)
