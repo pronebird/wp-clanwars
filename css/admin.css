@@ -19,6 +19,11 @@
 	margin: 2px;
 }
 
+.wp-cw-matcheditor h2 {
+	position: relative;
+	margin-right: 90px;
+}
+
 .wp-cw-mapeditor .screenshot img,
 .wp-cw-gameeditor .screenshot img {
     margin: 20px 0;
@@ -147,14 +152,16 @@
 }
 
 .linkbar {
-    display: inline;
-    float: right;
+    display: block;
     font-family: Helvetica, Arial;
     font-size: 12px;
     font-style: normal;
     font-weight: normal;
-    margin: 0 40px 0 0;
+    margin: 0;
     padding: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 .linkbar li {

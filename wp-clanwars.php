@@ -967,7 +967,7 @@ class WP_ClanWars {
         
     ?>
         <div class="wrap wp-cw-teams">
-            <h2><?php _e('Teams', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-teams&act=add'); ?>" class="button add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+            <h2><?php _e('Teams', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-teams&act=add'); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
 
             <div id="poststuff" class="metabox-holder">
 
@@ -1627,7 +1627,7 @@ class WP_ClanWars {
     ?>
         <div class="wrap wp-cw-games">
             <h2><?php _e('Games', WP_CLANWARS_TEXTDOMAIN); ?>
-				<?php if($this->acl_user_can('manage_game', 'all')) : ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=add'); ?>" class="button add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a><?php endif; ?>
+				<?php if($this->acl_user_can('manage_game', 'all')) : ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=add'); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a><?php endif; ?>
 			</h2>
 
             <div id="poststuff" class="metabox-holder">
@@ -1867,7 +1867,7 @@ class WP_ClanWars {
 
     ?>
         <div class="wrap wp-cw-maps">
-            <h2><?php _e('Maps', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=addmap&game_id=' . $game_id); ?>" class="button add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+            <h2><?php _e('Maps', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=addmap&game_id=' . $game_id); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
 
             <div id="poststuff" class="metabox-holder">
 
@@ -2842,16 +2842,14 @@ class WP_ClanWars {
 
             <div class="wrap wp-cw-matcheditor">
                 
-                <h2 class="clear"><?php echo $page_title; ?>
-
+                <h2><?php echo $page_title; ?>
                 <?php if($post_id) : ?>
                 <ul class="linkbar">
                     <li class="post-link"><a href="<?php echo esc_attr(get_permalink($post_id)); ?>" target="_blank" class="icon-link"><?php echo $post_id; ?></a></li>
                     <li class="post-comments"><a href="<?php echo get_comments_link($post_id); ?>" target="_blank"><?php echo get_comments_number($post_id); ?></a></li>
                 </ul>
                 <?php endif; ?>
-                
-                </h2>
+				</h2>
 
                     <form name="match-editor" id="match-editor" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
 
@@ -3351,7 +3349,7 @@ class WP_ClanWars {
 
     ?>
         <div class="wrap wp-cw-matches">
-            <h2><?php _e('Matches', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&act=add'); ?>" class="button add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+            <h2><?php _e('Matches', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&act=add'); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
 
             <div id="poststuff" class="metabox-holder">
 
