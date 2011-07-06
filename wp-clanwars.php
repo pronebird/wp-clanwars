@@ -308,7 +308,7 @@ class WP_ClanWars {
 		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/jquery.tipsy.js', array('jquery'), '0.1.7');
 		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/tipsy.css', array(), '0.1.7');
 
-		wp_register_style('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery', 'jquery-tipsy'), WP_CLANWARS_REV);
+		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_REV);
 	}
 
 	function acl_user_can($action, $value = false, $user_id = false)
@@ -427,7 +427,6 @@ class WP_ClanWars {
 		wp_enqueue_script('wp-cw-public');
 		wp_enqueue_style('jquery-tipsy');
 		wp_enqueue_style('wp-cw-flags');
-
 	}
 
     function on_load_any() {
@@ -629,7 +628,7 @@ class WP_ClanWars {
     }
 
     function get_country_flag($country, $deprecated = 0) {
-        return '<div class="flag ' . esc_attr($country) . '"><br/></div>';
+        return '<span class="flag ' . esc_attr($country) . '"><br/></span>';
     }
 
     function get_country_title($country) {
@@ -2372,6 +2371,7 @@ class WP_ClanWars {
 		$postarr = array(
 			'post_status' => 'publish',
 			'post_content' => '',
+			'post_excerpt' => '',
 			'post_title' => ''
 		);
 
@@ -2403,12 +2403,15 @@ class WP_ClanWars {
 					$post_title = __('Regular match', WP_CLANWARS_TEXTDOMAIN);
 			}
 
+			$post_excerpt = '';
 			$post_content = '<div class="wp-clanwars-page">';
 
-			$post_content .= '<div class="teams">' . 
+			$post_content .= '<p class="teams">' . 
 					'<span class="team1">' . $this->get_country_flag($m->team1_country, true) . ' ' . $m->team1_title . '</span>' .
 					'<span class="team2">' . $m->team2_title . ' ' . $this->get_country_flag($m->team2_country, true) . '</span>' .
-					'</div>';
+					'</p>';
+			
+			$post_excerpt .= sprintf(_x('%s vs %s', 'match_excerpt', WP_CLANWARS_TEXTDOMAIN), $m->team1_title, $m->team2_title) . "\n";
 
 			$r = $this->get_rounds($m->id);
 			$rounds = array();
@@ -2467,7 +2470,9 @@ class WP_ClanWars {
 			$t2 = $m->team2_tickets;
 			$round_class = $t1 < $t2 ? 'loose' : ($t1 > $t2 ? 'win' : 'draw');
 
-			$post_content .= '<div class="summary"><span class="scores ' . $round_class . '">' . sprintf(__('%d:%d'), $t1, $t2) . '</span></div>';
+			$score_text = sprintf(__('%d:%d'), $t1, $t2);
+			$post_content .= '<div class="summary"><span class="scores ' . $round_class . '">' . $score_text . '</span></div>';
+			$post_excerpt .= $score_text . "\n";
 
 			// match description
 			$sn = $m->match_status;
@@ -2500,6 +2505,7 @@ class WP_ClanWars {
                 // add target=_blank to all links
                 $description = preg_replace('#(<a.*?)(>.*?</a>)#i', '$1 target="_blank"$2', $description);
 
+				$post_excerpt .= $description . "\n";
 				$post_content .= '<p class="description">' . $description . '</p>';
             }
 
@@ -2507,6 +2513,7 @@ class WP_ClanWars {
 
 			$postarr['post_title'] = $post_title;
 			$postarr['post_content'] = $post_content;
+			$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
 
 			$new_post_ID = 0;
 
