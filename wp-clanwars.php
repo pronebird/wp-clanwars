@@ -84,7 +84,7 @@ class WP_ClanWars {
     {
         $revId = '';
 
-        if(preg_match('/\d+/', '$Rev$', $m))
+        if(preg_match('/\d+/', '$RevId$', $m))
             $revId = array_pop($m);
 
         define($var_base . '_REV', $revId);
