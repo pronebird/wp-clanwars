@@ -166,9 +166,9 @@
 }
 
 .linkbar li.post-link {
-    background: transparent url(images/icon-link16.png) 0% 50% no-repeat;
+    background: transparent url(../images/icon-link16.png) 0% 50% no-repeat;
 }
 
 .linkbar li.post-comments {
-    background: transparent url(images/icon-comments16.png) 0% 50% no-repeat;
+    background: transparent url(../images/icon-comments16.png) 0% 50% no-repeat;
 }

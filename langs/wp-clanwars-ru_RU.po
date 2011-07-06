@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-06 11:57+0300\n"
+"POT-Creation-Date: 2011-07-06 15:14+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrew Mikhaylov <and.mikhaylov@gmail.com>\n"
 "Language-Team: Andrew Mikhaylov <and@codeispoetry.ru>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-KeywordsList: __;_e;_n;_c;_x;__ngettext_noop:1,2;__ngettext:1,2;_n:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n;_c;_x:1,2c;__ngettext_noop:1,2;__ngettext:1,2;_n:1,2\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11) ? 0 : ((n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: /Users/pronebird/dev/wp-clanwars\n"
@@ -1015,28 +1015,28 @@ msgstr "ClanWars"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:101
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:102
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3184
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3185
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3611
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3612
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3724
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3190
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3191
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3617
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3618
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3730
 msgid "All"
 msgstr "Все"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:137
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3219
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3225
 msgid "Upcoming"
 msgstr "Предстоящий"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:139
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3221
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3227
 msgid "Playing"
 msgstr "Идет игра"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:141
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2456
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2471
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3223
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2458
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2473
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3229
 #, php-format
 msgid "%d:%d"
 msgstr ""
@@ -1082,150 +1082,150 @@ msgid "Official"
 msgstr "Официальный"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:284
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3348
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3354
 msgid "Matches"
 msgstr "Матчи"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:285
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:972
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:970
 msgid "Teams"
 msgstr "Команды"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:286
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1631
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1629
 msgid "Games"
 msgstr "Игры"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:287
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3892
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3898
 msgid "Import"
 msgstr "Импорт"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:288
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3620
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3626
 msgid "Settings"
 msgstr "Настройки"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:442
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:440
 msgid "Are you sure you want to delete this map?"
 msgstr "Вы уверены, что хотите удалить эту карту?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:443
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:441
 msgid "Are you sure you want to delete this game?"
 msgstr "Вы уверены, что хотите удалить эту игру?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:444
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:442
 msgid "Are you sure you want to delete this team?"
 msgstr "Вы уверены, что хотите удалить эту команду?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:445
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:443
 msgid "Are you sure you want to delete this match?"
 msgstr "Вы уверены, что хотите удалить этот матч?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:780
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:799
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:886
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1207
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1415
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1810
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2199
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2748
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2991
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2994
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3001
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3486
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3502
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3528
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3554
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:778
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:797
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:884
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1205
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1413
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1808
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2197
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2754
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2997
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3000
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3007
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3492
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3508
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3534
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3560
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:814
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:812
 msgid "New Team"
 msgstr "Новая команда"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:814
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:812
 msgid "Add Team"
 msgstr "Добавить команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:821
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:819
 msgid "Edit Team"
 msgstr "Редактировать команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:821
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:819
 msgid "Update Team"
 msgstr "Обновить команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:852
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:952
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1611
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1765
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1853
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2161
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2872
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3327
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:850
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:950
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1609
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1763
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1851
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2159
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2878
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3333
 msgid "Title"
 msgstr "Заголовок"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:852
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1765
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2161
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:850
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1763
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2159
 msgid "required"
 msgstr "обязательное"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:859
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:953
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:857
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:951
 msgid "Country"
 msgstr "Страна"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:899
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:907
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1452
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1486
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1513
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1548
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3059
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:897
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:905
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1450
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1484
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1511
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1546
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3065
 msgid "An error occurred."
 msgstr "Возникла ошибка."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:912
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:910
 msgid "Team title is required field."
 msgstr "Название команды является обязательным полем."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:938
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1597
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1838
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3167
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3313
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:936
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1595
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1836
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3173
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3319
 msgid "&laquo;"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:939
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1598
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1839
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3168
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3314
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:937
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1596
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1837
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3174
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3320
 msgid "&raquo;"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:944
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1603
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1844
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3173
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3319
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:942
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1601
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1842
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3179
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3325
 #, php-format
 msgid "Displaying %s&#8211;%s of %s"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:956
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:954
 msgid "Team is successfully added."
 msgstr "Команда успешно добавлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:960
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:958
 msgid "Team is successfully updated."
 msgstr "Команда успешно обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:965
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:963
 #, php-format
 msgid "%d Team deleted."
 msgid_plural "%d Teams deleted"
@@ -1233,167 +1233,167 @@ msgstr[0] "%d команда удалена."
 msgstr[1] "%d команды удалено."
 msgstr[2] "%d команд удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:972
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1632
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1872
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3348
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:970
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1630
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1870
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3354
 msgid "Add New"
 msgstr "Добавить"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:988
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1053
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1649
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1713
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1889
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1953
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3364
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3461
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:986
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1051
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1647
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1711
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1887
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1951
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3370
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3467
 msgid "Bulk Actions"
 msgstr "Действия"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:989
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1030
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1054
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1650
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1693
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1714
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1890
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1936
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1954
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3365
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3412
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3462
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3673
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3750
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:987
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1028
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1052
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1648
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1691
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1712
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1888
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1934
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1952
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3371
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3418
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3468
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3679
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3756
 msgid "Delete"
 msgstr "Удалить"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:991
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1056
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1653
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1717
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1892
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1956
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3367
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3464
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3675
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3752
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:989
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1054
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1651
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1715
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1890
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1954
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3373
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3470
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3681
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3758
 msgid "Apply"
 msgstr "Применить"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:995
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1657
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3371
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:993
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1655
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3377
 msgid "Search Teams:"
 msgstr "Поиск по командам:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:998
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:996
 msgid "Search Teams"
 msgstr "Поиск по командам"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1027
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1689
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1025
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1687
 #, php-format
 msgid "Edit &#8220;%s&#8221; Team"
 msgstr "Редактировать &#8220;%s&#8221; команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1027
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1689
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3409
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1025
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1687
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3415
 msgid "(Home Team)"
 msgstr "(Домашняя команда)"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1029
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1691
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1935
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3411
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1027
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1689
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1933
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3417
 msgid "Edit"
 msgstr "Редактировать"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1031
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1029
 msgid "Set As Home Team"
 msgstr "Сделать домашней командой"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1379
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1377
 msgid "New Game"
 msgstr "Новая игра"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1379
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1377
 msgid "Add Game"
 msgstr "Добавить игру"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1386
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1384
 msgid "Edit Game"
 msgstr "Редактировать игру"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1386
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1384
 msgid "Update Game"
 msgstr "Обновить игру"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1420
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1418
 msgid "Database error."
 msgstr "Ошибка базы данных"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1421
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1419
 msgid "The game is updated."
 msgstr "Игра обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1422
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1420
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in <code>php.ini</code>."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1423
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1421
 msgid "The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was specified in the HTML form."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1424
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1422
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1425
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1423
 msgid "No file was uploaded."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1426
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1424
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1427
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1425
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1428
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1426
 msgid "File upload stopped by extension."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1429
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1427
 msgid "File type does not meet security guidelines. Try another."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1458
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1492
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1456
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1490
 msgid "Game title is required field."
 msgstr "Название игры является обязательным полем."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1519
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1554
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1517
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1552
 msgid "Map title is required field."
 msgstr "Название карты является обязательным полем."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1612
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1772
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1610
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1770
 msgid "Abbreviation"
 msgstr "Аббревиатура"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1615
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1613
 msgid "Game is successfully added."
 msgstr "Игра успешно добавлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1619
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1617
 msgid "Game is successfully updated."
 msgstr "Игра успешно обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1624
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1622
 #, php-format
 msgid "%d Game deleted."
 msgid_plural "%d Games deleted"
@@ -1401,38 +1401,38 @@ msgstr[0] "%d игра удалена."
 msgstr[1] "%d игры удалено."
 msgstr[2] "%d игр удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1651
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1715
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1649
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1713
 msgid "Export"
 msgstr "Экспорт"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1660
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3374
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1658
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3380
 msgid "Search Games"
 msgstr "Поиск по играм"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1692
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1872
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1690
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1870
 msgid "Maps"
 msgstr "Карты"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1779
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1777
 msgid "Icon"
 msgstr "Иконка"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1786
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1784
 msgid "Delete Icon"
 msgstr "Удалить иконку"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1856
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1854
 msgid "Map is successfully added."
 msgstr "Карта успешно добавлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1860
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1858
 msgid "Map is successfully updated."
 msgstr "Карта успешно обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1865
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1863
 #, php-format
 msgid "%d Map deleted."
 msgid_plural "%d Maps deleted"
@@ -1440,142 +1440,148 @@ msgstr[0] "%d карта удалена."
 msgstr[1] "%d карты удалено."
 msgstr[2] "%d карт удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1896
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1894
 msgid "Search Maps:"
 msgstr "Поиск по картам:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1899
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1897
 msgid "Search Maps"
 msgstr "Поиск по картам"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1933
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1931
 #, php-format
 msgid "Edit &#8220;%s&#8221; Map"
 msgstr "Редактировать &#8220;%s&#8221; карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2111
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2109
 msgid "Add Map"
 msgstr "Добавить карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2118
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2116
 msgid "Edit Map"
 msgstr "Редактировать карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2118
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2116
 msgid "Update Map"
 msgstr "Обновить карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2168
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2166
 msgid "Screenshot"
 msgstr "Скриншот"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2175
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2173
 msgid "Delete Screenshot"
 msgstr "Удалить скриншот"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2261
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2259
 #, php-format
 msgid "%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input"
 msgstr "%2$s %1$s %5$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2402
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2401
 #, php-format
 msgid "%s vs %s"
 msgstr "%s vs %s"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2404
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3403
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2403
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3409
 msgid "Regular match"
 msgstr "Очередной матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2477
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2414
+#, fuzzy, php-format
+msgctxt "match_excerpt"
+msgid "%s vs %s"
+msgstr "%s vs %s"
+
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2481
 msgid "Match description"
 msgstr "Описание матча"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2734
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2740
 msgid "Add Match"
 msgstr "Добавить матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2741
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2747
 msgid "Edit Match"
 msgstr "Редактировать матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2816
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2822
 msgid "Match is successfully updated."
 msgstr "Матч успешно обновлен."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2860
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3328
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2866
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3334
 msgid "Game"
 msgstr "Игра"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2867
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2873
 msgid "The scores will be removed on game change."
 msgstr "Все очки будут удалены при смене игры."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2879
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2885
 msgid "Description"
 msgstr "Описание"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2886
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2892
 msgid "External URL"
 msgstr "Внешний URL"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2890
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2896
 msgid "Enter league URL or external match URL."
 msgstr "Введите URL лиги или внешний URL на матч."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2895
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3330
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2901
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3336
 msgid "Match status"
 msgstr "Статус матча"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2904
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3329
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2910
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3335
 msgid "Date"
 msgstr "Дата"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2920
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2926
 msgid "vs"
 msgstr "vs"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2929
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2935
 msgid "or just type opponent team here:"
 msgstr "или просто напечатайте название команды оппонента:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2938
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2944
 msgid "Add map"
 msgstr "Добавить карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2980
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2986
 msgid "Add Round"
 msgstr "Добавить раунд"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2981
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2987
 msgid "Exclude map from match"
 msgstr "Исключить карту из матча"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2982
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2988
 msgid "Remove round"
 msgstr "Удалить раунд"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3331
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3337
 msgid "Team 1"
 msgstr "Команда 1"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3332
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3338
 msgid "Team 2"
 msgstr "Команда 2"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3333
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3339
 msgid "Tickets"
 msgstr "Тикеты"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3336
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3342
 msgid "Match is successfully added."
 msgstr "Матч успешно добавлен."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3341
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3347
 #, php-format
 msgid "%d Match deleted."
 msgid_plural "%d Matches deleted"
@@ -1583,101 +1589,101 @@ msgstr[0] "%d матч удален."
 msgstr[1] "%d матча удалено."
 msgstr[2] "%d матчей удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3409
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3415
 #, php-format
 msgid "Edit &#8220;%s&#8221; Match"
 msgstr "Редактировать &#8220;%s&#8221; матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3603
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3609
 msgid "User Login"
 msgstr "Логин"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3604
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3610
 msgid "Permissions"
 msgstr "Права"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3623
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3629
 msgid "Settings saved."
 msgstr "Настройки сохранены."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3632
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3638
 msgid "Matches Category"
 msgstr "Рубрика для матчей"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3641
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3647
 msgid "None"
 msgstr "Ничего"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3653
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3659
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3658
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3664
 msgid "User Access"
 msgstr "Доступ пользователей"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3672
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3749
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3678
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3755
 msgid "Actions"
 msgstr "Действия"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3715
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3721
 msgid "Yes"
 msgstr "Да"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3715
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3721
 msgid "No"
 msgstr "Нет"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3764
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3770
 msgid "Add New User"
 msgstr "Добавить нового пользователя"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3771
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3777
 msgid "User"
 msgstr "Пользователь"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3776
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3782
 msgid "Allow user manage specified games only:"
 msgstr "Разрешить пользователю управлять только указанными ниже играми:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3783
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3789
 msgid "User can create new games <strong>only if &ldquo;All&rdquo; option is checked.</strong>"
 msgstr "Пользователь может создавать новые игры <strong>только если опция &laquo;Все&raquo; выставлена.</strong>"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3787
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3793
 msgid "Allow user:"
 msgstr "Разрешить пользователю:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3797
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3803
 msgid "Add User"
 msgstr "Добавить пользователя"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3842
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3848
 msgid "An upload error occurred while import."
 msgstr "Возникла ошибка во время импорта."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3845
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3851
 msgid "File successfully imported."
 msgstr "Файл успешно импортирован."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3845
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3851
 msgid "An error occurred while import."
 msgstr "Возникла ошибка во время импорта."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3852
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3858
 msgid "Import games"
 msgstr "Импорт игр"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3861
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3867
 msgid "Upload Package (gz file)"
 msgstr "Загрузить пакет (gz файл)"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3867
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3873
 msgid "Import Available Packages"
 msgstr "Импорт доступных пакетов"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3881
+#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3887
 msgid "installed"
 msgstr "установлен"
 
