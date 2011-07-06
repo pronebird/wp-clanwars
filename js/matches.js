@@ -1,10 +1,3 @@
-/*
-    Document   : matches
-    Created on : 05.04.2010, 18:14:07
-    Author     : and
-    Description:
-        Purpose of the javascript follows.
-*/
 
 function matchMap(id, game_id, map_id) {
 
@@ -72,6 +65,7 @@ function matchMap(id, game_id, map_id) {
     this.mapElement.find('.remove-matchmap')
         .click(function(evt){
             othis.remove();
+			return false;
         });
 
     // load map list

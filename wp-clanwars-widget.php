@@ -30,8 +30,8 @@ class WP_ClanWars_Widget extends WP_Widget {
 		$widget_ops = array('classname' => 'widget_clanwars', 'description' => __('ClanWars widget', WP_CLANWARS_TEXTDOMAIN) );
 		parent::WP_Widget('clanwars', __('ClanWars', WP_CLANWARS_TEXTDOMAIN), $widget_ops);
 
-		wp_register_script('jquery-cookie', WP_CLANWARS_URL . '/jquery.cookie.pack.js', array('jquery'), WP_CLANWARS_REV);
-		wp_register_script('wp-cw-tabs', WP_CLANWARS_URL . '/tabs.js', array('jquery', 'jquery-cookie'), WP_CLANWARS_REV);
+		wp_register_script('jquery-cookie', WP_CLANWARS_URL . '/js/jquery.cookie.pack.js', array('jquery'), WP_CLANWARS_REV);
+		wp_register_script('wp-cw-tabs', WP_CLANWARS_URL . '/js/tabs.js', array('jquery', 'jquery-cookie'), WP_CLANWARS_REV);
 
 		wp_enqueue_script('wp-cw-tabs');
 	}

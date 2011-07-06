@@ -112,7 +112,7 @@
 .wp-cw-matcheditor .match-results .remove
 {
     background-color: transparent;
-    background-image: url("../../../wp-admin/images/xit.gif");
+    background-image: url("../../../../wp-admin/images/xit.gif");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: 0% 50%;
@@ -126,7 +126,7 @@
 .wp-cw-matcheditor .match-results .remove:hover
 {
     background-color: transparent;
-    background-image: url("../../../wp-admin/images/xit.gif");
+    background-image: url("../../../../wp-admin/images/xit.gif");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: -10px 50%;
