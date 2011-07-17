@@ -5,7 +5,7 @@
  * Plugin URI: http://www.codeispoetry.ru/?page_id=xxx
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrew Mikhailov
- * Version: 1.3
+ * Version: 1.4
  * $Id$
  * Tags: cybersport, clanwar, team, clan, cyber, sport, match
  */
