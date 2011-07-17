@@ -1529,7 +1529,7 @@ msgstr "Внешний URL"
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2896
 msgid "Enter league URL or external match URL."
-msgstr "Введите URL лиги или внешний URL на матч."
+msgstr "Введите URL лиги или внешний URL матча."
 
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2901
 #: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3336
