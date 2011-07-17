@@ -51,6 +51,7 @@ class WP_ClanWars {
     );
 
     var $countries = array();
+	var $popular_countries = false;
 	var $match_status = array();
 	var $acl_keys = array();
     var $page_hooks = array();
@@ -450,13 +451,44 @@ class WP_ClanWars {
         return register_widget('WP_ClanWars_Widget');
     }
 
+	function most_popular_countries()
+	{
+		global $wpdb;
+		
+		$limit = 10;
+		
+		if($this->popular_countries === false) 
+		{
+		
+			$this->popular_countries = $wpdb->get_results(
+				$wpdb->prepare("(SELECT t1.country, COUNT(t2.id) AS cnt 
+								FROM {$this->tables['teams']} AS t1, {$this->tables['matches']} AS t2
+								WHERE t1.id = t2.team1
+								GROUP BY t1.country
+								LIMIT %d)
+								UNION
+								(SELECT t1.country, COUNT(t2.id) AS cnt 
+								FROM {$this->tables['teams']} AS t1, {$this->tables['matches']} AS t2
+								WHERE t1.id = t2.team2
+								GROUP BY t1.country
+								LIMIT %d)
+								ORDER BY cnt DESC
+								LIMIT %d", $limit, $limit, $limit), 
+							ARRAY_A);
+						
+		}
+					
+		return $this->popular_countries;
+	}
+
     function html_country_select_helper($p = array())
     {
         extract($this->extract_args($p, array(
                     'select' => '',
                     'name' => '',
                     'id' => '',
-                    'class' => ''
+                    'class' => '',
+					'show_popular' => false
                 )));
 
         $attrs = array();
@@ -474,6 +506,21 @@ class WP_ClanWars {
         if(!empty($attrstr)) $attrstr = ' ' . $attrstr;
 
         echo '<select' . $attrstr . '>';
+
+		if($show_popular) {
+			$popular = $this->most_popular_countries();
+			
+			if(!empty($popular)) {
+				foreach($popular as $i => $data) :
+					$abbr = $data['country'];
+					$title = isset($this->countries[$abbr]) ? $this->countries[$abbr] : $abbr;
+
+					echo '<option value="' . esc_attr($abbr) . '">' . esc_html($title) . '</option>';
+				endforeach;
+				echo '<optgroup label="-----------------" style="font-family: monospace;"></optgroup>';
+			}
+		}
+
         foreach($this->countries as $abbr => $title) :
             echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
         endforeach;
@@ -856,7 +903,7 @@ class WP_ClanWars {
                         <tr class="form-field form-required">
                             <th scope="row" valign="top"><label for="title"><?php _e('Country', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
                             <td>
-                                <?php $this->html_country_select_helper('name=country&id=country&select=' . $country); ?>
+                                <?php $this->html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country); ?>
                             </td>
                         </tr>
 
@@ -2932,7 +2979,7 @@ class WP_ClanWars {
 									<div class="team2-inline">
 										<label for="new_team_title"><?php _e('or just type opponent team here:', WP_CLANWARS_TEXTDOMAIN); ?></label><br/>
 										<input name="new_team_title" id="new_team_title" type="text" value="" maxlength="200" autocomplete="off" aria-required="true" />
-										<?php $this->html_country_select_helper('name=new_team_country&id=country'); ?>
+										<?php $this->html_country_select_helper('name=new_team_country&show_popular=1&id=country'); ?>
 									</div>
 									<br class="clear"/>
 
