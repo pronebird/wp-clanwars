@@ -68,8 +68,11 @@ class WP_ClanWars {
     const ErrorUploadStoppedByExt = -214;
     const ErrorUploadFileTypeNotAllowed = -215;
 
-    function WP_ClanWars() {
+    function __construct() {
         $this->tables = array_map(create_function('$t', 'global $table_prefix; return $table_prefix . $t; '), $this->tables);
+
+        load_plugin_textdomain(WP_CLANWARS_TEXTDOMAIN, PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)) . '/langs/', //2.5 Compatibility
+                               dirname(plugin_basename(__FILE__)) . '/langs/'); //2.6+, Works with custom wp-content dirs.
 
         $this->_expsvnprops('WP_CLANWARS');
         add_action('widgets_init', array($this, 'on_widgets_init'));
@@ -213,9 +216,6 @@ class WP_ClanWars {
     function on_init()
     {
         $this->_expsvnprops('WP_CLANWARS');
-
-        load_plugin_textdomain(WP_CLANWARS_TEXTDOMAIN, PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)) . '/langs/', //2.5 Compatibility
-                               dirname(plugin_basename(__FILE__)) . '/langs/'); //2.6+, Works with custom wp-content dirs.
 
 		$this->acl_keys = array(
 			'manage_matches' => __('Manage matches', WP_CLANWARS_TEXTDOMAIN),
