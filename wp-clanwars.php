@@ -520,8 +520,11 @@ class WP_ClanWars {
 				echo '<optgroup label="-----------------" style="font-family: monospace;"></optgroup>';
 			}
 		}
+		
+		$sorted_countries = $this->countries;
+		asort($sorted_countries);
 
-        foreach($this->countries as $abbr => $title) :
+        foreach($sorted_countries as $abbr => $title) :
             echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
         endforeach;
         echo '</select>';
@@ -2322,6 +2325,7 @@ class WP_ClanWars {
         global $wpdb;
 
         extract($this->extract_args($p, array(
+			'from_date' => 0,
             'id' => false,
 			'game_id' => false,
             'sum_tickets' => false,
@@ -2358,20 +2362,21 @@ class WP_ClanWars {
             $where_query[] = 't1.game_id IN (' . implode(', ', $game_id) . ')';
         }
 
+		if($from_date > 0) {
+			$where_query[] = 't1.date >= FROM_UNIXTIME(' . intval($from_date) . ')';
+		}
+
         if($limit > 0) {
             $limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
         }
 
-
-        if(!empty($where_query))
+        if(!empty($where_query)) {
             $where_query = 'WHERE ' . implode(' AND ', $where_query);
+		}
 
         if($count) {
-
             $rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . $this->tables['matches'] . '` AS t1 ' . $where_query);
-
             $ret = array('total_items' => 0, 'total_pages' => 1);
-			
             $ret['total_items'] = $rslt->m_count;
 
             if($limit > 0)
@@ -2405,6 +2410,8 @@ class WP_ClanWars {
 					 LEFT JOIN `' . $this->tables['teams'] . '` AS tt2 ON t1.team2=tt2.id ' .
 					 implode(' ', array($where_query, $order_query, $limit_query)));
         }
+
+		//echo '<pre>'. $wpdb->last_query.'</pre>';
 
         return $rslt;
     }
