@@ -219,7 +219,7 @@ msgstr "Конго"
 
 #: /Users/pronebird/dev/wp-clanwars/countries.php:74
 msgid "Cook Islands"
-msgstr "острова Кука"
+msgstr "Острова Кука"
 
 #: /Users/pronebird/dev/wp-clanwars/countries.php:75
 msgid "Costa Rica"
