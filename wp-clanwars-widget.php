@@ -50,8 +50,8 @@ class WP_ClanWars_Widget extends WP_Widget {
 			'1y' => array('title' => __('1 year', WP_CLANWARS_TEXTDOMAIN), 'value' => 60*60*24*30*12)
 		);
 
-		wp_register_script('jquery-cookie', WP_CLANWARS_URL . '/js/jquery.cookie.pack.js', array('jquery'), WP_CLANWARS_REV);
-		wp_register_script('wp-cw-tabs', WP_CLANWARS_URL . '/js/tabs.js', array('jquery', 'jquery-cookie'), WP_CLANWARS_REV);
+		wp_register_script('jquery-cookie', WP_CLANWARS_URL . '/js/jquery.cookie.pack.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-tabs', WP_CLANWARS_URL . '/js/tabs.js', array('jquery', 'jquery-cookie'), WP_CLANWARS_VERSION);
 
 		wp_enqueue_script('wp-cw-tabs');
 	}
