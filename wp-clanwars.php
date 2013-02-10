@@ -5,7 +5,7 @@
  * Plugin URI: http://www.codeispoetry.ru/wp-clanwars
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrej Mihajlov
- * Version: 1.5.3
+ * Version: 1.5.4
  *
  * Tags: cybersport, clanwar, team, clan, cyber, sport, match
  **/
@@ -29,10 +29,11 @@ if(!function_exists('add_action')) die('Cheatin&#8217; uh?');
 
 global $wpClanWars;
 
-define('WP_CLANWARS_VERSION', '1.5.3');
+define('WP_CLANWARS_VERSION', '1.5.4');
 
 define('WP_CLANWARS_TEXTDOMAIN', 'wp-clanwars');
 define('WP_CLANWARS_CATEGORY', '_wp_clanwars_category');
+define('WP_CLANWARS_DEFAULTCSS', '_wp_clanwars_defaultcss');
 define('WP_CLANWARS_ACL', '_wp_clanwars_acl');
 define('WP_CLANWARS_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
 
@@ -162,6 +163,7 @@ class WP_ClanWars {
 					);";
 
 		add_option(WP_CLANWARS_CATEGORY, -1);
+		add_option(WP_CLANWARS_DEFAULTCSS, true);
 		add_option(WP_CLANWARS_ACL, array());
 
 		// update database
@@ -183,6 +185,7 @@ class WP_ClanWars {
 		global $wpdb;
 
 		delete_option(WP_CLANWARS_CATEGORY);
+		delete_option(WP_CLANWARS_DEFAULTCSS);
 		delete_option(WP_CLANWARS_ACL);
 
 		foreach($this->tables as $t)
@@ -216,6 +219,7 @@ class WP_ClanWars {
 
 		add_action('admin_menu', array($this, 'on_admin_menu'));
 		add_action('template_redirect', array($this, 'on_template_redirect'));
+		add_action('wp_footer', array($this, 'on_wp_footer'));
 		
 		add_action('admin_post_wp-clanwars-deleteteams', array($this, 'on_admin_post_deleteteams'));
 		add_action('admin_post_wp-clanwars-sethometeam', array($this, 'on_admin_post_sethometeam'));
@@ -289,6 +293,9 @@ class WP_ClanWars {
 		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/tipsy.css', array(), '0.1.7');
 
 		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_VERSION);
+		
+		wp_register_style('wp-cw-sitecss', WP_CLANWARS_URL . '/css/site.css', array(), WP_CLANWARS_VERSION);
+		wp_register_style('wp-cw-widgetcss', WP_CLANWARS_URL . '/css/widget.css', array(), WP_CLANWARS_VERSION);
 	}
 
 	function acl_user_can($action, $value = false, $user_id = false)
@@ -399,6 +406,13 @@ class WP_ClanWars {
 		wp_enqueue_script('wp-cw-public');
 		wp_enqueue_style('jquery-tipsy');
 		wp_enqueue_style('wp-cw-flags');
+	}
+
+	function on_wp_footer() {
+		if(get_option(WP_CLANWARS_DEFAULTCSS)) {
+			wp_enqueue_style('wp-cw-sitecss');
+			wp_enqueue_style('wp-cw-widgetcss');
+		}
 	}
 
 	function on_load_any() {
@@ -3520,6 +3534,8 @@ class WP_ClanWars {
 		if(isset($_POST['category']))
 			update_option(WP_CLANWARS_CATEGORY, (int)$_POST['category']);
 
+		update_option(WP_CLANWARS_DEFAULTCSS, isset($_POST['enable_default_styles']));
+
 		$url = add_query_arg('saved', 'true', $_POST['_wp_http_referer']);
 
 		wp_redirect($url);
@@ -3676,6 +3692,10 @@ class WP_ClanWars {
 
 						?>
 					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php _e('Enable default styles', WP_CLANWARS_TEXTDOMAIN); ?></th>
+					<td><input type="checkbox" name="enable_default_styles" value="true"<?php checked(get_option(WP_CLANWARS_DEFAULTCSS), true); ?> /></td>
 				</tr>
 			 </table>
 

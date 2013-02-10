@@ -1,0 +1,328 @@
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
+
+@-webkit-keyframes pulse {
+	0% {
+	 background-color: #7a4a77;
+	}
+	50% {
+	 background-color: #6492ac;
+	}
+	100% {
+	 background-color: #7a4a77;
+	}
+}
+
+.wp-clanwars-list {
+	margin: 0 0 10px 0;
+	padding: 0;
+	background-color: #fff;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.wp-clanwars-list li {
+	list-style: none;
+	padding: 5px 0;
+	margin: 0;
+	position: relative;
+	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+}
+
+.wp-clanwars-list li.even {}
+.wp-clanwars-list .wrap {
+	margin: 0 0 0 30px;
+	padding: 0;
+}
+
+.wp-clanwars-list .opponent-team {
+	font-size: 12px;
+}
+
+.wp-clanwars-list .date {
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, serif;
+	font-size: 11px;
+}
+
+.wp-clanwars-list .icon {
+	position: absolute;
+	left: 5px;
+	top: 10px;
+}
+
+.wp-clanwars-list .maplist {
+	position: absolute;
+	left: 200px;
+	width: 200px;
+	top: 5px;
+	font-size: 12px;
+}
+
+.wp-clanwars-list .match-link {
+	font-size: 11px;
+	padding: 0 21px 0 5px;
+	background: transparent url('../images/page_url.gif') 98% 50% no-repeat;
+	margin-right: 5px;
+	float: right;
+}
+
+.wp-clanwars-pagination {
+	text-align: right;
+}
+
+.wp-clanwars-pagination .displaying-num {
+	float: left;
+}
+
+.wp-clanwars-pagination .page-numbers {
+	padding: 2px 5px;
+}
+
+.wp-clanwars-pagination .page-numbers.current {
+	color: #000;
+	font-weight: bold;
+}
+
+.wp-clanwars-page .scores,
+.wp-clanwars-list .scores,
+.wp-clanwars-list .upcoming,
+.wp-clanwars-list .playing {
+	float: right;
+	text-align: center;
+	min-width: 20px;
+	padding: 0 5px;
+	margin-right: 5px;
+	font-size: 11px;
+	font-weight: normal;
+	font-family: Arial;
+	letter-spacing: 0.5px;
+	margin-top: 5px;
+	/*-moz-box-shadow: 1px 1px 0px #444;
+	-webkit-box-shadow: 1px 1px 0px #444;
+	-khtml-box-shadow: 1px 1px 0px #444;
+	box-shadow: 0 1px 1px #000;*/
+	text-shadow: 0 1px 0 #222;
+}
+
+.wp-clanwars-page .scores {
+	float: none;
+	padding: 2px 5px;
+}
+
+.wp-clanwars-list .scores.win,
+.wp-clanwars-page .scores.win
+{
+	color: #fff;
+	background-color: #567632; /*#5f6e43;*/
+}
+
+.wp-clanwars-list .scores.draw,
+.wp-clanwars-page .scores.draw
+{
+	color: #fff;
+	background-color: #c87800;
+}
+
+.wp-clanwars-list .scores.loose,
+.wp-clanwars-page .scores.loose
+{
+	color: #fff;
+	background-color: #c00;
+}
+
+.wp-clanwars-list .upcoming {
+	color: #fff;
+	background-color: #7a4a77;
+	letter-spacing: 0;
+}
+
+.wp-clanwars-list .playing {
+	color: #fff;
+	background-color: #6492ac;
+	letter-spacing: 0;
+   -webkit-animation-name: pulse;
+   -webkit-animation-duration: 2s;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-animation-timing-function: ease-in-out;
+}
+
+.wp-clanwars-filter {
+	margin: 0 !important;
+	padding: 0;
+	display: block;
+	background: transparent url('../images/tabs.png') 0% 100% repeat-x;
+	zoom: 1;
+	border-bottom: 1px solid #ccc;
+}
+
+.wp-clanwars-filter li {
+	float: left;
+	list-style: none;
+	padding: 0;
+	margin: 0 0 0 3px;
+	text-shadow: 0 1px white;
+}
+
+.wp-clanwars-filter li:first-child {
+	margin-left: 0;
+}
+
+.wp-clanwars-filter li:hover,
+.wp-clanwars-filter li.selected {
+	background: #fff url('../images/tabs-active.png') 0% 100% repeat-x;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	-webkit-border-radius: 3px 3px 0 0;
+	-moz-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
+}
+
+.wp-clanwars-filter li:hover a ,
+.wp-clanwars-filter li.selected a {
+	color: #000;
+}
+
+.wp-clanwars-filter li a {
+	text-decoration: none;
+	border: 0;
+	color: #222;
+	display: block;
+	padding: 5px 12px;
+}
+
+.wp-clanwars-filter li:hover a,
+.wp-clanwars-filter li.selected a {
+	padding: 4px 11px 5px;
+}
+
+.wp-clanwars-page {
+	overflow: hidden;
+}
+
+.wp-clanwars-page .maplist {
+	display: block;
+	margin: 0 auto;
+	width: 468px;
+}
+
+.wp-clanwars-page .teams {
+	margin: 5px auto;
+	padding: 0 42px;
+	font-family: Georgia, Palatino, times, serif;
+	line-height: 1.5em;
+	color: #000;
+	text-shadow:0 1px 0 #666666;
+	overflow: hidden;
+}
+
+.wp-clanwars-page p.status.type-1 {
+	color: #c00;
+}
+
+.wp-clanwars-page .teams .team1 {
+	float: left;
+}
+
+.wp-clanwars-page .teams .team2 {
+	float: right;
+}
+
+.wp-clanwars-page .maplist .item {
+	width: 150px;
+	margin: 5px 42px;
+	float: left;
+}
+
+.wp-clanwars-page .maplist .item.aligncenter {
+	float: none;
+	margin: 5px auto;
+}
+
+.wp-clanwars-page .maplist .item .map-screenshot {
+	/*border: 1px solid #222;*/
+	position: relative;
+}
+.wp-clanwars-page .maplist .item .map-screenshot img {
+	display: block;
+}
+
+.wp-clanwars-page .maplist .item .map-title,
+.tipsy  .map-title {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	font-size: 12px;
+	line-height: 18px;
+	font-family: monospace;
+	color: #fff;
+	text-shadow: 0 0px 1px #000;
+	text-align: center;
+	background: rgba(0,0,0,.5);
+}
+
+.wp-clanwars-page .maplist .item .round {
+	text-align: center;
+	padding: 2px 0;
+	letter-spacing: 0.5px;
+}
+
+.wp-clanwars-page .summary {
+	margin: 15px 0;
+	text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	letter-spacing: 0.5px;
+}
+
+.wp-clanwars-page .summary .scores {
+	font-size: 18px;
+	padding: 5px 10px;
+	-moz-box-shadow: 0 1px 5px #444;
+	-webkit-box-shadow: 0 1px 5px #444;
+	-khtml-box-shadow: 0 1px 5px #444;
+	box-shadow: 0 1px 5px #444;
+}
+
+.wp-clanwars-page ul.match-props {
+	margin: 5px 0;
+}
+
+.wp-clanwars-page ul.match-props li {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0 22px;
+	line-height: 25px;
+}
+
+.wp-clanwars-page ul.match-props li.external_url {
+	background: transparent url(../images/icon-link16.png) 0% 50% no-repeat;
+}
+
+.wp-clanwars-page ul.match-props li.date {
+	background: transparent url(../images/icon-clocks16.png) 0% 50% no-repeat;
+}
+
+.wp-clanwars-page ul.match-props li.status {
+	background: transparent url(../images/icon-flag16.png) 0% 50% no-repeat;
+}
