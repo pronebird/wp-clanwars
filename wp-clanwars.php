@@ -2838,7 +2838,7 @@ class WP_ClanWars {
 			}
 		}
 
-		$games = $this->get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => asc));
+		$games = $this->get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
 		$teams = $this->get_team('id=all&orderby=title&order=asc');
 
 		extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
