@@ -1706,7 +1706,7 @@ class WP_ClanWars {
 							<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
 								<th scope="row" class="check-column"><input type="checkbox" name="items[]" value="<?php echo $item->id; ?>" /></th>
 								<td class="title column-title">
-									<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Team', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"> <?php echo esc_html($item->title); ?> <?php if($item->home_team) _e('(Home Team)', WP_CLANWARS_TEXTDOMAIN); ?></a><br />
+									<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Team', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"> <?php echo esc_html($item->title); ?></a><br />
 									<div class="row-actions">
 										<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=edit&amp;id=' . $item->id); ?>"><?php _e('Edit', WP_CLANWARS_TEXTDOMAIN); ?></a></span> |
 												<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=maps&amp;game_id=' . $item->id); ?>"><?php _e('Maps', WP_CLANWARS_TEXTDOMAIN); ?></a></span> | <span class="delete">
