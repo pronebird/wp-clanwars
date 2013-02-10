@@ -229,7 +229,6 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-import', array($this, 'on_admin_post_import'));
 
 		add_action('wp_ajax_get_maps', array($this, 'on_ajax_get_maps'));
-
 		add_shortcode('wp-clanwars', array($this, 'on_shortcode'));
 		
 		$this->register_cssjs();
@@ -257,10 +256,7 @@ class WP_ClanWars {
 		$user_role = $current_user->roles[0];
 
 		for($i = 0; $i < sizeof($keys); $i++) {
-
-			$has_access = $this->acl_user_can($keys[$i]);
-
-			if($has_access)
+			if($this->acl_user_can($keys[$i]))
 				$acl_table[$keys[$i]] = $user_role;
 		}
 
@@ -301,9 +297,7 @@ class WP_ClanWars {
 		global $user_ID;
 
 		$acl = $this->acl_get();
-
 		$is_super = false;
-
 		$caps = array(
 			'games' => array(),
 			'permissions' => array_fill_keys(array_keys($this->acl_keys), false)
@@ -314,16 +308,10 @@ class WP_ClanWars {
 
 		if(!empty($acl) && isset($acl[$user_id]))
 			$caps = $acl[$user_id];
-
-		// current_user, allow all for admins
-		if($user_id == $user_ID) {
-			$is_super = current_user_can('manage_options');
-		} else {
-			$user = new WP_User($user_id);
-
-			if(!empty($user))
-				$is_super = $user->has_cap('manage_options');
-		}
+	
+		$user = new WP_User($user_id);
+		if(!empty($user))
+			$is_super = $user->has_cap('manage_options');
 
 		if($is_super) {
 			$caps['games'] = array('all');
