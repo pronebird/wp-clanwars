@@ -260,7 +260,7 @@ class WP_ClanWars {
 				$acl_table[$keys[$i]] = $user_role;
 		}
 
-		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), -1, __FILE__, null, WP_CLANWARS_URL . '/images/plugin-icon.png');
+		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), 'subscriber', __FILE__, null, WP_CLANWARS_URL . '/images/plugin-icon.png');
 
 		$this->page_hooks['matches'] = add_submenu_page(__FILE__, __('Matches', WP_CLANWARS_TEXTDOMAIN), __('Matches', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_matches'], 'wp-clanwars-matches', array($this, 'on_manage_matches'));
 		$this->page_hooks['teams'] = add_submenu_page(__FILE__, __('Teams', WP_CLANWARS_TEXTDOMAIN), __('Teams', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_teams'], 'wp-clanwars-teams', array($this, 'on_manage_teams'));
