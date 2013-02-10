@@ -5,7 +5,7 @@
  * Plugin URI: http://www.codeispoetry.ru/wp-clanwars
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrej Mihajlov
- * Version: 1.5.1
+ * Version: 1.5.2
  *
  * Tags: cybersport, clanwar, team, clan, cyber, sport, match
  **/
@@ -28,6 +28,8 @@
 if(!function_exists('add_action')) die('Cheatin&#8217; uh?');
 
 global $wpClanWars;
+
+define('WP_CLANWARS_VERSION', '1.5.2');
 
 define('WP_CLANWARS_TEXTDOMAIN', 'wp-clanwars');
 define('WP_CLANWARS_CATEGORY', '_wp_clanwars_category');
@@ -74,24 +76,7 @@ class WP_ClanWars {
 		load_plugin_textdomain(WP_CLANWARS_TEXTDOMAIN, PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)) . '/langs/', //2.5 Compatibility
 							   dirname(plugin_basename(__FILE__)) . '/langs/'); //2.6+, Works with custom wp-content dirs.
 
-		$this->_expsvnprops('WP_CLANWARS');
 		add_action('widgets_init', array($this, 'on_widgets_init'));
-	}
-
-	/**
-	 * Parse and define plugin's revision number constant
-	 *
-	 * @return void
-	 */
-
-	function _expsvnprops($var_base)
-	{
-		$revId = '';
-
-		if(preg_match('/\d+/', '$RevId$', $m))
-			$revId = array_pop($m);
-
-		define($var_base . '_REV', $revId);
 	}
 
 	/**
@@ -215,8 +200,6 @@ class WP_ClanWars {
 
 	function on_init()
 	{
-		$this->_expsvnprops('WP_CLANWARS');
-
 		$this->acl_keys = array(
 			'manage_matches' => __('Manage matches', WP_CLANWARS_TEXTDOMAIN),
 			'manage_games' => __('Manage games', WP_CLANWARS_TEXTDOMAIN),
@@ -299,17 +282,17 @@ class WP_ClanWars {
 
 	function register_cssjs() 
 	{	
-		wp_register_script('jquery-json', WP_CLANWARS_URL . '/js/jquery.json-2.2.min.js', array('jquery'), WP_CLANWARS_REV);
-		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery', 'jquery-json', 'utils'), WP_CLANWARS_REV);
-		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery', 'utils'), WP_CLANWARS_REV);
+		wp_register_script('jquery-json', WP_CLANWARS_URL . '/js/jquery.json-2.2.min.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery', 'jquery-json', 'utils'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery', 'utils'), WP_CLANWARS_VERSION);
 
-		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_REV);
+		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
 		
 		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/jquery.tipsy.js', array('jquery'), '0.1.7');
 		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/tipsy.css', array(), '0.1.7');
 
-		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_REV);
+		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_VERSION);
 	}
 
 	function acl_user_can($action, $value = false, $user_id = false)
