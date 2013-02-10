@@ -245,7 +245,7 @@ class WP_ClanWars {
 
 	function on_admin_menu()
 	{
-		global $user_level;
+		global $current_user;
 
 		$acl_table = array(
 			'manage_matches' => 'manage_options',
@@ -254,13 +254,14 @@ class WP_ClanWars {
 		);
 		
 		$keys = array_keys($acl_table);
+		$user_role = $current_user->roles[0];
 
 		for($i = 0; $i < sizeof($keys); $i++) {
 
 			$has_access = $this->acl_user_can($keys[$i]);
 
 			if($has_access)
-				$acl_table[$keys[$i]] = $user_level;
+				$acl_table[$keys[$i]] = $user_role;
 		}
 
 		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), -1, __FILE__, null, WP_CLANWARS_URL . '/images/plugin-icon.png');
