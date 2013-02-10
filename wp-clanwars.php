@@ -1,14 +1,14 @@
 <?php
-/*
+/**
  * Plugin Name: WP-ClanWars
  * Author URI: http://www.codeispoetry.ru/
- * Plugin URI: http://www.codeispoetry.ru/?page_id=xxx
+ * Plugin URI: http://www.codeispoetry.ru/wp-clanwars
  * Description: ClanWars plugin for a cyber-sport team website
- * Author: Andrew Mikhailov
- * Version: 1.5
- * $Id$
+ * Author: Andrej Mihajlov
+ * Version: 1.5.1
+ *
  * Tags: cybersport, clanwar, team, clan, cyber, sport, match
- */
+ **/
 
 /*
 	This program is free software: you can redistribute it and/or modify
