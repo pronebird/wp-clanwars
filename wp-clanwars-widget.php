@@ -90,7 +90,10 @@ class WP_ClanWars_Widget extends WP_Widget {
 		
 		$from_date = 0;
 		if(isset($this->newer_than_options[$instance['hide_older_than']])) {
-			$from_date = $now - $this->newer_than_options[$instance['hide_older_than']]['value'];
+			$age = (int)$this->newer_than_options[$instance['hide_older_than']]['value'];
+			// 0 means show all matches
+			if($age > 0)
+				$from_date = $now - $age;
 		}
 			
 		foreach($_games as $g) {
