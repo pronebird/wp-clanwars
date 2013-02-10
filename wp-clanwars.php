@@ -1945,7 +1945,7 @@ class WP_ClanWars {
 							<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
 								<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $item->id; ?>" /></th>
 								<td class="column-icon media-icon">
-									<?php $attach = wp_get_attachment_image($item->screenshot, array(80));
+									<?php $attach = wp_get_attachment_image($item->screenshot, 'thumbnail');
 									if(!empty($attach)) echo $attach;
 									?>
 								</td>
