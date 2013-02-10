@@ -206,9 +206,6 @@ class WP_ClanWars_Widget extends WP_Widget {
         $visible_games = $instance['visible_games'];
 
         $games = $wpClanWars->get_game('id=all&orderby=title&order=asc');
-
-		if(!isset($this->show_last_array[$show]))
-			$show = 0;
 	?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', WP_CLANWARS_TEXTDOMAIN); ?></label> <input class="widefat" name="<?php echo $this->get_field_name('title'); ?>" id="<?php echo $this->get_field_id('title'); ?>" value="<?php echo esc_attr($title); ?>" type="text" /></p>
 
