@@ -1,178 +1,174 @@
+//
+// Admin page match management
+//
 
-function matchMap(id, game_id, map_id) {
+(function ($) {
 
-    var $ = jQuery;
-    var othis = this;
+	function matchMap(id, game_id, map_id) {
 
-    this.id = id;
-    this.map_id = typeof(map_id) != 'undefined' ? parseInt(map_id) : 0;
-    this.game_id = game_id;
-    this.mapSite = $('#mapsite');
-    this.rounds = {};
-    this.round_ID = 0;
-    this.mapElement = $('<div class="map">\n\
-                    <div class="title">\n\
-                        <span></span><a href="#" title="' + wpCWL10n.excludeMap + '" class="remove remove-matchmap"><br/></a>\n\
-                        <br class="clear"/>\n\
-                    </div>\n\
-                    <div class="leftcol">\n\
-                        <img src="' + wpCWL10n.plugin_url + '/images/no-map.jpg" class="screenshot" style="width: 150px;" />\n\
-                        <select name="scores[' + this.id + '][map_id]" class="map-select" disabled="disabled"></select>\n\
-                    </div>\n\
-                    <div class="add-round">\n\
-                        <input type="button" class="button button-secondary" value="' + wpCWL10n.addRound + '" />\n\
-                    </div>\n\
-                    <br class="clear"/>\n\
-                </div>');
-    
-    this.remove = function() {
-        this.mapElement.remove();
-    }
+		var othis = this;
 
-    this.removeRound = function(i) {
-        this.rounds[i].remove();
-        delete this.rounds[i];
-    }
+		this.id = id;
+		this.map_id = typeof(map_id) != 'undefined' ? parseInt(map_id) : 0;
+		this.game_id = game_id;
+		this.mapSite = $('#mapsite');
+		this.rounds = {};
+		this.round_ID = 0;
+		this.mapElement = $('<div class="map">\n\
+						<div class="title">\n\
+							<span></span><a href="#" title="' + wpCWL10n.excludeMap + '" class="remove remove-matchmap"><br/></a>\n\
+							<br class="clear"/>\n\
+						</div>\n\
+						<div class="leftcol">\n\
+							<img src="' + wpCWL10n.plugin_url + '/images/no-map.jpg" class="screenshot" style="width: 150px;" />\n\
+							<select name="scores[' + this.id + '][map_id]" class="map-select" disabled="disabled"></select>\n\
+						</div>\n\
+						<div class="add-round">\n\
+							<input type="button" class="button button-secondary" value="' + wpCWL10n.addRound + '" />\n\
+						</div>\n\
+						<br class="clear"/>\n\
+					</div>');
+		
+		this.remove = function() {
+			this.mapElement.remove();
+		}
 
-    this.addRound = function(score1, score2, round_id) {
+		this.removeRound = function(i) {
+			this.rounds[i].remove();
+			delete this.rounds[i];
+		}
 
-        if(typeof(round_id) == 'undefined')
-            round_id = 0;
+		this.addRound = function(score1, score2, round_id) {
 
-        var x = ++this.round_ID;
-        var n = $('<div class="round">\n\
-                        <input type="text" name="scores[' + this.id + '][team1][]" class="small-text" value="0" />\n\
-                        <input type="text" name="scores[' + this.id + '][team2][]" class="small-text" value="0" />\n\
-                        <input type="hidden" name="scores[' + this.id + '][round_id][]" value="' + round_id + '" />\n\
-                        <a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><br/></a>\n\
-                    </div>');
-        var i = n.find('input');
+			if(typeof(round_id) == 'undefined')
+				round_id = 0;
 
-        i.eq(0).val(score1); i.eq(1).val(score2);
+			var x = ++this.round_ID;
+			var n = $('<div class="round">\n\
+							<input type="text" name="scores[' + this.id + '][team1][]" class="small-text" value="0" />\n\
+							<input type="text" name="scores[' + this.id + '][team2][]" class="small-text" value="0" />\n\
+							<input type="hidden" name="scores[' + this.id + '][round_id][]" value="' + round_id + '" />\n\
+							<a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><br/></a>\n\
+						</div>');
+			var i = n.find('input');
 
-        n.insertBefore(this.mapElement.find('.add-round'));
-        
-        this.rounds[x] = n;
+			i.eq(0).val(score1); i.eq(1).val(score2);
 
-        n.find('.remove').click(function(e){
-           othis.removeRound(x);
-           return false;
-        });
+			n.insertBefore(this.mapElement.find('.add-round'));
+			
+			this.rounds[x] = n;
 
-        return x;
-    }
-    
-    this.mapElement.find('.remove-matchmap')
-        .click(function(evt){
-            othis.remove();
-			return false;
-        });
+			n.find('.remove').click(function(e){
+			   othis.removeRound(x);
+			   return false;
+			});
 
-    // load map list
-    jQuery.post(ajaxurl, {
-            action: 'get_maps',
-            game_id: this.game_id
-        },
-        function(response) {
+			return x;
+		}
+		
+		this.mapElement.find('.remove-matchmap')
+			.click(function(evt){
+				othis.remove();
+				return false;
+			});
 
-            var json = $.secureEvalJSON(response);
-            var select = othis.mapElement.find('.map-select');
+		// load map list
+		jQuery.post(ajaxurl, {
+				action: 'get_maps',
+				game_id: this.game_id
+			}, function(json) {
+				var select = othis.mapElement.find('.map-select');
 
-            for(var i = 0; i < json.length; i++) {
-                select.append($('<option></option>')
-                        .attr('rel', json[i].screenshot_url)
-                        .val(json[i].id)
-                        .text(json[i].title));
-            }
+				for(var i = 0; i < json.length; i++) {
+					select.append($('<option></option>')
+							.attr('rel', json[i].screenshot_url)
+							.val(json[i].id)
+							.text(json[i].title));
+				}
 
-            select.change(function(){
-                var option = $(this).find('option:selected');
-				var src = option.attr('rel');
+				select.change(function(){
+					var option = $(this).find('option:selected');
+					var src = option.attr('rel');
 
-				if(src.length < 1)
-					src = wpCWL10n.plugin_url + '/images/no-map.jpg';
+					if(src.length < 1)
+						src = wpCWL10n.plugin_url + '/images/no-map.jpg';
 
-                othis.mapElement.find('.screenshot').attr('src', src);
-                othis.mapElement.find('.title span').text(option.text());
+					othis.mapElement.find('.screenshot').attr('src', src);
+					othis.mapElement.find('.title span').text(option.text());
 
-                othis.map_id = option.val();
-            });
+					othis.map_id = option.val();
+				});
 
-            select.removeAttr('disabled');
+				select.removeAttr('disabled');
 
-            if(othis.map_id > 0) {
-                select.find('option[value=' + othis.map_id + ']')
-                    .attr('selected', 'selected').trigger('change');
-            } else {
-                select.find('option:first').trigger('change');
-            }
-    });
+				if(othis.map_id > 0) {
+					select.find('option[value=' + othis.map_id + ']')
+						.attr('selected', 'selected').trigger('change');
+				} else {
+					select.find('option:first').trigger('change');
+				}
+		}, 'json');
 
-    this.mapElement.find('.add-round input').bind('click', this.mapElement,
-        function(evt){
-            othis.addRound();
-            $(this).blur();
-        });
-    
-    this.mapSite.append(this.mapElement);
-}
+		this.mapElement.find('.add-round input').bind('click', this.mapElement,
+			function(evt){
+				othis.addRound();
+				$(this).blur();
+			});
+		
+		this.mapSite.append(this.mapElement);
+	}
 
-function matchManager() {
+	function matchManager() {
+		this.last_id = userSettings.time * -1;
+		this.matchSite = $('#matchsite');
+		this.maps = {};
 
-    var $ = jQuery;
+		this.addMap = function (field_id, map_id) {
+			if(typeof(field_id) == 'undefined')
+				field_id = --this.last_id;
 
-    this.last_id = userSettings.time * -1;
-    this.matchSite = $('#matchsite');
-    this.maps = {};
+			this.maps[field_id] = new matchMap(field_id, $('#game_id').val(), map_id);
 
-    this.addMap = function(field_id, map_id) {
+			return this.maps[field_id];
+		}
 
-        if(typeof(field_id) == 'undefined')
-            field_id = --this.last_id;
+		this.remove = function (id) {
+			if(typeof(this.maps[id]) == 'object')
+				this.maps[id].remove();
+				delete this.maps[id];
+		}
 
-        this.maps[field_id] = new matchMap(field_id, $('#game_id').val(), map_id);
+		this.removeAll = function () {
+			for(var i in this.maps) {
+				this.maps[i].remove();
+			}
 
-        return this.maps[field_id];
-    }
+			this.maps = {};
+		}
+	}
 
-    this.remove = function(id) {
-        if(typeof(this.maps[id]) == 'object')
-            this.maps[id].remove();
-            delete this.maps[id];
-    }
+	var wpMatchManager = new matchManager();
+	window.wpMatchManager = wpMatchManager;
 
-    this.removeAll = function() {
-        for(var i in this.maps) {
-            this.maps[i].remove();
-        }
+	$(document).ready(function ($) {
+		$('#game_id').change(function(){
+			wpMatchManager.removeAll();
+		});
 
-        this.maps = {};
-    }
+		$('#wp-cw-addmap input').click(function(){
+			var m = wpMatchManager.addMap();
 
-}
+			// add two rounds by default
+			m.addRound(0, 0);
+			m.addRound(0, 0);
 
-var wpMatchManager = new matchManager;
+			$(this).blur();
+		});
 
-jQuery(document).ready(function($){
-
-    try{convertEntities(wpCWL10n);}catch(e){};
-    
-    $('#game_id').change(function(){
-        wpMatchManager.removeAll();
-    });
-
-    $('#wp-cw-addmap input').click(function(){
-        var m = wpMatchManager.addMap();
-        // add two rounds by def
-        for(var i = 0; i < 2; i++)
-            m.addRound(0, 0);
-
-        $(this).blur();
-    });
-
-	$('#matchsite [name=team2]').change(function() {
-		$('#new_team_title').val('');
+		$('#matchsite [name=team2]').change(function () {
+			$('#new_team_title').val('');
+		});
 	});
 
-});
+})(jQuery);
 
