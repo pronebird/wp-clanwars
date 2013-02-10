@@ -1,8 +1,5 @@
 
-jQuery(document).ready(function($){
-
-	try{convertEntities(wpCWAdminL10n);}catch(e){};
-
+jQuery(document).ready(function ($) {
 	var arr = {
 		'wp-cw-maps' : wpCWAdminL10n.confirmDeleteMap,
 		'wp-cw-games' : wpCWAdminL10n.confirmDeleteGame,

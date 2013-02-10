@@ -279,9 +279,8 @@ class WP_ClanWars {
 
 	function register_cssjs() 
 	{	
-		wp_register_script('jquery-json', WP_CLANWARS_URL . '/js/jquery.json-2.2.min.js', array('jquery'), WP_CLANWARS_VERSION);
-		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery', 'jquery-json', 'utils'), WP_CLANWARS_VERSION);
-		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery', 'utils'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery'), WP_CLANWARS_VERSION);
 
 		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
@@ -844,6 +843,7 @@ class WP_ClanWars {
 	function team_editor($page_title, $page_action, $page_submit, $team_id = 0)
 	{
 		$defaults = array('title' => '', 'logo' => 0, 'country' => '', 'home_team' => 0, 'action' => '');
+		$data = array();
 
 		if($team_id > 0) {
 			$t = $this->get_team(array('id' => $team_id));
@@ -2853,15 +2853,15 @@ class WP_ClanWars {
 
 		<script type="text/javascript">
 		//<![CDATA[
-		jQuery(document).ready(function($){
-		<?php foreach($scores as $key => $data) : $vkey = str_replace('-', '_', $key); ?>
-		with(wpMatchManager.addMap(<?php echo esc_attr($key); ?>, <?php echo (int)$data['map_id']; ?>)){
-			<?php foreach(array_keys($data['team1']) as $v) : ?>
-			addRound(<?php echo (int)$data['team1'][$v]; ?>, <?php echo (int)$data['team2'][$v]; ?>, <?php echo (int)$data['round_id'][$v]; ?>);
-			<?php endforeach; ?>
-		}
+		jQuery(document).ready(function ($) {
+			var data = <?php echo json_encode($scores); ?>;
 
-		<?php endforeach; ?>
+			$.each(data, function (i, item) {
+				var m = wpMatchManager.addMap(i, item.map_id);
+				for(var j = 0; j < item.team1.length; j++) {
+					m.addRound(item.team1[j], item.team2[j], item.round_id[j]);
+				};
+			});
 		});
 		//]]>
 		</script>
@@ -3436,7 +3436,7 @@ class WP_ClanWars {
 							<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
 								<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $item->id; ?>" /></th>
 								<td class="title column-title">
-									<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Match', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"><?php echo esc_html($item->title); ?> <?php if($item->home_team) _e('(Home Team)', WP_CLANWARS_TEXTDOMAIN); ?></a><br />
+									<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Match', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"><?php echo esc_html($item->title); ?></a><br />
 									<div class="row-actions">
 										<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&amp;act=edit&amp;id=' . $item->id); ?>"><?php _e('Edit', WP_CLANWARS_TEXTDOMAIN); ?></a></span> | <span class="delete">
 												<a href="<?php echo wp_nonce_url('admin-post.php?action=wp-clanwars-deletematches&amp;do_action=delete&amp;delete[]=' . $item->id . '&amp;_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-deletematches'); ?>"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></a></span>
