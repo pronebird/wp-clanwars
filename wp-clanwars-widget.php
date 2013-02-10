@@ -1,10 +1,9 @@
 <?php
-/*
+/**
  * This is a part of  WP-ClanWars plugin
  * Description: WP-ClanWars Widget
- * Author: Andrew Mihaylov
- * $Id$
-*/
+ * Author: Andrej Mihajlov
+ **/
 
 /*
     This program is free software: you can redistribute it and/or modify
