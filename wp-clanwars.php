@@ -5,7 +5,7 @@
  * Plugin URI: http://www.codeispoetry.ru/wp-clanwars
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrej Mihajlov
- * Version: 1.5.2
+ * Version: 1.5.3
  *
  * Tags: cybersport, clanwar, team, clan, cyber, sport, match
  **/
@@ -29,7 +29,7 @@ if(!function_exists('add_action')) die('Cheatin&#8217; uh?');
 
 global $wpClanWars;
 
-define('WP_CLANWARS_VERSION', '1.5.2');
+define('WP_CLANWARS_VERSION', '1.5.3');
 
 define('WP_CLANWARS_TEXTDOMAIN', 'wp-clanwars');
 define('WP_CLANWARS_CATEGORY', '_wp_clanwars_category');
