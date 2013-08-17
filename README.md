@@ -11,17 +11,17 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 * __Games management__: add your own games, manage maps, export, import others.
 * __Match management__: create match, there is no limit for number of maps per match of number of rounds per map, extra information like "External League URL", "Practice War" or "Official Match" can be also specified, final score is calculated automatically.
 * __Teams management__: mostly informational, the only useful thing is to setup your team and mark it as home team. Home team is selected by default when you add a new match.
-* __Import/Export__: you can save a pack of games that you created on your own, all games are exported with maps attached to them. Can be useful if you need to transfer a game from one website to another. Plugin comes with 6 packs built-in which can be installed from Import menu.
+* __Import/Export__: you can save a pack of games that you created on your own, all games are exported with maps attached to them. Can be useful if you need to transfer a game from one website to another. Plugin comes with 7 game packs built-in which can be installed from Import menu.
 * __Access Control__: grant your war arrangers an access to match management.
 * __Match Browser__: site visitors can navigate through all matches.
 
 ### Screenshots
 
-![Match browser](readme/matchbrowser.jpg)
-![Games management](readme/games.jpg)
-![Match management](readme/matches.jpg)
-![Match editor](readme/match_editor.jpg)
-![Import menu](readme/import.jpg)
-![Settings](readme/settings.jpg)
-![Sidebar widget settings](readme/widget_setup.jpg)
-![Sidebar widget](readme/sidebar_widget.jpg)
+![Match browser](https://bitbucket.org/and/wp-clanwars/raw/default/readme/matchbrowser.jpg)
+![Games management](https://bitbucket.org/and/wp-clanwars/raw/default/readme/games.jpg)
+![Match management](https://bitbucket.org/and/wp-clanwars/raw/default/readme/matches.jpg)
+![Match editor](https://bitbucket.org/and/wp-clanwars/raw/default/readme/match_editor.jpg)
+![Import menu](https://bitbucket.org/and/wp-clanwars/raw/default/readme/import.jpg)
+![Settings](https://bitbucket.org/and/wp-clanwars/raw/default/readme/settings.jpg)
+![Sidebar widget settings](https://bitbucket.org/and/wp-clanwars/raw/default/readme/widget_setup.jpg)
+![Sidebar widget](https://bitbucket.org/and/wp-clanwars/raw/default/readme/sidebar_widget.jpg)
