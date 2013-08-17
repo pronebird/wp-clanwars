@@ -1,6 +1,6 @@
 ## WP-ClanWars plugin for WordPress
 
-I made this plugin for http://team-yes.ru/ and never thought about publishing it on WordPress Directory since I am not capable to maintain it anymore, so use at your own risk. However I appreciate and encourage others to improve the plugin, I am sure there is a plenty of room for improvement.
+I made this plugin for [Team Yes! Multigaming team](http://team-yes.ru/) and never thought about publishing it on WordPress Directory since I am not capable to maintain it anymore, so use at your own risk. However I appreciate and encourage others to improve the plugin, I am sure there is a plenty of room for improvement.
 
 For every match the plugin creates a post, all post are created in a category set in plugin settings. I suggest to create a separate category for all matches. Since every match is a regular post, it means that they will show up all around the website, if it's not desired behavior you will have to restrict matches category from being shown on specific pages of your website (e.g. on front page), I guess there are plenty of plugins for that or you can always do it manually by fixing your theme files. I would also suggest to avoid any changes to the content of created posts because plugin overwrites post content on match update.
 
@@ -17,11 +17,26 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 
 ### Screenshots
 
+#### Match Browser
 ![Match browser](https://bitbucket.org/and/wp-clanwars/raw/default/readme/matchbrowser.jpg)
+
+#### Games management
 ![Games management](https://bitbucket.org/and/wp-clanwars/raw/default/readme/games.jpg)
+
+#### Match management
 ![Match management](https://bitbucket.org/and/wp-clanwars/raw/default/readme/matches.jpg)
+
+#### Match editor
 ![Match editor](https://bitbucket.org/and/wp-clanwars/raw/default/readme/match_editor.jpg)
+
+#### Import menu
 ![Import menu](https://bitbucket.org/and/wp-clanwars/raw/default/readme/import.jpg)
+
+#### Settings
 ![Settings](https://bitbucket.org/and/wp-clanwars/raw/default/readme/settings.jpg)
+
+#### Sidebar widget settings
 ![Sidebar widget settings](https://bitbucket.org/and/wp-clanwars/raw/default/readme/widget_setup.jpg)
+
+#### Sidebar widget
 ![Sidebar widget](https://bitbucket.org/and/wp-clanwars/raw/default/readme/sidebar_widget.jpg)
