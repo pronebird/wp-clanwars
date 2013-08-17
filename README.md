@@ -9,7 +9,7 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 ### Features
 
 * __Games management__: add your own games, manage maps, export, import others.
-* __Match management__: create match, there is no limit for number of maps per match of number of rounds per map, extra information like "External League URL", "Practice War" or "Official Match" can be also specified, final score is calculated automatically.
+* __Match management__: create match, there is no limit for number of maps per match or number of rounds per map, extra information like "External League URL", "Practice War" or "Official Match" can be also specified, final score is calculated automatically.
 * __Teams management__: mostly informational, the only useful thing is to setup your team and mark it as home team. Home team is selected by default when you add a new match.
 * __Import/Export__: you can save a pack of games that you created on your own, all games are exported with maps attached to them. Can be useful if you need to transfer a game from one website to another. Plugin comes with 7 game packs built-in which can be installed from Import menu.
 * __Access Control__: grant your war arrangers an access to match management.
