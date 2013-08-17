@@ -215,7 +215,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 
         
         <p><?php _e('Show games:', WP_CLANWARS_TEXTDOMAIN); ?></p>
-        <p style="overflow: auto; max-height: 100px; background: #fff;" class="widefat">
+        <p style="overflow: auto; max-height: 100px; border: 1px solid #dfdfdf; background: #fff;" class="widefat">
             <?php foreach($games as $item) : ?>
             <label for="<?php echo $this->get_field_id('visible_games-' . $item->id); ?>"><input type="checkbox" name="<?php echo $this->get_field_name('visible_games'); ?>[]" id="<?php echo $this->get_field_id('visible_games-' . $item->id); ?>" value="<?php echo esc_attr($item->id); ?>" <?php checked(true, in_array($item->id, $visible_games)); ?>/> <?php echo esc_html($item->title); ?></label><br/>
             <?php endforeach; ?>
