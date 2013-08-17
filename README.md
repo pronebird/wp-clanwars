@@ -4,6 +4,8 @@ I made this plugin for [Team Yes! Multigaming team](http://team-yes.ru/) and nev
 
 For every match the plugin creates a post, all post are created in a category set in plugin settings. I suggest to create a separate category for all matches. Since every match is a regular post, it means that they will show up all around the website, if it's not desired behavior you will have to restrict matches category from being shown on specific pages of your website (e.g. on front page), I guess there are plenty of plugins for that or you can always do it manually by fixing your theme files. I would also suggest to avoid any changes to the content of created posts because plugin overwrites post content on match update.
 
+By default plugin uses it's own stylesheet which can be disabled in plugin settings. If you decide to make a custom CSS that better fits your website, as example, take a look at default styles: [site.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/site.css) and [widget.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/widget.css).
+
 Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode, I suggest to create a separate page for it.
 
 ### Features
