@@ -1,43 +1,44 @@
 [
-	{
-	  "title" : "Battlefield 1942",
-	  "abbr" : "BF1942",
-	  "package" : "bf1942.json.gz",
-	  "icon" : "bf1942.png"
-	},
-
-	{
-	  "title" : "Battlefield 2",
-	  "abbr" : "BF2",
-	  "package" : "bf2.json.gz",
-	  "icon" : "bf2.png"
-	},
-
-	{
-	  "title" : "Bad Company 2",
-	  "abbr" : "BC2",
-	  "package" : "bc2.json.gz",
-	  "icon" : "bc2.png"
-	},
-
-	{
-	  "title" : "Bad Company 2 Vietnam",
-	  "abbr" : "BC2V",
-	  "package" : "bc2v.json.gz",
-	  "icon" : "bc2v.png"
-	},
-
-	{
-	  "title" : "Left 4 Dead 2",
-	  "abbr" : "L4D2",
-	  "package" : "l4d2.json.gz",
-	  "icon" : "l4d2.png"
-	},
-
-    	{
-	  "title" : "Team Fortress 2",
-	  "abbr" : "TF2",
-	  "package" : "tf2.json.gz",
-	  "icon" : "tf2.gif"
-	}
+  {
+    "title": "Battlefield 1942",
+    "abbr": "BF1942",
+    "package": "bf1942.json.gz",
+    "icon": "bf1942.png"
+  },
+  {
+    "title": "Battlefield 2",
+    "abbr": "BF2",
+    "package": "bf2.json.gz",
+    "icon": "bf2.png"
+  },
+  {
+    "title": "Battlefield 3",
+    "abbr": "BF3",
+    "package": "bf3.json.gz",
+    "icon": "bf3.jpg"
+  },
+  {
+    "title": "Bad Company 2",
+    "abbr": "BC2",
+    "package": "bc2.json.gz",
+    "icon": "bc2.png"
+  },
+  {
+    "title": "Bad Company 2 Vietnam",
+    "abbr": "BC2V",
+    "package": "bc2v.json.gz",
+    "icon": "bc2v.png"
+  },
+  {
+    "title": "Left 4 Dead 2",
+    "abbr": "L4D2",
+    "package": "l4d2.json.gz",
+    "icon": "l4d2.png"
+  },
+  {
+    "title": "Team Fortress 2",
+    "abbr": "TF2",
+    "package": "tf2.json.gz",
+    "icon": "tf2.gif"
+  }
 ]
