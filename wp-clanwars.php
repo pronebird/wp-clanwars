@@ -252,25 +252,43 @@ class WP_ClanWars {
 
 		$acl_table = array(
 			'manage_matches' => 'manage_options',
+			'manage_teams' => 'manage_options',
 			'manage_games' => 'manage_options',
-			'manage_teams' => 'manage_options'
 		);
-		
+
+		$routes = array(
+			'manage_matches' => 'wp-clanwars-matches',
+			'manage_teams' => 'wp-clanwars-teams',
+			'manage_games' => 'wp-clanwars-games'
+		);
+
 		$keys = array_keys($acl_table);
 		$user_role = $current_user->roles[0];
+		$top_level_slug = '';
 
 		for($i = 0; $i < sizeof($keys); $i++) {
-			if($this->acl_user_can($keys[$i]))
+			if($this->acl_user_can($keys[$i])) {
 				$acl_table[$keys[$i]] = $user_role;
+
+				// point top level slug to first menu user has access to
+				if($top_level_slug === '') {
+					$top_level_slug = $routes[$keys[$i]];
+				}
+			}
 		}
 
-		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), 'subscriber', __FILE__, null, WP_CLANWARS_URL . '/images/plugin-icon.png');
+		// do not register admin menu becuase user doesn't have any permissions
+		if($top_level_slug === '') {
+			return;
+		}
 
-		$this->page_hooks['matches'] = add_submenu_page(__FILE__, __('Matches', WP_CLANWARS_TEXTDOMAIN), __('Matches', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_matches'], 'wp-clanwars-matches', array($this, 'on_manage_matches'));
-		$this->page_hooks['teams'] = add_submenu_page(__FILE__, __('Teams', WP_CLANWARS_TEXTDOMAIN), __('Teams', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_teams'], 'wp-clanwars-teams', array($this, 'on_manage_teams'));
-		$this->page_hooks['games'] = add_submenu_page(__FILE__, __('Games', WP_CLANWARS_TEXTDOMAIN), __('Games', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_games'], 'wp-clanwars-games', array($this, 'on_manage_games'));
-		$this->page_hooks['import'] = add_submenu_page(__FILE__, __('Import', WP_CLANWARS_TEXTDOMAIN), __('Import', WP_CLANWARS_TEXTDOMAIN), 'manage_options', 'wp-clanwars-import', array($this, 'on_import'));
-		$this->page_hooks['settings'] = add_submenu_page(__FILE__, __('Settings', WP_CLANWARS_TEXTDOMAIN), __('Settings', WP_CLANWARS_TEXTDOMAIN), 'manage_options', 'wp-clanwars-settings', array($this, 'on_settings'));
+		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), $user_role, $top_level_slug, null, WP_CLANWARS_URL . '/images/plugin-icon.png');
+
+		$this->page_hooks['matches'] = add_submenu_page($top_level_slug, __('Matches', WP_CLANWARS_TEXTDOMAIN), __('Matches', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_matches'], $routes['manage_matches'], array($this, 'on_manage_matches'));
+		$this->page_hooks['teams'] = add_submenu_page($top_level_slug, __('Teams', WP_CLANWARS_TEXTDOMAIN), __('Teams', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_teams'], $routes['manage_teams'], array($this, 'on_manage_teams'));
+		$this->page_hooks['games'] = add_submenu_page($top_level_slug, __('Games', WP_CLANWARS_TEXTDOMAIN), __('Games', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_games'], $routes['manage_games'], array($this, 'on_manage_games'));
+		$this->page_hooks['import'] = add_submenu_page($top_level_slug, __('Import', WP_CLANWARS_TEXTDOMAIN), __('Import', WP_CLANWARS_TEXTDOMAIN), 'manage_options', 'wp-clanwars-import', array($this, 'on_import'));
+		$this->page_hooks['settings'] = add_submenu_page($top_level_slug, __('Settings', WP_CLANWARS_TEXTDOMAIN), __('Settings', WP_CLANWARS_TEXTDOMAIN), 'manage_options', 'wp-clanwars-settings', array($this, 'on_settings'));
 
 
 		add_action('load-' . $this->page_hooks['matches'], array($this, 'on_load_manage_matches'));
@@ -2939,7 +2957,7 @@ class WP_ClanWars {
 							<th scope="row" valign="top"><label for=""><?php _e('Match status', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 							<td>
 								<?php foreach($this->match_status as $index => $text) : ?>
-								<label for="match_status_<?php echo $index; ?>"><input type="radio" value="<?php echo $index; ?>" name="match_status" id="match_status_<?php echo $index; ?>"<?php checked($index, $match_status, true); ?> /> <?php echo $text; ?></label><br/>
+								<p><label for="match_status_<?php echo $index; ?>"><input type="radio" value="<?php echo $index; ?>" name="match_status" id="match_status_<?php echo $index; ?>"<?php checked($index, $match_status, true); ?> /> <?php echo $text; ?></label></p>
 								<?php endforeach; ?>
 							</td>
 						</tr>
@@ -3824,7 +3842,7 @@ class WP_ClanWars {
 
 				<div class="form-field">
 					<label><?php _e('Allow user manage specified games only:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-					<ul class="listbox">
+					<ul>
 						<?php foreach($games as $g) : ?>
 						<li><label for="game_<?php echo $g->id; ?>"><input type="checkbox" name="games[]" id="game_<?php echo $g->id; ?>" value="<?php echo $g->id; ?>" /> <?php echo esc_html($g->title); ?></label></li>
 						<?php endforeach; ?>
@@ -3835,7 +3853,7 @@ class WP_ClanWars {
 
 				<div class="form-field">
 					<label><?php _e('Allow user:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-					<ul class="listbox">
+					<ul>
 						<?php foreach($this->acl_keys as $key => $title) : ?>
 						<li><label for="<?php echo esc_attr($key); ?>"><input type="checkbox" class="check" name="permissions[<?php echo esc_attr($key); ?>]" value="1" id="<?php echo esc_attr($key); ?>" /> <?php echo $title; ?></label></li>
 						<?php endforeach; ?>

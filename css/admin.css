@@ -32,10 +32,6 @@
 	background-color: #fff;
 }
 
-.wp-cw-matcheditor label input[type=radio] {
-	vertical-align: baseline;
-}
-
 .wp-cw-matcheditor textarea#description {
     height: 5em;
     resize: vertical;
@@ -92,7 +88,8 @@
 }
 
 .wp-cw-matcheditor .match-results .map .title span {
-    float: left;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .wp-cw-matcheditor .match-results .map select {
@@ -128,8 +125,11 @@
     width: 10px;
     height: 22px;
     overflow: hidden;
-    float: right;
-    display: block;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
 }
 
 .wp-cw-matcheditor .match-results .remove:hover
@@ -141,14 +141,10 @@
     background-position: -10px 50%;
 }
 
-.wp-cw-matcheditor .match-results  .remove-matchmap {
-    float: left;
+.wp-cw-matcheditor .match-results .remove-matchmap {
+    display: inline-block;
+    vertical-align: middle;
     margin-left: 10px;
-}
-
-.wp-cw-settings .listbox label input {
-	display: inline;
-	width: auto;
 }
 
 .available-games img {
