@@ -5,7 +5,7 @@
  * Plugin URI: https://bitbucket.org/and/wp-clanwars
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrej Mihajlov
- * Version: 1.5.5
+ * Version: 1.5.7
  *
  * Tags: cybersport, clanwar, team, clan, cyber, sport, match
  **/
