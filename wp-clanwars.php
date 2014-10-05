@@ -779,7 +779,7 @@ class WP_ClanWars {
 	function set_hometeam($id) {
 		global $wpdb;
 
-		$wpdb->query($wpdb->prepare('UPDATE `' . $this->tables['teams'] . '` SET home_team=0'));
+		$wpdb->update($this->tables['teams'], array('home_team' => 0), array('home_team' => 1), array('%d'), array('%d'));
 		return $wpdb->update($this->tables['teams'], array('home_team' => 1), array('id' => $id), array('%d'), array('%d'));
 	}
 
