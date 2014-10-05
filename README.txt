@@ -1,7 +1,6 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: http://example.com/
-Tags: comments, spam
+=== WP-ClanWars ===
+Contributors: andddd
+Tags: cybersport, clanwar, team, clan, cyber, sport, match
 Requires at least: 3.0.1
 Tested up to: 4.0
 Stable tag: 1.5.6
