@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-10 21:11+0100\n"
+"POT-Creation-Date: 2014-10-05 19:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrej Mihajlov <and@codeispoetry.ru>\n"
 "Language-Team: Andrej Mihajlov <and@codeispoetry.ru>\n"
@@ -14,1259 +14,1213 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n;_c;_x:1,2c;__ngettext_noop:1,2;"
 "__ngettext:1,2;_n:1,2\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11) ? 0 : ((n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20)) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.5\n"
-"X-Poedit-SearchPath-0: /Users/pronebird/dev/wp-clanwars\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:20
+#: ../countries.php:20
 msgid "Afghanistan"
 msgstr "Афганистан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:21
+#: ../countries.php:21
 msgid "Albania"
 msgstr "Албания"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:22
+#: ../countries.php:22
 msgid "Algeria"
 msgstr "Алжир"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:23
+#: ../countries.php:23
 msgid "American Samoa"
 msgstr "Американское Самоа"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:24
+#: ../countries.php:24
 msgid "Andorra"
 msgstr "Андорра"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:25
+#: ../countries.php:25
 msgid "Angola"
 msgstr "Ангола"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:26
+#: ../countries.php:26
 msgid "Anguilla"
 msgstr "Ангилья"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:27
+#: ../countries.php:27
 msgid "Antigua and Barbuda"
 msgstr "Антигуа и Барбуда"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:28
+#: ../countries.php:28
 msgid "Argentina"
 msgstr "Аргентина"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:29
+#: ../countries.php:29
 msgid "Armenia"
 msgstr "Армения"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:30
+#: ../countries.php:30
 msgid "Aruba"
 msgstr "Аруба"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:31
+#: ../countries.php:31
 msgid "Australia"
 msgstr "Австралия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:32
+#: ../countries.php:32
 msgid "Austria"
 msgstr "Австрия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:33
+#: ../countries.php:33
 msgid "Azerbaijan"
 msgstr "Азербайджан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:34
+#: ../countries.php:34
 msgid "Bahamas"
 msgstr "Багамские острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:35
+#: ../countries.php:35
 msgid "Bahrain"
 msgstr "Бахрейн"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:36
+#: ../countries.php:36
 msgid "Bangladesh"
 msgstr "Бангладеш"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:37
+#: ../countries.php:37
 msgid "Barbados"
 msgstr "Барбадос"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:38
+#: ../countries.php:38
 msgid "Belarus"
 msgstr "Беларусь"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:39
+#: ../countries.php:39
 msgid "Belgium"
 msgstr "Бельгия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:40
+#: ../countries.php:40
 msgid "Belize"
 msgstr "Белиз"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:41
+#: ../countries.php:41
 msgid "Benin"
 msgstr "Бенин"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:42
+#: ../countries.php:42
 msgid "Bermuda"
 msgstr "Бермуды"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:43
+#: ../countries.php:43
 msgid "Bhutan"
 msgstr "Бутан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:44
+#: ../countries.php:44
 msgid "Bolivia"
 msgstr "Боливия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:45
+#: ../countries.php:45
 msgid "Bosnia and Herzegowina"
 msgstr "Босния и Герцеговина"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:46
+#: ../countries.php:46
 msgid "Botswana"
 msgstr "Ботсвана"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:47
+#: ../countries.php:47
 msgid "Bouvet Island"
 msgstr "Буве"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:48
+#: ../countries.php:48
 msgid "Brazil"
 msgstr "Бразилия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:49
+#: ../countries.php:49
 msgid "British Indian Ocean Territory"
 msgstr "Британская территория Индийского океана"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:50
+#: ../countries.php:50
 msgid "Brunei Darussalam"
 msgstr "Бруней-Даруссалам"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:51
+#: ../countries.php:51
 msgid "Bulgaria"
 msgstr "Болгария"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:52
+#: ../countries.php:52
 msgid "Burkina Faso"
 msgstr "Буркина-Фасо"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:53
+#: ../countries.php:53
 msgid "Burundi"
 msgstr "Бурунди"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:54
+#: ../countries.php:54
 msgid "Cambodia"
 msgstr "Камбоджа"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:55
+#: ../countries.php:55
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:56
+#: ../countries.php:56
 msgid "Canada"
 msgstr "Канада"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:57
+#: ../countries.php:57
 msgid "Cape Verde"
 msgstr "Кабо-Верде"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:58
+#: ../countries.php:58
 msgid "Catalonia"
 msgstr "Каталония"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:59
+#: ../countries.php:59
 msgid "Cayman Islands"
 msgstr "Каймановы острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:60
+#: ../countries.php:60
 msgid "Central African Republic"
 msgstr "Центрально-Африканская Республика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:61
+#: ../countries.php:61
 msgid "Chad"
 msgstr "Чад"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:62
+#: ../countries.php:62
 msgid "Chile"
 msgstr "Чили"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:63
+#: ../countries.php:63
 msgid "China"
 msgstr "Китай"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:64
+#: ../countries.php:64
 msgid "Christmas Island"
 msgstr "Остров Рождества"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:65
+#: ../countries.php:65
 msgid "Cocos (Keeling) Islands"
 msgstr "Кокосовые (Килинг) острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:66
+#: ../countries.php:66
 msgid "Colombia"
 msgstr "Колумбия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:67
+#: ../countries.php:67
 msgid "Comoros"
 msgstr "Коморские острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:68
+#: ../countries.php:68
 msgid "Congo"
 msgstr "Конго"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:69
+#: ../countries.php:69
 msgid "Congo, the DRC"
 msgstr "Конго"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:70
+#: ../countries.php:70
 msgid "Cook Islands"
 msgstr "Острова Кука"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:71
+#: ../countries.php:71
 msgid "Costa Rica"
 msgstr "Коста Рика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:72
+#: ../countries.php:72
 msgid "Cote D'Ivoire"
 msgstr "Кот-д'Ивуар"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:73
+#: ../countries.php:73
 msgid "Croatia"
 msgstr "Хорватия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:74
+#: ../countries.php:74
 msgid "Cuba"
 msgstr "Куба"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:75
+#: ../countries.php:75
 msgid "Cyprus"
 msgstr "Кипр"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:76
+#: ../countries.php:76
 msgid "Czech Republic"
 msgstr "Чехия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:77
+#: ../countries.php:77
 msgid "Denmark"
 msgstr "Дания"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:78
+#: ../countries.php:78
 msgid "Djibouti"
 msgstr "Джибути"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:79
+#: ../countries.php:79
 msgid "Dominica"
 msgstr "Доминика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:80
+#: ../countries.php:80
 msgid "Dominican Republic"
 msgstr "Доминиканская Республика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:81
+#: ../countries.php:81
 msgid "Ecuador"
 msgstr "Эквадор"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:82
+#: ../countries.php:82
 msgid "Egypt"
 msgstr "Египет"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:83
+#: ../countries.php:83
 msgid "El Salvador"
 msgstr "Сальвадор"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:84
+#: ../countries.php:84
 msgid "England"
 msgstr "Англия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:85
+#: ../countries.php:85
 msgid "Equatorial Guinea"
 msgstr "Экваториальная Гвинея"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:86
+#: ../countries.php:86
 msgid "Eritrea"
 msgstr "Эритрея"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:87
+#: ../countries.php:87
 msgid "Estonia"
 msgstr "Эстония"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:88
+#: ../countries.php:88
 msgid "Ethiopia"
 msgstr "Эфиопия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:89
+#: ../countries.php:89
 msgid "European Union"
 msgstr "Европейский союз"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:90
+#: ../countries.php:90
 msgid "Falkland Islands (Malvinas)"
 msgstr "Фолклендские (Мальвинские) острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:91
+#: ../countries.php:91
 msgid "Faroe Islands"
 msgstr "Фарерские острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:92
+#: ../countries.php:92
 msgid "Fiji"
 msgstr "Фиджи"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:93
+#: ../countries.php:93
 msgid "Finland"
 msgstr "Финляндия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:94
+#: ../countries.php:94
 msgid "France"
 msgstr "Франция"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:95
+#: ../countries.php:95
 msgid "French Guiana"
 msgstr "Французская Гвиана"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:96
+#: ../countries.php:96
 msgid "French Polynesia"
 msgstr "Французская Полинезия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:97
+#: ../countries.php:97
 msgid "French Southern Territories"
 msgstr "Французские южные территории"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:98
+#: ../countries.php:98
 msgid "Gabon"
 msgstr "Габон"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:99
+#: ../countries.php:99
 msgid "Gambia"
 msgstr "Гамбия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:100
+#: ../countries.php:100
 msgid "Georgia"
 msgstr "Грузия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:101
+#: ../countries.php:101
 msgid "Germany"
 msgstr "Германия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:102
+#: ../countries.php:102
 msgid "Ghana"
 msgstr "Гана"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:103
+#: ../countries.php:103
 msgid "Gibraltar"
 msgstr "Гибралтар"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:104
+#: ../countries.php:104
 msgid "Greece"
 msgstr "Греция"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:105
+#: ../countries.php:105
 msgid "Greenland"
 msgstr "Гринландия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:106
+#: ../countries.php:106
 msgid "Grenada"
 msgstr "Гренада"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:107
+#: ../countries.php:107
 msgid "Guadeloupe"
 msgstr "Гваделупа"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:108
+#: ../countries.php:108
 msgid "Guam"
 msgstr "Гуам"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:109
+#: ../countries.php:109
 msgid "Guatemala"
 msgstr "Гватемала"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:110
+#: ../countries.php:110
 msgid "Guinea"
 msgstr "Гвинея"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:111
+#: ../countries.php:111
 msgid "Guinea-Bissau"
 msgstr "Гвинея-Бисау"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:112
+#: ../countries.php:112
 msgid "Guyana"
 msgstr "Гайана"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:113
+#: ../countries.php:113
 msgid "Haiti"
 msgstr "Гаити"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:114
+#: ../countries.php:114
 msgid "Heard Island and McDonald Islands"
 msgstr "Остров Херд и острова Макдональд"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:115
+#: ../countries.php:115
 msgid "Holy See (Vatican City State)"
 msgstr "Святой Престол (Ватикан)"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:116
+#: ../countries.php:116
 msgid "Honduras"
 msgstr "Гондурас"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:117
+#: ../countries.php:117
 msgid "Hong Kong"
 msgstr "Гонконг"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:118
+#: ../countries.php:118
 msgid "Hungary"
 msgstr "Венгрия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:119
+#: ../countries.php:119
 msgid "Iceland"
 msgstr "Исландия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:120
+#: ../countries.php:120
 msgid "India"
 msgstr "Индия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:121
+#: ../countries.php:121
 msgid "Indonesia"
 msgstr "Индонезия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:122
+#: ../countries.php:122
 msgid "Iran, Islamic Republic of"
 msgstr "Иран"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:123
+#: ../countries.php:123
 msgid "Iraq"
 msgstr "Ирак"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:124
+#: ../countries.php:124
 msgid "Ireland"
 msgstr "Ирландия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:125
+#: ../countries.php:125
 msgid "Israel"
 msgstr "Израиль"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:126
+#: ../countries.php:126
 msgid "Italy"
 msgstr "Италия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:127
+#: ../countries.php:127
 msgid "Jamaica"
 msgstr "Ямайка"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:128
+#: ../countries.php:128
 msgid "Japan"
 msgstr "Япония"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:129
+#: ../countries.php:129
 msgid "Jordan"
 msgstr "Иордан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:130
+#: ../countries.php:130
 msgid "Kazakhstan"
 msgstr "Казахстан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:131
+#: ../countries.php:131
 msgid "Kenya"
 msgstr "Кения"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:132
+#: ../countries.php:132
 msgid "Kiribati"
 msgstr "Кирибати"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:133
+#: ../countries.php:133
 msgid "Korea, Democratic People's Republic of"
 msgstr "Корея, КНДР"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:134
+#: ../countries.php:134
 msgid "Korea, Republic of"
 msgstr "Корея, Республика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:135
+#: ../countries.php:135
 msgid "Kuwait"
 msgstr "Кувейт"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:136
+#: ../countries.php:136
 msgid "Kyrgyzstan"
 msgstr "Кыргызстан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:137
+#: ../countries.php:137
 msgid "Lao People's Democratic Republic"
 msgstr "Лаосская Народно-Демократическая Республика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:138
+#: ../countries.php:138
 msgid "Latvia"
 msgstr "Латвия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:139
+#: ../countries.php:139
 msgid "Lebanon"
 msgstr "Ливан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:140
+#: ../countries.php:140
 msgid "Lesotho"
 msgstr "Лесото"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:141
+#: ../countries.php:141
 msgid "Liberia"
 msgstr "Либерия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:142
+#: ../countries.php:142
 msgid "Libyan Arab Jamahiriya"
 msgstr "Ливийской Арабской Джамахирии"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:143
+#: ../countries.php:143
 msgid "Liechtenstein"
 msgstr "Лихтенштейн"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:144
+#: ../countries.php:144
 msgid "Lithuania"
 msgstr "Литва"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:145
+#: ../countries.php:145
 msgid "Luxembourg"
 msgstr "Люксембург"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:146
+#: ../countries.php:146
 msgid "Macao"
 msgstr "Макао"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:147
+#: ../countries.php:147
 msgid "Macedonia, the former Yugoslav Republic of"
 msgstr "Македония, бывшая Югославская Республика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:148
+#: ../countries.php:148
 msgid "Madagascar"
 msgstr "Мадагаскар"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:149
+#: ../countries.php:149
 msgid "Malawi"
 msgstr "Малави"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:150
+#: ../countries.php:150
 msgid "Malaysia"
 msgstr "Малайзия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:151
+#: ../countries.php:151
 msgid "Maldives"
 msgstr "Мальдивы"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:152
+#: ../countries.php:152
 msgid "Mali"
 msgstr "Мали"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:153
+#: ../countries.php:153
 msgid "Malta"
 msgstr "Мальта"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:154
+#: ../countries.php:154
 msgid "Marshall Islands"
 msgstr "Маршалловы острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:155
+#: ../countries.php:155
 msgid "Martinique"
 msgstr "Мартиника"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:156
+#: ../countries.php:156
 msgid "Mauritania"
 msgstr "Мавритания"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:157
+#: ../countries.php:157
 msgid "Mauritius"
 msgstr "Маврикий"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:158
+#: ../countries.php:158
 msgid "Mayotte"
 msgstr "Майотта"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:159
+#: ../countries.php:159
 msgid "Mexico"
 msgstr "Мексика"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:160
+#: ../countries.php:160
 msgid "Micronesia, Federated States of"
 msgstr "Микронезия, Федеративные Штаты"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:161
+#: ../countries.php:161
 msgid "Moldova, Republic of"
 msgstr "Молдова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:162
+#: ../countries.php:162
 msgid "Monaco"
 msgstr "Монако"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:163
+#: ../countries.php:163
 msgid "Mongolia"
 msgstr "Монголия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:164
+#: ../countries.php:164
 msgid "Montenegro"
 msgstr "Черногория"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:165
+#: ../countries.php:165
 msgid "Montserrat"
 msgstr "Монсеррат"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:166
+#: ../countries.php:166
 msgid "Morocco"
 msgstr "Морокко"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:167
+#: ../countries.php:167
 msgid "Mozambique"
 msgstr "Мозамбик"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:168
+#: ../countries.php:168
 msgid "Myanmar"
 msgstr "Мьянма"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:169
+#: ../countries.php:169
 msgid "Namibia"
 msgstr "Намибия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:170
+#: ../countries.php:170
 msgid "Nauru"
 msgstr "Науру"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:171
+#: ../countries.php:171
 msgid "Nepal"
 msgstr "Непал"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:172
+#: ../countries.php:172
 msgid "Netherlands"
 msgstr "Голландия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:173
+#: ../countries.php:173
 msgid "Netherlands Antilles"
 msgstr "Нидерландские Антильские острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:174
+#: ../countries.php:174
 msgid "New Caledonia"
 msgstr "Новая Каледония"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:175
+#: ../countries.php:175
 msgid "New Zealand"
 msgstr "Новая Зеландия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:176
+#: ../countries.php:176
 msgid "Nicaragua"
 msgstr "Никарагуа"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:177
+#: ../countries.php:177
 msgid "Niger"
 msgstr "Нигер"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:178
+#: ../countries.php:178
 msgid "Nigeria"
 msgstr "Нигерия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:179
+#: ../countries.php:179
 msgid "Niue"
 msgstr "Ниуэ"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:180
+#: ../countries.php:180
 msgid "Norfolk Island"
 msgstr "Остров Норфолк"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:181
+#: ../countries.php:181
 msgid "Northern Mariana Islands"
 msgstr "Северные Марианские острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:182
+#: ../countries.php:182
 msgid "Norway"
 msgstr "Норвегия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:183
+#: ../countries.php:183
 msgid "Oman"
 msgstr "Оман"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:184
+#: ../countries.php:184
 msgid "Pakistan"
 msgstr "Пакистан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:185
+#: ../countries.php:185
 msgid "Palau"
 msgstr "Палау"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:186
+#: ../countries.php:186
 msgid "Palestinian Territory, Occupied"
 msgstr "Палестинской территория"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:187
+#: ../countries.php:187
 msgid "Panama"
 msgstr "Панама"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:188
+#: ../countries.php:188
 msgid "Papua New Guinea"
 msgstr "Папуа Новая Гвинея"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:189
+#: ../countries.php:189
 msgid "Paraguay"
 msgstr "Парагвай"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:190
+#: ../countries.php:190
 msgid "Peru"
 msgstr "Перу"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:191
+#: ../countries.php:191
 msgid "Philippines"
 msgstr "Филиппины"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:192
+#: ../countries.php:192
 msgid "Pitcairn"
 msgstr "Питкэрн"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:193
+#: ../countries.php:193
 msgid "Poland"
 msgstr "Польша"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:194
+#: ../countries.php:194
 msgid "Portugal"
 msgstr "Португалия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:195
+#: ../countries.php:195
 msgid "Puerto Rico"
 msgstr "Пуэрто Рико"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:196
+#: ../countries.php:196
 msgid "Qatar"
 msgstr "Катар"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:197
+#: ../countries.php:197
 msgid "Romania"
 msgstr "Румыния"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:198
+#: ../countries.php:198
 msgid "Russia"
 msgstr "Россия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:199
+#: ../countries.php:199
 msgid "Rwanda"
 msgstr "Рванда"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:200
+#: ../countries.php:200
 msgid "Réunion"
 msgstr "Реюньон"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:201
+#: ../countries.php:201
 msgid "Saint Helena, Ascension and Tristan da Cunha"
 msgstr "Остров Святой Елены, Вознесения и Тристан-да-Кунья"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:202
+#: ../countries.php:202
 msgid "Saint Kitts and Nevis"
 msgstr "Сент-Китс и Невис"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:203
+#: ../countries.php:203
 msgid "Saint Lucia"
 msgstr "Сент-Люсия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:204
+#: ../countries.php:204
 msgid "Saint Pierre and Miquelon"
 msgstr "Сен-Пьер и Микелон"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:205
+#: ../countries.php:205
 msgid "Saint Vincent and the Grenadines"
 msgstr "Сент-Винсент и Гренадины"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:206
+#: ../countries.php:206
 msgid "Samoa"
 msgstr "Самоа"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:207
+#: ../countries.php:207
 msgid "San Marino"
 msgstr "Сан - Марино"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:208
+#: ../countries.php:208
 msgid "Sao Tome and Principe"
 msgstr "Сан-Томе и Принсипи"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:209
+#: ../countries.php:209
 msgid "Saudi Arabia"
 msgstr "Саудовская Арабия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:210
+#: ../countries.php:210
 msgid "Scotland"
 msgstr "Шотландия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:211
+#: ../countries.php:211
 msgid "Senegal"
 msgstr "Сенегал"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:212
+#: ../countries.php:212
 msgid "Serbia"
 msgstr "Сербия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:213
+#: ../countries.php:213
 msgid "Serbia and Montenegro"
 msgstr "Сербия и Черногория"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:214
+#: ../countries.php:214
 msgid "Seychelles"
 msgstr "Сейшельские острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:215
+#: ../countries.php:215
 msgid "Sierra Leone"
 msgstr "Сьерра-Леоне"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:216
+#: ../countries.php:216
 msgid "Singapore"
 msgstr "Сингапур"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:217
+#: ../countries.php:217
 msgid "Slovakia"
 msgstr "Словакия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:218
+#: ../countries.php:218
 msgid "Slovenia"
 msgstr "Словения"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:219
+#: ../countries.php:219
 msgid "Solomon Islands"
 msgstr "Соломоновы острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:220
+#: ../countries.php:220
 msgid "Somalia"
 msgstr "Сомали"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:221
+#: ../countries.php:221
 msgid "South Africa"
 msgstr "ЮАР"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:222
+#: ../countries.php:222
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Южная Георгия и Южные Сандвичевы острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:223
+#: ../countries.php:223
 msgid "Spain"
 msgstr "Испания"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:224
+#: ../countries.php:224
 msgid "Sri Lanka"
 msgstr "Шри Ланка"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:225
+#: ../countries.php:225
 msgid "Sudan"
 msgstr "Судан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:226
+#: ../countries.php:226
 msgid "Suriname"
 msgstr "Суринам"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:227
+#: ../countries.php:227
 msgid "Svalbard and Jan Mayen"
 msgstr "Шпицберген и Ян-Майен"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:228
+#: ../countries.php:228
 msgid "Swaziland"
 msgstr "Свазиленд"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:229
+#: ../countries.php:229
 msgid "Sweden"
 msgstr "Швеция"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:230
+#: ../countries.php:230
 msgid "Switzerland"
 msgstr "Швейцария"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:231
+#: ../countries.php:231
 msgid "Syrian Arab Republic"
 msgstr "Сирийской Арабской Республики"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:232
+#: ../countries.php:232
 msgid "Taiwan, Province of China"
 msgstr "Тайвань, провинция Китая"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:233
+#: ../countries.php:233
 msgid "Tajikistan"
 msgstr "Таджикистан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:234
+#: ../countries.php:234
 msgid "Tanzania, United Republic of"
 msgstr "Танзания"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:235
+#: ../countries.php:235
 msgid "Thailand"
 msgstr "Таиланд"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:236
+#: ../countries.php:236
 msgid "Timor-Leste"
 msgstr "Тимор-Лешти"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:237
+#: ../countries.php:237
 msgid "Togo"
 msgstr "Того"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:238
+#: ../countries.php:238
 msgid "Tokelau"
 msgstr "Токелау"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:239
+#: ../countries.php:239
 msgid "Tonga"
 msgstr "Тонга"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:240
+#: ../countries.php:240
 msgid "Trinidad and Tobago"
 msgstr "Тринидад и Тобаго"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:241
+#: ../countries.php:241
 msgid "Tunisia"
 msgstr "Тунис"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:242
+#: ../countries.php:242
 msgid "Turkey"
 msgstr "Турция"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:243
+#: ../countries.php:243
 msgid "Turkmenistan"
 msgstr "Туркменистан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:244
+#: ../countries.php:244
 msgid "Turks and Caicos Islands"
 msgstr "Острова Теркс и Кайкос"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:245
+#: ../countries.php:245
 msgid "Tuvalu"
 msgstr "Тувалу"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:246
+#: ../countries.php:246
 msgid "Uganda"
 msgstr "Уганда"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:247
+#: ../countries.php:247
 msgid "Ukraine"
 msgstr "Украина"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:248
+#: ../countries.php:248
 msgid "United Arab Emirates"
 msgstr "Объединенные Арабские Эмираты"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:249
+#: ../countries.php:249
 msgid "United Kingdom"
 msgstr "Великобритания"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:250
+#: ../countries.php:250
 msgid "United States"
 msgstr "США"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:251
+#: ../countries.php:251
 msgid "United States Minor Outlying Islands"
 msgstr "Соединенные Штаты Америки Внешние малые острова"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:252
+#: ../countries.php:252
 msgid "Uruguay"
 msgstr "Уругвай"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:253
+#: ../countries.php:253
 msgid "Uzbekistan"
 msgstr "Узбекистан"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:254
+#: ../countries.php:254
 msgid "Vanuatu"
 msgstr "Вануату"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:255
+#: ../countries.php:255
 msgid "Venezuela, Bolivarian Republic of"
 msgstr "Венесуэла"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:256
+#: ../countries.php:256
 msgid "Viet Nam"
 msgstr "Вьетнам"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:257
+#: ../countries.php:257
 msgid "Virgin Islands, British"
 msgstr "Виргинские острова, Британские"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:258
+#: ../countries.php:258
 msgid "Virgin Islands, U.S."
 msgstr "Виргинские острова, США"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:259
+#: ../countries.php:259
 msgid "Wales"
 msgstr "Уэльс"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:260
+#: ../countries.php:260
 msgid "Wallis and Futuna"
 msgstr "Уоллис и Футуна"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:261
+#: ../countries.php:261
 msgid "Western Sahara"
 msgstr "Западная Сахара"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:262
+#: ../countries.php:262
 msgid "Yemen"
 msgstr "Йемен"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:263
+#: ../countries.php:263
 msgid "Zambia"
 msgstr "Замбия"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:264
+#: ../countries.php:264
 msgid "Zimbabwe"
 msgstr "Зимбабве"
 
-#: /Users/pronebird/dev/wp-clanwars/countries.php:265
+#: ../countries.php:265
 msgid "Åland"
 msgstr "Аландские острова"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:32
+#: ../wp-clanwars-widget.php:32
 msgid "ClanWars widget"
 msgstr "ClanWars виджет"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:33
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:35
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:80
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:267
+#: ../wp-clanwars-widget.php:33 ../wp-clanwars-widget.php:35
+#: ../wp-clanwars-widget.php:80 ../wp-clanwars.php:285
 msgid "ClanWars"
 msgstr "ClanWars"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:42
+#: ../wp-clanwars-widget.php:42
 msgid "Show all"
 msgstr " Показывать все"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:43
+#: ../wp-clanwars-widget.php:43
 msgid "1 week"
 msgstr "1 неделя"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:44
+#: ../wp-clanwars-widget.php:44
 msgid "2 weeks"
 msgstr "2 недели"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:45
+#: ../wp-clanwars-widget.php:45
 msgid "3 weeks"
 msgstr "3 недели"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:46
+#: ../wp-clanwars-widget.php:46
 msgid "1 month"
 msgstr "1 месяц"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:47
+#: ../wp-clanwars-widget.php:47
 msgid "2 months"
 msgstr "2 месяца"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:48
+#: ../wp-clanwars-widget.php:48
 msgid "3 months"
 msgstr "3 месяца"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:49
+#: ../wp-clanwars-widget.php:49
 msgid "6 months"
 msgstr "6 месяцев"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:50
+#: ../wp-clanwars-widget.php:50
 msgid "1 year"
 msgstr "1 год"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:129
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:130
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3228
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3229
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3657
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3658
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3774
+#: ../wp-clanwars-widget.php:129 ../wp-clanwars-widget.php:130
+#: ../wp-clanwars.php:3245 ../wp-clanwars.php:3246 ../wp-clanwars.php:3674
+#: ../wp-clanwars.php:3675 ../wp-clanwars.php:3791
 msgid "All"
 msgstr "Все"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:165
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3263
+#: ../wp-clanwars-widget.php:165 ../wp-clanwars.php:3280
 msgid "Upcoming"
 msgstr "Предстоящий"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:167
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3265
+#: ../wp-clanwars-widget.php:167 ../wp-clanwars.php:3282
 msgid "Playing"
 msgstr "Идет игра"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:169
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2498
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2513
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3267
+#: ../wp-clanwars-widget.php:169 ../wp-clanwars.php:2516
+#: ../wp-clanwars.php:2531 ../wp-clanwars.php:3284
 #, php-format
 msgid "%d:%d"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:210
+#: ../wp-clanwars-widget.php:210
 msgid "Title:"
 msgstr "Заголовок:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:213
+#: ../wp-clanwars-widget.php:213
 msgid "Hide title"
 msgstr "Скрыть заголовок"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:217
+#: ../wp-clanwars-widget.php:217
 msgid "Show games:"
 msgstr "Показывать игры:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:223
+#: ../wp-clanwars-widget.php:223
 msgid "Do not check any game if you want to show all games."
 msgstr "Не выбирайте ничего, если хотите чтобы отображались все игры."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:225
+#: ../wp-clanwars-widget.php:225
 msgid "Show matches:"
 msgstr "Количество матчей:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars-widget.php:226
+#: ../wp-clanwars-widget.php:226
 msgid "Hide older than"
 msgstr "Скрыть матчи старше чем"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:207
+#: ../wp-clanwars.php:207
 msgid "Manage matches"
 msgstr "Управление матчами"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:208
+#: ../wp-clanwars.php:208
 msgid "Manage games"
 msgstr "Управление играми"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:209
+#: ../wp-clanwars.php:209
 msgid "Manage teams"
 msgstr "Управление командами"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:213
+#: ../wp-clanwars.php:213
 msgid "PCW"
 msgstr "PCW"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:214
+#: ../wp-clanwars.php:214
 msgid "Official"
 msgstr "Официальный"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:269
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3392
+#: ../wp-clanwars.php:287 ../wp-clanwars.php:3409
 msgid "Matches"
 msgstr "Матчи"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:270
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1006
+#: ../wp-clanwars.php:288 ../wp-clanwars.php:1024
 msgid "Teams"
 msgstr "Команды"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:271
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1665
+#: ../wp-clanwars.php:289 ../wp-clanwars.php:1683
 msgid "Games"
 msgstr "Игры"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:272
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3942
+#: ../wp-clanwars.php:290 ../wp-clanwars.php:3959
 msgid "Import"
 msgstr "Импорт"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:273
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3666
+#: ../wp-clanwars.php:291 ../wp-clanwars.php:3683
 msgid "Settings"
 msgstr "Настройки"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:426
+#: ../wp-clanwars.php:444
 msgid "Are you sure you want to delete this map?"
 msgstr "Вы уверены, что хотите удалить эту карту?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:427
+#: ../wp-clanwars.php:445
 msgid "Are you sure you want to delete this game?"
 msgstr "Вы уверены, что хотите удалить эту игру?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:428
+#: ../wp-clanwars.php:446
 msgid "Are you sure you want to delete this team?"
 msgstr "Вы уверены, что хотите удалить эту команду?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:429
+#: ../wp-clanwars.php:447
 msgid "Are you sure you want to delete this match?"
 msgstr "Вы уверены, что хотите удалить этот матч?"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:813
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:832
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:920
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1241
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1449
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1844
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2233
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2794
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3035
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3038
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3045
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3530
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3548
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3574
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3600
+#: ../wp-clanwars.php:831 ../wp-clanwars.php:850 ../wp-clanwars.php:938
+#: ../wp-clanwars.php:1259 ../wp-clanwars.php:1467 ../wp-clanwars.php:1862
+#: ../wp-clanwars.php:2251 ../wp-clanwars.php:2812 ../wp-clanwars.php:3052
+#: ../wp-clanwars.php:3055 ../wp-clanwars.php:3062 ../wp-clanwars.php:3547
+#: ../wp-clanwars.php:3565 ../wp-clanwars.php:3591 ../wp-clanwars.php:3617
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:847
+#: ../wp-clanwars.php:865
 msgid "New Team"
 msgstr "Новая команда"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:847
+#: ../wp-clanwars.php:865
 msgid "Add Team"
 msgstr "Добавить команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:854
+#: ../wp-clanwars.php:872
 msgid "Edit Team"
 msgstr "Редактировать команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:854
+#: ../wp-clanwars.php:872
 msgid "Update Team"
 msgstr "Обновить команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:886
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:986
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1645
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1799
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1887
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2195
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2916
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3371
+#: ../wp-clanwars.php:904 ../wp-clanwars.php:1004 ../wp-clanwars.php:1663
+#: ../wp-clanwars.php:1817 ../wp-clanwars.php:1905 ../wp-clanwars.php:2213
+#: ../wp-clanwars.php:2933 ../wp-clanwars.php:3388
 msgid "Title"
 msgstr "Заголовок"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:886
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1799
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2195
+#: ../wp-clanwars.php:904 ../wp-clanwars.php:1817 ../wp-clanwars.php:2213
 msgid "required"
 msgstr "обязательное"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:893
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:987
+#: ../wp-clanwars.php:911 ../wp-clanwars.php:1005
 msgid "Country"
 msgstr "Страна"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:933
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:941
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1486
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1520
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1547
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1582
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3103
+#: ../wp-clanwars.php:951 ../wp-clanwars.php:959 ../wp-clanwars.php:1504
+#: ../wp-clanwars.php:1538 ../wp-clanwars.php:1565 ../wp-clanwars.php:1600
+#: ../wp-clanwars.php:3120
 msgid "An error occurred."
 msgstr "Возникла ошибка."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:946
+#: ../wp-clanwars.php:964
 msgid "Team title is required field."
 msgstr "Название команды является обязательным полем."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:972
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1631
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1872
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3211
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3357
+#: ../wp-clanwars.php:990 ../wp-clanwars.php:1649 ../wp-clanwars.php:1890
+#: ../wp-clanwars.php:3228 ../wp-clanwars.php:3374
 msgid "&laquo;"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:973
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1632
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1873
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3212
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3358
+#: ../wp-clanwars.php:991 ../wp-clanwars.php:1650 ../wp-clanwars.php:1891
+#: ../wp-clanwars.php:3229 ../wp-clanwars.php:3375
 msgid "&raquo;"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:978
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1637
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1878
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3217
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3363
+#: ../wp-clanwars.php:996 ../wp-clanwars.php:1655 ../wp-clanwars.php:1896
+#: ../wp-clanwars.php:3234 ../wp-clanwars.php:3380
 #, php-format
 msgid "Displaying %s&#8211;%s of %s"
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:990
+#: ../wp-clanwars.php:1008
 msgid "Team is successfully added."
 msgstr "Команда успешно добавлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:994
+#: ../wp-clanwars.php:1012
 msgid "Team is successfully updated."
 msgstr "Команда успешно обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:999
+#: ../wp-clanwars.php:1017
 #, php-format
 msgid "%d Team deleted."
 msgid_plural "%d Teams deleted"
@@ -1274,169 +1228,139 @@ msgstr[0] "%d команда удалена."
 msgstr[1] "%d команды удалено."
 msgstr[2] "%d команд удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1006
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1666
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1906
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3392
+#: ../wp-clanwars.php:1024 ../wp-clanwars.php:1684 ../wp-clanwars.php:1924
+#: ../wp-clanwars.php:3409
 msgid "Add New"
 msgstr "Добавить"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1022
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1087
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1683
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1747
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1923
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1987
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3408
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3505
+#: ../wp-clanwars.php:1040 ../wp-clanwars.php:1105 ../wp-clanwars.php:1701
+#: ../wp-clanwars.php:1765 ../wp-clanwars.php:1941 ../wp-clanwars.php:2005
+#: ../wp-clanwars.php:3425 ../wp-clanwars.php:3522
 msgid "Bulk Actions"
 msgstr "Действия"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1023
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1064
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1088
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1684
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1727
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1748
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1924
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1970
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1988
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3409
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3456
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3506
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3723
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3800
+#: ../wp-clanwars.php:1041 ../wp-clanwars.php:1082 ../wp-clanwars.php:1106
+#: ../wp-clanwars.php:1702 ../wp-clanwars.php:1745 ../wp-clanwars.php:1766
+#: ../wp-clanwars.php:1942 ../wp-clanwars.php:1988 ../wp-clanwars.php:2006
+#: ../wp-clanwars.php:3426 ../wp-clanwars.php:3473 ../wp-clanwars.php:3523
+#: ../wp-clanwars.php:3740 ../wp-clanwars.php:3817
 msgid "Delete"
 msgstr "Удалить"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1025
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1090
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1687
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1751
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1926
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1990
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3411
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3508
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3725
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3802
+#: ../wp-clanwars.php:1043 ../wp-clanwars.php:1108 ../wp-clanwars.php:1705
+#: ../wp-clanwars.php:1769 ../wp-clanwars.php:1944 ../wp-clanwars.php:2008
+#: ../wp-clanwars.php:3428 ../wp-clanwars.php:3525 ../wp-clanwars.php:3742
+#: ../wp-clanwars.php:3819
 msgid "Apply"
 msgstr "Применить"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1029
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1691
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3415
+#: ../wp-clanwars.php:1047 ../wp-clanwars.php:1709 ../wp-clanwars.php:3432
 msgid "Search Teams:"
 msgstr "Поиск по командам:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1032
+#: ../wp-clanwars.php:1050
 msgid "Search Teams"
 msgstr "Поиск по командам"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1061
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1723
+#: ../wp-clanwars.php:1079 ../wp-clanwars.php:1741
 #, php-format
 msgid "Edit &#8220;%s&#8221; Team"
 msgstr "Редактировать &#8220;%s&#8221; команду"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1061
+#: ../wp-clanwars.php:1079
 msgid "(Home Team)"
 msgstr "(Домашняя команда)"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1063
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1725
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1969
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3455
+#: ../wp-clanwars.php:1081 ../wp-clanwars.php:1743 ../wp-clanwars.php:1987
+#: ../wp-clanwars.php:3472
 msgid "Edit"
 msgstr "Редактировать"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1065
+#: ../wp-clanwars.php:1083
 msgid "Set As Home Team"
 msgstr "Сделать домашней командой"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1413
+#: ../wp-clanwars.php:1431
 msgid "New Game"
 msgstr "Новая игра"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1413
+#: ../wp-clanwars.php:1431
 msgid "Add Game"
 msgstr "Добавить игру"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1420
+#: ../wp-clanwars.php:1438
 msgid "Edit Game"
 msgstr "Редактировать игру"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1420
+#: ../wp-clanwars.php:1438
 msgid "Update Game"
 msgstr "Обновить игру"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1454
+#: ../wp-clanwars.php:1472
 msgid "Database error."
 msgstr "Ошибка базы данных"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1455
+#: ../wp-clanwars.php:1473
 msgid "The game is updated."
 msgstr "Игра обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1456
+#: ../wp-clanwars.php:1474
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "<code>php.ini</code>."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1457
+#: ../wp-clanwars.php:1475
 msgid ""
 "The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was "
 "specified in the HTML form."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1458
+#: ../wp-clanwars.php:1476
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1459
+#: ../wp-clanwars.php:1477
 msgid "No file was uploaded."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1460
+#: ../wp-clanwars.php:1478
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1461
+#: ../wp-clanwars.php:1479
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1462
+#: ../wp-clanwars.php:1480
 msgid "File upload stopped by extension."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1463
+#: ../wp-clanwars.php:1481
 msgid "File type does not meet security guidelines. Try another."
 msgstr ""
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1492
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1526
+#: ../wp-clanwars.php:1510 ../wp-clanwars.php:1544
 msgid "Game title is required field."
 msgstr "Название игры является обязательным полем."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1553
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1588
+#: ../wp-clanwars.php:1571 ../wp-clanwars.php:1606
 msgid "Map title is required field."
 msgstr "Название карты является обязательным полем."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1646
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1806
+#: ../wp-clanwars.php:1664 ../wp-clanwars.php:1824
 msgid "Abbreviation"
 msgstr "Аббревиатура"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1649
+#: ../wp-clanwars.php:1667
 msgid "Game is successfully added."
 msgstr "Игра успешно добавлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1653
+#: ../wp-clanwars.php:1671
 msgid "Game is successfully updated."
 msgstr "Игра успешно обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1658
+#: ../wp-clanwars.php:1676
 #, php-format
 msgid "%d Game deleted."
 msgid_plural "%d Games deleted"
@@ -1444,38 +1368,35 @@ msgstr[0] "%d игра удалена."
 msgstr[1] "%d игры удалено."
 msgstr[2] "%d игр удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1685
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1749
+#: ../wp-clanwars.php:1703 ../wp-clanwars.php:1767
 msgid "Export"
 msgstr "Экспорт"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1694
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3418
+#: ../wp-clanwars.php:1712 ../wp-clanwars.php:3435
 msgid "Search Games"
 msgstr "Поиск по играм"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1726
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1906
+#: ../wp-clanwars.php:1744 ../wp-clanwars.php:1924
 msgid "Maps"
 msgstr "Карты"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1813
+#: ../wp-clanwars.php:1831
 msgid "Icon"
 msgstr "Иконка"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1820
+#: ../wp-clanwars.php:1838
 msgid "Delete Icon"
 msgstr "Удалить иконку"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1890
+#: ../wp-clanwars.php:1908
 msgid "Map is successfully added."
 msgstr "Карта успешно добавлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1894
+#: ../wp-clanwars.php:1912
 msgid "Map is successfully updated."
 msgstr "Карта успешно обновлена."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1899
+#: ../wp-clanwars.php:1917
 #, php-format
 msgid "%d Map deleted."
 msgid_plural "%d Maps deleted"
@@ -1483,40 +1404,40 @@ msgstr[0] "%d карта удалена."
 msgstr[1] "%d карты удалено."
 msgstr[2] "%d карт удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1930
+#: ../wp-clanwars.php:1948
 msgid "Search Maps:"
 msgstr "Поиск по картам:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1933
+#: ../wp-clanwars.php:1951
 msgid "Search Maps"
 msgstr "Поиск по картам"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:1967
+#: ../wp-clanwars.php:1985
 #, php-format
 msgid "Edit &#8220;%s&#8221; Map"
 msgstr "Редактировать &#8220;%s&#8221; карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2145
+#: ../wp-clanwars.php:2163
 msgid "Add Map"
 msgstr "Добавить карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2152
+#: ../wp-clanwars.php:2170
 msgid "Edit Map"
 msgstr "Редактировать карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2152
+#: ../wp-clanwars.php:2170
 msgid "Update Map"
 msgstr "Обновить карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2202
+#: ../wp-clanwars.php:2220
 msgid "Screenshot"
 msgstr "Скриншот"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2209
+#: ../wp-clanwars.php:2227
 msgid "Delete Screenshot"
 msgstr "Удалить скриншот"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2295
+#: ../wp-clanwars.php:2313
 #, php-format
 msgid ""
 "%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: "
@@ -1525,110 +1446,102 @@ msgstr ""
 "%2$s %1$s %5$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: "
 "minute input, 5: year input"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2441
+#: ../wp-clanwars.php:2459
 #, php-format
 msgid "%s vs %s"
 msgstr "%s vs %s"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2443
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3447
+#: ../wp-clanwars.php:2461 ../wp-clanwars.php:3464
 msgid "Regular match"
 msgstr "Очередной матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2454
+#: ../wp-clanwars.php:2472
 #, php-format
 msgctxt "match_excerpt"
 msgid "%s vs %s"
 msgstr "%s vs %s"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2521
+#: ../wp-clanwars.php:2539
 msgid "Match description"
 msgstr "Описание матча"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2780
+#: ../wp-clanwars.php:2798
 msgid "Add Match"
 msgstr "Добавить матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2787
+#: ../wp-clanwars.php:2805
 msgid "Edit Match"
 msgstr "Редактировать матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2862
+#: ../wp-clanwars.php:2880
 msgid "Match is successfully updated."
 msgstr "Матч успешно обновлен."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2904
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3372
+#: ../wp-clanwars.php:2922 ../wp-clanwars.php:3389
 msgid "Game"
 msgstr "Игра"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2911
-msgid "The scores will be removed on game change."
-msgstr "Все очки будут удалены при смене игры."
-
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2923
+#: ../wp-clanwars.php:2940
 msgid "Description"
 msgstr "Описание"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2930
+#: ../wp-clanwars.php:2947
 msgid "External URL"
 msgstr "Внешний URL"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2934
-msgid "Enter league URL or external match URL."
-msgstr "Введите URL лиги или внешний URL матча."
+#: ../wp-clanwars.php:2951
+msgid "Enter league or external match URL."
+msgstr "Введите адрес лиги или внешний адрес матча."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2939
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3374
+#: ../wp-clanwars.php:2956 ../wp-clanwars.php:3391
 msgid "Match status"
 msgstr "Статус матча"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2948
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3373
+#: ../wp-clanwars.php:2965 ../wp-clanwars.php:3390
 msgid "Date"
 msgstr "Дата"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2964
+#: ../wp-clanwars.php:2981
 msgid "vs"
 msgstr "vs"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2973
+#: ../wp-clanwars.php:2990
 msgid "or just type opponent team here:"
 msgstr "или просто напечатайте название команды оппонента:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:2982
+#: ../wp-clanwars.php:2999
 msgid "Add map"
 msgstr "Добавить карту"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3024
+#: ../wp-clanwars.php:3041
 msgid "Add Round"
 msgstr "Добавить раунд"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3025
+#: ../wp-clanwars.php:3042
 msgid "Exclude map from match"
 msgstr "Исключить карту из матча"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3026
+#: ../wp-clanwars.php:3043
 msgid "Remove round"
 msgstr "Удалить раунд"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3375
+#: ../wp-clanwars.php:3392
 msgid "Team 1"
 msgstr "Команда 1"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3376
+#: ../wp-clanwars.php:3393
 msgid "Team 2"
 msgstr "Команда 2"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3377
+#: ../wp-clanwars.php:3394
 msgid "Tickets"
 msgstr "Тикеты"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3380
+#: ../wp-clanwars.php:3397
 msgid "Match is successfully added."
 msgstr "Матч успешно добавлен."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3385
+#: ../wp-clanwars.php:3402
 #, php-format
 msgid "%d Match deleted."
 msgid_plural "%d Matches deleted"
@@ -1636,69 +1549,68 @@ msgstr[0] "%d матч удален."
 msgstr[1] "%d матча удалено."
 msgstr[2] "%d матчей удалено."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3453
+#: ../wp-clanwars.php:3470
 #, php-format
 msgid "Edit &#8220;%s&#8221; Match"
 msgstr "Редактировать &#8220;%s&#8221; матч"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3649
+#: ../wp-clanwars.php:3666
 msgid "User Login"
 msgstr "Логин"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3650
+#: ../wp-clanwars.php:3667
 msgid "Permissions"
 msgstr "Права"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3669
+#: ../wp-clanwars.php:3686
 msgid "Settings saved."
 msgstr "Настройки сохранены."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3678
+#: ../wp-clanwars.php:3695
 msgid "Matches Category"
 msgstr "Рубрика для матчей"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3687
+#: ../wp-clanwars.php:3704
 msgid "None"
 msgstr "Ничего"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3697
+#: ../wp-clanwars.php:3714
 msgid "Enable default styles"
 msgstr "Включить базовые стили"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3703
+#: ../wp-clanwars.php:3720
 msgid "Save Changes"
 msgstr "Сохранить изменения"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3708
+#: ../wp-clanwars.php:3725
 msgid "User Access"
 msgstr "Доступ пользователей"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3722
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3799
+#: ../wp-clanwars.php:3739 ../wp-clanwars.php:3816
 msgid "Actions"
 msgstr "Действия"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3765
+#: ../wp-clanwars.php:3782
 msgid "Yes"
 msgstr "Да"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3765
+#: ../wp-clanwars.php:3782
 msgid "No"
 msgstr "Нет"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3814
+#: ../wp-clanwars.php:3831
 msgid "Add New User"
 msgstr "Добавить нового пользователя"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3821
+#: ../wp-clanwars.php:3838
 msgid "User"
 msgstr "Пользователь"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3826
+#: ../wp-clanwars.php:3843
 msgid "Allow user manage specified games only:"
 msgstr "Разрешить пользователю управлять только указанными ниже играми:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3833
+#: ../wp-clanwars.php:3850
 msgid ""
 "User can create new games <strong>only if &ldquo;All&rdquo; option is "
 "checked.</strong>"
@@ -1706,38 +1618,41 @@ msgstr ""
 "Пользователь может создавать новые игры <strong>только если опция &laquo;"
 "Все&raquo; выставлена.</strong>"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3837
+#: ../wp-clanwars.php:3854
 msgid "Allow user:"
 msgstr "Разрешить пользователю:"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3847
+#: ../wp-clanwars.php:3864
 msgid "Add User"
 msgstr "Добавить пользователя"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3892
+#: ../wp-clanwars.php:3909
 msgid "An upload error occurred while import."
 msgstr "Возникла ошибка во время импорта."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3895
+#: ../wp-clanwars.php:3912
 msgid "File successfully imported."
 msgstr "Файл успешно импортирован."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3895
+#: ../wp-clanwars.php:3912
 msgid "An error occurred while import."
 msgstr "Возникла ошибка во время импорта."
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3902
+#: ../wp-clanwars.php:3919
 msgid "Import games"
 msgstr "Импорт игр"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3911
+#: ../wp-clanwars.php:3928
 msgid "Upload Package (gz file)"
 msgstr "Загрузить пакет (gz файл)"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3917
+#: ../wp-clanwars.php:3934
 msgid "Import Available Packages"
 msgstr "Импорт доступных пакетов"
 
-#: /Users/pronebird/dev/wp-clanwars/wp-clanwars.php:3931
+#: ../wp-clanwars.php:3948
 msgid "installed"
 msgstr "установлен"
+
+#~ msgid "The scores will be removed on game change."
+#~ msgstr "Все очки будут удалены при смене игры."

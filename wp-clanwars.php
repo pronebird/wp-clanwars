@@ -2926,7 +2926,6 @@ class WP_ClanWars {
 									<option value="<?php echo $item->id; ?>"<?php selected($item->id, $game_id); ?>><?php echo esc_html($item->title); ?></option>
 									<?php endforeach; ?>
 								</select>
-								<p class="description"><?php _e('The scores will be removed on game change.', WP_CLANWARS_TEXTDOMAIN); ?></p>
 							</td>
 						</tr>
 
@@ -2949,7 +2948,7 @@ class WP_ClanWars {
 							<td>
 								<input type="text" name="external_url" id="external_url" value="<?php echo esc_attr($external_url); ?>" />
 
-								<p class="description"><?php _e('Enter league URL or external match URL.', WP_CLANWARS_TEXTDOMAIN); ?></p>
+								<p class="description"><?php _e('Enter league or external match URL.', WP_CLANWARS_TEXTDOMAIN); ?></p>
 							</td>
 						</tr>
 
@@ -2988,14 +2987,13 @@ class WP_ClanWars {
 									</div>
 
 									<div class="team2-inline">
-										<label for="new_team_title"><?php _e('or just type opponent team here:', WP_CLANWARS_TEXTDOMAIN); ?></label><br/>
+										<p><label for="new_team_title"><?php _e('or just type opponent team here:', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
+										<p class="clearfix">
 										<input name="new_team_title" id="new_team_title" type="text" value="" maxlength="200" autocomplete="off" aria-required="true" />
 										<?php $this->html_country_select_helper('name=new_team_country&show_popular=1&id=country'); ?>
+										</p>
 									</div>
-									<br class="clear"/>
-
 									<div id="mapsite"></div>
-
 									<div class="add-map" id="wp-cw-addmap">
 										<input type="button" class="button button-secondary" value="<?php _e('Add map', WP_CLANWARS_TEXTDOMAIN); ?>" />
 									</div>
