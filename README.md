@@ -14,6 +14,8 @@ I published plugin on WordPress.org, so you can install it thru admin now.
 
 https://wordpress.org/plugins/wp-clanwars/
 
+Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
+
 ### Features
 
 * __Games management__: add your own games, manage maps, export, import others.
