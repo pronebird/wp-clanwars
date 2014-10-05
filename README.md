@@ -8,6 +8,12 @@ By default plugin uses it's own stylesheet which can be disabled in plugin setti
 
 Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode, I suggest to create a separate page for it.
 
+### Installation
+
+I published plugin on WordPress.org, so you can install it thru admin now.
+
+https://wordpress.org/plugins/wp-clanwars/
+
 ### Features
 
 * __Games management__: add your own games, manage maps, export, import others.
