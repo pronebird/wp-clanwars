@@ -20,25 +20,25 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 ### Screenshots
 
 #### Match Browser
-![Match browser](https://bitbucket.org/and/wp-clanwars/raw/default/readme/matchbrowser.jpg)
+![Match browser](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-1.jpg)
 
 #### Games management
-![Games management](https://bitbucket.org/and/wp-clanwars/raw/default/readme/games.jpg)
+![Games management](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-2.jpg)
 
 #### Match management
-![Match management](https://bitbucket.org/and/wp-clanwars/raw/default/readme/matches.jpg)
+![Match management](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-3.jpg)
 
 #### Match editor
-![Match editor](https://bitbucket.org/and/wp-clanwars/raw/default/readme/match_editor.jpg)
+![Match editor](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-4.jpg)
 
 #### Import menu
-![Import menu](https://bitbucket.org/and/wp-clanwars/raw/default/readme/import.jpg)
+![Import menu](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-5.jpg)
 
 #### Settings
-![Settings](https://bitbucket.org/and/wp-clanwars/raw/default/readme/settings.jpg)
+![Settings](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-6.jpg)
 
 #### Sidebar widget settings
-![Sidebar widget settings](https://bitbucket.org/and/wp-clanwars/raw/default/readme/widget_setup.jpg)
+![Sidebar widget settings](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-7.jpg)
 
 #### Sidebar widget
-![Sidebar widget](https://bitbucket.org/and/wp-clanwars/raw/default/readme/sidebar_widget.jpg)
+![Sidebar widget](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-8.jpg)
