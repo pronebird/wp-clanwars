@@ -19,6 +19,10 @@ By default plugin uses it's own stylesheet which can be disabled in plugin setti
 
 Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode, I suggest to create a separate page for it.
 
+== Installation ==
+
+Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
+
 == Features ==
 
 * __Games management__: add your own games, manage maps, export, import others.
