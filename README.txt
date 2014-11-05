@@ -3,7 +3,7 @@ Contributors: andddd
 Tags: cybersport, clanwar, team, clan, cyber, sport, match
 Requires at least: 3.0.1
 Tested up to: 4.0
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -44,6 +44,11 @@ Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
 8. Sidebar widget
 
 == Changelog ==
+
+= 1.6.1 =
+
+* Use ZipArchive when available
+* Improve ZIP error handling
 
 = 1.6.0 =
 
