@@ -43,3 +43,10 @@ Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
 7. Sidebar widget settings
 8. Sidebar widget
 
+== Changelog ==
+
+= 1.6.0 =
+
+* Add import/export to ZIP
+* Add "Export" link next to "Maps" in Games section
+* Drop old localizations
