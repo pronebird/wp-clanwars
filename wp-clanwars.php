@@ -5,7 +5,7 @@
  * Plugin URI: https://bitbucket.org/and/wp-clanwars
  * Description: ClanWars plugin for a cyber-sport team website
  * Author: Andrej Mihajlov
- * Version: 1.5.8
+ * Version: 1.6.0
  *
  * Tags: cybersport, clanwar, team, clan, cyber, sport, match
  **/
@@ -29,7 +29,7 @@ if(!function_exists('add_action')) die('Cheatin&#8217; uh?');
 
 global $wpClanWars;
 
-define('WP_CLANWARS_VERSION', '1.5.8');
+define('WP_CLANWARS_VERSION', '1.6.0');
 
 define('WP_CLANWARS_TEXTDOMAIN', 'wp-clanwars');
 define('WP_CLANWARS_CATEGORY', '_wp_clanwars_category');
@@ -4014,7 +4014,7 @@ class WP_ClanWars {
 					<p><input type="file" name="userfile" /></p>
 				</fieldset>
 
-				<p class="submit"><input type="submit" class="button-secondary" value="<?php _e('Import', WP_CLANWARS_TEXTDOMAIN); ?>" /></p>
+				<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Import', WP_CLANWARS_TEXTDOMAIN); ?>" /></p>
 
 			</form>
 
