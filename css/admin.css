@@ -198,3 +198,6 @@ html[xmlns] .clearfix {
 .linkbar li.post-comments {
     background: transparent url(../images/icon-comments16.png) 0% 50% no-repeat;
 }
+
+/* WordPress 3 fixes */
+body[class*='version-3-'] .wp-cw-settings .form-field input[type=checkbox] { width: 16px; }
