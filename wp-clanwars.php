@@ -42,6 +42,7 @@ define('WP_CLANWARS_IMPORTPATH', dirname(__FILE__) . '/' . WP_CLANWARS_IMPORTDIR
 define('WP_CLANWARS_IMPORTURL', WP_CLANWARS_URL . '/' . WP_CLANWARS_IMPORTDIR);
 
 require (dirname(__FILE__) . '/wp-clanwars-widget.php');
+require_once(ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
 class WP_ClanWars {
 
@@ -1275,84 +1276,111 @@ class WP_ClanWars {
 					$referer = add_query_arg('delete', $error, $referer);
 				break;
 				case 'export':
+					$game_id = current($items);
+					$zip_archive = $this->export_game($game_id);
 
-					$data = $this->export_games($items);
+					if(is_wp_error($zip_archive)) {
+						var_dump($zip_archive);
+						die();
+					}
 
-					header('Content-Type: application/x-gzip-compressed');
-					header('Content-Disposition: attachment; filename="wp-clanwars-gamepack-' . date('Y-m-d', $this->current_time_fixed('timestamp')) . '.gz"');
+					$zip_url = site_url() . '/' . str_replace(ABSPATH, '', $zip_archive);
 
-					$json = json_encode($data);
-					$gzdata = gzcompress($json, 9);
-
-					header('Content-Length: ' . strlen($gzdata));
-
-					echo $gzdata;
-
+					wp_redirect($zip_url);
 					die();
-					
 				break;
 			}
-			
+
 		}
 
 		wp_redirect($referer);
 	}
 
-	function export_games($id)
+	function export_game($id)
 	{
-		$data = array();
+		global $wp_filesystem;
+		WP_Filesystem();
+
+		$id = (int)$id;
 		$games = $this->get_game(array('id' => $id));
+		$game = current($games);
 
-		foreach($games as $game) {
-			$game_data = $this->extract_args($game, array(
-					'title' => '', 'abbr' => '',
-					'icon' => '', 'maplist' => array()
-				));
-
-			$maplist = $this->get_map(array('game_id' => $game->id));
-
-			if($game->icon != 0) {
-				$attach = get_attached_file($game->icon);
-				$mimetype = get_post_mime_type($game->icon);
-				$pathinfo = pathinfo($attach);
-
-				if(!empty($attach)){
-					$content = $this->_get_file_content($attach);
-
-					if(!empty($content))
-						$game_data['icon'] = array(
-							'filename' => $pathinfo['basename'],
-							'mimetype' => $mimetype,
-							'data' => base64_encode($content));
-				}
-			}
-
-			foreach($maplist as $map) {
-				$map_data = array('title' => $map->title, 'screenshot' => '');
-
-				if($map->screenshot != 0) {
-					$attach = get_attached_file($map->screenshot);
-					$mimetype = get_post_mime_type($map->screenshot);
-					$pathinfo = pathinfo($attach);
-
-					if(!empty($attach)){
-						$content = $this->_get_file_content($attach);
-
-						if(!empty($content))
-							$map_data['screenshot'] = array(
-								'filename' => $pathinfo['basename'],
-								'mimetype' => $mimetype,
-								'data' => base64_encode($content));
-					}
-				}
-
-				$game_data['maplist'][] = $map_data;
-			}
-
-			$data[] = $game_data;
+		if(!$game) {
+			return new WP_Error('plugin-error', 'Unable to find game.');
 		}
 
-		return $data;
+		$upload_dir = wp_upload_dir();
+		$export_dir = $upload_dir['basedir'] . '/wp-clanwars';
+		$wp_filesystem->mkdir($export_dir);
+
+		$game_data = $this->extract_args($game, array(
+			'title' => '', 'abbr' => '',
+			'icon' => '', 'maplist' => array()
+		));
+		$zip_path = sprintf('%s/gamepack-%s.zip', $export_dir, (strlen($game->abbr) ? $game->abbr : $game->id));
+		$zip_acrhive = new PclZip($zip_path);
+		$zip_files = array();
+
+		$maplist = $this->get_map(array('game_id' => $game->id));
+
+		if($game->icon != 0) {
+			$attach = get_attached_file($game->icon);
+			$mimetype = get_post_mime_type($game->icon);
+
+			if(!empty($attach)) {
+				$game_data['icon'] = array(
+					'filename' => trim(str_replace($upload_dir['basedir'], '', $attach), '/'),
+					'mimetype' => $mimetype
+				);
+				$zip_files[] = $attach;
+			}
+		}
+
+		foreach($maplist as $map) {
+			$map_data = array('title' => $map->title, 'screenshot' => '');
+
+			if($map->screenshot != 0) {
+				$attach = get_attached_file($map->screenshot);
+				$mimetype = get_post_mime_type($map->screenshot);
+
+				if(!empty($attach)) {
+					$map_data['screenshot'] = array(
+						'filename' => trim(str_replace($upload_dir['basedir'], '', $attach), '/'),
+						'mimetype' => $mimetype
+					);
+					$zip_files[] = $attach;
+				}
+			}
+
+			$game_data['maplist'][] = $map_data;
+		}
+
+		// create index.json
+		$index_file_dir = sprintf('%s/zip-' . md5(microtime(true)), $export_dir);
+		$index_file_json = sprintf('%s/index.json', $index_file_dir);
+
+		// create temporary folder for index.json
+		$wp_filesystem->mkdir($index_file_dir);
+		$wp_filesystem->put_contents($index_file_json, json_encode($game_data));
+
+		// zip index.json first
+		$result = $zip_acrhive->create($index_file_json,
+			PCLZIP_OPT_REMOVE_PATH, $index_file_dir,
+			PCLZIP_OPT_NO_COMPRESSION);
+
+		// zip all images
+		$result = $zip_acrhive->add($zip_files,
+			PCLZIP_OPT_REMOVE_PATH, $upload_dir['basedir'],
+			PCLZIP_OPT_NO_COMPRESSION);
+
+		// remove temp folder
+		$wp_filesystem->rmdir($index_file_dir, true);
+
+		if($result != 0) {
+			return $zip_path;
+		} else {
+			return new WP_Error('zip-error', 'Failed to ZIP files. Reason: ' . $zip_acrhive->errorInfo(true));
+		}
 	}
 
 	function _import_image($p) {
@@ -1700,7 +1728,6 @@ class WP_ClanWars {
 								<select name="do_action">
 									<option value="" selected="selected"><?php _e('Bulk Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
 									<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
-									<option value="export"><?php _e('Export', WP_CLANWARS_TEXTDOMAIN); ?></option>
 								</select>
 								<input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction" id="wp-clanwars-doaction" class="button-secondary action" />
 							</div>
@@ -1741,8 +1768,9 @@ class WP_ClanWars {
 									<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Team', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"> <?php echo esc_html($item->title); ?></a><br />
 									<div class="row-actions">
 										<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=edit&amp;id=' . $item->id); ?>"><?php _e('Edit', WP_CLANWARS_TEXTDOMAIN); ?></a></span> |
-												<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=maps&amp;game_id=' . $item->id); ?>"><?php _e('Maps', WP_CLANWARS_TEXTDOMAIN); ?></a></span> | <span class="delete">
-												<a href="<?php echo wp_nonce_url('admin-post.php?action=wp-clanwars-gamesop&amp;do_action=delete&amp;items[]=' . $item->id . '&amp;_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-gamesop'); ?>"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></a></span>
+										<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=maps&amp;game_id=' . $item->id); ?>"><?php _e('Maps', WP_CLANWARS_TEXTDOMAIN); ?></a></span> |
+										<span class="export"><a href="<?php echo wp_nonce_url('admin-post.php?action=wp-clanwars-gamesop&amp;do_action=export&amp;items[]=' . $item->id . '&amp;_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-gamesop'); ?>"><?php _e('Export', WP_CLANWARS_TEXTDOMAIN); ?></a></span> |
+										<span class="delete"><a href="<?php echo wp_nonce_url('admin-post.php?action=wp-clanwars-gamesop&amp;do_action=delete&amp;items[]=' . $item->id . '&amp;_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-gamesop'); ?>"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></a></span>
 									</div>
 								</td>
 								<td class="abbr column-abbr">
