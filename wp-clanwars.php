@@ -1371,6 +1371,10 @@ class WP_ClanWars {
 		// clean up existing file first
 		$wp_filesystem->delete($zip_path);
 
+		// Zip can use a lot of memory, but not this much hopefully
+		/** This filter is documented in wp-admin/admin.php */
+		@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );
+
 		// use pecl ZipArchive if available
 		if(class_exists('ZipArchive')) {
 			$zip_acrhive = new ZipArchive();
