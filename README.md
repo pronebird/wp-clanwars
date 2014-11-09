@@ -10,7 +10,7 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 
 ### Help out to translate this plugin
 
-Wanna see WP-ClanWars in your language, help out to translate it!
+Wanna see WP-ClanWars in your language? Help out to translate it!
 
 https://www.transifex.com/projects/p/wp-clanwars/
 
