@@ -1,3 +1,9 @@
+## Help out to translate this plugin
+
+Wanna see WP-ClanWars in your language? Help out to translate it!
+
+https://www.transifex.com/projects/p/wp-clanwars/
+
 ## WP-ClanWars plugin for WordPress
 
 WP-ClanWars is a match organizer plugin for cyber sport teams. It supports multiple games, sidebar widget, match browser, and allows multigamings to delegate match scheduling between multiple war arrangers using simple access control system.
@@ -7,12 +13,6 @@ Plugin creates a post for every match, all posts are published under category se
 By default plugin uses it's own stylesheet which can be disabled in plugin settings. If you decide to make a custom CSS for your website, as example, take a look at default styles: [site.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/site.css) and [widget.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/widget.css).
 
 Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode, I suggest to create a separate page for it.
-
-### Help out to translate this plugin
-
-Wanna see WP-ClanWars in your language? Help out to translate it!
-
-https://www.transifex.com/projects/p/wp-clanwars/
 
 ### Installation
 
