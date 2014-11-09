@@ -8,6 +8,12 @@ By default plugin uses it's own stylesheet which can be disabled in plugin setti
 
 Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode, I suggest to create a separate page for it.
 
+### Help out to translate this plugin
+
+Wanna see WP-ClanWars in your language, help out to translate it!
+
+https://www.transifex.com/projects/p/wp-clanwars/
+
 ### Installation
 
 I published plugin on WordPress.org, so you can install it thru admin now.
