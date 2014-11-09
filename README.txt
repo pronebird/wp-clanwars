@@ -9,6 +9,12 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WP-ClanWars is a match organizer plugin for cyber sport teams.
 
+== Help out to translate this plugin ==
+
+Wanna see WP-ClanWars in your language? Help out to translate it!
+
+https://www.transifex.com/projects/p/wp-clanwars/
+
 == Description ==
 
 WP-ClanWars is a match organizer plugin for cyber sport teams. It supports multiple games, sidebar widget, match browser, and allows multigamings to delegate match scheduling between multiple war arrangers using simple access control system.
