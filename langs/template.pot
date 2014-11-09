@@ -1,0 +1,1655 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-ClanWars\n"
+"POT-Creation-Date: 2014-11-09 19:20+0100\n"
+"PO-Revision-Date: 2014-11-09 19:20+0100\n"
+"Last-Translator: Andrej Mihajlov <and@codeispoetry.ru>\n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: countries.php:20
+msgid "Afghanistan"
+msgstr ""
+
+#: countries.php:21
+msgid "Albania"
+msgstr ""
+
+#: countries.php:22
+msgid "Algeria"
+msgstr ""
+
+#: countries.php:23
+msgid "American Samoa"
+msgstr ""
+
+#: countries.php:24
+msgid "Andorra"
+msgstr ""
+
+#: countries.php:25
+msgid "Angola"
+msgstr ""
+
+#: countries.php:26
+msgid "Anguilla"
+msgstr ""
+
+#: countries.php:27
+msgid "Antigua and Barbuda"
+msgstr ""
+
+#: countries.php:28
+msgid "Argentina"
+msgstr ""
+
+#: countries.php:29
+msgid "Armenia"
+msgstr ""
+
+#: countries.php:30
+msgid "Aruba"
+msgstr ""
+
+#: countries.php:31
+msgid "Australia"
+msgstr ""
+
+#: countries.php:32
+msgid "Austria"
+msgstr ""
+
+#: countries.php:33
+msgid "Azerbaijan"
+msgstr ""
+
+#: countries.php:34
+msgid "Bahamas"
+msgstr ""
+
+#: countries.php:35
+msgid "Bahrain"
+msgstr ""
+
+#: countries.php:36
+msgid "Bangladesh"
+msgstr ""
+
+#: countries.php:37
+msgid "Barbados"
+msgstr ""
+
+#: countries.php:38
+msgid "Belarus"
+msgstr ""
+
+#: countries.php:39
+msgid "Belgium"
+msgstr ""
+
+#: countries.php:40
+msgid "Belize"
+msgstr ""
+
+#: countries.php:41
+msgid "Benin"
+msgstr ""
+
+#: countries.php:42
+msgid "Bermuda"
+msgstr ""
+
+#: countries.php:43
+msgid "Bhutan"
+msgstr ""
+
+#: countries.php:44
+msgid "Bolivia"
+msgstr ""
+
+#: countries.php:45
+msgid "Bosnia and Herzegowina"
+msgstr ""
+
+#: countries.php:46
+msgid "Botswana"
+msgstr ""
+
+#: countries.php:47
+msgid "Bouvet Island"
+msgstr ""
+
+#: countries.php:48
+msgid "Brazil"
+msgstr ""
+
+#: countries.php:49
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+#: countries.php:50
+msgid "Brunei Darussalam"
+msgstr ""
+
+#: countries.php:51
+msgid "Bulgaria"
+msgstr ""
+
+#: countries.php:52
+msgid "Burkina Faso"
+msgstr ""
+
+#: countries.php:53
+msgid "Burundi"
+msgstr ""
+
+#: countries.php:54
+msgid "Cambodia"
+msgstr ""
+
+#: countries.php:55
+msgid "Cameroon"
+msgstr ""
+
+#: countries.php:56
+msgid "Canada"
+msgstr ""
+
+#: countries.php:57
+msgid "Cape Verde"
+msgstr ""
+
+#: countries.php:58
+msgid "Catalonia"
+msgstr ""
+
+#: countries.php:59
+msgid "Cayman Islands"
+msgstr ""
+
+#: countries.php:60
+msgid "Central African Republic"
+msgstr ""
+
+#: countries.php:61
+msgid "Chad"
+msgstr ""
+
+#: countries.php:62
+msgid "Chile"
+msgstr ""
+
+#: countries.php:63
+msgid "China"
+msgstr ""
+
+#: countries.php:64
+msgid "Christmas Island"
+msgstr ""
+
+#: countries.php:65
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+#: countries.php:66
+msgid "Colombia"
+msgstr ""
+
+#: countries.php:67
+msgid "Comoros"
+msgstr ""
+
+#: countries.php:68
+msgid "Congo"
+msgstr ""
+
+#: countries.php:69
+msgid "Congo, the DRC"
+msgstr ""
+
+#: countries.php:70
+msgid "Cook Islands"
+msgstr ""
+
+#: countries.php:71
+msgid "Costa Rica"
+msgstr ""
+
+#: countries.php:72
+msgid "Cote D'Ivoire"
+msgstr ""
+
+#: countries.php:73
+msgid "Croatia"
+msgstr ""
+
+#: countries.php:74
+msgid "Cuba"
+msgstr ""
+
+#: countries.php:75
+msgid "Cyprus"
+msgstr ""
+
+#: countries.php:76
+msgid "Czech Republic"
+msgstr ""
+
+#: countries.php:77
+msgid "Denmark"
+msgstr ""
+
+#: countries.php:78
+msgid "Djibouti"
+msgstr ""
+
+#: countries.php:79
+msgid "Dominica"
+msgstr ""
+
+#: countries.php:80
+msgid "Dominican Republic"
+msgstr ""
+
+#: countries.php:81
+msgid "Ecuador"
+msgstr ""
+
+#: countries.php:82
+msgid "Egypt"
+msgstr ""
+
+#: countries.php:83
+msgid "El Salvador"
+msgstr ""
+
+#: countries.php:84
+msgid "England"
+msgstr ""
+
+#: countries.php:85
+msgid "Equatorial Guinea"
+msgstr ""
+
+#: countries.php:86
+msgid "Eritrea"
+msgstr ""
+
+#: countries.php:87
+msgid "Estonia"
+msgstr ""
+
+#: countries.php:88
+msgid "Ethiopia"
+msgstr ""
+
+#: countries.php:89
+msgid "European Union"
+msgstr ""
+
+#: countries.php:90
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
+#: countries.php:91
+msgid "Faroe Islands"
+msgstr ""
+
+#: countries.php:92
+msgid "Fiji"
+msgstr ""
+
+#: countries.php:93
+msgid "Finland"
+msgstr ""
+
+#: countries.php:94
+msgid "France"
+msgstr ""
+
+#: countries.php:95
+msgid "French Guiana"
+msgstr ""
+
+#: countries.php:96
+msgid "French Polynesia"
+msgstr ""
+
+#: countries.php:97
+msgid "French Southern Territories"
+msgstr ""
+
+#: countries.php:98
+msgid "Gabon"
+msgstr ""
+
+#: countries.php:99
+msgid "Gambia"
+msgstr ""
+
+#: countries.php:100
+msgid "Georgia"
+msgstr ""
+
+#: countries.php:101
+msgid "Germany"
+msgstr ""
+
+#: countries.php:102
+msgid "Ghana"
+msgstr ""
+
+#: countries.php:103
+msgid "Gibraltar"
+msgstr ""
+
+#: countries.php:104
+msgid "Greece"
+msgstr ""
+
+#: countries.php:105
+msgid "Greenland"
+msgstr ""
+
+#: countries.php:106
+msgid "Grenada"
+msgstr ""
+
+#: countries.php:107
+msgid "Guadeloupe"
+msgstr ""
+
+#: countries.php:108
+msgid "Guam"
+msgstr ""
+
+#: countries.php:109
+msgid "Guatemala"
+msgstr ""
+
+#: countries.php:110
+msgid "Guinea"
+msgstr ""
+
+#: countries.php:111
+msgid "Guinea-Bissau"
+msgstr ""
+
+#: countries.php:112
+msgid "Guyana"
+msgstr ""
+
+#: countries.php:113
+msgid "Haiti"
+msgstr ""
+
+#: countries.php:114
+msgid "Heard Island and McDonald Islands"
+msgstr ""
+
+#: countries.php:115
+msgid "Holy See (Vatican City State)"
+msgstr ""
+
+#: countries.php:116
+msgid "Honduras"
+msgstr ""
+
+#: countries.php:117
+msgid "Hong Kong"
+msgstr ""
+
+#: countries.php:118
+msgid "Hungary"
+msgstr ""
+
+#: countries.php:119
+msgid "Iceland"
+msgstr ""
+
+#: countries.php:120
+msgid "India"
+msgstr ""
+
+#: countries.php:121
+msgid "Indonesia"
+msgstr ""
+
+#: countries.php:122
+msgid "Iran, Islamic Republic of"
+msgstr ""
+
+#: countries.php:123
+msgid "Iraq"
+msgstr ""
+
+#: countries.php:124
+msgid "Ireland"
+msgstr ""
+
+#: countries.php:125
+msgid "Israel"
+msgstr ""
+
+#: countries.php:126
+msgid "Italy"
+msgstr ""
+
+#: countries.php:127
+msgid "Jamaica"
+msgstr ""
+
+#: countries.php:128
+msgid "Japan"
+msgstr ""
+
+#: countries.php:129
+msgid "Jordan"
+msgstr ""
+
+#: countries.php:130
+msgid "Kazakhstan"
+msgstr ""
+
+#: countries.php:131
+msgid "Kenya"
+msgstr ""
+
+#: countries.php:132
+msgid "Kiribati"
+msgstr ""
+
+#: countries.php:133
+msgid "Korea, Democratic People's Republic of"
+msgstr ""
+
+#: countries.php:134
+msgid "Korea, Republic of"
+msgstr ""
+
+#: countries.php:135
+msgid "Kuwait"
+msgstr ""
+
+#: countries.php:136
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: countries.php:137
+msgid "Lao People's Democratic Republic"
+msgstr ""
+
+#: countries.php:138
+msgid "Latvia"
+msgstr ""
+
+#: countries.php:139
+msgid "Lebanon"
+msgstr ""
+
+#: countries.php:140
+msgid "Lesotho"
+msgstr ""
+
+#: countries.php:141
+msgid "Liberia"
+msgstr ""
+
+#: countries.php:142
+msgid "Libyan Arab Jamahiriya"
+msgstr ""
+
+#: countries.php:143
+msgid "Liechtenstein"
+msgstr ""
+
+#: countries.php:144
+msgid "Lithuania"
+msgstr ""
+
+#: countries.php:145
+msgid "Luxembourg"
+msgstr ""
+
+#: countries.php:146
+msgid "Macao"
+msgstr ""
+
+#: countries.php:147
+msgid "Macedonia, the former Yugoslav Republic of"
+msgstr ""
+
+#: countries.php:148
+msgid "Madagascar"
+msgstr ""
+
+#: countries.php:149
+msgid "Malawi"
+msgstr ""
+
+#: countries.php:150
+msgid "Malaysia"
+msgstr ""
+
+#: countries.php:151
+msgid "Maldives"
+msgstr ""
+
+#: countries.php:152
+msgid "Mali"
+msgstr ""
+
+#: countries.php:153
+msgid "Malta"
+msgstr ""
+
+#: countries.php:154
+msgid "Marshall Islands"
+msgstr ""
+
+#: countries.php:155
+msgid "Martinique"
+msgstr ""
+
+#: countries.php:156
+msgid "Mauritania"
+msgstr ""
+
+#: countries.php:157
+msgid "Mauritius"
+msgstr ""
+
+#: countries.php:158
+msgid "Mayotte"
+msgstr ""
+
+#: countries.php:159
+msgid "Mexico"
+msgstr ""
+
+#: countries.php:160
+msgid "Micronesia, Federated States of"
+msgstr ""
+
+#: countries.php:161
+msgid "Moldova, Republic of"
+msgstr ""
+
+#: countries.php:162
+msgid "Monaco"
+msgstr ""
+
+#: countries.php:163
+msgid "Mongolia"
+msgstr ""
+
+#: countries.php:164
+msgid "Montenegro"
+msgstr ""
+
+#: countries.php:165
+msgid "Montserrat"
+msgstr ""
+
+#: countries.php:166
+msgid "Morocco"
+msgstr ""
+
+#: countries.php:167
+msgid "Mozambique"
+msgstr ""
+
+#: countries.php:168
+msgid "Myanmar"
+msgstr ""
+
+#: countries.php:169
+msgid "Namibia"
+msgstr ""
+
+#: countries.php:170
+msgid "Nauru"
+msgstr ""
+
+#: countries.php:171
+msgid "Nepal"
+msgstr ""
+
+#: countries.php:172
+msgid "Netherlands"
+msgstr ""
+
+#: countries.php:173
+msgid "Netherlands Antilles"
+msgstr ""
+
+#: countries.php:174
+msgid "New Caledonia"
+msgstr ""
+
+#: countries.php:175
+msgid "New Zealand"
+msgstr ""
+
+#: countries.php:176
+msgid "Nicaragua"
+msgstr ""
+
+#: countries.php:177
+msgid "Niger"
+msgstr ""
+
+#: countries.php:178
+msgid "Nigeria"
+msgstr ""
+
+#: countries.php:179
+msgid "Niue"
+msgstr ""
+
+#: countries.php:180
+msgid "Norfolk Island"
+msgstr ""
+
+#: countries.php:181
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#: countries.php:182
+msgid "Norway"
+msgstr ""
+
+#: countries.php:183
+msgid "Oman"
+msgstr ""
+
+#: countries.php:184
+msgid "Pakistan"
+msgstr ""
+
+#: countries.php:185
+msgid "Palau"
+msgstr ""
+
+#: countries.php:186
+msgid "Palestinian Territory, Occupied"
+msgstr ""
+
+#: countries.php:187
+msgid "Panama"
+msgstr ""
+
+#: countries.php:188
+msgid "Papua New Guinea"
+msgstr ""
+
+#: countries.php:189
+msgid "Paraguay"
+msgstr ""
+
+#: countries.php:190
+msgid "Peru"
+msgstr ""
+
+#: countries.php:191
+msgid "Philippines"
+msgstr ""
+
+#: countries.php:192
+msgid "Pitcairn"
+msgstr ""
+
+#: countries.php:193
+msgid "Poland"
+msgstr ""
+
+#: countries.php:194
+msgid "Portugal"
+msgstr ""
+
+#: countries.php:195
+msgid "Puerto Rico"
+msgstr ""
+
+#: countries.php:196
+msgid "Qatar"
+msgstr ""
+
+#: countries.php:197
+msgid "Romania"
+msgstr ""
+
+#: countries.php:198
+msgid "Russia"
+msgstr ""
+
+#: countries.php:199
+msgid "Rwanda"
+msgstr ""
+
+#: countries.php:200
+msgid "Réunion"
+msgstr ""
+
+#: countries.php:201
+msgid "Saint Helena, Ascension and Tristan da Cunha"
+msgstr ""
+
+#: countries.php:202
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+#: countries.php:203
+msgid "Saint Lucia"
+msgstr ""
+
+#: countries.php:204
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+#: countries.php:205
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
+#: countries.php:206
+msgid "Samoa"
+msgstr ""
+
+#: countries.php:207
+msgid "San Marino"
+msgstr ""
+
+#: countries.php:208
+msgid "Sao Tome and Principe"
+msgstr ""
+
+#: countries.php:209
+msgid "Saudi Arabia"
+msgstr ""
+
+#: countries.php:210
+msgid "Scotland"
+msgstr ""
+
+#: countries.php:211
+msgid "Senegal"
+msgstr ""
+
+#: countries.php:212
+msgid "Serbia"
+msgstr ""
+
+#: countries.php:213
+msgid "Serbia and Montenegro"
+msgstr ""
+
+#: countries.php:214
+msgid "Seychelles"
+msgstr ""
+
+#: countries.php:215
+msgid "Sierra Leone"
+msgstr ""
+
+#: countries.php:216
+msgid "Singapore"
+msgstr ""
+
+#: countries.php:217
+msgid "Slovakia"
+msgstr ""
+
+#: countries.php:218
+msgid "Slovenia"
+msgstr ""
+
+#: countries.php:219
+msgid "Solomon Islands"
+msgstr ""
+
+#: countries.php:220
+msgid "Somalia"
+msgstr ""
+
+#: countries.php:221
+msgid "South Africa"
+msgstr ""
+
+#: countries.php:222
+msgid "South Georgia and the South Sandwich Islands"
+msgstr ""
+
+#: countries.php:223
+msgid "Spain"
+msgstr ""
+
+#: countries.php:224
+msgid "Sri Lanka"
+msgstr ""
+
+#: countries.php:225
+msgid "Sudan"
+msgstr ""
+
+#: countries.php:226
+msgid "Suriname"
+msgstr ""
+
+#: countries.php:227
+msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+#: countries.php:228
+msgid "Swaziland"
+msgstr ""
+
+#: countries.php:229
+msgid "Sweden"
+msgstr ""
+
+#: countries.php:230
+msgid "Switzerland"
+msgstr ""
+
+#: countries.php:231
+msgid "Syrian Arab Republic"
+msgstr ""
+
+#: countries.php:232
+msgid "Taiwan, Province of China"
+msgstr ""
+
+#: countries.php:233
+msgid "Tajikistan"
+msgstr ""
+
+#: countries.php:234
+msgid "Tanzania, United Republic of"
+msgstr ""
+
+#: countries.php:235
+msgid "Thailand"
+msgstr ""
+
+#: countries.php:236
+msgid "Timor-Leste"
+msgstr ""
+
+#: countries.php:237
+msgid "Togo"
+msgstr ""
+
+#: countries.php:238
+msgid "Tokelau"
+msgstr ""
+
+#: countries.php:239
+msgid "Tonga"
+msgstr ""
+
+#: countries.php:240
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: countries.php:241
+msgid "Tunisia"
+msgstr ""
+
+#: countries.php:242
+msgid "Turkey"
+msgstr ""
+
+#: countries.php:243
+msgid "Turkmenistan"
+msgstr ""
+
+#: countries.php:244
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+#: countries.php:245
+msgid "Tuvalu"
+msgstr ""
+
+#: countries.php:246
+msgid "Uganda"
+msgstr ""
+
+#: countries.php:247
+msgid "Ukraine"
+msgstr ""
+
+#: countries.php:248
+msgid "United Arab Emirates"
+msgstr ""
+
+#: countries.php:249
+msgid "United Kingdom"
+msgstr ""
+
+#: countries.php:250
+msgid "United States"
+msgstr ""
+
+#: countries.php:251
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+#: countries.php:252
+msgid "Uruguay"
+msgstr ""
+
+#: countries.php:253
+msgid "Uzbekistan"
+msgstr ""
+
+#: countries.php:254
+msgid "Vanuatu"
+msgstr ""
+
+#: countries.php:255
+msgid "Venezuela, Bolivarian Republic of"
+msgstr ""
+
+#: countries.php:256
+msgid "Viet Nam"
+msgstr ""
+
+#: countries.php:257
+msgid "Virgin Islands, British"
+msgstr ""
+
+#: countries.php:258
+msgid "Virgin Islands, U.S."
+msgstr ""
+
+#: countries.php:259
+msgid "Wales"
+msgstr ""
+
+#: countries.php:260
+msgid "Wallis and Futuna"
+msgstr ""
+
+#: countries.php:261
+msgid "Western Sahara"
+msgstr ""
+
+#: countries.php:262
+msgid "Yemen"
+msgstr ""
+
+#: countries.php:263
+msgid "Zambia"
+msgstr ""
+
+#: countries.php:264
+msgid "Zimbabwe"
+msgstr ""
+
+#: countries.php:265
+msgid "Åland"
+msgstr ""
+
+#: wp-clanwars-widget.php:32
+msgid "ClanWars widget"
+msgstr ""
+
+#: wp-clanwars-widget.php:33 wp-clanwars-widget.php:35
+#: wp-clanwars-widget.php:80 wp-clanwars.php:290
+msgid "ClanWars"
+msgstr ""
+
+#: wp-clanwars-widget.php:42
+msgid "Show all"
+msgstr ""
+
+#: wp-clanwars-widget.php:43
+msgid "1 week"
+msgstr ""
+
+#: wp-clanwars-widget.php:44
+msgid "2 weeks"
+msgstr ""
+
+#: wp-clanwars-widget.php:45
+msgid "3 weeks"
+msgstr ""
+
+#: wp-clanwars-widget.php:46
+msgid "1 month"
+msgstr ""
+
+#: wp-clanwars-widget.php:47
+msgid "2 months"
+msgstr ""
+
+#: wp-clanwars-widget.php:48
+msgid "3 months"
+msgstr ""
+
+#: wp-clanwars-widget.php:49
+msgid "6 months"
+msgstr ""
+
+#: wp-clanwars-widget.php:50
+msgid "1 year"
+msgstr ""
+
+#: wp-clanwars-widget.php:129 wp-clanwars-widget.php:130 wp-clanwars.php:3347
+#: wp-clanwars.php:3348 wp-clanwars.php:3776 wp-clanwars.php:3777
+#: wp-clanwars.php:3893
+msgid "All"
+msgstr ""
+
+#: wp-clanwars-widget.php:165 wp-clanwars.php:3382
+msgid "Upcoming"
+msgstr ""
+
+#: wp-clanwars-widget.php:167 wp-clanwars.php:3384
+msgid "Playing"
+msgstr ""
+
+#: wp-clanwars-widget.php:169 wp-clanwars.php:2619 wp-clanwars.php:2634
+#: wp-clanwars.php:3386
+#, php-format
+msgid "%d:%d"
+msgstr ""
+
+#: wp-clanwars-widget.php:210
+msgid "Title:"
+msgstr ""
+
+#: wp-clanwars-widget.php:213
+msgid "Hide title"
+msgstr ""
+
+#: wp-clanwars-widget.php:217
+msgid "Show games:"
+msgstr ""
+
+#: wp-clanwars-widget.php:223
+msgid "Do not check any game if you want to show all games."
+msgstr ""
+
+#: wp-clanwars-widget.php:225
+msgid "Show matches:"
+msgstr ""
+
+#: wp-clanwars-widget.php:226
+msgid "Hide older than"
+msgstr ""
+
+#: wp-clanwars.php:212
+msgid "Manage matches"
+msgstr ""
+
+#: wp-clanwars.php:213
+msgid "Manage games"
+msgstr ""
+
+#: wp-clanwars.php:214
+msgid "Manage teams"
+msgstr ""
+
+#: wp-clanwars.php:218
+msgid "PCW"
+msgstr ""
+
+#: wp-clanwars.php:219
+msgid "Official"
+msgstr ""
+
+#: wp-clanwars.php:292 wp-clanwars.php:3511
+msgid "Matches"
+msgstr ""
+
+#: wp-clanwars.php:293 wp-clanwars.php:1029
+msgid "Teams"
+msgstr ""
+
+#: wp-clanwars.php:294 wp-clanwars.php:1786
+msgid "Games"
+msgstr ""
+
+#: wp-clanwars.php:295 wp-clanwars.php:4063
+msgid "Import"
+msgstr ""
+
+#: wp-clanwars.php:296 wp-clanwars.php:3785
+msgid "Settings"
+msgstr ""
+
+#: wp-clanwars.php:449
+msgid "Are you sure you want to delete this map?"
+msgstr ""
+
+#: wp-clanwars.php:450
+msgid "Are you sure you want to delete this game?"
+msgstr ""
+
+#: wp-clanwars.php:451
+msgid "Are you sure you want to delete this team?"
+msgstr ""
+
+#: wp-clanwars.php:452
+msgid "Are you sure you want to delete this match?"
+msgstr ""
+
+#: wp-clanwars.php:836 wp-clanwars.php:855 wp-clanwars.php:943
+#: wp-clanwars.php:1264 wp-clanwars.php:1570 wp-clanwars.php:1965
+#: wp-clanwars.php:2354 wp-clanwars.php:2915 wp-clanwars.php:3154
+#: wp-clanwars.php:3157 wp-clanwars.php:3164 wp-clanwars.php:3649
+#: wp-clanwars.php:3667 wp-clanwars.php:3693 wp-clanwars.php:3719
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+#: wp-clanwars.php:870
+msgid "New Team"
+msgstr ""
+
+#: wp-clanwars.php:870
+msgid "Add Team"
+msgstr ""
+
+#: wp-clanwars.php:877
+msgid "Edit Team"
+msgstr ""
+
+#: wp-clanwars.php:877
+msgid "Update Team"
+msgstr ""
+
+#: wp-clanwars.php:909 wp-clanwars.php:1009 wp-clanwars.php:1766
+#: wp-clanwars.php:1919 wp-clanwars.php:2008 wp-clanwars.php:2316
+#: wp-clanwars.php:3036 wp-clanwars.php:3490
+msgid "Title"
+msgstr ""
+
+#: wp-clanwars.php:909 wp-clanwars.php:1919 wp-clanwars.php:2316
+msgid "required"
+msgstr ""
+
+#: wp-clanwars.php:916 wp-clanwars.php:1010
+msgid "Country"
+msgstr ""
+
+#: wp-clanwars.php:956 wp-clanwars.php:964 wp-clanwars.php:1607
+#: wp-clanwars.php:1641 wp-clanwars.php:1668 wp-clanwars.php:1703
+#: wp-clanwars.php:3222
+msgid "An error occurred."
+msgstr ""
+
+#: wp-clanwars.php:969
+msgid "Team title is required field."
+msgstr ""
+
+#: wp-clanwars.php:995 wp-clanwars.php:1752 wp-clanwars.php:1993
+#: wp-clanwars.php:3330 wp-clanwars.php:3476
+msgid "&laquo;"
+msgstr ""
+
+#: wp-clanwars.php:996 wp-clanwars.php:1753 wp-clanwars.php:1994
+#: wp-clanwars.php:3331 wp-clanwars.php:3477
+msgid "&raquo;"
+msgstr ""
+
+#: wp-clanwars.php:1001 wp-clanwars.php:1758 wp-clanwars.php:1999
+#: wp-clanwars.php:3336 wp-clanwars.php:3482
+#, php-format
+msgid "Displaying %s&#8211;%s of %s"
+msgstr ""
+
+#: wp-clanwars.php:1013
+msgid "Team is successfully added."
+msgstr ""
+
+#: wp-clanwars.php:1017
+msgid "Team is successfully updated."
+msgstr ""
+
+#: wp-clanwars.php:1022
+#, php-format
+msgid "%d Team deleted."
+msgid_plural "%d Teams deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#: wp-clanwars.php:1029 wp-clanwars.php:1787 wp-clanwars.php:2027
+#: wp-clanwars.php:3511
+msgid "Add New"
+msgstr ""
+
+#: wp-clanwars.php:1045 wp-clanwars.php:1110 wp-clanwars.php:1804
+#: wp-clanwars.php:1868 wp-clanwars.php:2044 wp-clanwars.php:2108
+#: wp-clanwars.php:3527 wp-clanwars.php:3624
+msgid "Bulk Actions"
+msgstr ""
+
+#: wp-clanwars.php:1046 wp-clanwars.php:1087 wp-clanwars.php:1111
+#: wp-clanwars.php:1805 wp-clanwars.php:1848 wp-clanwars.php:1869
+#: wp-clanwars.php:2045 wp-clanwars.php:2091 wp-clanwars.php:2109
+#: wp-clanwars.php:3528 wp-clanwars.php:3575 wp-clanwars.php:3625
+#: wp-clanwars.php:3842 wp-clanwars.php:3919
+msgid "Delete"
+msgstr ""
+
+#: wp-clanwars.php:1048 wp-clanwars.php:1113 wp-clanwars.php:1807
+#: wp-clanwars.php:1871 wp-clanwars.php:2047 wp-clanwars.php:2111
+#: wp-clanwars.php:3530 wp-clanwars.php:3627 wp-clanwars.php:3844
+#: wp-clanwars.php:3921
+msgid "Apply"
+msgstr ""
+
+#: wp-clanwars.php:1052 wp-clanwars.php:1811 wp-clanwars.php:3534
+msgid "Search Teams:"
+msgstr ""
+
+#: wp-clanwars.php:1055
+msgid "Search Teams"
+msgstr ""
+
+#: wp-clanwars.php:1084 wp-clanwars.php:1843
+#, php-format
+msgid "Edit &#8220;%s&#8221; Team"
+msgstr ""
+
+#: wp-clanwars.php:1084
+msgid "(Home Team)"
+msgstr ""
+
+#: wp-clanwars.php:1086 wp-clanwars.php:1845 wp-clanwars.php:2090
+#: wp-clanwars.php:3574
+msgid "Edit"
+msgstr ""
+
+#: wp-clanwars.php:1088
+msgid "Set As Home Team"
+msgstr ""
+
+#: wp-clanwars.php:1534
+msgid "New Game"
+msgstr ""
+
+#: wp-clanwars.php:1534
+msgid "Add Game"
+msgstr ""
+
+#: wp-clanwars.php:1541
+msgid "Edit Game"
+msgstr ""
+
+#: wp-clanwars.php:1541
+msgid "Update Game"
+msgstr ""
+
+#: wp-clanwars.php:1575
+msgid "Database error."
+msgstr ""
+
+#: wp-clanwars.php:1576
+msgid "The game is updated."
+msgstr ""
+
+#: wp-clanwars.php:1577
+msgid ""
+"The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
+"<code>php.ini</code>."
+msgstr ""
+
+#: wp-clanwars.php:1578
+msgid ""
+"The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was "
+"specified in the HTML form."
+msgstr ""
+
+#: wp-clanwars.php:1579
+msgid "The uploaded file was only partially uploaded."
+msgstr ""
+
+#: wp-clanwars.php:1580
+msgid "No file was uploaded."
+msgstr ""
+
+#: wp-clanwars.php:1581
+msgid "Missing a temporary folder."
+msgstr ""
+
+#: wp-clanwars.php:1582
+msgid "Failed to write file to disk."
+msgstr ""
+
+#: wp-clanwars.php:1583
+msgid "File upload stopped by extension."
+msgstr ""
+
+#: wp-clanwars.php:1584
+msgid "File type does not meet security guidelines. Try another."
+msgstr ""
+
+#: wp-clanwars.php:1613 wp-clanwars.php:1647
+msgid "Game title is required field."
+msgstr ""
+
+#: wp-clanwars.php:1674 wp-clanwars.php:1709
+msgid "Map title is required field."
+msgstr ""
+
+#: wp-clanwars.php:1767 wp-clanwars.php:1926
+msgid "Game tag"
+msgstr ""
+
+#: wp-clanwars.php:1770
+msgid "Game is successfully added."
+msgstr ""
+
+#: wp-clanwars.php:1774
+msgid "Game is successfully updated."
+msgstr ""
+
+#: wp-clanwars.php:1779
+#, php-format
+msgid "%d Game deleted."
+msgid_plural "%d Games deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#: wp-clanwars.php:1814 wp-clanwars.php:3537
+msgid "Search Games"
+msgstr ""
+
+#: wp-clanwars.php:1846 wp-clanwars.php:2027
+msgid "Maps"
+msgstr ""
+
+#: wp-clanwars.php:1847
+msgid "Export"
+msgstr ""
+
+#: wp-clanwars.php:1929
+msgid "For example: for Left 4 Dead 2 it can be L4D2."
+msgstr ""
+
+#: wp-clanwars.php:1934
+msgid "Icon"
+msgstr ""
+
+#: wp-clanwars.php:1941
+msgid "Delete Icon"
+msgstr ""
+
+#: wp-clanwars.php:2011
+msgid "Map is successfully added."
+msgstr ""
+
+#: wp-clanwars.php:2015
+msgid "Map is successfully updated."
+msgstr ""
+
+#: wp-clanwars.php:2020
+#, php-format
+msgid "%d Map deleted."
+msgid_plural "%d Maps deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#: wp-clanwars.php:2051
+msgid "Search Maps:"
+msgstr ""
+
+#: wp-clanwars.php:2054
+msgid "Search Maps"
+msgstr ""
+
+#: wp-clanwars.php:2088
+#, php-format
+msgid "Edit &#8220;%s&#8221; Map"
+msgstr ""
+
+#: wp-clanwars.php:2266
+msgid "Add Map"
+msgstr ""
+
+#: wp-clanwars.php:2273
+msgid "Edit Map"
+msgstr ""
+
+#: wp-clanwars.php:2273
+msgid "Update Map"
+msgstr ""
+
+#: wp-clanwars.php:2323
+msgid "Screenshot"
+msgstr ""
+
+#: wp-clanwars.php:2330
+msgid "Delete Screenshot"
+msgstr ""
+
+#: wp-clanwars.php:2416
+#, php-format
+msgid ""
+"%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: "
+"minute input, 5: year input"
+msgstr ""
+
+#: wp-clanwars.php:2562
+#, php-format
+msgid "%s vs %s"
+msgstr ""
+
+#: wp-clanwars.php:2564 wp-clanwars.php:3566
+msgid "Regular match"
+msgstr ""
+
+#: wp-clanwars.php:2575
+#, php-format
+msgctxt "match_excerpt"
+msgid "%s vs %s"
+msgstr ""
+
+#: wp-clanwars.php:2642
+msgid "Match description"
+msgstr ""
+
+#: wp-clanwars.php:2901
+msgid "Add Match"
+msgstr ""
+
+#: wp-clanwars.php:2908
+msgid "Edit Match"
+msgstr ""
+
+#: wp-clanwars.php:2983
+msgid "Match is successfully updated."
+msgstr ""
+
+#: wp-clanwars.php:3025 wp-clanwars.php:3491
+msgid "Game"
+msgstr ""
+
+#: wp-clanwars.php:3043
+msgid "Description"
+msgstr ""
+
+#: wp-clanwars.php:3050
+msgid "External URL"
+msgstr ""
+
+#: wp-clanwars.php:3054
+msgid "Enter league or external match URL."
+msgstr ""
+
+#: wp-clanwars.php:3059 wp-clanwars.php:3493
+msgid "Match status"
+msgstr ""
+
+#: wp-clanwars.php:3068 wp-clanwars.php:3492
+msgid "Date"
+msgstr ""
+
+#: wp-clanwars.php:3084
+msgid "vs"
+msgstr ""
+
+#: wp-clanwars.php:3093
+msgid "or just type opponent team here:"
+msgstr ""
+
+#: wp-clanwars.php:3101
+msgid "Add map"
+msgstr ""
+
+#: wp-clanwars.php:3143
+msgid "Add Round"
+msgstr ""
+
+#: wp-clanwars.php:3144
+msgid "Exclude map from match"
+msgstr ""
+
+#: wp-clanwars.php:3145
+msgid "Remove round"
+msgstr ""
+
+#: wp-clanwars.php:3494
+msgid "Team 1"
+msgstr ""
+
+#: wp-clanwars.php:3495
+msgid "Team 2"
+msgstr ""
+
+#: wp-clanwars.php:3496
+msgid "Tickets"
+msgstr ""
+
+#: wp-clanwars.php:3499
+msgid "Match is successfully added."
+msgstr ""
+
+#: wp-clanwars.php:3504
+#, php-format
+msgid "%d Match deleted."
+msgid_plural "%d Matches deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#: wp-clanwars.php:3572
+#, php-format
+msgid "Edit &#8220;%s&#8221; Match"
+msgstr ""
+
+#: wp-clanwars.php:3768
+msgid "User Login"
+msgstr ""
+
+#: wp-clanwars.php:3769
+msgid "Permissions"
+msgstr ""
+
+#: wp-clanwars.php:3788
+msgid "Settings saved."
+msgstr ""
+
+#: wp-clanwars.php:3797
+msgid "Matches Category"
+msgstr ""
+
+#: wp-clanwars.php:3806
+msgid "None"
+msgstr ""
+
+#: wp-clanwars.php:3816
+msgid "Enable default styles"
+msgstr ""
+
+#: wp-clanwars.php:3822
+msgid "Save Changes"
+msgstr ""
+
+#: wp-clanwars.php:3827
+msgid "User Access"
+msgstr ""
+
+#: wp-clanwars.php:3841 wp-clanwars.php:3918
+msgid "Actions"
+msgstr ""
+
+#: wp-clanwars.php:3884
+msgid "Yes"
+msgstr ""
+
+#: wp-clanwars.php:3884
+msgid "No"
+msgstr ""
+
+#: wp-clanwars.php:3933
+msgid "Add New User"
+msgstr ""
+
+#: wp-clanwars.php:3940
+msgid "User"
+msgstr ""
+
+#: wp-clanwars.php:3945
+msgid "Allow user manage specified games only:"
+msgstr ""
+
+#: wp-clanwars.php:3952
+msgid ""
+"User can create new games <strong>only if &ldquo;All&rdquo; option is "
+"checked.</strong>"
+msgstr ""
+
+#: wp-clanwars.php:3956
+msgid "Allow user:"
+msgstr ""
+
+#: wp-clanwars.php:3966
+msgid "Add User"
+msgstr ""
+
+#: wp-clanwars.php:4011
+msgid "An upload error occurred while import."
+msgstr ""
+
+#: wp-clanwars.php:4014
+msgid "File(s) successfully imported."
+msgstr ""
+
+#: wp-clanwars.php:4014
+msgid "An error occurred while import."
+msgstr ""
+
+#: wp-clanwars.php:4021
+msgid "Import games"
+msgstr ""
+
+#: wp-clanwars.php:4022
+msgid ""
+"Import may take some time. Please do not refresh browser when in progress."
+msgstr ""
+
+#: wp-clanwars.php:4032
+msgid "Import available games"
+msgstr ""
+
+#: wp-clanwars.php:4046
+msgid "installed"
+msgstr ""
+
+#: wp-clanwars.php:4059
+msgid "Upload package (ZIP file)"
+msgstr ""
