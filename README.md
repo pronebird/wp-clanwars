@@ -4,6 +4,18 @@ Wanna see WP-ClanWars in your language? Help out to translate it!
 
 https://www.transifex.com/projects/p/wp-clanwars/
 
+## TODO
+
+❏ Set post date to match date to hide future posts
+❏ Add tournament logo
+❏ Option to disable upcoming matches
+❏ Add sort options in widget
+❏ Match search
+❏ Add team logo
+❏ Pagination in widget or load more
+
+I work on this plugin in free time and I don't have much, so contributions are welcome.
+
 ## WP-ClanWars plugin for WordPress
 
 WP-ClanWars is a match organizer plugin for cyber sport teams. It supports multiple games, sidebar widget, match browser, and allows multigamings to delegate match scheduling between multiple war arrangers using simple access control system.
