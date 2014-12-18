@@ -86,6 +86,21 @@ class WP_ClanWars {
 	}
 
 	/**
+	 * Check if plugin runs within jumpstarter instance
+	 *
+	 * @return bool true if plugin runs within jumpstarter instance, otherwise false
+	 */
+	function is_jumpstarter() {
+		static $file_exists = null;
+
+		if($file_exists === null) {
+			$file_exists = file_exists('/app/env.json');
+		}
+
+		return $file_exists;
+	}
+
+	/**
 	 * Plugin activation hook
 	 *
 	 * Creates tables if needed
