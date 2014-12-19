@@ -121,6 +121,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 
 <ul class="clanwar-list">
 
+	<?php if(sizeof($games) > 1) : ?>
 	<li>
 		<ul class="tabs">
 		<?php
@@ -140,6 +141,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 		<?php endfor; ?>
 		</ul>
 	</li>
+	<?php endif; ?>
 
 	<?php foreach($matches as $i => $match) :
 			$is_upcoming = false;
