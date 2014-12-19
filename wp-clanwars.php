@@ -114,10 +114,12 @@ class WP_ClanWars {
 
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
+		$charset_collate = $wpdb->get_charset_collate();
+
 		$dbstruct = '';
 
 		$dbstruct .= "CREATE TABLE `{$this->tables['games']}` (
-					  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 					  `title` varchar(200) NOT NULL,
 					  `abbr` varchar(20) DEFAULT NULL,
 					  `icon` bigint(20) unsigned DEFAULT NULL,
@@ -125,7 +127,7 @@ class WP_ClanWars {
 					  KEY `icon` (`icon`),
 					  KEY `title` (`title`),
 					  KEY `abbr` (`abbr`)
-					);";
+					) $charset_collate;";
 
 		$dbstruct .= "CREATE TABLE `{$this->tables['maps']}` (
 					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -134,16 +136,16 @@ class WP_ClanWars {
 					  `screenshot` bigint(20) unsigned DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  KEY `game_id` (`game_id`,`screenshot`)
-					);";
+					) $charset_collate;";
 
 		$dbstruct .= "CREATE TABLE `{$this->tables['matches']}` (
 					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 					  `title` varchar(200) DEFAULT NULL,
-					  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+					  `date` datetime NOT NULL,
 					  `post_id` bigint(20) unsigned DEFAULT NULL,
-					  `team1` int(11) unsigned NOT NULL,
-					  `team2` int(11) unsigned NOT NULL,
-					  `game_id` int(11) unsigned NOT NULL,
+					  `team1` int(10) unsigned NOT NULL,
+					  `team2` int(10) unsigned NOT NULL,
+					  `game_id` int(10) unsigned NOT NULL,
 					  `match_status` tinyint(1) DEFAULT '0',
 					  `description` text NOT NULL,
 					  `external_url` varchar(200) DEFAULT NULL,
@@ -155,23 +157,23 @@ class WP_ClanWars {
 					  KEY `team2` (`team2`),
 					  KEY `match_status` (`match_status`),
 					  KEY `date` (`date`)
-					);";
+					) $charset_collate;";
 
 		$dbstruct .= "CREATE TABLE `{$this->tables['rounds']}` (
 					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 					  `match_id` int(10) unsigned NOT NULL,
-					  `group_n` int(11) NOT NULL,
+					  `group_n` int(10) NOT NULL,
 					  `map_id` int(10) unsigned NOT NULL,
-					  `tickets1` int(11) NOT NULL,
-					  `tickets2` int(11) NOT NULL,
+					  `tickets1` int(10) NOT NULL,
+					  `tickets2` int(10) NOT NULL,
 					  PRIMARY KEY (`id`),
 					  KEY `match_id` (`match_id`),
 					  KEY `group_n` (`group_n`),
 					  KEY `map_id` (`map_id`)
-					);";
+					) $charset_collate;";
 
 		$dbstruct .= "CREATE TABLE `{$this->tables['teams']}` (
-					  `id` int(11) NOT NULL AUTO_INCREMENT,
+					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 					  `title` varchar(200) NOT NULL,
 					  `logo` bigint(20) unsigned DEFAULT NULL,
 					  `country` varchar(20) DEFAULT NULL,
@@ -180,7 +182,7 @@ class WP_ClanWars {
 					  KEY `country` (`country`),
 					  KEY `home_team` (`home_team`),
 					  KEY `title` (`title`)
-					);";
+					) $charset_collate;";
 
 		add_option(WP_CLANWARS_CATEGORY, -1);
 		add_option(WP_CLANWARS_DEFAULTCSS, true);
