@@ -1904,11 +1904,13 @@ class WP_ClanWars {
 	function game_editor($page_title, $page_action, $page_submit, $game_id = 0)
 	{
 		$defaults = array('title' => '', 'icon' => 0, 'abbr' => '', 'action' => '');
+		$data = array();
 
 		if($game_id > 0) {
 			$t = $this->get_game(array('id' => $game_id));
-			if(!empty($t))
+			if(!empty($t)) {
 				$data = (array)$t[0];
+			}
 		}
 
 		extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
