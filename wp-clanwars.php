@@ -789,9 +789,9 @@ class WP_ClanWars {
 		{
 			$insert_id = $wpdb->insert_id;
 
-			if($home_team)
+			if($data['home_team']) {
 				$this->set_hometeam($insert_id);
-
+			}
 			return $insert_id;
 		}
 
