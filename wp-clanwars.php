@@ -2440,7 +2440,7 @@ class WP_ClanWars {
 		if(is_array($date) && isset($date['hh'], $date['mn'], $date['mm'], $date['jj'], $date['yy'])) {
 			return mktime((int)$date['hh'], (int)$date['mn'], 0, (int)$date['mm'], (int)$date['jj'], (int)$date['yy']);
 		}
-		return mktime();
+		return $date;
 	}
 
 	function get_match($p, $count = false)
@@ -2973,7 +2973,7 @@ class WP_ClanWars {
 
 			if(!empty($t)){
 				$data = (array)$t[0];
-				$data['date'] = strtotime($data['date']);
+				$data['date'] = mysql2date('U', $data['date']);
 				$data['scores'] = array();
 
 				$post_id = $data['post_id'];
