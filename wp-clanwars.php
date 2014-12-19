@@ -91,13 +91,9 @@ class WP_ClanWars {
 	 * @return bool true if plugin runs within jumpstarter instance, otherwise false
 	 */
 	function is_jumpstarter() {
-		static $file_exists = null;
-
-		if($file_exists === null) {
-			$file_exists = file_exists('/app/env.json');
-		}
-
-		return $file_exists;
+		// JS_WP_User is defined in wp-jumpstarter:
+		// see: https://github.com/jumpstarter-io/wp-jumpstarter/blob/master/jumpstarter.php
+		return class_exists('JS_WP_User');
 	}
 
 	/**
@@ -304,7 +300,10 @@ class WP_ClanWars {
 			return;
 		}
 
-		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), $user_role, $top_level_slug, null, WP_CLANWARS_URL . '/images/plugin-icon.png');
+		// place plugin below dashboard on jumpstarter
+		$menu_position = $this->is_jumpstarter() ? 3 : null;
+
+		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), $user_role, $top_level_slug, null, WP_CLANWARS_URL . '/images/plugin-icon.png', $menu_position);
 
 		$this->page_hooks['matches'] = add_submenu_page($top_level_slug, __('Matches', WP_CLANWARS_TEXTDOMAIN), __('Matches', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_matches'], $routes['manage_matches'], array($this, 'on_manage_matches'));
 		$this->page_hooks['teams'] = add_submenu_page($top_level_slug, __('Teams', WP_CLANWARS_TEXTDOMAIN), __('Teams', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_teams'], $routes['manage_teams'], array($this, 'on_manage_teams'));
@@ -1067,7 +1066,7 @@ class WP_ClanWars {
 
 							<div class="alignright actions" style="display: none;">
 								<label class="screen-reader-text" for="teams-search-input"><?php _e('Search Teams:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								<input id="teams-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
+								<input id="teams-search-input" name="s" value="<?php if(isset($search_title)) esc_attr_e($search_title); ?>" type="text" />
 
 								<input id="teams-search-submit" value="<?php _e('Search Teams', WP_CLANWARS_TEXTDOMAIN); ?>" class="button" type="button" />
 							</div>
@@ -1826,7 +1825,7 @@ class WP_ClanWars {
 
 							<div class="alignright actions" style="display: none;">
 								<label class="screen-reader-text" for="games-search-input"><?php _e('Search Teams:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								<input id="games-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
+								<input id="games-search-input" name="s" value="<?php if(isset($search_title)) esc_attr_e($search_title); ?>" type="text" />
 
 								<input id="games-search-submit" value="<?php _e('Search Games', WP_CLANWARS_TEXTDOMAIN); ?>" class="button" type="button" />
 							</div>
@@ -2068,7 +2067,7 @@ class WP_ClanWars {
 
 							<div class="alignright actions" style="display: none;">
 								<label class="screen-reader-text" for="maps-search-input"><?php _e('Search Maps:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								<input id="maps-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
+								<input id="maps-search-input" name="s" value="<?php if(isset($search_title)) esc_attr_e($search_title); ?>" type="text" />
 
 								<input id="maps-search-submit" value="<?php _e('Search Maps', WP_CLANWARS_TEXTDOMAIN); ?>" class="button" type="button" />
 							</div>
@@ -3548,7 +3547,7 @@ class WP_ClanWars {
 
 							<div class="alignright actions" style="display: none;">
 								<label class="screen-reader-text" for="games-search-input"><?php _e('Search Teams:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								<input id="games-search-input" name="s" value="<?php echo esc_html($search_title); ?>" type="text" />
+								<input id="games-search-input" name="s" value="<?php if(isset($search_title)) esc_attr_e($search_title); ?>" type="text" />
 
 								<input id="games-search-submit" value="<?php _e('Search Games', WP_CLANWARS_TEXTDOMAIN); ?>" class="button" type="button" />
 							</div>
