@@ -144,7 +144,9 @@ html[xmlns] .clearfix {
 }
 
 .wp-clanwars-list .scores.loose,
-.wp-clanwars-page .scores.loose
+.wp-clanwars-page .scores.loose,
+.wp-clanwars-list .scores.loss,
+.wp-clanwars-page .scores.loss
 {
 	color: #fff;
 	background-color: #c00;

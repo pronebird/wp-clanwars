@@ -2632,7 +2632,7 @@ class WP_ClanWars {
 
 					$t1 = $round->tickets1;
 					$t2 = $round->tickets2;
-					$round_class = $t1 < $t2 ? 'loose' : ($t1 > $t2 ? 'win' : 'draw');
+					$round_class = $t1 < $t2 ? 'loss' : ($t1 > $t2 ? 'win' : 'draw');
 
 					$post_content .= '<div class="round">';
 					$post_content .= '<span class="scores ' . $round_class . '">' . sprintf(__('%d:%d'), $t1, $t2) . '</span>';
@@ -2648,7 +2648,7 @@ class WP_ClanWars {
 
 			$t1 = $m->team1_tickets;
 			$t2 = $m->team2_tickets;
-			$round_class = $t1 < $t2 ? 'loose' : ($t1 > $t2 ? 'win' : 'draw');
+			$round_class = $t1 < $t2 ? 'loss' : ($t1 > $t2 ? 'win' : 'draw');
 
 			$score_text = sprintf(__('%d:%d'), $t1, $t2);
 			$post_content .= '<div class="summary"><span class="scores ' . $round_class . '">' . $score_text . '</span></div>';
@@ -3390,7 +3390,7 @@ class WP_ClanWars {
 			$is_upcoming = false;
 			$t1 = $match->team1_tickets;
 			$t2 = $match->team2_tickets;
-			$wld_class = $t1 == $t2 ? 'draw' : ($t1 > $t2 ? 'win' : 'loose');
+			$wld_class = $t1 == $t2 ? 'draw' : ($t1 > $t2 ? 'win' : 'loss');
 			$date = mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $match->date);
 			$timestamp = mysql2date('U', $match->date);
 
