@@ -2437,13 +2437,10 @@ class WP_ClanWars {
 
 	function date_array2time_helper($date)
 	{
-		if(is_array($date) &&
-			isset($date['hh'], $date['mn'], $date['mm'], $date['jj'], $date['yy']))
-		{
-			return mktime($date['hh'], $date['mn'], 0, $date['mm'], $date['jj'], $date['yy']);
+		if(is_array($date) && isset($date['hh'], $date['mn'], $date['mm'], $date['jj'], $date['yy'])) {
+			return mktime((int)$date['hh'], (int)$date['mn'], 0, (int)$date['mm'], (int)$date['jj'], (int)$date['yy']);
 		}
-
-		return $date;
+		return mktime();
 	}
 
 	function get_match($p, $count = false)
