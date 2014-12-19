@@ -3151,7 +3151,7 @@ class WP_ClanWars {
 
 	function on_load_manage_matches()
 	{
-		$id = isset($_REQUEST['id']) ? $_GET['id'] : 0;
+		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
 		
 		wp_enqueue_script('wp-cw-matches');
