@@ -51,11 +51,7 @@ foreach($rounds as $map_group) :
 </div>
 
 <ul class="match-props">
-	<li class="date"><?php echo mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $match->date); ?></li>
-
-<?php if($match_status_text) : ?>
-	<li class="status type-<?php echo $match->match_status; ?>"><?php esc_html_e($match_status_text);?></li>
-<?php endif; ?>
+	<li class="date"><?php esc_html_e($match_status_text); ?>, <?php echo mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $match->date); ?></li>
 
 <?php if(!empty($match->external_url)) : ?>
 	<li class="external_url">

@@ -2954,14 +2954,14 @@ class WP_ClanWars {
 						<tr class="form-field form-required">
 							<th scope="row" valign="top"><label for="title"><?php _e('Title', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 							<td>
-								<input name="title" id="title" type="text" value="<?php echo esc_attr($title); ?>" maxlength="200" autocomplete="off" aria-required="true" />
+								<input name="title" id="title" type="text" value="<?php echo esc_attr($title); ?>" placeholder="<?php _e('For example: ESL Winter League', WP_CLANWARS_TEXTDOMAIN); ?>" maxlength="200" autocomplete="off" aria-required="true" />
 							</td>
 						</tr>
 
 						<tr class="form-field">
 							<th scope="row" valign="top"><label for="description"><?php _e('Description', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 							<td>
-								<textarea name="description" id="description"><?php echo esc_html($description); ?></textarea>
+								<textarea name="description" id="description" placeholder="<?php _e('Optional: Drop a line or two about match. You can always edit post directly and add screenshots to gallery.', WP_CLANWARS_TEXTDOMAIN); ?>"><?php echo esc_html($description); ?></textarea>
 							</td>
 						</tr>
 
