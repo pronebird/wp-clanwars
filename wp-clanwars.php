@@ -45,6 +45,7 @@ define('WP_CLANWARS_IMPORTURL', WP_CLANWARS_URL . '/' . WP_CLANWARS_IMPORTDIR);
 define('WP_CLANWARS_EXPORTDIR', 'wp-clanwars');
 define('WP_CLANWARS_ZIPINDEX', 'index.json');
 
+require (dirname(__FILE__) . '/classes/view.class.php');
 require (dirname(__FILE__) . '/wp-clanwars-widget.php');
 require_once(ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
@@ -3337,17 +3338,16 @@ class WP_ClanWars {
 			if(!isset($rounds[$v->group_n])) {
 				$rounds[$v->group_n] = array();
 			}
-			$rounds[$v->group_n][] = $v;
+			array_push($rounds[$v->group_n], $v);
 		}
 
-		ob_start();
+		$match_status_text = $this->match_status[$m->match_status];
+		$team1_flag = $this->get_country_flag($m->team1_country, true);
+		$team2_flag = $this->get_country_flag($m->team2_country, true);
 
-		include(dirname(__FILE__) . '/views/match_view.php');
-
-		$content = ob_get_contents();
-		ob_end_clean();
-
-		return $content;
+		return \WP_Clanwars\View::render( 'match_view', compact(
+			'm', 'rounds', 'match_status_text', 'team1_flag', 'team2_flag')
+		);
 	}
 
 	function on_browser_shortcode($atts) {
