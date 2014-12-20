@@ -2688,7 +2688,7 @@ class WP_ClanWars {
 			$post_content .= '</div>'; // page
 
 			$postarr['post_title'] = $post_title;
-			$postarr['post_content'] = $post_content;
+			$postarr['post_content'] = '[wp-clanwars match_id="' . $m->id . '"]';
 			$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
 
 			$new_post_ID = 0;
@@ -3311,7 +3311,46 @@ class WP_ClanWars {
 	}
 
 	function on_shortcode($atts) {
+		extract(shortcode_atts(array('match_id' => 0), $atts));
 
+		$match_id = (int)$match_id;
+		if($match_id > 0) {
+			return $this->on_match_shortcode($match_id);
+		}
+
+		return $this->on_browser_shortcode($atts);
+	}
+
+	function on_match_shortcode($match_id) {
+		$matches = $this->get_match(array('id' => $match_id, 'sum_tickets' => true));
+
+		if(empty($matches)) {
+			return __("<p>Match with id = $match_id</p>", WP_CLANWARS_TEXTDOMAIN);
+		}
+
+		$m = $matches[0];
+		$r = $this->get_rounds($m->id);
+		$rounds = array();
+
+		// group rounds by map
+		foreach($r as $v) {
+			if(!isset($rounds[$v->group_n])) {
+				$rounds[$v->group_n] = array();
+			}
+			$rounds[$v->group_n][] = $v;
+		}
+
+		ob_start();
+
+		include(dirname(__FILE__) . '/views/match_view.php');
+
+		$content = ob_get_contents();
+		ob_end_clean();
+
+		return $content;
+	}
+
+	function on_browser_shortcode($atts) {
 		$output = '';
 
 		extract(shortcode_atts(array('per_page' => 20), $atts));
