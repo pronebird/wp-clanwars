@@ -2821,7 +2821,7 @@ class WP_ClanWars {
 	{
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-		return $this->match_editor(__('Edit Match', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-matches', __('Edit Match', WP_CLANWARS_TEXTDOMAIN), $id);
+		return $this->match_editor(__('Edit Match', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-matches', __('Update Match', WP_CLANWARS_TEXTDOMAIN), $id);
 	}
 
 	function on_ajax_get_maps()
