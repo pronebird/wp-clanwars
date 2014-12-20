@@ -1,7 +1,8 @@
 <div class="wp-clanwars-page-v2">
 <p class="teams">
-	<span class="team1"><?php echo $this->get_country_flag($m->team1_country, true) . ' ' . $m->team1_title; ?></span>
-	<span class="team2"><?php echo $m->team2_title . ' ' . $this->get_country_flag($m->team2_country, true); ?></span>
+	<span class="team1"><?php echo $team1_flag; ?> <?php esc_html_e($m->team1_title); ?></span>
+	<span class="vs"><?php _e('vs.', WP_CLANWARS_TEXTDOMAIN); ?></span>
+	<span class="team2"><?php esc_html_e($m->team2_title); ?> <?php echo $team2_flag; ?></span>
 </p>
 <div class="maplist clearfix">
 <?php
@@ -52,8 +53,8 @@ foreach($rounds as $map_group) :
 <ul class="match-props">
 	<li class="date"><?php echo mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $m->date); ?></li>
 
-<?php if(isset($this->match_status[$m->match_status])) : ?>
-	<li class="status type-<?php echo $m->match_status; ?>"><?php esc_html_e($this->match_status[$m->match_status]);?></li>
+<?php if($match_status_text) : ?>
+	<li class="status type-<?php echo $m->match_status; ?>"><?php esc_html_e($match_status_text);?></li>
 <?php endif; ?>
 
 <?php if(!empty($m->external_url)) : ?>
