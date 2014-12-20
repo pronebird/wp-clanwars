@@ -43,6 +43,10 @@ html[xmlns] .clearfix {
 	position: relative;
 }
 
+.wp-cw-matcheditor button > .dashicons {
+    vertical-align: middle;
+}
+
 .wp-cw-mapeditor .screenshot img,
 .wp-cw-gameeditor .screenshot img {
     margin: 20px 0;
@@ -56,15 +60,20 @@ html[xmlns] .clearfix {
     resize: vertical;
 }
 
+#mapsite {
+    margin-left: -20px;
+}
+
 .wp-cw-matcheditor .match-results {
     margin: 0;
-    width: 400px;
 }
 
 .wp-cw-matcheditor .match-results .map {
-    margin: 10px 0;
-    padding: 5px;
+    margin: 10px 0 0 20px;
+    padding: 0px;
     position: relative;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .wp-cw-matcheditor .match-results .teams {
@@ -117,7 +126,8 @@ html[xmlns] .clearfix {
 }
 
 .wp-cw-matcheditor .match-results .round {
-    width: 130px;
+    /*width: 130px;*/
+    margin-bottom: 0.5em;
 }
 
 .wp-cw-matcheditor .match-results .round,
@@ -126,44 +136,14 @@ html[xmlns] .clearfix {
     margin-left: 160px;
 }
 
-.wp-cw-matcheditor .match-results .add-round {
-    margin-top: 10px;
-}
-
 .wp-cw-matcheditor .match-results .add-map {
     margin: 20px 0;
 }
 
-.wp-cw-matcheditor .match-results .remove
-{
-    background-color: transparent;
-    background-image: url("../../../../wp-admin/images/xit.gif");
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: 0% 50%;
-    width: 10px;
-    height: 22px;
-    overflow: hidden;
+.wp-cw-matcheditor .match-results .remove {
     display: inline-block;
     vertical-align: middle;
-    -webkit-transition: none;
-    -moz-transition: none;
-    transition: none;
-}
-
-.wp-cw-matcheditor .match-results .remove:hover
-{
-    background-color: transparent;
-    background-image: url("../../../../wp-admin/images/xit.gif");
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: -10px 50%;
-}
-
-.wp-cw-matcheditor .match-results .remove-matchmap {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px;
+    text-decoration: none;
 }
 
 .available-games img {
