@@ -3000,8 +3000,7 @@ class WP_ClanWars {
 									<?php foreach($teams as $t) : ?>
 										<option value="<?php echo $t->id; ?>"<?php selected(true, $team1 > 0 ? ($t->id == $team1) : $t->home_team, true); ?>><?php echo esc_html($t->title); ?></option>
 									<?php endforeach; ?>
-									</select>&nbsp;<?php _e('vs', WP_CLANWARS_TEXTDOMAIN); ?>&nbsp;
-									<select name="team2" class="team-select">
+									</select>&nbsp;<?php _e('vs', WP_CLANWARS_TEXTDOMAIN); ?>&nbsp;<select name="team2" class="team-select">
 									<?php foreach($teams as $t) : ?>
 										<option value="<?php echo $t->id; ?>"<?php selected(true, $t->id==$team2, true); ?>><?php echo esc_html($t->title); ?></option>
 									<?php endforeach; ?>
@@ -3009,7 +3008,7 @@ class WP_ClanWars {
 									</div>
 
 									<div class="team2-inline">
-										<p><label for="new_team_title"><?php _e('or just type opponent team here:', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
+										<p><label for="new_team_title"><?php _e('or quickly add new opponent:', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
 										<p class="clearfix">
 										<input name="new_team_title" id="new_team_title" type="text" value="" maxlength="200" autocomplete="off" aria-required="true" />
 										<?php $this->html_country_select_helper('name=new_team_country&show_popular=1&id=country'); ?>
@@ -3017,7 +3016,7 @@ class WP_ClanWars {
 									</div>
 									<div id="mapsite"></div>
 									<div class="add-map" id="wp-cw-addmap">
-										<input type="button" class="button button-secondary" value="<?php _e('Add map', WP_CLANWARS_TEXTDOMAIN); ?>" />
+										<button class="button button-secondary"><span class="dashicons dashicons-plus"></span> <?php _e('Add map', WP_CLANWARS_TEXTDOMAIN); ?></button>
 									</div>
 
 								</div>
