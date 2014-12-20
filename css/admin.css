@@ -172,7 +172,6 @@ html[xmlns] .clearfix {
 
 .linkbar {
     display: block;
-    font-family: Helvetica, Arial;
     font-size: 12px;
     font-style: normal;
     font-weight: normal;
@@ -186,18 +185,33 @@ html[xmlns] .clearfix {
 .linkbar li {
     list-style: none;
     float: left;
-    margin-left: 10px;
-    line-height: 35px;
-    padding-left: 20px;
+    margin: 0 0 0 15px;
+    padding: 0;
 }
 
-.linkbar li.post-link {
-    background: transparent url(../images/icon-link16.png) 0% 50% no-repeat;
+.linkbar li a {
+    display: block;
+    text-decoration: none;
 }
 
-.linkbar li.post-comments {
-    background: transparent url(../images/icon-comments16.png) 0% 50% no-repeat;
+.linkbar li a:before {
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    font: normal 20px/1 'dashicons';
+    vertical-align: middle;
+    margin-right: 2px;
 }
+
+.linkbar li.view-post a:before {
+    content: "\f177";
+}
+.linkbar li.edit-post a:before {
+    content: "\f464";
+}
+.linkbar li.post-comments a:before {
+    content: "\f101";
+}
+
 
 /* WordPress 3 fixes */
 body[class*='version-3-'] .wp-cw-settings .form-field input[type=checkbox] { width: 16px; }
