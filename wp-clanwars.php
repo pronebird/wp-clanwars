@@ -2534,179 +2534,79 @@ class WP_ClanWars {
 					 implode(' ', array($where_query, $order_query, $limit_query)));
 		}
 
-		//echo '<pre>'. $wpdb->last_query.'</pre>';
-
 		return $rslt;
 	}
 
 	function update_match_post($match_id) {
-
 		global $wpdb;
 
+		// Get match by ID
+		$matches = $this->get_match(array(
+			'id' => $match_id,
+			'sum_tickets' => true
+		));
+
+		if(empty($matches)) {
+			return false;
+		}
+
+		$match = $matches[0];
+
+		// Get post category
 		$post_category = get_option(WP_CLANWARS_CATEGORY, -1);
 
+		// New post data
 		$postarr = array(
 			'post_status' => 'publish',
-			'post_content' => '',
 			'post_excerpt' => '',
 			'post_title' => ''
 		);
 
-		if($post_category != -1)
-			$postarr['post_category'] = array((int)$post_category);
-		
-		$matches = $this->get_match(array('id' => $match_id, 'sum_tickets' => true));
-
-		if(!empty($matches)) {
-
-			$m = $matches[0];
-
-			$post = get_post($m->post_id);
-
-			if(!is_null($post)) {
-				$postarr['ID'] = $post->ID;
-			}
-
-			$post_title = $m->title;
-
-			if(empty($post_title)) {
-
-				$t1 = $this->get_team(array('id' => $team1));
-				$t2 = $this->get_team(array('id' => $team2));
-
-				if(!empty($t1) && !empty($t2))
-					$post_title = sprintf(__('%s vs %s', WP_CLANWARS_TEXTDOMAIN), $t1->title, $t2->title);
-				else
-					$post_title = __('Regular match', WP_CLANWARS_TEXTDOMAIN);
-			}
-
-			$post_excerpt = '';
-			$post_content = '<div class="wp-clanwars-page">';
-
-			$post_content .= '<p class="teams">' . 
-					'<span class="team1">' . $this->get_country_flag($m->team1_country, true) . ' ' . $m->team1_title . '</span>' .
-					'<span class="team2">' . $m->team2_title . ' ' . $this->get_country_flag($m->team2_country, true) . '</span>' .
-					'</p>';
-			
-			$post_excerpt .= sprintf(_x('%s vs %s', 'match_excerpt', WP_CLANWARS_TEXTDOMAIN), $m->team1_title, $m->team2_title) . "\n";
-
-			$r = $this->get_rounds($m->id);
-			$rounds = array();
-
-			// group rounds by map
-			foreach($r as $v) {
-				
-				if(!isset($rounds[$v->group_n]))
-					$rounds[$v->group_n] = array();
-
-				$rounds[$v->group_n][] = $v;
-			}
-
-			$post_content .= '<div class="maplist clearfix">';
-			// render maps/rounds
-			foreach($rounds as $map_group) {
-
-				$first = $map_group[0];
-				$image = wp_get_attachment_image_src($first->screenshot);
-
-				$item_class = 'item';
-
-				if(sizeof($rounds) == 1) {
-					$item_class .= ' aligncenter';
-				}
-
-				$post_content .= '<div class="' . $item_class . '">';
-
-				$post_content .= '<div class="map-screenshot">';
-				$post_content .= '<div class="map-title">' . esc_html($first->title) . '</div>';
-
-				if(!empty($image))
-					$post_content .= '<div><img src="' . $image[0] . '" alt="' . esc_attr($first->title) . '" style="width: ' . $image[1] . 'px; height: ' . $image[2] . 'px;" /></div>';
-
-				$post_content .= '</div>';
-
-				foreach($map_group as $round) {
-
-					$t1 = $round->tickets1;
-					$t2 = $round->tickets2;
-					$round_class = $t1 < $t2 ? 'loss' : ($t1 > $t2 ? 'win' : 'draw');
-
-					$post_content .= '<div class="round">';
-					$post_content .= '<span class="scores ' . $round_class . '">' . sprintf(__('%d:%d'), $t1, $t2) . '</span>';
-					$post_content .= '</div>';
-					
-				}
-
-				$post_content .= '</div>';
-
-			}
-
-			$post_content .= '</div>'; // maplist
-
-			$t1 = $m->team1_tickets;
-			$t2 = $m->team2_tickets;
-			$round_class = $t1 < $t2 ? 'loss' : ($t1 > $t2 ? 'win' : 'draw');
-
-			$score_text = sprintf(__('%d:%d'), $t1, $t2);
-			$post_content .= '<div class="summary"><span class="scores ' . $round_class . '">' . $score_text . '</span></div>';
-			$post_excerpt .= $score_text . "\n";
-
-			// match description
-			$sn = $m->match_status;
-			$date = mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $m->date);
-
-			$post_content .= '<h3>' . __('Match description', WP_CLANWARS_TEXTDOMAIN) . '</h3>';
-
-			$post_content .= '<ul class="match-props">';
-			$post_content .= '<li class="date">' . $date . '</li>';
-
-			if(isset($this->match_status[$sn]))
-				$post_content .= '<li class="status type-' . $sn . '">' . $this->match_status[$sn] . '</li>';
-
-			if(!empty($m->external_url))
-			{
-				$post_content .= '<li class="external_url">';
-				$post_content .= '<a href="' . esc_attr($m->external_url) . '" target="_blank">' . esc_url($m->external_url) . '</a>';
-				$post_content .= '</li>';
-			}
-
-			$post_content .= '</ul>'; // match-props
-
-			if(!empty($m->description))
-			{
-				$description = nl2br(esc_html($m->description));
-				$description = make_clickable($description);
-				$description = wptexturize($description);
-				$description = convert_smilies($description);
-
-				// add target=_blank to all links
-				$description = preg_replace('#(<a.*?)(>.*?</a>)#i', '$1 target="_blank"$2', $description);
-
-				$post_excerpt .= $description . "\n";
-				$post_content .= '<p class="description">' . $description . '</p>';
-			}
-
-			$post_content .= '</div>'; // page
-
-			$postarr['post_title'] = $post_title;
-			$postarr['post_content'] = '[wp-clanwars match_id="' . $m->id . '"]';
-			$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
-
-			$new_post_ID = 0;
-
-			if(isset($postarr['ID']))
-				$new_post_ID = wp_update_post($postarr);
-			else
-				$new_post_ID = wp_insert_post($postarr);
-
-			$result = $wpdb->update($this->tables['matches'], array('post_id' => $new_post_ID), array('id' => $match_id), array('%d'), array('%d'));
-
-			return $new_post_ID;
-
+		if($post_category !== -1) {
+			$postarr['post_category'] = array( (int)$post_category );
 		}
 
-		return false;
+		$post = get_post($match->post_id);
 
+		if(!is_null($post)) {
+			$postarr['ID'] = $post->ID;
+		}
+
+		$post_title = $match->title;
+		if(empty($post_title)) {
+			$post_title = sprintf(__('%s vs. %s', WP_CLANWARS_TEXTDOMAIN), $match->team1_title, $match->team2_title);
+		}
+
+		$post_excerpt = sprintf(_x('%s vs. %s', 'match_excerpt', WP_CLANWARS_TEXTDOMAIN), $match->team1_title, $match->team2_title) . "\n";
+		$post_excerpt .= sprintf(__('%d:%d'), $match->team1_tickets, $match->team2_tickets) . "\n";
+
+		if(!empty($match->description)) {
+			$description = nl2br(esc_html($match->description));
+			$description = make_clickable($description);
+			$description = wptexturize($description);
+			$description = convert_smilies($description);
+
+			// add target=_blank to all links
+			$description = preg_replace('#(<a.*?)(>.*?</a>)#i', '$1 target="_blank"$2', $description);
+
+			$post_excerpt .= $description . "\n";
+		}
+
+		$postarr['post_title'] = $post_title;
+		$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
+
+		if(!isset($postarr['ID'])) {
+			// generate shortcode only when creating post
+			$postarr['post_content'] = '[wp-clanwars match_id="' . $match->id . '"]';
+
+			$new_post_ID = wp_insert_post($postarr);
+		} else {
+			$new_post_ID = wp_update_post($postarr);
+		}
+
+		$result = $wpdb->update($this->tables['matches'], array('post_id' => $new_post_ID), array('id' => $match_id), array('%d'), array('%d'));
+
+		return $new_post_ID;
 	}
 
 	function add_match($p)
@@ -2989,6 +2889,8 @@ class WP_ClanWars {
 			}
 		}
 
+		$num_comments = get_comments_number($post_id);
+
 		$games = $this->get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
 		$teams = $this->get_team('id=all&orderby=title&order=asc');
 
@@ -3022,8 +2924,9 @@ class WP_ClanWars {
 				<h2><?php echo $page_title; ?>
 				<?php if($post_id) : ?>
 				<ul class="linkbar">
-					<li class="post-link"><a href="<?php echo esc_attr(get_permalink($post_id)); ?>" target="_blank" class="icon-link"><?php echo $post_id; ?></a></li>
-					<li class="post-comments"><a href="<?php echo get_comments_link($post_id); ?>" target="_blank"><?php echo get_comments_number($post_id); ?></a></li>
+					<li class="edit-post"><a href="<?php echo esc_attr(admin_url('post.php?post=' . $post_id . '&action=edit')); ?>" target="_blank"><?php _e('Edit post', WP_CLANWARS_TEXTDOMAIN); ?></a></li>
+					<li class="view-post"><a href="<?php echo esc_attr(get_permalink($post_id)); ?>" target="_blank"><?php _e('View post', WP_CLANWARS_TEXTDOMAIN); ?></a></li>
+					<li class="post-comments"><a href="<?php echo get_comments_link($post_id); ?>" target="_blank"><?php printf( _n( '%d Comment', '%d Comments', $num_comments, WP_CLANWARS_TEXTDOMAIN), $num_comments ); ?></a></li>
 				</ul>
 				<?php endif; ?>
 				</h2>
@@ -3329,8 +3232,8 @@ class WP_ClanWars {
 			return __("<p>Match with id = $match_id</p>", WP_CLANWARS_TEXTDOMAIN);
 		}
 
-		$m = $matches[0];
-		$r = $this->get_rounds($m->id);
+		$match = $matches[0];
+		$r = $this->get_rounds($match->id);
 		$rounds = array();
 
 		// group rounds by map
@@ -3341,12 +3244,12 @@ class WP_ClanWars {
 			array_push($rounds[$v->group_n], $v);
 		}
 
-		$match_status_text = $this->match_status[$m->match_status];
-		$team1_flag = $this->get_country_flag($m->team1_country, true);
-		$team2_flag = $this->get_country_flag($m->team2_country, true);
+		$match_status_text = $this->match_status[$match->match_status];
+		$team1_flag = $this->get_country_flag($match->team1_country, true);
+		$team2_flag = $this->get_country_flag($match->team2_country, true);
 
 		return \WP_Clanwars\View::render( 'match_view', compact(
-			'm', 'rounds', 'match_status_text', 'team1_flag', 'team2_flag')
+			'match', 'rounds', 'match_status_text', 'team1_flag', 'team2_flag')
 		);
 	}
 

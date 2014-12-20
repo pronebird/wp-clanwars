@@ -1,8 +1,8 @@
 <div class="wp-clanwars-page-v2">
 <p class="teams">
-	<span class="team1"><?php echo $team1_flag; ?> <?php esc_html_e($m->team1_title); ?></span>
+	<span class="team1"><?php echo $team1_flag; ?> <?php esc_html_e($match->team1_title); ?></span>
 	<span class="vs"><?php _e('vs.', WP_CLANWARS_TEXTDOMAIN); ?></span>
-	<span class="team2"><?php esc_html_e($m->team2_title); ?> <?php echo $team2_flag; ?></span>
+	<span class="team2"><?php esc_html_e($match->team2_title); ?> <?php echo $team2_flag; ?></span>
 </p>
 <div class="maplist clearfix">
 <?php
@@ -39,8 +39,8 @@ foreach($rounds as $map_group) :
 </div> <!-- .maplist -->
 
 <?php
-	$t1 = $m->team1_tickets;
-	$t2 = $m->team2_tickets;
+	$t1 = $match->team1_tickets;
+	$t2 = $match->team2_tickets;
 	$round_class = $t1 < $t2 ? 'loss' : ($t1 > $t2 ? 'win' : 'draw');
 
 	$score_text = sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2);
@@ -51,22 +51,22 @@ foreach($rounds as $map_group) :
 </div>
 
 <ul class="match-props">
-	<li class="date"><?php echo mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $m->date); ?></li>
+	<li class="date"><?php echo mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $match->date); ?></li>
 
 <?php if($match_status_text) : ?>
-	<li class="status type-<?php echo $m->match_status; ?>"><?php esc_html_e($match_status_text);?></li>
+	<li class="status type-<?php echo $match->match_status; ?>"><?php esc_html_e($match_status_text);?></li>
 <?php endif; ?>
 
-<?php if(!empty($m->external_url)) : ?>
+<?php if(!empty($match->external_url)) : ?>
 	<li class="external_url">
-		<a href="<?php esc_attr_e($m->external_url); ?>" target="_blank"><?php echo esc_url($m->external_url); ?></a>
+		<a href="<?php esc_attr_e($match->external_url); ?>" target="_blank"><?php echo esc_url($match->external_url); ?></a>
 	</li>
 <?php endif; ?>
 
 </ul> <!-- .match-props -->
 
-<?php if(!empty($m->description)) : 
-	$description = nl2br(esc_html($m->description));
+<?php if(!empty($match->description)) : 
+	$description = nl2br(esc_html($match->description));
 	$description = make_clickable($description);
 	$description = wptexturize($description);
 	$description = convert_smilies($description);
