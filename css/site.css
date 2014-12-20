@@ -142,11 +142,6 @@ html[xmlns] .clearfix {
 	font-weight: normal;
 	letter-spacing: 0.5px;
 	margin-top: 5px;
-	/*-moz-box-shadow: 1px 1px 0px #444;
-	-webkit-box-shadow: 1px 1px 0px #444;
-	-khtml-box-shadow: 1px 1px 0px #444;
-	box-shadow: 0 1px 1px #000;*/
-	text-shadow: 0 1px 0 #222;
 }
 
 .wp-clanwars-page-v2 .scores {
@@ -206,7 +201,6 @@ html[xmlns] .clearfix {
 	list-style: none;
 	padding: 0;
 	margin: 0 0 0 3px;
-	text-shadow: 0 1px white;
 }
 
 .wp-clanwars-filter li:first-child {
@@ -302,7 +296,6 @@ html[xmlns] .clearfix {
 	font-size: 1em;
 
 	color: #fff;
-	text-shadow: 0 0px 1px #000;
 
 	text-align: center;
 	background: rgba(0, 0, 0, 0.5);
