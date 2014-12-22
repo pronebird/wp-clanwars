@@ -3736,87 +3736,50 @@ class WP_ClanWars {
 		return false;
 	}
 
+	// Match game by title and or abbreviation
+	// @param $title a game title
+	// @param $abbr a game abbreviation (optional)
+	// @param $objects a list of all available games (optional)
+	// @return bool a game object matching $title or $abbr, otherwise false
 	function is_game_installed($title, $abbr = '', $objects = false) {
-
-		if(!is_array($objects))
+		if(!is_array($objects)) {
 			$objects = $this->get_game('');
+		}
 
 		foreach($objects as $p) {
-			if(preg_match('#' . preg_quote($abbr, '#') . '#i', $p->abbr))
+			if(!empty($abbr) && preg_match('#' . preg_quote($abbr, '#') . '#i', $p->abbr)) {
 				return $p;
+			}
 
-			if(preg_match('#' . preg_quote($title, '#') . '#i', $p->title))
+			if(!empty($title) && preg_match('#' . preg_quote($title, '#') . '#i', $p->title)) {
 				return $p;
+			}
 		}
 
 		return false;
 	}
 
+	// Import page hook
 	function on_import() {
-
 		$import_list = $this->get_available_games();
 		$installed_games = $this->get_game('');
 
-		if(isset($_GET['upload']))
+		// mark installed games
+		foreach($import_list as $game) {
+			$game->is_installed = ($this->is_game_installed($game->title, $game->abbr, $installed_games) !== false);
+		}
+
+		if(isset($_GET['upload'])) {
 			$this->add_notice(__('An upload error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 'error');
-		
-		if(isset($_GET['import']))
+		}
+
+		if(isset($_GET['import'])) {
 			$this->add_notice($_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), $_GET['import'] === 'success' ? 'updated' : 'error');
+		}
 
 		echo $this->print_notices();
-		
-		?>
-		<div class="wrap">
-			<div id="icon-tools" class="icon32"><br></div>
-			<h2><?php _e('Import games', WP_CLANWARS_TEXTDOMAIN); ?></h2>
-			<p><?php _e('Import may take some time. Please do not refresh browser when in progress.', WP_CLANWARS_TEXTDOMAIN); ?></p>
 
-			<form id="wp-cw-import" method="post" action="admin-post.php" enctype="multipart/form-data">
-
-				<input type="hidden" name="action" value="wp-clanwars-import" />
-				<?php wp_nonce_field('wp-clanwars-import'); ?>
-
-				<?php if(!empty($import_list)) : ?>
-
-				<fieldset>
-					<p><label for="available"><input type="radio" name="import" id="available" value="available" checked="checked" /> <?php _e('Import available games', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
-
-					<ul class="available-games">
-
-					<?php foreach($import_list as $index => $game) :
-
-						$installed = $this->is_game_installed($game->title, $game->abbr, $installed_games);
-
-					?>
-
-						<li>
-							<label for="game-<?php echo $index; ?>">
-								<input type="checkbox" name="items[]" id="game-<?php echo $index; ?>" value="<?php echo $index; ?>" /> <img src="<?php echo esc_attr(trailingslashit(WP_CLANWARS_IMPORTURL) . $game->icon); ?>" alt="<?php echo esc_attr($game->title); ?>" /> <?php echo esc_html($game->title); ?>
-								<?php if($installed !== false) : ?>
-								<span class="description"><?php _e('installed', WP_CLANWARS_TEXTDOMAIN); ?></span>
-								<?php endif; ?>
-							</label>
-						</li>
-
-					<?php endforeach; ?>
-
-					</ul>
-				</fieldset>
-
-				<?php endif; ?>
-
-				<fieldset>
-					<p><label for="upload"><input type="radio" name="import" id="upload" value="upload" /> <?php _e('Upload package (ZIP file)', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
-					<p><input type="file" name="userfile" /></p>
-				</fieldset>
-
-				<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Import', WP_CLANWARS_TEXTDOMAIN); ?>" /></p>
-
-			</form>
-
-		</div>
-		<?php
-
+		echo \WP_Clanwars\View::render('import', compact('import_list'));
 	}
 
 }
