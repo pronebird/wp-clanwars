@@ -34,7 +34,7 @@
 
 		</table>
 
-		<p class="submit"><input type="submit" class="button-primary" name="submit" value="<?php echo $page_submit; ?>" /></p>
+		<p class="submit"><input type="submit" class="button button-primary" name="submit" value="<?php echo $page_submit; ?>" /></p>
 
 	</form>
 

@@ -123,16 +123,9 @@ jQuery(document).ready(function ($) {
 			</td>
 		</tr>
 
-		<tr>
-			<th></th>
-			<td>
-				<p class="submit">
-					<input type="submit" class="button-primary" id="wp-cw-submit" name="submit" value="<?php esc_attr_e($page_submit); ?>" />
-				</p>
-			</td>
-		</tr>
-
 		</table>
+
+		<p class="submit"><input type="submit" class="button button-primary" id="wp-cw-submit" name="submit" value="<?php esc_attr_e($page_submit); ?>" /></p>
 
 	</form>
 
