@@ -10,7 +10,7 @@
 	<?php endif; ?>
 
 	<!-- Basic Settings -->
-	<form method="post" action="admin-post.php">
+	<form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
 		<?php wp_nonce_field('wp-clanwars-settings'); ?>
 		<input type="hidden" name="action" value="wp-clanwars-settings" />
 
@@ -39,7 +39,7 @@
 		<div id="col-right">
 			<div class="col-wrap">
 
-			<form method="post" action="admin-post.php">
+			<form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
 				<?php wp_nonce_field('wp-clanwars-deleteacl'); ?>
 				<input type="hidden" name="action" value="wp-clanwars-deleteacl" />
 
@@ -136,7 +136,7 @@
 
 			<h3><?php _e('Add New User', WP_CLANWARS_TEXTDOMAIN); ?></h3>
 
-			<form class="form-wrap" method="post" action="admin-post.php">
+			<form class="form-wrap" method="post" action="<?php echo admin_url('admin-post.php'); ?>">
 				<?php wp_nonce_field('wp-clanwars-acl'); ?>
 				<input type="hidden" name="action" value="wp-clanwars-acl" />
 
