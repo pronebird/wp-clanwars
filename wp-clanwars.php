@@ -3545,10 +3545,14 @@ class WP_ClanWars {
 
 		check_admin_referer('wp-clanwars-settings');
 
-		if(isset($_POST['category']))
+		if(isset($_POST['category'])) {
 			update_option(WP_CLANWARS_CATEGORY, (int)$_POST['category']);
+		}
 
-		update_option(WP_CLANWARS_DEFAULTCSS, isset($_POST['enable_default_styles']));
+		// keep default styles always enabled on jumpstarter
+		$enable_default_styles = isset($_POST['enable_default_styles']) || $this->is_jumpstarter();
+
+		update_option(WP_CLANWARS_DEFAULTCSS, $enable_default_styles);
 
 		$url = add_query_arg('saved', 'true', $_POST['_wp_http_referer']);
 
@@ -3658,7 +3662,6 @@ class WP_ClanWars {
 	}
 
 	function on_settings() {
-
 		$table_columns = array(
 			'cb' => '<input type="checkbox" />',
 			'user_login' => __('User Login', WP_CLANWARS_TEXTDOMAIN),
@@ -3674,7 +3677,11 @@ class WP_ClanWars {
 			'selected' => get_option(WP_CLANWARS_CATEGORY, -1),
 			'echo' => false
 		));
+
 		$enable_default_styles = get_option(WP_CLANWARS_DEFAULTCSS);
+
+		// hide default styles checkbox on jumpstarter
+		$hide_default_styles = $this->is_jumpstarter();
 
 		$games = $this->get_game('id=all');
 		$acl = $this->acl_get();
@@ -3710,7 +3717,7 @@ class WP_ClanWars {
 		}
 
 		$context = compact('table_columns', 'games', 'acl_keys', 'user_acl_info',
-							'categories_dropdown', 'enable_default_styles');
+							'categories_dropdown', 'enable_default_styles', 'hide_default_styles');
 		$context += array(
 			'print_table_header' => function () {
 				call_user_func_array(array($this, 'print_table_header'), func_get_args());
