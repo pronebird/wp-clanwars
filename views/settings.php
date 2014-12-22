@@ -30,7 +30,7 @@
 		 </table>
 
 		<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e('Save Changes', WP_CLANWARS_TEXTDOMAIN); ?>" />
+			<input type="submit" class="button button-primary" value="<?php _e('Save Changes', WP_CLANWARS_TEXTDOMAIN); ?>" />
 		</p>
 
 	</form>
@@ -53,7 +53,7 @@
 						<option value="" selected="selected"><?php _e('Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
 						<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
 					</select>
-					<input value="<?php _e('Apply'); ?>" class="button-secondary action" type="submit" />
+					<input value="<?php _e('Apply'); ?>" class="button button-secondary action" type="submit" />
 					</div>
 					<br class="clear" />
 				</div>
@@ -123,7 +123,7 @@
 						<option value="" selected="selected"><?php _e('Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
 						<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
 					</select>
-					<input value="<?php _e('Apply'); ?>" class="button-secondary action" type="submit" />
+					<input value="<?php _e('Apply'); ?>" class="button button-secondary action" type="submit" />
 					</div>
 					<br class="clear" />
 				</div>
@@ -172,7 +172,7 @@
 					</ul>
 				</div>
 
-				<input type="submit" class="button-primary" value="<?php _e('Add User', WP_CLANWARS_TEXTDOMAIN); ?>" />
+				<input type="submit" class="button button-primary" value="<?php _e('Add User', WP_CLANWARS_TEXTDOMAIN); ?>" />
 			</form>
 
 			</div><!-- .col-wrap -->

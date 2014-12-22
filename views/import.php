@@ -38,7 +38,7 @@
 			<p><input type="file" name="userfile" /></p>
 		</fieldset>
 
-		<p class="submit"><input type="submit" class="button-primary" value="<?php _e('Import', WP_CLANWARS_TEXTDOMAIN); ?>" /></p>
+		<p class="submit"><input type="submit" class="button button-primary" value="<?php _e('Import', WP_CLANWARS_TEXTDOMAIN); ?>" /></p>
 
 	</form>
 
