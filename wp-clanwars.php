@@ -2734,6 +2734,42 @@ class WP_ClanWars {
 		return $wpdb->query('DELETE FROM `' . $this->tables['rounds'] . '` WHERE match_id IN(' . implode(',', $match_id) . ')');
 	}
 
+	// Get available games bundled with plugin
+	// This function simply reads and decodes import/import.json
+	// @return an array of avaialable games on success, otherwise false
+	function get_available_games() {
+		$content = file_get_contents(trailingslashit(WP_CLANWARS_IMPORTPATH) . 'import.json');
+
+		if($content !== false) {
+			return json_decode($content);
+		}
+
+		return false;
+	}
+
+	// Match game by title and or abbreviation
+	// @param $title a game title
+	// @param $abbr a game abbreviation (optional)
+	// @param $objects a list of all available games (optional)
+	// @return bool a game object matching $title or $abbr, otherwise false
+	function is_game_installed($title, $abbr = '', $objects = false) {
+		if(!is_array($objects)) {
+			$objects = $this->get_game('');
+		}
+
+		foreach($objects as $p) {
+			if(!empty($abbr) && preg_match('#' . preg_quote($abbr, '#') . '#i', $p->abbr)) {
+				return $p;
+			}
+
+			if(!empty($title) && preg_match('#' . preg_quote($title, '#') . '#i', $p->title)) {
+				return $p;
+			}
+		}
+
+		return false;
+	}
+
 	function on_add_match() 
 	{
 		return $this->match_editor(__('Add Match', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-matches', __('Add Match', WP_CLANWARS_TEXTDOMAIN));
@@ -3644,6 +3680,7 @@ class WP_ClanWars {
 		wp_redirect($url);
 	}
 
+	// Settings page hook
 	function on_settings() {
 		$table_columns = array(
 			'cb' => '<input type="checkbox" />',
@@ -3708,42 +3745,6 @@ class WP_ClanWars {
 		);
 
 		echo \WP_Clanwars\View::render('settings', $context);
-	}
-
-	// Get available games bundled with plugin
-	// This function simply reads and decodes import/import.json
-	// @return an array of avaialable games on success, otherwise false
-	function get_available_games() {
-		$content = file_get_contents(trailingslashit(WP_CLANWARS_IMPORTPATH) . 'import.json');
-
-		if($content !== false) {
-			return json_decode($content);
-		}
-
-		return false;
-	}
-
-	// Match game by title and or abbreviation
-	// @param $title a game title
-	// @param $abbr a game abbreviation (optional)
-	// @param $objects a list of all available games (optional)
-	// @return bool a game object matching $title or $abbr, otherwise false
-	function is_game_installed($title, $abbr = '', $objects = false) {
-		if(!is_array($objects)) {
-			$objects = $this->get_game('');
-		}
-
-		foreach($objects as $p) {
-			if(!empty($abbr) && preg_match('#' . preg_quote($abbr, '#') . '#i', $p->abbr)) {
-				return $p;
-			}
-
-			if(!empty($title) && preg_match('#' . preg_quote($title, '#') . '#i', $p->title)) {
-				return $p;
-			}
-		}
-
-		return false;
 	}
 
 	// Import page hook
