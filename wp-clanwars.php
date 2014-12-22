@@ -3265,6 +3265,11 @@ class WP_ClanWars {
 		$matches = $this->get_match($condition);
 		$stat = $this->get_match($stat_condition, true);
 
+		// populate games with urls for icons
+		foreach ($matches as $match) {
+			$match->game_icon_url = wp_get_attachment_url($match->game_icon);
+		}
+
 		$page_links = paginate_links( array(
 				'base' => add_query_arg('paged', '%#%'),
 				'format' => '',
@@ -3282,13 +3287,13 @@ class WP_ClanWars {
 		);
 
 		$table_columns = array('cb' => '<input type="checkbox" />',
-					  'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
-					  'game_title' => __('Game', WP_CLANWARS_TEXTDOMAIN),
-					  'date' => __('Date', WP_CLANWARS_TEXTDOMAIN),
-					  'match_status' => __('Match status', WP_CLANWARS_TEXTDOMAIN),
-					  'team1' => __('Team 1', WP_CLANWARS_TEXTDOMAIN),
-					  'team2' => __('Team 2', WP_CLANWARS_TEXTDOMAIN),
-					  'tickets' => __('Tickets', WP_CLANWARS_TEXTDOMAIN));
+				'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
+				'game_title' => __('Game', WP_CLANWARS_TEXTDOMAIN),
+				'date' => __('Date', WP_CLANWARS_TEXTDOMAIN),
+				'match_status' => __('Match status', WP_CLANWARS_TEXTDOMAIN),
+				'team1' => __('Team 1', WP_CLANWARS_TEXTDOMAIN),
+				'team2' => __('Team 2', WP_CLANWARS_TEXTDOMAIN),
+				'tickets' => __('Tickets', WP_CLANWARS_TEXTDOMAIN));
 
 		if(isset($_GET['add'])) {
 			$this->add_notice(__('Match is successfully added.', WP_CLANWARS_TEXTDOMAIN), 'updated');
@@ -3301,140 +3306,19 @@ class WP_ClanWars {
 
 		$this->print_notices();
 
-	?>
-		<div class="wrap wp-cw-matches">
-			<h2><?php _e('Matches', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&act=add'); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+		$match_statuses = $this->match_status;
 
-			<div id="poststuff" class="metabox-holder">
+		$context = compact('table_columns', 'page_links', 'page_links_text', 'matches', 'match_statuses');
+		$context += array(
+			'print_table_header' => function () {
+				call_user_func_array(array($this, 'print_table_header'), func_get_args());
+			},
+			'get_country_flag' => function () {
+				return call_user_func_array(array($this, 'get_country_flag'), func_get_args());
+			}
+		);
 
-				<div id="post-body">
-					<div id="post-body-content" class="has-sidebar-content">
-
-					<form id="wp-clanwars-manageform" action="admin-post.php" method="post">
-						<?php wp_nonce_field('wp-clanwars-deletematches'); ?>
-
-						<input type="hidden" name="action" value="wp-clanwars-deletematches" />
-
-						<div class="tablenav">
-
-							<div class="alignleft actions">
-								<select name="do_action">
-									<option value="" selected="selected"><?php _e('Bulk Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
-									<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
-								</select>
-								<input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction" id="wp-clanwars-doaction" class="button-secondary action" />
-							</div>
-
-							<div class="alignright actions" style="display: none;">
-								<label class="screen-reader-text" for="games-search-input"><?php _e('Search Teams:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								<input id="games-search-input" name="s" value="<?php if(isset($search_title)) esc_attr_e($search_title); ?>" type="text" />
-
-								<input id="games-search-submit" value="<?php _e('Search Games', WP_CLANWARS_TEXTDOMAIN); ?>" class="button" type="button" />
-							</div>
-
-						<br class="clear" />
-
-						</div>
-
-						<div class="clear"></div>
-
-						<table class="widefat fixed" cellspacing="0">
-						<thead>
-						<tr>
-						<?php $this->print_table_header($table_columns); ?>
-						</tr>
-						</thead>
-
-						<tfoot>
-						<tr>
-						<?php $this->print_table_header($table_columns, false); ?>
-						</tr>
-						</tfoot>
-
-						<tbody>
-
-						<?php foreach($matches as $i => $item) : ?>
-
-							<?php
-							// if the match has no title so set default one
-							if(empty($item->title))
-								$item->title = __('Regular match', WP_CLANWARS_TEXTDOMAIN);
-							?>
-
-							<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
-								<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $item->id; ?>" /></th>
-								<td class="title column-title">
-									<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Match', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"><?php echo esc_html($item->title); ?></a><br />
-									<div class="row-actions">
-										<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&amp;act=edit&amp;id=' . $item->id); ?>"><?php _e('Edit', WP_CLANWARS_TEXTDOMAIN); ?></a></span> | <span class="delete">
-												<a href="<?php echo wp_nonce_url('admin-post.php?action=wp-clanwars-deletematches&amp;do_action=delete&amp;delete[]=' . $item->id . '&amp;_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-deletematches'); ?>"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></a></span>
-									</div>
-								</td>
-								<td class="game_title column-game_title">
-									<?php
-									$game_icon = wp_get_attachment_url($item->game_icon);
-									if($game_icon !== false) :
-									?>
-									<img src="<?php echo $game_icon; ?>" alt="<?php echo esc_attr($item->game_title); ?>" class="icon" />
-									<?php endif; ?>
-
-									<?php echo esc_html($item->game_title); ?>
-								</td>
-								<td class="date column-date">
-									<?php echo date('d.m.Y H:i', strtotime($item->date)); ?>
-								</td>
-								<td class="match_status column-match_status">
-									<?php
-									$n = $item->match_status;
-									
-									if(isset($this->match_status[$n]))
-										echo $this->match_status[$n];
-									?>
-								</td>
-								<td class="team1 column-team1">
-									<?php echo $this->get_country_flag($item->team1_country, true); ?>
-									<?php echo esc_html($item->team1_title); ?>
-								</td>
-								<td class="team2 column-team2">
-									<?php echo $this->get_country_flag($item->team2_country, true); ?>
-									<?php echo esc_html($item->team2_title); ?>
-								</td>
-								<td class="tickets column-tickets">
-									<?php echo sprintf('%s:%s', $item->team1_tickets, $item->team2_tickets); ?>
-								</td>
-							</tr>
-
-						<?php endforeach; ?>
-
-						</tbody>
-
-						</table>
-
-						<div class="tablenav">
-
-							<div class="tablenav-pages"><?php echo $page_links_text; ?></div>
-
-							<div class="alignleft actions">
-							<select name="do_action2">
-							<option value="" selected="selected"><?php _e('Bulk Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
-							<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
-							</select>
-							<input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction2" id="wp-clanwars-doaction2" class="button-secondary action" />
-							</div>
-
-							<br class="clear" />
-
-						</div>
-
-					</form>
-
-					</div>
-				</div>
-				<br class="clear"/>
-
-			</div>
-		</div>
-	<?php
+		echo \WP_Clanwars\View::render('match_table', $context);
 	}
 
 	function on_admin_post_settings() {
