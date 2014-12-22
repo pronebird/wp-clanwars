@@ -3710,6 +3710,9 @@ class WP_ClanWars {
 		echo \WP_Clanwars\View::render('settings', $context);
 	}
 
+	// Get available games bundled with plugin
+	// This function simply reads and decodes import/import.json
+	// @return an array of avaialable games on success, otherwise false
 	function get_available_games() {
 		$content = file_get_contents(trailingslashit(WP_CLANWARS_IMPORTPATH) . 'import.json');
 
