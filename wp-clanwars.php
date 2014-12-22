@@ -3659,217 +3659,65 @@ class WP_ClanWars {
 
 	function on_settings() {
 
-		$table_columns = array('cb' => '<input type="checkbox" />',
-					  'user_login' => __('User Login', WP_CLANWARS_TEXTDOMAIN),
-					  'user_permissions' => __('Permissions', WP_CLANWARS_TEXTDOMAIN)
-				);
+		$table_columns = array(
+			'cb' => '<input type="checkbox" />',
+			'user_login' => __('User Login', WP_CLANWARS_TEXTDOMAIN),
+			'user_permissions' => __('Permissions', WP_CLANWARS_TEXTDOMAIN)
+		);
+
+		$categories_dropdown = wp_dropdown_categories(array(
+			'name' => 'category',
+			'hierarchical' => true,
+			'show_option_none' => __('None'),
+			'hide_empty' => 0,
+			'hide_if_empty' => 0,
+			'selected' => get_option(WP_CLANWARS_CATEGORY, -1),
+			'echo' => false
+		));
+		$enable_default_styles = get_option(WP_CLANWARS_DEFAULTCSS);
 
 		$games = $this->get_game('id=all');
+		$acl = $this->acl_get();
+		$acl_keys = $this->acl_keys;
 
 		$obj = new stdClass();
 		$obj->id = 0;
 		$obj->title = __('All', WP_CLANWARS_TEXTDOMAIN);
 		$obj->abbr = __('All');
 		$obj->icon = 0;
-		
+
 		array_unshift($games, $obj);
 
-	?>
-	<div class="wrap wp-cw-settings">
+		$user_acl_info = array();
 
-		<h2><?php _e('Settings', WP_CLANWARS_TEXTDOMAIN); ?></h2>
+		foreach($acl as $user_id => $user_acl) {
+			$user = get_userdata($user_id);
+			$allowed_games = $this->acl_user_can('which_games', false, $user_id);
+			$user_games = $this->get_game(array('id' => $allowed_games, 'orderby' => 'title', 'order' => 'asc'));
 
-		<?php if(isset($_GET['saved'])) : ?>
-		<div class="updated fade"><p><?php _e('Settings saved.', WP_CLANWARS_TEXTDOMAIN); ?></p></div>
-		<?php endif; ?>
+			// populate games with urls for icons
+			foreach ($user_games as $game) {
+				$game->icon_url = wp_get_attachment_url($game->icon);
+			}
 
-		<form method="post" action="admin-post.php">
-			<?php wp_nonce_field('wp-clanwars-settings'); ?>
-			<input type="hidden" name="action" value="wp-clanwars-settings" />
+			$item = new stdClass();
+			$item->user = $user;
+			$item->user_acl = $user_acl;
+			$item->user_games = $user_games;
+			$item->allowed_games = $allowed_games;
 
-			 <table class="form-table">
-				<tr valign="top">
-					<th scope="row"><?php _e('Matches Category', WP_CLANWARS_TEXTDOMAIN); ?></th>
-					<td>
-						<?php
+			array_push($user_acl_info, $item);
+		}
 
-						$selected = get_option(WP_CLANWARS_CATEGORY, -1);
-						
-						wp_dropdown_categories(
-								array('name' => 'category',
-									  'hierarchical' => true,
-									  'show_option_none' => __('None'),
-									  'hide_empty' => 0,
-									  'hide_if_empty' => 0,
-									  'selected' => $selected)
-								);
+		$context = compact('table_columns', 'games', 'acl_keys', 'user_acl_info',
+							'categories_dropdown', 'enable_default_styles');
+		$context += array(
+			'print_table_header' => function () {
+				call_user_func_array(array($this, 'print_table_header'), func_get_args());
+			}
+		);
 
-						?>
-					</td>
-				</tr>
-				<tr valign="top">
-					<th scope="row"><?php _e('Enable default styles', WP_CLANWARS_TEXTDOMAIN); ?></th>
-					<td><input type="checkbox" name="enable_default_styles" value="true"<?php checked(get_option(WP_CLANWARS_DEFAULTCSS), true); ?> /></td>
-				</tr>
-			 </table>
-
-			<p class="submit">
-				<input class="button-secondary" value="<?php _e('Save Changes', WP_CLANWARS_TEXTDOMAIN); ?>" type="submit" />
-			</p>
-
-		</form>
-
-		<h2><?php _e('User Access', WP_CLANWARS_TEXTDOMAIN); ?></h2>
-
-		<div id="col-container">
-
-			<div id="col-right">
-			<div class="col-wrap">
-
-			<form method="post" action="admin-post.php">
-				<?php wp_nonce_field('wp-clanwars-deleteacl'); ?>
-				<input type="hidden" name="action" value="wp-clanwars-deleteacl" />
-
-				<div class="tablenav">
-					<div class="alignleft actions">
-					<select name="doaction">
-						<option value="" selected="selected"><?php _e('Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
-						<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
-					</select>
-					<input value="<?php _e('Apply'); ?>" class="button-secondary action" type="submit" />
-					</div>
-					<br class="clear" />
-				</div>
-
-
-				<table class="widefat fixed" cellspacing="0">
-					<thead>
-					<tr>
-						<?php $this->print_table_header($table_columns); ?>
-					</tr>
-					</thead>
-
-					<tfoot>
-					<tr>
-						<?php $this->print_table_header($table_columns, false); ?>
-					</tr>
-					</tfoot>
-
-					<tbody>
-						<?php
-
-						$acl = $this->acl_get();
-
-						$keys = array_keys($acl);
-
-						for($i = 0; $i < sizeof($keys); $i++) :
-						
-							$user_id = $keys[$i];
-							$user_acl = $acl[$user_id];
-							$user = get_userdata($user_id);
-
-						?>
-
-						<tr<?php if($i % 2 == 0) : ?> class="alternate"<?php endif; ?>>
-							<th class="check-column"><input type="checkbox" class="check" name="users[]" value="<?php echo $user_id; ?>" /></th>
-							<td><?php echo $user->user_login; ?></td>
-							<td>
-								<?php foreach($user_acl['permissions'] as $name => $is_allowed) : ?>
-								<ul>
-									<li><?php echo $this->acl_keys[$name]; ?>: <?php echo ($is_allowed) ? __('Yes', WP_CLANWARS_TEXTDOMAIN) : __('No', WP_CLANWARS_TEXTDOMAIN); ?></li>
-								</ul>
-								<?php endforeach; ?>
-
-								<?php
-									$allowed_games = $this->acl_user_can('which_games', false, $user_id);
-									$user_games = $this->get_game(array('id' => $allowed_games, 'orderby' => 'title', 'order' => 'asc'));
-
-									if($allowed_games == 'all') {
-										echo __('All', WP_CLANWARS_TEXTDOMAIN);
-									}
-								?>
-								
-									<?php foreach($user_games as $game) :
-										
-										$game_icon = wp_get_attachment_url($game->icon);
-
-										if($game_icon !== false) {
-											echo '<img src="' . $game_icon . '" alt="' . esc_attr($game->title) . '" class="icon" /> ';
-										} else {
-											echo esc_html(empty($game->abbr) ? $game->title : $game->abbr);
-										}
-
-									endforeach; ?>
-							</td>
-						</tr>
-
-						<?php endfor; ?>
-					</tbody>
-				</table>
-
-				<div class="tablenav">
-					<div class="alignleft actions">
-					<select name="doaction2">
-						<option value="" selected="selected"><?php _e('Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
-						<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
-					</select>
-					<input value="<?php _e('Apply'); ?>" class="button-secondary action" type="submit" />
-					</div>
-					<br class="clear" />
-				</div>
-
-			</form>
-
-			</div></div>
-
-			<div id="col-left">
-			<div class="col-wrap">
-
-			<h3><?php _e('Add New User', WP_CLANWARS_TEXTDOMAIN); ?></h3>
-
-			<form class="form-wrap" method="post" action="admin-post.php">
-				<?php wp_nonce_field('wp-clanwars-acl'); ?>
-				<input type="hidden" name="action" value="wp-clanwars-acl" />
-
-				<div class="form-field">
-					<label for="user"><?php _e('User', WP_CLANWARS_TEXTDOMAIN); ?></label>
-					<?php wp_dropdown_users('name=user'); ?>
-				</div>
-
-				<div class="form-field">
-					<label><?php _e('Allow user manage specified games only:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-					<ul>
-						<?php foreach($games as $g) : ?>
-						<li><label for="game_<?php echo $g->id; ?>"><input type="checkbox" name="games[]" id="game_<?php echo $g->id; ?>" value="<?php echo $g->id; ?>" /> <?php echo esc_html($g->title); ?></label></li>
-						<?php endforeach; ?>
-					</ul>
-					
-					<p class="description"><?php _e('User can create new games <strong>only if &ldquo;All&rdquo; option is checked.</strong>', WP_CLANWARS_TEXTDOMAIN); ?></p>
-				</div>
-
-				<div class="form-field">
-					<label><?php _e('Allow user:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-					<ul>
-						<?php foreach($this->acl_keys as $key => $title) : ?>
-						<li><label for="<?php echo esc_attr($key); ?>"><input type="checkbox" class="check" name="permissions[<?php echo esc_attr($key); ?>]" value="1" id="<?php echo esc_attr($key); ?>" /> <?php echo $title; ?></label></li>
-						<?php endforeach; ?>
-						
-					</ul>
-				</div>
-
-				<p class="submit">
-					<input type="submit" class="button-secondary" value="<?php _e('Add User', WP_CLANWARS_TEXTDOMAIN); ?>" />
-				</p>
-			</form>
-
-			</div></div>
-
-		</div>
-	
-	</div>
-		
-	<?php
-
+		echo \WP_Clanwars\View::render('settings', $context);
 	}
 
 	function get_available_games() {
