@@ -1242,23 +1242,6 @@ class WP_ClanWars {
 		return $wpdb->query('DELETE FROM `' . $this->tables['games'] . '` WHERE id IN(' . implode(',', $id) . ')');
 	}
 
-	function _get_file_content($filename) {
-		$content = '';
-
-		$fp = @fopen($filename, 'rb');
-
-		if($fp) {
-			while(!feof($fp))
-				$content .= fread($fp, 128);
-
-			fclose($fp);
-			
-			return $content;
-		}
-
-		return null;
-	}
-
 	function on_admin_post_gamesop()
 	{
 		if(!$this->acl_user_can('manage_games'))
@@ -3728,10 +3711,11 @@ class WP_ClanWars {
 	}
 
 	function get_available_games() {
-		$content = $this->_get_file_content(trailingslashit(WP_CLANWARS_IMPORTPATH) . 'import.json');
+		$content = file_get_contents(trailingslashit(WP_CLANWARS_IMPORTPATH) . 'import.json');
 
-		if($content)
+		if($content !== false) {
 			return json_decode($content);
+		}
 
 		return false;
 	}
