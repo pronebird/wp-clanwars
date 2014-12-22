@@ -2784,9 +2784,9 @@ class WP_ClanWars {
 
 	function on_ajax_get_maps()
 	{
-		if(!$this->acl_user_can('manage_games') &&
-		   !$this->acl_user_can('manage_matches'))
+		if(!$this->acl_user_can('manage_games') && !$this->acl_user_can('manage_matches')) {
 			wp_die( __('Cheatin&#8217; uh?') );
+		}
 
 		$game_id = isset($_POST['game_id']) ? (int)$_POST['game_id'] : 0;
 
@@ -2802,15 +2802,15 @@ class WP_ClanWars {
 			echo json_encode($maps); die();
 		}
 	}
-	
+
 	function match_editor($page_title, $page_action, $page_submit, $id = 0)
 	{
-		$data = array();
+		$match = new stdClass();
 		$current_time = $this->current_time_fixed('timestamp', 0);
-		$post_id = 0;
 
 		$defaults = array('game_id' => 0,
 			'title' => '',
+			'post_id' => 0,
 			'team1' => 0,
 			'team2' => 0,
 			'scores' => array(),
@@ -2824,172 +2824,53 @@ class WP_ClanWars {
 							'hh' => date('H', $current_time),
 							'mn' => date('i', $current_time)
 				));
-		
 
 		if($id > 0) {
-			$t = $this->get_match(array('id' => $id));
+			$result = $this->get_match(array('id' => $id));
+			if(!empty($result)) {
+				$match = $result[0];
+				$match->date = mysql2date('U', $match->date);
+				$match->scores = array();
 
-			if(!empty($t)){
-				$data = (array)$t[0];
-				$data['date'] = mysql2date('U', $data['date']);
-				$data['scores'] = array();
-
-				$post_id = $data['post_id'];
-
-				$rounds = $this->get_rounds($data['id']);
+				$rounds = $this->get_rounds($match->id);
 
 				foreach($rounds as $round) {
-					$data['scores'][$round->group_n]['map_id'] = $round->map_id;
-					$data['scores'][$round->group_n]['round_id'][] = $round->id;
-					$data['scores'][$round->group_n]['team1'][] = $round->tickets1;
-					$data['scores'][$round->group_n]['team2'][] = $round->tickets2;
+					$match->scores[$round->group_n]['map_id'] = $round->map_id;
+					$match->scores[$round->group_n]['round_id'][] = $round->id;
+					$match->scores[$round->group_n]['team1'][] = $round->tickets1;
+					$match->scores[$round->group_n]['team2'][] = $round->tickets2;
 				}
 			}
 		}
 
-		$num_comments = get_comments_number($post_id);
+		$num_comments = isset($match->post_id) ? get_comments_number($match->post_id) : 0;
+		$match_statuses = $this->match_status;
 
 		$games = $this->get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
 		$teams = $this->get_team('id=all&orderby=title&order=asc');
 
-		extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
-		$date = $this->date_array2time_helper($date);
+		$merged_data = $this->extract_args(stripslashes_deep($_POST), $this->extract_args($match, $defaults));
+		$merged_data['date'] = $this->date_array2time_helper($merged_data['date']);
+
+		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'post_id', 'games', 'teams');
+		$context += $merged_data;
+
+		$context += array(
+			'html_date_helper' => function () {
+				call_user_func_array(array($this, 'html_date_helper'), func_get_args());
+			},
+			'html_country_select_helper' => function () {
+				call_user_func_array(array($this, 'html_country_select_helper'), func_get_args());
+			}
+		);
 
 		if(isset($_GET['update'])) {
 			$this->add_notice(__('Match is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
 		}
 
 		$this->print_notices();
-		?>
 
-		<script type="text/javascript">
-		//<![CDATA[
-		jQuery(document).ready(function ($) {
-			var data = <?php echo json_encode($scores); ?>;
-
-			$.each(data, function (i, item) {
-				var m = wpMatchManager.addMap(i, item.map_id);
-				for(var j = 0; j < item.team1.length; j++) {
-					m.addRound(item.team1[j], item.team2[j], item.round_id[j]);
-				};
-			});
-		});
-		//]]>
-		</script>
-
-			<div class="wrap wp-cw-matcheditor">
-				
-				<h2><?php echo $page_title; ?>
-				<?php if($post_id) : ?>
-				<ul class="linkbar">
-					<li class="edit-post"><a href="<?php echo esc_attr(admin_url('post.php?post=' . $post_id . '&action=edit')); ?>" target="_blank"><?php _e('Edit post', WP_CLANWARS_TEXTDOMAIN); ?></a></li>
-					<li class="view-post"><a href="<?php echo esc_attr(get_permalink($post_id)); ?>" target="_blank"><?php _e('View post', WP_CLANWARS_TEXTDOMAIN); ?></a></li>
-					<li class="post-comments"><a href="<?php echo get_comments_link($post_id); ?>" target="_blank"><?php printf( _n( '%d Comment', '%d Comments', $num_comments, WP_CLANWARS_TEXTDOMAIN), $num_comments ); ?></a></li>
-				</ul>
-				<?php endif; ?>
-				</h2>
-
-					<form name="match-editor" id="match-editor" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
-
-						<input type="hidden" name="action" value="<?php echo esc_attr($page_action); ?>" />
-						<input type="hidden" name="id" value="<?php echo esc_attr($id); ?>" />
-
-						<?php wp_nonce_field($page_action); ?>
-
-						<table class="form-table">
-
-						<tr class="form-field form-required">
-							<th scope="row" valign="top"><label for="game_id"><?php _e('Game', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<select id="game_id" name="game_id">
-									<?php foreach($games as $item) : ?>
-									<option value="<?php echo $item->id; ?>"<?php selected($item->id, $game_id); ?>><?php echo esc_html($item->title); ?></option>
-									<?php endforeach; ?>
-								</select>
-							</td>
-						</tr>
-
-						<tr class="form-field form-required">
-							<th scope="row" valign="top"><label for="title"><?php _e('Title', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<input name="title" id="title" type="text" value="<?php echo esc_attr($title); ?>" placeholder="<?php _e('For example: ESL Winter League', WP_CLANWARS_TEXTDOMAIN); ?>" maxlength="200" autocomplete="off" aria-required="true" />
-							</td>
-						</tr>
-
-						<tr class="form-field">
-							<th scope="row" valign="top"><label for="description"><?php _e('Description', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<textarea name="description" id="description" placeholder="<?php _e('Optional: Drop a line or two about match. You can always edit post directly and add screenshots to gallery.', WP_CLANWARS_TEXTDOMAIN); ?>"><?php echo esc_html($description); ?></textarea>
-							</td>
-						</tr>
-
-						<tr class="form-field">
-							<th scope="row" valign="top"><label for="external_url"><?php _e('External URL', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<input type="text" name="external_url" id="external_url" value="<?php echo esc_attr($external_url); ?>" />
-
-								<p class="description"><?php _e('Enter league or external match URL.', WP_CLANWARS_TEXTDOMAIN); ?></p>
-							</td>
-						</tr>
-
-						<tr class="form-required">
-							<th scope="row" valign="top"><label for=""><?php _e('Match status', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<?php foreach($this->match_status as $index => $text) : ?>
-								<p><label for="match_status_<?php echo $index; ?>"><input type="radio" value="<?php echo $index; ?>" name="match_status" id="match_status_<?php echo $index; ?>"<?php checked($index, $match_status, true); ?> /> <?php echo $text; ?></label></p>
-								<?php endforeach; ?>
-							</td>
-						</tr>
-
-						<tr class="form-required">
-							<th scope="row" valign="top"><label for=""><?php _e('Date', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<?php $this->html_date_helper('date', $date); ?>
-							</td>
-						</tr>
-
-						<tr class="form-required">
-							<th scope="row" valign="top"></th>
-							<td>
-								<div class="match-results" id="matchsite">
-
-									<div class="teams">
-									<select name="team1" class="team-select">
-									<?php foreach($teams as $t) : ?>
-										<option value="<?php echo $t->id; ?>"<?php selected(true, $team1 > 0 ? ($t->id == $team1) : $t->home_team, true); ?>><?php echo esc_html($t->title); ?></option>
-									<?php endforeach; ?>
-									</select>&nbsp;<?php _e('vs', WP_CLANWARS_TEXTDOMAIN); ?>&nbsp;<select name="team2" class="team-select">
-									<?php foreach($teams as $t) : ?>
-										<option value="<?php echo $t->id; ?>"<?php selected(true, $t->id==$team2, true); ?>><?php echo esc_html($t->title); ?></option>
-									<?php endforeach; ?>
-									</select>
-									</div>
-
-									<div class="team2-inline">
-										<p><label for="new_team_title"><?php _e('or quickly add new opponent:', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
-										<p class="clearfix">
-										<input name="new_team_title" id="new_team_title" type="text" value="" placeholder="<?php _e('New Team', WP_CLANWARS_TEXTDOMAIN); ?>" maxlength="200" autocomplete="off" aria-required="true" />
-										<?php $this->html_country_select_helper('name=new_team_country&show_popular=1&id=country'); ?>
-										</p>
-									</div>
-									<div id="mapsite"></div>
-									<div class="add-map" id="wp-cw-addmap">
-										<button class="button button-secondary"><span class="dashicons dashicons-plus"></span> <?php _e('Add map', WP_CLANWARS_TEXTDOMAIN); ?></button>
-									</div>
-
-								</div>
-							</td>
-						</tr>
-
-						</table>
-
-						<p class="submit"><input type="submit" class="button-primary" id="wp-cw-submit" name="submit" value="<?php echo $page_submit; ?>" /></p>
-
-					</form>
-
-			</div>
-
-		<?php
+		echo \WP_Clanwars\View::render('edit_match', $context);
 	}
 
 	function quick_pick_team($title, $country) {
