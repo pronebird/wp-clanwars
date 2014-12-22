@@ -1692,72 +1692,24 @@ class WP_ClanWars {
 	function game_editor($page_title, $page_action, $page_submit, $game_id = 0)
 	{
 		$defaults = array('title' => '', 'icon' => 0, 'abbr' => '', 'action' => '');
-		$data = array();
+		$game = new stdClass();
 
 		if($game_id > 0) {
-			$t = $this->get_game(array('id' => $game_id));
-			if(!empty($t)) {
-				$data = (array)$t[0];
+			$result = $this->get_game(array('id' => $game_id));
+			if(!empty($result)) {
+				$game = $result[0];
 			}
 		}
 
-		extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
-
 		$this->print_notices();
 
-		$attach = wp_get_attachment_image($icon, 'thumbnail');
-		?>
+		$view = new \WP_Clanwars\View( 'edit_game' );
 
-			<div class="wrap wp-cw-gameeditor">
-				<h2><?php echo $page_title; ?></h2>
+		$context = $this->extract_args(stripslashes_deep($_POST), $this->extract_args($game, $defaults));
+		$context['attach'] = isset($game->icon) ? wp_get_attachment_image($game->icon, 'thumbnail') : '';
+		$context += compact( 'page_title', 'page_action', 'page_submit', 'game_id' );
 
-					<form name="team-editor" id="team-editor" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
-
-						<input type="hidden" name="action" value="<?php echo esc_attr($page_action); ?>" />
-						<input type="hidden" name="id" value="<?php echo esc_attr($game_id); ?>" />
-
-						<?php wp_nonce_field($page_action); ?>
-
-						<table class="form-table">
-
-						<tr class="form-field form-required">
-							<th scope="row" valign="top"><label for="title"><span class="alignleft"><?php _e('Title', WP_CLANWARS_TEXTDOMAIN); ?></span><span class="alignright"><abbr title="<?php _e('required', WP_CLANWARS_TEXTDOMAIN); ?>" class="required">*</abbr></span><br class="clear" /></label></th>
-							<td>
-								<input name="title" id="title" type="text" class="regular-text" value="<?php echo esc_attr($title); ?>" maxlength="200" autocomplete="off" aria-required="true" />
-							</td>
-						</tr>
-
-						<tr class="form-field">
-							<th scope="row" valign="top"><label for="abbr"><?php _e('Game tag', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<input name="abbr" id="abbr" type="text" class="regular-text" value="<?php echo esc_attr($abbr); ?>" maxlength="20" autocomplete="off" />
-								<p class="description"><?php _e('For example: for Left 4 Dead 2 it can be L4D2.', WP_CLANWARS_TEXTDOMAIN); ?></p>
-							</td>
-						</tr>
-
-						<tr>
-							<th scope="row" valign="top"><label for="icon_file"><?php _e('Icon', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<input type="file" name="icon_file" id="icon_file" />
-
-								<?php if(!empty($attach)) : ?>
-								<div class="screenshot"><?php echo $attach; ?></div>
-								<div>
-								<label for="delete-image"><input type="checkbox" name="delete_image" id="delete-image" /> <?php _e('Delete Icon', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								</div>
-								<?php endif; ?>
-							</td>
-						</tr>
-
-						</table>
-
-						<p class="submit"><input type="submit" class="button-primary" name="submit" value="<?php echo $page_submit; ?>" /></p>
-
-					</form>
-
-			</div>
-
-		<?php
+		$view->render( $context );
 	}
 
 	/*
