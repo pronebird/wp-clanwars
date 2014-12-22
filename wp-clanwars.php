@@ -1630,12 +1630,14 @@ class WP_ClanWars {
 				break;
 		}
 
-		$teams = $this->get_game(array(
+		$games = $this->get_game(array(
 					'id' => $filter_games,
 					'orderby' => 'title', 'order' => 'asc',
 					'limit' => $limit, 'offset' => ($limit * ($current_page-1))
 				));
 		$stat = $this->get_game(array('id' => $filter_games, 'limit' => $limit), true);
+
+		$show_add_button = $this->acl_user_can('manage_game', 'all');
 
 		$page_links = paginate_links( array(
 				'base' => add_query_arg('paged', '%#%'),
@@ -1673,9 +1675,11 @@ class WP_ClanWars {
 		$this->print_notices();
 
 		$view = new \WP_Clanwars\View( 'game_table' );
-		
-		$context = array();
-		
+
+		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
+
+		$context = compact( 'show_add_button', 'games', 'table_columns', 'page_links_text' );
+
 		$view->render( $context );
 	}
 
