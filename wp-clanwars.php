@@ -317,8 +317,9 @@ class WP_ClanWars {
 		add_action('load-' . $this->page_hooks['teams'], array($this, 'on_load_manage_teams'));
 		add_action('load-' . $this->page_hooks['games'], array($this, 'on_load_manage_games'));
 
-		foreach($this->page_hooks as $page_hook)
+		foreach($this->page_hooks as $page_hook) {
 			add_action('load-' . $page_hook, array($this, 'on_load_any'));
+		}
 	}
 
 	function register_cssjs() 
@@ -506,15 +507,17 @@ class WP_ClanWars {
 		return $this->popular_countries;
 	}
 
-	function html_country_select_helper($p = array())
+	function html_country_select_helper($p = array(), $print = true)
 	{
 		extract($this->extract_args($p, array(
-					'select' => '',
-					'name' => '',
-					'id' => '',
-					'class' => '',
-					'show_popular' => false
-				)));
+			'select' => '',
+			'name' => '',
+			'id' => '',
+			'class' => '',
+			'show_popular' => false
+		)));
+
+		ob_start();
 
 		$attrs = array();
 
@@ -553,6 +556,15 @@ class WP_ClanWars {
 			echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
 		endforeach;
 		echo '</select>';
+
+		$output = ob_get_clean();
+
+		if($print) {
+			echo $output;
+			return;
+		}
+
+		return $output;
 	}
 
 	function html_notice_helper($message, $type = 'updated', $echo = true) {
@@ -901,50 +913,22 @@ class WP_ClanWars {
 
 		if($team_id > 0) {
 			$t = $this->get_team(array('id' => $team_id));
-			if(!empty($t))
+			if(!empty($t)) {
 				$data = (array)$t[0];
+			}
 		}
 
 		extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
 
+		$country_select = $this->html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
+
 		$this->print_notices();
-		?>
 
-			<div class="wrap">
-				<h2><?php echo $page_title; ?></h2>
-
-					<form name="team-editor" id="team-editor" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
-
-						<input type="hidden" name="action" value="<?php echo esc_attr($page_action); ?>" />
-						<input type="hidden" name="id" value="<?php echo esc_attr($team_id); ?>" />
-
-						<?php wp_nonce_field($page_action); ?>
-
-						<table class="form-table">
-
-						<tr class="form-field form-required">
-							<th scope="row" valign="top"><label for="title"><span class="alignleft"><?php _e('Title', WP_CLANWARS_TEXTDOMAIN); ?></span><span class="alignright"><abbr title="<?php _e('required', WP_CLANWARS_TEXTDOMAIN); ?>" class="required">*</abbr></span><br class="clear" /></label></th>
-							<td>
-								<input name="title" id="title" type="text" class="regular-text" value="<?php echo esc_attr($title); ?>" maxlength="200" autocomplete="off" aria-required="true" />
-							</td>
-						</tr>
-
-						<tr class="form-field form-required">
-							<th scope="row" valign="top"><label for="title"><?php _e('Country', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<?php $this->html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country); ?>
-							</td>
-						</tr>
-
-						</table>
-
-						<p class="submit"><input type="submit" class="button-primary" name="submit" value="<?php echo $page_submit; ?>" /></p>
-
-					</form>
-
-			</div>
-
-		<?php
+		echo \WP_Clanwars\View::render('edit_team',
+				compact('page_title', 'page_action', 'page_submit',
+					'team_id', 'title', 'logo', 'country', 'home_team', 'action',
+					'country_select')
+			);
 	}
 
 	function on_load_manage_teams()
@@ -2280,27 +2264,22 @@ class WP_ClanWars {
 
 	function on_add_map()
 	{
-	   $game_id = isset($_GET['game_id']) ? (int)$_GET['game_id'] : 0;
+		$game_id = isset($_GET['game_id']) ? (int)$_GET['game_id'] : 0;
 
-	   $this->map_editor(__('Add Map', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-addmap', __('Add Map', WP_CLANWARS_TEXTDOMAIN), $game_id);
+		$this->map_editor(__('Add Map', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-addmap', __('Add Map', WP_CLANWARS_TEXTDOMAIN), $game_id);
 	}
 
 	function on_edit_map()
 	{
-	   $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+		$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-	   $this->map_editor(__('Edit Map', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-editmap', __('Update Map', WP_CLANWARS_TEXTDOMAIN), 0, $id);
-	}
-
-	function page_not_found($title, $message) {
-
-		echo '<div class="wrap"><h2>' . $title . '</h2>' . $message . '</div>';
-
+		$this->map_editor(__('Edit Map', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-editmap', __('Update Map', WP_CLANWARS_TEXTDOMAIN), 0, $id);
 	}
 
 	function map_editor($page_title, $page_action, $page_submit, $game_id, $id = 0)
 	{
 		$defaults = array('title' => '', 'screenshot' => 0, 'abbr' => '', 'action' => '');
+		$data = array();
 
 		if($id > 0) {
 			$t = $this->get_map(array('id' => $id, 'game_id' => $game_id));
@@ -2316,51 +2295,11 @@ class WP_ClanWars {
 		$attach = wp_get_attachment_image($screenshot, 'thumbnail');
 
 		$this->print_notices();
-		?>
 
-			<div class="wrap wp-cw-mapeditor">
-				<h2><?php echo $page_title; ?></h2>
-
-					<form name="map-editor" id="map-editor" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
-
-						<input type="hidden" name="action" value="<?php echo esc_attr($page_action); ?>" />
-						<input type="hidden" name="game_id" value="<?php echo esc_attr($game_id); ?>" />
-						<input type="hidden" name="id" value="<?php echo esc_attr($id); ?>" />
-
-						<?php wp_nonce_field($page_action); ?>
-
-						<table class="form-table">
-
-						<tr class="form-field form-required">
-							<th scope="row" valign="top"><label for="title"><span class="alignleft"><?php _e('Title', WP_CLANWARS_TEXTDOMAIN); ?></span><span class="alignright"><abbr title="<?php _e('required', WP_CLANWARS_TEXTDOMAIN); ?>" class="required">*</abbr></span><br class="clear" /></label></th>
-							<td>
-								<input name="title" id="title" type="text" class="regular-text" value="<?php echo esc_attr($title); ?>" maxlength="200" autocomplete="off" aria-required="true" />
-							</td>
-						</tr>
-
-						<tr>
-							<th scope="row" valign="top"><label for="screenshot_file"><?php _e('Screenshot', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
-							<td>
-								<input type="file" name="screenshot_file" id="screenshot_file" />
-
-								<?php if(!empty($attach)) : ?>
-								<div class="screenshot"><?php echo $attach; ?></div>
-								<div>
-								<label for="delete-image"><input type="checkbox" name="delete_image" id="delete-image" /> <?php _e('Delete Screenshot', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								</div>
-								<?php endif; ?>
-							</td>
-						</tr>
-
-						</table>
-
-						<p class="submit"><input type="submit" class="button-primary" name="submit" value="<?php echo $page_submit; ?>" /></p>
-
-					</form>
-
-			</div>
-
-		<?php
+		echo \WP_Clanwars\View::render('edit_map', compact(
+			'page_title', 'page_action', 'page_submit', 'game_id', 'id',
+			'attach', 'title', 'screenshot', 'abbr', 'action')
+		);
 	}
 
 	/*

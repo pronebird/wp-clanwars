@@ -38,16 +38,13 @@ foreach($rounds as $map_group) :
 <?php endforeach; // maps ?>
 </div> <!-- .maplist -->
 
+<div class="summary">
 <?php
 	$t1 = $match->team1_tickets;
 	$t2 = $match->team2_tickets;
 	$round_class = $t1 < $t2 ? 'loss' : ($t1 > $t2 ? 'win' : 'draw');
-
-	$score_text = sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2);
 ?>
-
-<div class="summary">
-	<div class="scores <?php esc_attr_e($round_class); ?>"><?php echo $score_text; ?></div>
+	<div class="scores <?php esc_attr_e($round_class); ?>"><?php echo sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2); ?></div>
 </div>
 
 <ul class="match-props">
