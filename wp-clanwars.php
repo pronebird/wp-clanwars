@@ -924,11 +924,11 @@ class WP_ClanWars {
 
 		$this->print_notices();
 
-		echo \WP_Clanwars\View::render('edit_team',
-				compact('page_title', 'page_action', 'page_submit',
+		$view = new \WP_Clanwars\View( 'edit_team' );
+		$context = compact('page_title', 'page_action', 'page_submit',
 					'team_id', 'title', 'logo', 'country', 'home_team', 'action',
-					'country_select')
-			);
+					'country_select');
+		$view->render( $context );
 	}
 
 	function on_load_manage_teams()
@@ -2279,10 +2279,12 @@ class WP_ClanWars {
 
 		$this->print_notices();
 
-		echo \WP_Clanwars\View::render('edit_map', compact(
-			'page_title', 'page_action', 'page_submit', 'game_id', 'id',
-			'attach', 'title', 'screenshot', 'abbr', 'action')
-		);
+		$view = new \WP_Clanwars\View( 'edit_map' );
+
+		$context = compact('page_title', 'page_action', 'page_submit', 'game_id', 'id',
+			'attach', 'title', 'screenshot', 'abbr', 'action');
+
+		$view->render( $context );
 	}
 
 	/*
@@ -2852,25 +2854,21 @@ class WP_ClanWars {
 		$merged_data = $this->extract_args(stripslashes_deep($_POST), $this->extract_args($match, $defaults));
 		$merged_data['date'] = $this->date_array2time_helper($merged_data['date']);
 
-		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'post_id', 'games', 'teams');
-		$context += $merged_data;
-
-		$context += array(
-			'html_date_helper' => function () {
-				call_user_func_array(array($this, 'html_date_helper'), func_get_args());
-			},
-			'html_country_select_helper' => function () {
-				call_user_func_array(array($this, 'html_country_select_helper'), func_get_args());
-			}
-		);
-
 		if(isset($_GET['update'])) {
 			$this->add_notice(__('Match is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
 		}
 
 		$this->print_notices();
 
-		echo \WP_Clanwars\View::render('edit_match', $context);
+		$view = new \WP_Clanwars\View( 'edit_match' );
+
+		$view->add_helper('html_date_helper', array($this, 'html_date_helper'));
+		$view->add_helper('html_country_select_helper', array($this, 'html_country_select_helper'));
+
+		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'post_id', 'games', 'teams');
+		$context += $merged_data;
+
+		$view->render( $context );
 	}
 
 	function quick_pick_team($title, $country) {
@@ -3086,9 +3084,11 @@ class WP_ClanWars {
 		$team1_flag = $this->get_country_flag($match->team1_country, true);
 		$team2_flag = $this->get_country_flag($match->team2_country, true);
 
-		return \WP_Clanwars\View::render( 'match_view', compact(
-			'match', 'rounds', 'match_status_text', 'team1_flag', 'team2_flag')
-		);
+		$view = new \WP_Clanwars\View( 'match_view' );
+
+		$context = compact('match', 'rounds', 'match_status_text', 'team1_flag', 'team2_flag');
+
+		return $view->render( $context, false );
 	}
 
 	function on_browser_shortcode($atts) {
@@ -3263,6 +3263,7 @@ class WP_ClanWars {
 		);
 
 		$matches = $this->get_match($condition);
+		$match_statuses = $this->match_status;
 		$stat = $this->get_match($stat_condition, true);
 
 		// populate games with urls for icons
@@ -3306,19 +3307,13 @@ class WP_ClanWars {
 
 		$this->print_notices();
 
-		$match_statuses = $this->match_status;
+		$view = new \WP_Clanwars\View( 'match_table' );
+
+		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
+		$view->add_helper( 'get_country_flag', array($this, 'get_country_flag') );
 
 		$context = compact('table_columns', 'page_links', 'page_links_text', 'matches', 'match_statuses');
-		$context += array(
-			'print_table_header' => function () {
-				call_user_func_array(array($this, 'print_table_header'), func_get_args());
-			},
-			'get_country_flag' => function () {
-				return call_user_func_array(array($this, 'get_country_flag'), func_get_args());
-			}
-		);
-
-		echo \WP_Clanwars\View::render('match_table', $context);
+		$view->render($context);
 	}
 
 	function on_admin_post_settings() {
@@ -3501,15 +3496,13 @@ class WP_ClanWars {
 			array_push($user_acl_info, $item);
 		}
 
+		$view = new \WP_Clanwars\View( 'settings' );
+		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
+
 		$context = compact('table_columns', 'games', 'acl_keys', 'user_acl_info',
 							'categories_dropdown', 'enable_default_styles', 'hide_default_styles');
-		$context += array(
-			'print_table_header' => function () {
-				call_user_func_array(array($this, 'print_table_header'), func_get_args());
-			}
-		);
 
-		echo \WP_Clanwars\View::render('settings', $context);
+		$view->render( $context );
 	}
 
 	// Import page hook
@@ -3530,9 +3523,13 @@ class WP_ClanWars {
 			$this->add_notice($_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), $_GET['import'] === 'success' ? 'updated' : 'error');
 		}
 
-		echo $this->print_notices();
+		$this->print_notices();
 
-		echo \WP_Clanwars\View::render('import', compact('import_list'));
+		$view = new \WP_Clanwars\View( 'import' );
+
+		$context = compact('import_list');
+
+		$view->render( $context );
 	}
 
 }
