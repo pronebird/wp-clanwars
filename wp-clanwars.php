@@ -1151,8 +1151,9 @@ class WP_ClanWars {
 
 	function on_admin_post_gamesop()
 	{
-		if(!$this->acl_user_can('manage_games'))
+		if(!$this->acl_user_can('manage_games')) {
 			wp_die( __('Cheatin&#8217; uh?') );
+		}
 
 		check_admin_referer('wp-clanwars-gamesop');
 
@@ -1631,13 +1632,18 @@ class WP_ClanWars {
 		}
 
 		$games = $this->get_game(array(
-					'id' => $filter_games,
-					'orderby' => 'title', 'order' => 'asc',
-					'limit' => $limit, 'offset' => ($limit * ($current_page-1))
-				));
+			'id' => $filter_games,
+			'orderby' => 'title', 'order' => 'asc',
+			'limit' => $limit, 'offset' => ($limit * ($current_page-1))
+		));
 		$stat = $this->get_game(array('id' => $filter_games, 'limit' => $limit), true);
 
 		$show_add_button = $this->acl_user_can('manage_game', 'all');
+
+		// pre-populate games with icons
+		foreach ($games as $game) {
+			$game->icon_url = wp_get_attachment_url($game->icon);
+		}
 
 		$page_links = paginate_links( array(
 				'base' => add_query_arg('paged', '%#%'),
@@ -1786,6 +1792,10 @@ class WP_ClanWars {
 		$maps = $this->get_map('id=all&orderby=title&order=asc&game_id=' . $game_id . '&limit=' . $limit . '&offset=' . ($limit * ($current_page-1)));
 		$stat = $this->get_map('id=all&game_id=' . $game_id . '&limit=' . $limit, true);
 
+		foreach($maps as $map) {
+			$map->attach = wp_get_attachment_image($map->screenshot, 'thumbnail');
+		}
+
 		$page_links = paginate_links( array(
 				'base' => add_query_arg('paged', '%#%'),
 				'format' => '',
@@ -1802,9 +1812,11 @@ class WP_ClanWars {
 				$page_links
 		);
 
-		$table_columns = array('cb' => '<input type="checkbox" />',
-					  'icon' => '',
-					  'title' => __('Title', WP_CLANWARS_TEXTDOMAIN));
+		$table_columns = array(
+			'cb' => '<input type="checkbox" />',
+				'icon' => '',
+				'title' => __('Title', WP_CLANWARS_TEXTDOMAIN)
+		);
 
 		if(isset($_GET['add'])) {
 			$this->add_notice(__('Map is successfully added.', WP_CLANWARS_TEXTDOMAIN), 'updated');
@@ -1821,110 +1833,13 @@ class WP_ClanWars {
 
 		$this->print_notices();
 
-	?>
-		<div class="wrap wp-cw-maps">
-			<h2><?php _e('Maps', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=addmap&game_id=' . $game_id); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+		$view = new \WP_Clanwars\View( 'map_table' );
 
-			<div id="poststuff" class="metabox-holder">
+		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 
-				<div id="post-body">
-					<div id="post-body-content" class="has-sidebar-content">
+		$context = compact( 'table_columns', 'page_links_text', 'maps', 'game_id' );
 
-					<form id="wp-clanwars-manageform" action="admin-post.php" method="post">
-						<?php wp_nonce_field('wp-clanwars-deletemaps'); ?>
-
-						<input type="hidden" name="action" value="wp-clanwars-deletemaps" />
-						<input type="hidden" name="game_id" value="<?php echo $game_id; ?>" />
-
-						<div class="tablenav">
-
-							<div class="alignleft actions">
-								<select name="do_action">
-									<option value="" selected="selected"><?php _e('Bulk Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
-									<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
-								</select>
-								<input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction" id="wp-clanwars-doaction" class="button-secondary action" />
-							</div>
-
-							<div class="alignright actions" style="display: none;">
-								<label class="screen-reader-text" for="maps-search-input"><?php _e('Search Maps:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-								<input id="maps-search-input" name="s" value="<?php if(isset($search_title)) esc_attr_e($search_title); ?>" type="text" />
-
-								<input id="maps-search-submit" value="<?php _e('Search Maps', WP_CLANWARS_TEXTDOMAIN); ?>" class="button" type="button" />
-							</div>
-
-						<br class="clear" />
-
-						</div>
-
-						<div class="clear"></div>
-
-						<table class="widefat fixed" cellspacing="0">
-						<thead>
-						<tr>
-						<?php $this->print_table_header($table_columns); ?>
-						</tr>
-						</thead>
-
-						<tfoot>
-						<tr>
-						<?php $this->print_table_header($table_columns, false); ?>
-						</tr>
-						</tfoot>
-
-						<tbody>
-
-						<?php foreach($maps as $i => $item) : ?>
-
-							<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
-								<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $item->id; ?>" /></th>
-								<td class="column-icon media-icon">
-									<?php $attach = wp_get_attachment_image($item->screenshot, 'thumbnail');
-									if(!empty($attach)) echo $attach;
-									?>
-								</td>
-								<td class="title column-title">
-									<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=editmap&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Map', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"> <?php echo esc_html($item->title); ?></a><br />
-									<div class="row-actions">
-										<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=editmap&amp;id=' . $item->id); ?>"><?php _e('Edit', WP_CLANWARS_TEXTDOMAIN); ?></a></span> | <span class="delete">
-												<a href="<?php echo wp_nonce_url('admin-post.php?action=wp-clanwars-deletemaps&amp;do_action=delete&amp;delete[]=' . $item->id . '&amp;_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-deletemaps'); ?>"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></a></span>
-									</div>
-								</td>
-							</tr>
-
-						<?php endforeach; ?>
-
-						</tbody>
-
-						</table>
-
-						<div class="tablenav">
-
-							<div class="tablenav-pages"><?php echo $page_links_text; ?></div>
-
-							<div class="alignleft actions">
-							<select name="do_action2">
-							<option value="" selected="selected"><?php _e('Bulk Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
-							<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
-							</select>
-							<input type="submit" value="<?php _e('Apply', WP_CLANWARS_TEXTDOMAIN); ?>" name="doaction2" id="wp-clanwars-doaction2" class="button-secondary action" />
-							</div>
-
-							<br class="clear" />
-
-						</div>
-
-					</form>
-
-					</div>
-				</div>
-				<br class="clear"/>
-
-			</div>
-
-		</div>
-<?php
-
+		$view->render( $context );
 	}
 
 	function get_map($p, $count = false)
@@ -3125,7 +3040,7 @@ class WP_ClanWars {
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 		$view->add_helper( 'get_country_flag', array($this, 'get_country_flag') );
 
-		$context = compact('table_columns', 'page_links', 'page_links_text', 'matches', 'match_statuses');
+		$context = compact('table_columns', 'page_links_text', 'matches', 'match_statuses');
 		$view->render($context);
 	}
 

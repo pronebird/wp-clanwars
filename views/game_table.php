@@ -56,6 +56,9 @@
 					<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
 						<th scope="row" class="check-column"><input type="checkbox" name="items[]" value="<?php echo $item->id; ?>" /></th>
 						<td class="title column-title">
+							<?php if(!empty($item->icon_url)) : ?>
+							<img src="<?php esc_attr_e($item->icon_url); ?>" class="icon" />
+							<?php endif; ?>
 							<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Team', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"> <?php echo esc_html($item->title); ?></a><br />
 							<div class="row-actions">
 								<span class="edit"><a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&amp;act=edit&amp;id=' . $item->id); ?>"><?php _e('Edit', WP_CLANWARS_TEXTDOMAIN); ?></a></span> |
