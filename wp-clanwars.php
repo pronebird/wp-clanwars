@@ -251,6 +251,9 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-deleteacl', array($this, 'on_admin_post_deleteacl'));
 		add_action('admin_post_wp-clanwars-import', array($this, 'on_admin_post_import'));
 
+		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setupteam'));
+		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setupgames'));
+
 		add_action('wp_ajax_get_maps', array($this, 'on_ajax_get_maps'));
 		add_shortcode('wp-clanwars', array($this, 'on_shortcode'));
 		
@@ -398,19 +401,82 @@ class WP_ClanWars {
 		static $flag = null;
 
 		if($flag === null) {
-			$result = $this->get_game(array(), true);
-			$flag = ($result['total_items'] === 0);
+			$has_hometeam = is_object( $this->get_hometeam() );
+			$games_result = $this->get_game(array(), true);
+
+			$flag = ($games_result['total_items'] === 0 || !$has_hometeam) && current_user_can('manage_options');
 		}
 
 		return $flag;
 	}
 
 	function onboarding_page() {
-		$view = new \WP_Clanwars\View( 'onboarding' );
+		$games_result = $this->get_game(array(), true);
 
-		$view->add_helper('html_country_select_helper', array($this, 'html_country_select_helper'));
+		$has_hometeam = is_object( $this->get_hometeam() );
+		$has_games = ($games_result['total_items'] > 0);
 
-		$view->render();
+		$context = array();
+
+		if(!$has_hometeam && !$has_games) {
+			$context['page_submit'] = __( 'Continue', WP_CLANWARS_TEXTDOMAIN );
+		} else {
+			$context['page_submit'] = __( 'Finish', WP_CLANWARS_TEXTDOMAIN );
+		}
+
+		if(!$has_hometeam) {
+			$view = new \WP_Clanwars\View( 'setup_team' );
+			$view->add_helper('html_country_select_helper', array($this, 'html_country_select_helper'));
+		} else {
+			$view = new \WP_Clanwars\View( 'setup_games' );
+
+			$import_list = $this->get_available_games();
+			$installed_games = $this->get_game('');
+
+			// mark installed games
+			foreach($import_list as $game) {
+				$game->is_installed = ($this->is_game_installed($game->title, $game->abbr, $installed_games) !== false);
+			}
+
+			$context += compact('import_list');
+		}
+
+		$view->render( $context );
+	}
+
+	function on_admin_post_setupteam() {
+		if(!current_user_can('manage_options')) {
+			wp_die(__('Cheatin&#8217; uh?'));
+		}
+
+		check_admin_referer('wp-clanwars-setupteam');
+
+		$referer = $_REQUEST['_wp_http_referer'];
+
+		$data = $this->extract_args($_POST, array(
+			'title' => '',
+			'country' => ''
+		));
+
+		$data['home_team'] = 1;
+
+		$this->add_team( $data );
+
+		wp_redirect($referer);
+	}
+
+	function on_admin_post_setupgames() {
+		if(!current_user_can('manage_options')) {
+			wp_die(__('Cheatin&#8217; uh?'));
+		}
+
+		check_admin_referer('wp-clanwars-setupgames');
+
+		$referer = $_REQUEST['_wp_http_referer'];
+
+		var_dump($_POST);
+
+		wp_redirect($referer);
 	}
 
 	function acl_user_can($action, $value = false, $user_id = false)
@@ -781,9 +847,11 @@ class WP_ClanWars {
 
 		$options = wp_parse_args($args, $defaults);
 
-		if(is_array($defaults))
-			foreach(array_keys($defaults) as $key)
+		if(is_array($defaults)) {
+			foreach(array_keys($defaults) as $key) {
 				$rslt[$key] = $options[$key];
+			}
+		}
 
 		return $rslt;
 	}
@@ -892,6 +960,12 @@ class WP_ClanWars {
 		return $wpdb->update($this->tables['teams'], array('home_team' => 1), array('id' => $id), array('%d'), array('%d'));
 	}
 
+	function get_hometeam() {
+		global $wpdb;
+
+		return $wpdb->get_row("SELECT * FROM {$this->tables['teams']} WHERE home_team = 1");
+	}
+
 	function update_team($id, $p)
 	{
 		global $wpdb;
@@ -899,7 +973,7 @@ class WP_ClanWars {
 		$fields = array('title' => '%s', 'country' => '%s', 'home_team' => '%d', 'logo' => '%d');
 
 		$data = wp_parse_args($p, array());
-		
+
 		$update_data = array();
 		$update_mask = array();
 
