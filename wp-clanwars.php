@@ -304,39 +304,113 @@ class WP_ClanWars {
 		// place plugin below dashboard on jumpstarter
 		$menu_position = $this->is_jumpstarter() ? 3 : null;
 
-		$top = add_menu_page(__('ClanWars', WP_CLANWARS_TEXTDOMAIN), __('ClanWars', WP_CLANWARS_TEXTDOMAIN), $user_role, $top_level_slug, null, WP_CLANWARS_URL . '/images/plugin-icon.png', $menu_position);
+		$top = add_menu_page(
+			__('ClanWars', WP_CLANWARS_TEXTDOMAIN), 
+			__('ClanWars', WP_CLANWARS_TEXTDOMAIN), 
+			$user_role, 
+			$top_level_slug, 
+			null, 
+			WP_CLANWARS_URL . '/images/plugin-icon.png', 
+			$menu_position
+		);
 
-		$this->page_hooks['matches'] = add_submenu_page($top_level_slug, __('Matches', WP_CLANWARS_TEXTDOMAIN), __('Matches', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_matches'], $routes['manage_matches'], array($this, 'on_manage_matches'));
-		$this->page_hooks['teams'] = add_submenu_page($top_level_slug, __('Teams', WP_CLANWARS_TEXTDOMAIN), __('Teams', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_teams'], $routes['manage_teams'], array($this, 'on_manage_teams'));
-		$this->page_hooks['games'] = add_submenu_page($top_level_slug, __('Games', WP_CLANWARS_TEXTDOMAIN), __('Games', WP_CLANWARS_TEXTDOMAIN), $acl_table['manage_games'], $routes['manage_games'], array($this, 'on_manage_games'));
-		$this->page_hooks['import'] = add_submenu_page($top_level_slug, __('Import', WP_CLANWARS_TEXTDOMAIN), __('Import', WP_CLANWARS_TEXTDOMAIN), 'manage_options', 'wp-clanwars-import', array($this, 'on_import'));
-		$this->page_hooks['settings'] = add_submenu_page($top_level_slug, __('Settings', WP_CLANWARS_TEXTDOMAIN), __('Settings', WP_CLANWARS_TEXTDOMAIN), 'manage_options', 'wp-clanwars-settings', array($this, 'on_settings'));
+		$this->page_hooks['matches'] = add_submenu_page(
+			$top_level_slug, 
+			__('Matches', WP_CLANWARS_TEXTDOMAIN), 
+			__('Matches', WP_CLANWARS_TEXTDOMAIN), 
+			$acl_table['manage_matches'], 
+			$routes['manage_matches'], 
+			$this->onboarding_or_page( 'on_manage_matches' )
+		);
 
+		$this->page_hooks['teams'] = add_submenu_page(
+			$top_level_slug, 
+			__('Teams', WP_CLANWARS_TEXTDOMAIN), 
+			__('Teams', WP_CLANWARS_TEXTDOMAIN), 
+			$acl_table['manage_teams'], 
+			$routes['manage_teams'], 
+			$this->onboarding_or_page( 'on_manage_teams' )
+		);
 
-		add_action('load-' . $this->page_hooks['matches'], array($this, 'on_load_manage_matches'));
-		add_action('load-' . $this->page_hooks['teams'], array($this, 'on_load_manage_teams'));
-		add_action('load-' . $this->page_hooks['games'], array($this, 'on_load_manage_games'));
+		$this->page_hooks['games'] = add_submenu_page(
+			$top_level_slug, 
+			__('Games', WP_CLANWARS_TEXTDOMAIN), 
+			__('Games', WP_CLANWARS_TEXTDOMAIN), 
+			$acl_table['manage_games'], 
+			$routes['manage_games'], 
+			$this->onboarding_or_page( 'on_manage_games' )
+		);
+
+		$this->page_hooks['import'] = add_submenu_page(
+			$top_level_slug, 
+			__('Import', WP_CLANWARS_TEXTDOMAIN), 
+			__('Import', WP_CLANWARS_TEXTDOMAIN), 
+			'manage_options', 
+			'wp-clanwars-import', 
+			$this->onboarding_or_page( 'on_import' )
+		);
+
+		$this->page_hooks['settings'] = add_submenu_page(
+			$top_level_slug, 
+			__('Settings', WP_CLANWARS_TEXTDOMAIN), 
+			__('Settings', WP_CLANWARS_TEXTDOMAIN), 
+			'manage_options', 
+			'wp-clanwars-settings', 
+			$this->onboarding_or_page( 'on_settings' )
+		);
+
+		if(!$this->should_onboard_user()) {
+			add_action('load-' . $this->page_hooks['matches'], array($this, 'on_load_manage_matches'));
+			add_action('load-' . $this->page_hooks['teams'], array($this, 'on_load_manage_teams'));
+			add_action('load-' . $this->page_hooks['games'], array($this, 'on_load_manage_games'));
+		}
 
 		foreach($this->page_hooks as $page_hook) {
 			add_action('load-' . $page_hook, array($this, 'on_load_any'));
 		}
 	}
 
-	function register_cssjs() 
-	{	
+	function register_cssjs()
+	{
 		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery'), WP_CLANWARS_VERSION);
 		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery'), WP_CLANWARS_VERSION);
 
 		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
-		
+
 		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/jquery.tipsy.js', array('jquery'), '0.1.7');
 		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/tipsy.css', array(), '0.1.7');
 
 		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_VERSION);
-		
+
 		wp_register_style('wp-cw-sitecss', WP_CLANWARS_URL . '/css/site.css', array(), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-widgetcss', WP_CLANWARS_URL . '/css/widget.css', array(), WP_CLANWARS_VERSION);
+	}
+
+	function onboarding_or_page($page_method) {
+		if($this->should_onboard_user()) {
+			return array( $this, 'onboarding_page');
+		}
+		return array( $this, $page_method );
+	}
+
+	function should_onboard_user() {
+		static $flag = null;
+
+		if($flag === null) {
+			$result = $this->get_game(array(), true);
+			$flag = ($result['total_items'] === 0);
+		}
+
+		return $flag;
+	}
+
+	function onboarding_page() {
+		$view = new \WP_Clanwars\View( 'onboarding' );
+
+		$view->add_helper('html_country_select_helper', array($this, 'html_country_select_helper'));
+
+		$view->render();
 	}
 
 	function acl_user_can($action, $value = false, $user_id = false)
@@ -774,10 +848,11 @@ class WP_ClanWars {
 
 			$ret = array('total_items' => 0, 'total_pages' => 1);
 
-			$ret['total_items'] = $rslt->m_count;
+			$ret['total_items'] = (int) $rslt->m_count;
 			
-			if($limit > 0)
+			if($limit > 0) {
 				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
+			}
 
 			return $ret;
 		}
@@ -1084,10 +1159,11 @@ class WP_ClanWars {
 
 			$ret = array('total_items' => 0, 'total_pages' => 1);
 
-			$ret['total_items'] = $rslt->m_count;
+			$ret['total_items'] = (int) $rslt->m_count;
 
-			if($limit > 0)
+			if($limit > 0) {
 				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
+			}
 
 			return $ret;
 		}
@@ -1846,10 +1922,11 @@ class WP_ClanWars {
 
 			$ret = array('total_items' => 0, 'total_pages' => 1);
 
-			$ret['total_items'] = $rslt->m_count;
+			$ret['total_items'] = (int) $rslt->m_count;
 
-			if($limit > 0)
+			if($limit > 0) {
 				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
+			}
 
 			return $ret;
 		}
@@ -2104,10 +2181,11 @@ class WP_ClanWars {
 		if($count) {
 			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . $this->tables['matches'] . '` AS t1 ' . $where_query);
 			$ret = array('total_items' => 0, 'total_pages' => 1);
-			$ret['total_items'] = $rslt->m_count;
+			$ret['total_items'] = (int) $rslt->m_count;
 
-			if($limit > 0)
+			if($limit > 0) {
 				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
+			}
 
 			return $ret;
 		}
