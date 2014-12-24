@@ -49,6 +49,15 @@
 
 				<tbody>
 
+				<!-- .no-items  -->
+				<?php if(empty($matches)) : ?>
+
+				<tr class="no-items">
+					<td class="colspanchange" colspan="7"><?php _e('No items found.', WP_CLANWARS_TEXTDOMAIN); ?></td>
+				</tr>
+
+				<?php endif; ?>
+
 				<?php foreach($matches as $i => $item) : ?>
 
 					<?php

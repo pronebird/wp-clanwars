@@ -49,6 +49,15 @@
 
 				<tbody>
 
+				<!-- .no-items  -->
+				<?php if(empty($teams)) : ?>
+
+				<tr class="no-items">
+					<td class="colspanchange" colspan="2"><?php _e('No items found.', WP_CLANWARS_TEXTDOMAIN); ?></td>
+				</tr>
+
+				<?php endif; ?>
+
 				<?php foreach($teams as $i => $item) : ?>
 
 					<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
