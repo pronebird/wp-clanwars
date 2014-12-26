@@ -2999,7 +2999,7 @@ class WP_ClanWars {
 	function on_browser_shortcode($atts) {
 		$output = '';
 
-		extract(shortcode_atts(array('per_page' => 20), $atts));
+		extract(shortcode_atts(array('per_page' => 1), $atts));
 
 		$per_page = abs($per_page);
 		$current_page = max( 1, get_query_var('paged') );
@@ -3043,7 +3043,7 @@ class WP_ClanWars {
 
 		array_unshift($games, $obj);
 
-		$this_url = remove_query_arg(array('page', 'game'));
+		$this_url = remove_query_arg(array('paged', 'game'));
 		for($i = 0; $i < sizeof($games); $i++) :
 			$game = $games[$i];
 			$link = ($game->id == 0) ? $this_url : add_query_arg('game', $game->id, $this_url);

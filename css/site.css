@@ -119,11 +119,12 @@ html[xmlns] .clearfix {
 	min-width: 30px;
 	text-align: center;
 	border: 0;
+	outline: 0;
 }
 
 .wp-clanwars-pagination .page-numbers.current {
-	font-weight: bold;
 	background-color: rgba(0,0,0,0.05);
+	border-radius: 3px;
 }
 
 .wp-clanwars-page-v2 .scores,
