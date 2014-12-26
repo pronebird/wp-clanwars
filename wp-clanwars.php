@@ -2897,7 +2897,7 @@ class WP_ClanWars {
 		$matches = $this->get_match(array('id' => $match_id, 'sum_tickets' => true));
 
 		if(empty($matches)) {
-			return __("<p>Match with id = $match_id</p>", WP_CLANWARS_TEXTDOMAIN);
+			return __("<p>Match with id = $match_id has been removed.</p>", WP_CLANWARS_TEXTDOMAIN);
 		}
 
 		$match = $matches[0];
