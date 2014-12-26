@@ -3002,14 +3002,11 @@ class WP_ClanWars {
 		extract(shortcode_atts(array('per_page' => 20), $atts));
 
 		$per_page = abs($per_page);
-		$current_page = get_query_var('page');
+		$current_page = max( 1, get_query_var('paged') );
 		$now = $this->current_time_fixed('timestamp');
 		$current_game = isset($_GET['game']) ? $_GET['game'] : false;
 
 		$games = $this->get_game('id=all&orderby=title&order=asc');
-
-		if($current_page < 1)
-			$current_page = 1;
 
 		$p = array(
 			'limit' => $per_page,
@@ -3021,16 +3018,12 @@ class WP_ClanWars {
 		);
 
 		$matches = $this->get_match($p, false);
-
 		$stat = $this->get_match($p, true);
-
-		$page_links = paginate_links( array(
-				'base' => add_query_arg('page', '%#%'),
-				'format' => '',
-				'prev_text' => __('&laquo;'),
-				'next_text' => __('&raquo;'),
-				'total' => $stat['total_pages'],
-				'current' => $current_page
+		$page_links = paginate_links(array(
+			'prev_text' => __('&larr;'),
+			'next_text' => __('&rarr;'),
+			'total' => $stat['total_pages'],
+			'current' => $current_page
 		));
 
 		$page_links_text = sprintf( '<span class="displaying-num">' . __( 'Displaying %s&#8211;%s of %s' ) . '</span>%s',
@@ -3135,7 +3128,7 @@ class WP_ClanWars {
 
 		$output .= '</ul>';
 
-		$output .= '<div class="wp-clanwars-pagination clearfix">' .$page_links_text . '</div>';
+		$output .= '<div class="wp-clanwars-pagination">' .$page_links_text . '</div>';
 
 		return $output;
 	}
