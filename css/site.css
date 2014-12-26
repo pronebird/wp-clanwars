@@ -59,26 +59,23 @@ html[xmlns] .clearfix {
 }
 
 .wp-clanwars-list {
-	margin: 0 0 10px 0;
+	margin: 0 0 1em 0;
 	padding: 0;
-	background-color: #fff;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	list-style: none;
 }
 
 .wp-clanwars-list li {
-	list-style: none;
-	padding: 5px 0;
+	padding: 1em 0;
 	margin: 0;
 	position: relative;
-	border-bottom: 1px solid #ccc;
 	overflow: hidden;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.wp-clanwars-list li.even {}
 .wp-clanwars-list .wrap {
 	margin: 0 0 0 30px;
 	padding: 0;
+	position: relative;
 }
 
 .wp-clanwars-list .opponent-team {
@@ -92,16 +89,12 @@ html[xmlns] .clearfix {
 
 .wp-clanwars-list .icon {
 	position: absolute;
-	left: 5px;
-	top: 10px;
+	left: -30px;
+	top: 0.5em;
 }
 
 .wp-clanwars-list .maplist {
-	position: absolute;
-	left: 200px;
-	width: 200px;
-	top: 5px;
-	font-size: 1em;
+	display: inline-block;
 }
 
 .wp-clanwars-list .match-link {
@@ -137,11 +130,9 @@ html[xmlns] .clearfix {
 	text-align: center;
 	min-width: 20px;
 	padding: 5px 5px;
-	margin-right: 5px;
 	font-size: 0.8em;
 	font-weight: normal;
 	letter-spacing: 0.5px;
-	margin-top: 5px;
 }
 
 .wp-clanwars-page-v2 .scores {
@@ -188,52 +179,29 @@ html[xmlns] .clearfix {
 }
 
 .wp-clanwars-filter {
-	margin: 0 !important;
+	margin: 0 0 1em !important;
 	padding: 0;
 	display: block;
-	background: transparent url('../images/tabs.png') 0% 100% repeat-x;
-	zoom: 1;
-	border-bottom: 1px solid #ccc;
+	list-style: none;
 }
 
 .wp-clanwars-filter li {
-	float: left;
-	list-style: none;
+	display: inline-block;
 	padding: 0;
-	margin: 0 0 0 3px;
+	margin: 0;
 }
 
-.wp-clanwars-filter li:first-child {
-	margin-left: 0;
-}
-
-.wp-clanwars-filter li:hover,
 .wp-clanwars-filter li.selected {
-	background: #fff url('../images/tabs-active.png') 0% 100% repeat-x;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	border-top: 1px solid #ccc;
-	-webkit-border-radius: 3px 3px 0 0;
-	-moz-border-radius: 3px 3px 0 0;
-	border-radius: 3px 3px 0 0;
-}
-
-.wp-clanwars-filter li:hover a ,
-.wp-clanwars-filter li.selected a {
-	color: #000;
+	background-color: rgba(0, 0, 0, 0.05);
+	border-radius: 3px;
 }
 
 .wp-clanwars-filter li a {
 	text-decoration: none;
 	border: 0;
-	color: #222;
 	display: block;
 	padding: 5px 12px;
-}
-
-.wp-clanwars-filter li:hover a,
-.wp-clanwars-filter li.selected a {
-	padding: 4px 11px 5px;
+	outline: 0;
 }
 
 /*
