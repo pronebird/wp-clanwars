@@ -3040,7 +3040,7 @@ class WP_ClanWars {
 				$page_links
 		);
 
-		$output .= '<ul class="wp-clanwars-filter clearfix">';
+		$output .= '<ul class="wp-clanwars-filter">';
 
 		$obj = new stdClass();
 		$obj->id = 0;
@@ -3086,14 +3086,15 @@ class WP_ClanWars {
 				$output .= '<div class="scores ' . $wld_class . '">' . sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2) . '</div>';
 			endif;
 
+			// teams
+			$output .= '<div class="wrap">';
+
 			// output game icon
 			$game_icon = wp_get_attachment_url($match->game_icon);
-			
+
 			if($game_icon !== false) {
 				$output .= '<img src="' . $game_icon . '" alt="' . esc_attr($match->game_title) . '" class="icon" /> ';
 			}
-			// teams
-			$output .= '<div class="wrap">';
 
 			$team2_title = esc_html($match->team2_title);
 
