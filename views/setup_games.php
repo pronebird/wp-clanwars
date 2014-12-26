@@ -1,4 +1,4 @@
-<div class="wrap wp-cw-onboarding">
+<div class="wrap wp-cw-onboarding setup-games">
 
 	<h2><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
 	<h3><?php _e( 'Install games', WP_CLANWARS_TEXTDOMAIN ); ?></h3>
@@ -43,8 +43,8 @@
 
 		<fieldset>
 			<p><label for="create"><input type="radio" name="import" id="create" value="create" /> <?php _e('Create a new game', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
-			<p><?php _e('<i>Not finding your game?</i> You can create your own!<br/>You will be able to upload maps later under <strong>Games tab</strong>.', WP_CLANWARS_TEXTDOMAIN); ?></p>
-			<p><input type="text" class="regular-text" name="new_game_name" placeholder="<?php _e("Type a new game's name", WP_CLANWARS_TEXTDOMAIN); ?>" /></p>
+			<p><?php _e("<i>Not finding your game?</i> You can create your own!<br/>We'll take you to map editing right away.", WP_CLANWARS_TEXTDOMAIN); ?></p>
+			<p><input type="text" class="regular-text" name="new_game_name" placeholder="<?php _e("Type in a new game's name", WP_CLANWARS_TEXTDOMAIN); ?>" /></p>
 		</fieldset>
 
 		<p class="submit">

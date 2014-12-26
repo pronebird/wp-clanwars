@@ -60,13 +60,6 @@
 
 				<?php foreach($matches as $i => $item) : ?>
 
-					<?php
-					// if the match has no title so set default one
-					// if(empty($item->title)) {
-					// 	$item->title = __('Regular match', WP_CLANWARS_TEXTDOMAIN);
-					// }
-					?>
-
 					<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
 						<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $item->id; ?>" /></th>
 						<td class="title column-title">

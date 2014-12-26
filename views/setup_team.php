@@ -11,9 +11,9 @@
 
 		<p><?php _e( 'Hello there! Just a couple of things to complete your installation.', WP_CLANWARS_TEXTDOMAIN ); ?></p>
 
-		<p><?php _e( 'What is your team name?', WP_CLANWARS_TEXTDOMAIN ); ?></p>
+		<p><?php _e( 'What is the name of your team?', WP_CLANWARS_TEXTDOMAIN ); ?></p>
 		<p>
-			<input type="text" class="regular-text" name="title" required="true" />
+			<input type="text" class="regular-text" name="title" required="true" placeholder="<?php _e("Type in your team's name", WP_CLANWARS_TEXTDOMAIN); ?>" />
 		</p>
 
 		<p><?php _e( 'Where is it from?', WP_CLANWARS_TEXTDOMAIN ); ?></p>
