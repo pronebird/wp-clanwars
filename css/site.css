@@ -107,6 +107,7 @@ html[xmlns] .clearfix {
 
 .wp-clanwars-pagination {
 	text-align: right;
+	overflow: hidden;
 }
 
 .wp-clanwars-pagination .displaying-num {
@@ -114,12 +115,15 @@ html[xmlns] .clearfix {
 }
 
 .wp-clanwars-pagination .page-numbers {
-	padding: 2px 5px;
+	display: inline-block;
+	min-width: 30px;
+	text-align: center;
+	border: 0;
 }
 
 .wp-clanwars-pagination .page-numbers.current {
-	color: #000;
 	font-weight: bold;
+	background-color: rgba(0,0,0,0.05);
 }
 
 .wp-clanwars-page-v2 .scores,
