@@ -192,11 +192,6 @@ html[xmlns] .clearfix {
     content: "\f101";
 }
 
-
-/* WordPress 3 fixes */
-body[class*='version-3-'] .wp-cw-settings .form-field input[type=checkbox] { width: 16px; }
-
-
 /*
  * Onboarding
 **/
