@@ -144,7 +144,7 @@ class WP_ClanWars {
 					  `team2` int(10) unsigned NOT NULL,
 					  `game_id` int(10) unsigned NOT NULL,
 					  `match_status` tinyint(1) DEFAULT '0',
-					  `description` text NOT NULL,
+					  `description` text,
 					  `external_url` varchar(200) DEFAULT NULL,
 					  PRIMARY KEY (`id`),
 					  KEY `post_id` (`post_id`),
