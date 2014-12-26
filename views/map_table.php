@@ -1,5 +1,5 @@
 <div class="wrap wp-cw-maps">
-	<h2><?php _e('Maps', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=addmap&game_id=' . $game_id); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+	<h2><?php printf(__('Maps / %s', WP_CLANWARS_TEXTDOMAIN), esc_html($game->title)); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=addmap&game_id=' . $game_id); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
 
 	<div id="poststuff" class="metabox-holder">
 
@@ -10,7 +10,7 @@
 				<?php wp_nonce_field('wp-clanwars-deletemaps'); ?>
 
 				<input type="hidden" name="action" value="wp-clanwars-deletemaps" />
-				<input type="hidden" name="game_id" value="<?php echo $game_id; ?>" />
+				<input type="hidden" name="game_id" value="<?php esc_attr_e($game_id); ?>" />
 
 				<div class="tablenav">
 
@@ -49,6 +49,15 @@
 				</tfoot>
 
 				<tbody>
+
+				<!-- .no-items  -->
+				<?php if(empty($maps)) : ?>
+
+				<tr class="no-items">
+					<td class="colspanchange" colspan="2"><?php _e('No items found.', WP_CLANWARS_TEXTDOMAIN); ?></td>
+				</tr>
+
+				<?php endif; ?>
 
 				<?php foreach($maps as $i => $item) : ?>
 
