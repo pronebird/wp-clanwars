@@ -47,6 +47,12 @@ define('WP_CLANWARS_ZIPINDEX', 'index.json');
 
 require_once (dirname(__FILE__) . '/classes/view.class.php');
 require_once (dirname(__FILE__) . '/classes/utils.class.php');
+require_once (dirname(__FILE__) . '/classes/games.class.php');
+require_once (dirname(__FILE__) . '/classes/teams.class.php');
+require_once (dirname(__FILE__) . '/classes/maps.class.php');
+require_once (dirname(__FILE__) . '/classes/rounds.class.php');
+require_once (dirname(__FILE__) . '/classes/matches.class.php');
+
 require_once (dirname(__FILE__) . '/wp-clanwars-widget.php');
 require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
@@ -61,7 +67,6 @@ class WP_ClanWars {
 	);
 
 	var $countries = array();
-	var $popular_countries = false;
 	var $match_status = array();
 	var $acl_keys = array();
 	var $page_hooks = array();
@@ -85,6 +90,7 @@ class WP_ClanWars {
 							   dirname(plugin_basename(__FILE__)) . '/langs/'); //2.6+, Works with custom wp-content dirs.
 
 		add_action('widgets_init', array($this, 'on_widgets_init'));
+		add_action('init', array($this, 'on_init'));
 	}
 
 	/**
@@ -115,72 +121,11 @@ class WP_ClanWars {
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$dbstruct = '';
-
-		$dbstruct .= "CREATE TABLE `{$this->tables['games']}` (
-					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-					  `title` varchar(200) NOT NULL,
-					  `abbr` varchar(20) DEFAULT NULL,
-					  `icon` bigint(20) unsigned DEFAULT NULL,
-					  PRIMARY KEY (`id`),
-					  KEY `icon` (`icon`),
-					  KEY `title` (`title`),
-					  KEY `abbr` (`abbr`)
-					) $charset_collate;";
-
-		$dbstruct .= "CREATE TABLE `{$this->tables['maps']}` (
-					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-					  `game_id` int(10) unsigned NOT NULL,
-					  `title` varchar(200) NOT NULL,
-					  `screenshot` bigint(20) unsigned DEFAULT NULL,
-					  PRIMARY KEY (`id`),
-					  KEY `game_id` (`game_id`,`screenshot`)
-					) $charset_collate;";
-
-		$dbstruct .= "CREATE TABLE `{$this->tables['matches']}` (
-					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-					  `title` varchar(200) DEFAULT NULL,
-					  `date` datetime NOT NULL,
-					  `post_id` bigint(20) unsigned DEFAULT NULL,
-					  `team1` int(10) unsigned NOT NULL,
-					  `team2` int(10) unsigned NOT NULL,
-					  `game_id` int(10) unsigned NOT NULL,
-					  `match_status` tinyint(1) DEFAULT '0',
-					  `description` text,
-					  `external_url` varchar(200) DEFAULT NULL,
-					  PRIMARY KEY (`id`),
-					  KEY `post_id` (`post_id`),
-					  KEY `post_title` (`title`),
-					  KEY `game_id` (`game_id`),
-					  KEY `team1` (`team1`),
-					  KEY `team2` (`team2`),
-					  KEY `match_status` (`match_status`),
-					  KEY `date` (`date`)
-					) $charset_collate;";
-
-		$dbstruct .= "CREATE TABLE `{$this->tables['rounds']}` (
-					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-					  `match_id` int(10) unsigned NOT NULL,
-					  `group_n` int(10) NOT NULL,
-					  `map_id` int(10) unsigned NOT NULL,
-					  `tickets1` int(10) NOT NULL,
-					  `tickets2` int(10) NOT NULL,
-					  PRIMARY KEY (`id`),
-					  KEY `match_id` (`match_id`),
-					  KEY `group_n` (`group_n`),
-					  KEY `map_id` (`map_id`)
-					) $charset_collate;";
-
-		$dbstruct .= "CREATE TABLE `{$this->tables['teams']}` (
-					  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-					  `title` varchar(200) NOT NULL,
-					  `logo` bigint(20) unsigned DEFAULT NULL,
-					  `country` varchar(20) DEFAULT NULL,
-					  `home_team` tinyint(1) DEFAULT '0',
-					  PRIMARY KEY (`id`),
-					  KEY `country` (`country`),
-					  KEY `home_team` (`home_team`),
-					  KEY `title` (`title`)
-					) $charset_collate;";
+		$dbstruct .= \WP_Clanwars\Games::schema();
+		$dbstruct .= \WP_Clanwars\Maps::schema();
+		$dbstruct .= \WP_Clanwars\Games::schema();
+		$dbstruct .= \WP_Clanwars\Rounds::schema();
+		$dbstruct .= \WP_Clanwars\Teams::schema();
 
 		add_option(WP_CLANWARS_CATEGORY, -1);
 		add_option(WP_CLANWARS_DEFAULTCSS, true);
@@ -240,7 +185,7 @@ class WP_ClanWars {
 		add_action('admin_menu', array($this, 'on_admin_menu'));
 		add_action('template_redirect', array($this, 'on_template_redirect'));
 		add_action('wp_footer', array($this, 'on_wp_footer'));
-		
+
 		add_action('admin_post_wp-clanwars-deleteteams', array($this, 'on_admin_post_deleteteams'));
 		add_action('admin_post_wp-clanwars-sethometeam', array($this, 'on_admin_post_sethometeam'));
 		add_action('admin_post_wp-clanwars-gamesop', array($this, 'on_admin_post_gamesop'));
@@ -257,7 +202,7 @@ class WP_ClanWars {
 
 		add_action('wp_ajax_get_maps', array($this, 'on_ajax_get_maps'));
 		add_shortcode('wp-clanwars', array($this, 'on_shortcode'));
-		
+
 		$this->register_cssjs();
 	}
 
@@ -309,57 +254,57 @@ class WP_ClanWars {
 		$menu_position = $this->is_jumpstarter() ? 3 : null;
 
 		$top = add_menu_page(
-			__('ClanWars', WP_CLANWARS_TEXTDOMAIN), 
-			__('ClanWars', WP_CLANWARS_TEXTDOMAIN), 
-			$user_role, 
-			$top_level_slug, 
-			null, 
-			WP_CLANWARS_URL . '/images/plugin-icon.png', 
+			__('ClanWars', WP_CLANWARS_TEXTDOMAIN),
+			__('ClanWars', WP_CLANWARS_TEXTDOMAIN),
+			$user_role,
+			$top_level_slug,
+			null,
+			WP_CLANWARS_URL . '/images/plugin-icon.png',
 			$menu_position
 		);
 
 		$this->page_hooks['matches'] = add_submenu_page(
-			$top_level_slug, 
-			__('Matches', WP_CLANWARS_TEXTDOMAIN), 
-			__('Matches', WP_CLANWARS_TEXTDOMAIN), 
-			$acl_table['manage_matches'], 
-			$routes['manage_matches'], 
+			$top_level_slug,
+			__('Matches', WP_CLANWARS_TEXTDOMAIN),
+			__('Matches', WP_CLANWARS_TEXTDOMAIN),
+			$acl_table['manage_matches'],
+			$routes['manage_matches'],
 			$this->onboarding_or_page( 'on_manage_matches' )
 		);
 
 		$this->page_hooks['teams'] = add_submenu_page(
-			$top_level_slug, 
-			__('Teams', WP_CLANWARS_TEXTDOMAIN), 
-			__('Teams', WP_CLANWARS_TEXTDOMAIN), 
-			$acl_table['manage_teams'], 
-			$routes['manage_teams'], 
+			$top_level_slug,
+			__('Teams', WP_CLANWARS_TEXTDOMAIN),
+			__('Teams', WP_CLANWARS_TEXTDOMAIN),
+			$acl_table['manage_teams'],
+			$routes['manage_teams'],
 			$this->onboarding_or_page( 'on_manage_teams' )
 		);
 
 		$this->page_hooks['games'] = add_submenu_page(
-			$top_level_slug, 
-			__('Games', WP_CLANWARS_TEXTDOMAIN), 
-			__('Games', WP_CLANWARS_TEXTDOMAIN), 
-			$acl_table['manage_games'], 
-			$routes['manage_games'], 
+			$top_level_slug,
+			__('Games', WP_CLANWARS_TEXTDOMAIN),
+			__('Games', WP_CLANWARS_TEXTDOMAIN),
+			$acl_table['manage_games'],
+			$routes['manage_games'],
 			$this->onboarding_or_page( 'on_manage_games' )
 		);
 
 		$this->page_hooks['import'] = add_submenu_page(
-			$top_level_slug, 
-			__('Import', WP_CLANWARS_TEXTDOMAIN), 
-			__('Import', WP_CLANWARS_TEXTDOMAIN), 
-			'manage_options', 
-			'wp-clanwars-import', 
+			$top_level_slug,
+			__('Import', WP_CLANWARS_TEXTDOMAIN),
+			__('Import', WP_CLANWARS_TEXTDOMAIN),
+			'manage_options',
+			'wp-clanwars-import',
 			$this->onboarding_or_page( 'on_import' )
 		);
 
 		$this->page_hooks['settings'] = add_submenu_page(
-			$top_level_slug, 
-			__('Settings', WP_CLANWARS_TEXTDOMAIN), 
-			__('Settings', WP_CLANWARS_TEXTDOMAIN), 
-			'manage_options', 
-			'wp-clanwars-settings', 
+			$top_level_slug,
+			__('Settings', WP_CLANWARS_TEXTDOMAIN),
+			__('Settings', WP_CLANWARS_TEXTDOMAIN),
+			'manage_options',
+			'wp-clanwars-settings',
 			$this->onboarding_or_page( 'on_settings' )
 		);
 
@@ -402,8 +347,8 @@ class WP_ClanWars {
 		static $flag = null;
 
 		if($flag === null) {
-			$has_hometeam = is_object( $this->get_hometeam() );
-			$games_result = $this->get_game(array(), true);
+			$has_hometeam = is_object( \WP_Clanwars\Teams::get_hometeam() );
+			$games_result = \WP_Clanwars\Games::get_game(array(), true);
 
 			$flag = ($games_result['total_items'] === 0 || !$has_hometeam) && current_user_can('manage_options');
 		}
@@ -412,9 +357,9 @@ class WP_ClanWars {
 	}
 
 	function onboarding_page() {
-		$games_result = $this->get_game(array(), true);
+		$games_result = \WP_Clanwars\Games::get_game(array(), true);
 
-		$has_hometeam = is_object( $this->get_hometeam() );
+		$has_hometeam = is_object( \WP_Clanwars\Teams::get_hometeam() );
 		$has_games = ($games_result['total_items'] > 0);
 
 		$context = array();
@@ -432,7 +377,7 @@ class WP_ClanWars {
 			$view = new \WP_Clanwars\View( 'setup_games' );
 
 			$import_list = $this->get_available_games();
-			$installed_games = $this->get_game('');
+			$installed_games = \WP_Clanwars\Games::get_game('');
 
 			// mark installed games
 			foreach($import_list as $game) {
@@ -475,7 +420,7 @@ class WP_ClanWars {
 
 		$data['home_team'] = 1;
 
-		$this->add_team( $data );
+		\WP_Clanwars\Teams::add_team( $data );
 
 		wp_redirect($referer);
 	}
@@ -534,7 +479,7 @@ class WP_ClanWars {
 
 			case 'create':
 
-				$new_game_id = $this->add_game(array(
+				$new_game_id = \WP_Clanwars\Games::add_game(array(
 					'title' => $new_game_name,
 					'abbr' => strtoupper($new_game_name)
 				));
@@ -568,7 +513,7 @@ class WP_ClanWars {
 
 		if(!empty($acl) && isset($acl[$user_id]))
 			$caps = $acl[$user_id];
-	
+
 		$user = new WP_User($user_id);
 		if(!empty($user))
 			$is_super = $user->has_cap('manage_options');
@@ -693,30 +638,30 @@ class WP_ClanWars {
 	function most_popular_countries()
 	{
 		global $wpdb;
-		
+
 		$limit = 10;
-		
-		if($this->popular_countries === false) 
+
+		if($this->popular_countries === false)
 		{
-		
+
 			$this->popular_countries = $wpdb->get_results(
-				$wpdb->prepare("(SELECT t1.country, COUNT(t2.id) AS cnt 
+				$wpdb->prepare("(SELECT t1.country, COUNT(t2.id) AS cnt
 								FROM {$this->tables['teams']} AS t1, {$this->tables['matches']} AS t2
 								WHERE t1.id = t2.team1
 								GROUP BY t1.country
 								LIMIT %d)
 								UNION
-								(SELECT t1.country, COUNT(t2.id) AS cnt 
+								(SELECT t1.country, COUNT(t2.id) AS cnt
 								FROM {$this->tables['teams']} AS t1, {$this->tables['matches']} AS t2
 								WHERE t1.id = t2.team2
 								GROUP BY t1.country
 								LIMIT %d)
 								ORDER BY cnt DESC
-								LIMIT %d", $limit, $limit, $limit), 
+								LIMIT %d", $limit, $limit, $limit),
 							ARRAY_A);
-						
+
 		}
-					
+
 		return $this->popular_countries;
 	}
 
@@ -749,8 +694,8 @@ class WP_ClanWars {
 		echo '<select' . $attrstr . '>';
 
 		if($show_popular) {
-			$popular = $this->most_popular_countries();
-			
+			$popular = \WP_Clanwars\Teams::most_popular_countries();
+
 			if(!empty($popular)) {
 				foreach($popular as $i => $data) :
 					$abbr = $data['country'];
@@ -761,7 +706,7 @@ class WP_ClanWars {
 				echo '<optgroup label="-----------------" style="font-family: monospace;"></optgroup>';
 			}
 		}
-		
+
 		$sorted_countries = $this->countries;
 		asort($sorted_countries);
 
@@ -918,147 +863,6 @@ class WP_ClanWars {
 		return false;
 	}
 
-	function get_team($p, $count = false)
-	{
-		global $wpdb;
-
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
-					'id' => false,
-					'title' => false,
-					'limit' => 0,
-					'offset' => 0,
-					'orderby' => 'id',
-					'order' => 'ASC')));
-
-		$where_query = '';
-		$limit_query = '';
-		$order_query = '';
-
-		$order = strtolower($order);
-		if($order != 'asc' && $order != 'desc')
-			$order = 'asc';
-
-		$order_query = 'ORDER BY `' . $orderby . '` ' . $order;
-
-		if($id != 'all' && $id !== false) {
-
-			if(!is_array($id))
-				$id = array($id);
-
-			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
-		}
-
-		if($title !== false) {
-			$where_query[] = $wpdb->prepare('title=%s', $title);
-		}
-
-		if($limit > 0) {
-			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
-		}
-
-
-		if(!empty($where_query))
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
-
-		if($count) {
-
-			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . $this->tables['teams'] . '` ' . $where_query);
-
-			$ret = array('total_items' => 0, 'total_pages' => 1);
-
-			$ret['total_items'] = (int) $rslt->m_count;
-			
-			if($limit > 0) {
-				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
-			}
-
-			return $ret;
-		}
-
-		$rslt = $wpdb->get_results('SELECT * FROM `' . $this->tables['teams'] . '` ' . implode(' ', array($where_query, $order_query, $limit_query)));
-
-		return $rslt;
-	}
-
-	function add_team($p)
-	{
-		global $wpdb;
-
-		$data = \WP_Clanwars\Utils::extract_args($p, array(
-					'title' => '',
-					'logo' => 0,
-					'country' => '',
-					'home_team' => 0));
-
-		if($wpdb->insert($this->tables['teams'], $data, array('%s', '%d', '%s', '%d')))
-		{
-			$insert_id = $wpdb->insert_id;
-
-			if($data['home_team']) {
-				$this->set_hometeam($insert_id);
-			}
-			return $insert_id;
-		}
-
-		return false;
-	}
-
-	function set_hometeam($id) {
-		global $wpdb;
-
-		$wpdb->update($this->tables['teams'], array('home_team' => 0), array('home_team' => 1), array('%d'), array('%d'));
-		return $wpdb->update($this->tables['teams'], array('home_team' => 1), array('id' => $id), array('%d'), array('%d'));
-	}
-
-	function get_hometeam() {
-		global $wpdb;
-
-		return $wpdb->get_row("SELECT * FROM {$this->tables['teams']} WHERE home_team = 1");
-	}
-
-	function update_team($id, $p)
-	{
-		global $wpdb;
-
-		$fields = array('title' => '%s', 'country' => '%s', 'home_team' => '%d', 'logo' => '%d');
-
-		$data = wp_parse_args($p, array());
-
-		$update_data = array();
-		$update_mask = array();
-
-		foreach($fields as $fld => $mask) {
-			if(isset($data[$fld])) {
-				$update_data[$fld] = $data[$fld];
-				$update_mask[] = $mask;
-			}
-		}
-
-		$result = $wpdb->update($this->tables['teams'], $update_data, array('id' => $id), $update_mask, array('%d'));
-
-		if(isset($update_data['home_team'])) {
-			$this->set_hometeam($id);
-		}
-
-		return $result;
-	}
-
-	function delete_team($id) 
-	{
-		global $wpdb;
-		
-		if(!is_array($id))
-			$id = array($id);
-		
-		$id = array_map('intval', $id);
-
-		// delete matches belongs to this team
-		$this->delete_match_by_team($id);
-		
-		return $wpdb->query('DELETE FROM `' . $this->tables['teams'] . '` WHERE id IN(' . implode(',', $id) . ')');
-	}
-
 	function on_admin_post_deleteteams()
 	{
 		if(!$this->acl_user_can('manage_teams'))
@@ -1071,7 +875,7 @@ class WP_ClanWars {
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
 			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
 
-			$error = $this->delete_team($delete);
+			$error = \WP_Clanwars\Teams::delete_team($delete);
 			$referer = add_query_arg('delete', $error, $referer);
 		}
 
@@ -1079,7 +883,7 @@ class WP_ClanWars {
 	}
 
 	function on_admin_post_sethometeam()
-	{	
+	{
 		if(!$this->acl_user_can('manage_teams'))
 			wp_die( __('Cheatin&#8217; uh?') );
 
@@ -1089,7 +893,7 @@ class WP_ClanWars {
 
 		extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('id' => array())));
 
-		$error = $this->set_hometeam($id);
+		$error = \WP_Clanwars\Teams::set_hometeam($id);
 
 		wp_redirect($referer);
 	}
@@ -1112,7 +916,7 @@ class WP_ClanWars {
 		$data = array();
 
 		if($team_id > 0) {
-			$t = $this->get_team(array('id' => $team_id));
+			$t = \WP_Clanwars\Teams::get_team(array('id' => $team_id));
 			if(!empty($t)) {
 				$data = (array)$t[0];
 			}
@@ -1138,7 +942,7 @@ class WP_ClanWars {
 
 		// ACL checks on edit
 		if($act == 'edit') {
-			$t = $this->get_team(array('id' => $id));
+			$t = \WP_Clanwars\Teams::get_team(array('id' => $id));
 
 			if($id != 0 && empty($t))
 				wp_die( __('Cheatin&#8217; uh?') );
@@ -1150,7 +954,7 @@ class WP_ClanWars {
 
 				switch($act) {
 					case 'add':
-						if($this->add_team(stripslashes_deep($_POST))) {
+						if(\WP_Clanwars\Teams::add_team(stripslashes_deep($_POST))) {
 							wp_redirect(admin_url('admin.php?page=wp-clanwars-teams&add=1'));
 							exit();
 						} else
@@ -1158,7 +962,7 @@ class WP_ClanWars {
 					break;
 
 					case 'edit':
-						if($this->update_team($id, stripslashes_deep($_POST)) !== false) {
+						if(\WP_Clanwars\Teams::update_team($id, stripslashes_deep($_POST)) !== false) {
 							wp_redirect(admin_url('admin.php?page=wp-clanwars-teams&update=1'));
 							exit();
 						} else
@@ -1187,8 +991,8 @@ class WP_ClanWars {
 				break;
 		}
 
-		$teams = $this->get_team('id=all&order=asc&orderby=title&limit=' . $limit . '&offset=' . ($limit * ($current_page-1)));
-		$stat = $this->get_team('id=all&limit=' . $limit, true);
+		$teams = \WP_Clanwars\Teams::get_team('id=all&order=asc&orderby=title&limit=' . $limit . '&offset=' . ($limit * ($current_page-1)));
+		$stat = \WP_Clanwars\Teams::get_team('id=all&limit=' . $limit, true);
 
 		$page_links = paginate_links( array(
 				'base' => add_query_arg('paged', '%#%'),
@@ -1240,116 +1044,6 @@ class WP_ClanWars {
 	 * Games Managment
 	 */
 
-	function get_game($p, $count = false)
-	{
-		global $wpdb;
-
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
-			'id' => false,
-			'limit' => 0,
-			'offset' => 0,
-			'orderby' => 'id',
-			'order' => 'ASC')));
-
-		$where_query = '';
-		$limit_query = '';
-		$order_query = '';
-
-		$order = strtolower($order);
-		if($order != 'asc' && $order != 'desc')
-			$order = 'asc';
-
-		$order_query = 'ORDER BY `' . $orderby . '` ' . $order;
-
-		if($id != 'all' && $id !== false) {
-
-			if(!is_array($id))
-				$id = array($id);
-
-			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
-		}
-
-		if($limit > 0) {
-			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
-		}
-
-
-		if(!empty($where_query))
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
-
-		if($count) {
-
-			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . $this->tables['games'] . '` ' . $where_query);
-
-			$ret = array('total_items' => 0, 'total_pages' => 1);
-
-			$ret['total_items'] = (int) $rslt->m_count;
-
-			if($limit > 0) {
-				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
-			}
-
-			return $ret;
-		}
-
-		$rslt = $wpdb->get_results('SELECT * FROM `' . $this->tables['games'] . '` ' . implode(' ', array($where_query, $order_query, $limit_query)));
-
-		return $rslt;
-	}
-
-	function add_game($p)
-	{
-		global $wpdb;
-
-		$data = \WP_Clanwars\Utils::extract_args($p, array('title' => '', 'abbr' => '', 'icon' => 0));
-
-		if($wpdb->insert($this->tables['games'], $data, array('%s', '%s', '%d')))
-		{
-			$insert_id = $wpdb->insert_id;
-
-			return $insert_id;
-		}
-
-		return false;
-	}
-
-	function update_game($id, $p)
-	{
-		global $wpdb;
-
-		$fields = array('title' => '%s', 'abbr' => '%s', 'icon' => '%d');
-
-		$data = wp_parse_args($p, array());
-
-		$update_data = array();
-		$update_mask = array();
-
-		foreach($fields as $fld => $mask) {
-			if(isset($data[$fld])) {
-				$update_data[$fld] = $data[$fld];
-				$update_mask[] = $mask;
-			}
-		}
-
-		return $wpdb->update($this->tables['games'], $update_data, array('id' => $id), $update_mask, array('%d'));
-	}
-
-	function delete_game($id)
-	{
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-
-		$this->delete_map_by_game($id);
-		$this->delete_match_by_game($id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['games'] . '` WHERE id IN(' . implode(',', $id) . ')');
-	}
-
 	function on_admin_post_gamesop()
 	{
 		if(!$this->acl_user_can('manage_games')) {
@@ -1369,7 +1063,7 @@ class WP_ClanWars {
 
 			switch($action) {
 				case 'delete':
-					$error = $this->delete_game($items);
+					$error = \WP_Clanwars\Games::delete_game($items);
 					$referer = add_query_arg('delete', $error, $referer);
 				break;
 				case 'export':
@@ -1399,7 +1093,7 @@ class WP_ClanWars {
 		WP_Filesystem();
 
 		$id = (int)$id;
-		$games = $this->get_game(array('id' => $id));
+		$games = \WP_Clanwars\Games::get_game(array('id' => $id));
 		$game = current($games);
 
 		if(!$game) {
@@ -1415,7 +1109,7 @@ class WP_ClanWars {
 		));
 		$zip_files = array();
 
-		$maplist = $this->get_map(array('game_id' => $game->id));
+		$maplist = \WP_Clanwars\Maps::get_map(array('game_id' => $game->id));
 
 		if($game->icon != 0) {
 			$attach = get_attached_file($game->icon);
@@ -1600,7 +1294,7 @@ class WP_ClanWars {
 		$maplist = $p['maplist'];
 		unset($p['maplist']);
 
-		$game_id = $this->add_game($p);
+		$game_id = \WP_Clanwars\Games::add_game($p);
 
 		if(empty($game_id)) {
 			$clean_unzip_dir();
@@ -1613,7 +1307,7 @@ class WP_ClanWars {
 			$p['game_id'] = $game_id;
 
 			if(!empty($p['title'])) {
-				$this->add_map($p);
+				\WP_Clanwars\Maps::add_map($p);
 			}
 		}
 
@@ -1640,22 +1334,22 @@ class WP_ClanWars {
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 		$game_id = isset($_GET['game_id']) ? $_GET['game_id'] : 0;
 		$die = false;
-		
+
 		// Check game or map is really exists
 		if($act == 'add' && !$this->acl_user_can('manage_game', 'all')) {
 			$die = true;
 		}
 		else if($act == 'edit' || $act == 'maps' || $act == 'addmap') {
 
-			$g = $this->get_game(array('id' => 
+			$g = \WP_Clanwars\Games::get_game(array('id' =>
 					($act == 'maps' || $act == 'addmap' ? $game_id : $id)
 				));
 
 			$die = empty($g) || !$this->acl_user_can('manage_game', $g[0]->id);
-			
+
 		} else if($act == 'editmap') {
-			
-			$m = $this->get_map(array('id' => $id));
+
+			$m = \WP_Clanwars\Maps::get_map(array('id' => $id));
 			$die = empty($m);
 		}
 
@@ -1693,7 +1387,7 @@ class WP_ClanWars {
 
 							if($data['icon'] >= 0) {
 
-								if($this->add_game($data)) {
+								if(\WP_Clanwars\Games::add_game($data)) {
 									wp_redirect(admin_url('admin.php?page=wp-clanwars-games&add=1'));
 									exit();
 								} else
@@ -1712,9 +1406,9 @@ class WP_ClanWars {
 						extract($data);
 
 						unset($data['delete_image']);
-						
+
 						if(!empty($title)) {
-							
+
 							if(!empty($delete_image))
 								$data['icon'] = 0;
 
@@ -1727,7 +1421,7 @@ class WP_ClanWars {
 
 							if($attach_id >= 0) {
 
-								if($this->update_game($id, $data) !== false) {
+								if(\WP_Clanwars\Games::update_game($id, $data) !== false) {
 									wp_redirect(admin_url('admin.php?page=wp-clanwars-games&update=1'));
 									exit();
 								} else
@@ -1739,7 +1433,7 @@ class WP_ClanWars {
 						} else
 							$this->add_notice(__('Game title is required field.', WP_CLANWARS_TEXTDOMAIN), 'error');
 						break;
-						
+
 					case 'addmap':
 						$defaults = array('title' => '', 'game_id' => 0, 'id' => 0);
 						$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
@@ -1748,13 +1442,13 @@ class WP_ClanWars {
 						if(!empty($title)) {
 
 							$attach_id = $this->handle_upload('screenshot_file');
-							
+
 							if($attach_id == self::ErrorUploadNoFile)
 								$attach_id = 0;
 
 							if($attach_id >= 0) {
 
-								if($this->add_map(array('title' => $title, 'screenshot' => $attach_id, 'game_id' => $game_id)) !== false) {
+								if(\WP_Clanwars\Maps::add_map(array('title' => $title, 'screenshot' => $attach_id, 'game_id' => $game_id)) !== false) {
 									wp_redirect(admin_url(sprintf('admin.php?page=wp-clanwars-games&act=maps&game_id=%d&add=1', $game_id)));
 									exit();
 								} else
@@ -1767,7 +1461,7 @@ class WP_ClanWars {
 							$this->add_notice(__('Map title is required field.', WP_CLANWARS_TEXTDOMAIN), 'error');
 
 						break;
-						
+
 					case 'editmap':
 						$defaults = array('title' => '', 'game_id' => 'all', 'id' => 0, 'delete_image' => false);
 						$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
@@ -1789,7 +1483,7 @@ class WP_ClanWars {
 
 							if($attach_id >= 0) {
 
-								if($this->update_map($id, $update_data) !== false) {
+								if(\WP_Clanwars\Maps::update_map($id, $update_data) !== false) {
 									wp_redirect(admin_url(sprintf('admin.php?page=wp-clanwars-games&act=maps&game_id=%d&update=1', $game_id)));
 									exit();
 								} else
@@ -1832,12 +1526,12 @@ class WP_ClanWars {
 				break;
 		}
 
-		$games = $this->get_game(array(
+		$games = \WP_Clanwars\Games::get_game(array(
 			'id' => $filter_games,
 			'orderby' => 'title', 'order' => 'asc',
 			'limit' => $limit, 'offset' => ($limit * ($current_page-1))
 		));
-		$stat = $this->get_game(array('id' => $filter_games, 'limit' => $limit), true);
+		$stat = \WP_Clanwars\Games::get_game(array('id' => $filter_games, 'limit' => $limit), true);
 
 		$show_add_button = $this->acl_user_can('manage_game', 'all');
 
@@ -1896,7 +1590,7 @@ class WP_ClanWars {
 		$game = new stdClass();
 
 		if($game_id > 0) {
-			$result = $this->get_game(array('id' => $game_id));
+			$result = \WP_Clanwars\Games::get_game(array('id' => $game_id));
 			if(!empty($result)) {
 				$game = $result[0];
 			}
@@ -1916,7 +1610,7 @@ class WP_ClanWars {
 	/*
 	 * Maps managment
 	 */
-	
+
 	function on_admin_post_deletemaps()
 	{
 		if(!$this->acl_user_can('manage_games'))
@@ -1929,7 +1623,7 @@ class WP_ClanWars {
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
 			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
 
-			$error = $this->delete_map($delete);
+			$error = \WP_Clanwars\Maps::delete_map($delete);
 			$referer = add_query_arg('delete', $error, $referer);
 		}
 
@@ -1942,9 +1636,9 @@ class WP_ClanWars {
 		$current_page = isset($_GET['paged']) ? $_GET['paged'] : 1;
 		$limit = 10;
 
-		$maps = $this->get_map('id=all&orderby=title&order=asc&game_id=' . $game_id . '&limit=' . $limit . '&offset=' . ($limit * ($current_page-1)));
-		$stat = $this->get_map('id=all&game_id=' . $game_id . '&limit=' . $limit, true);
-		$game = current($this->get_game(array('id' => $game_id)));
+		$maps = \WP_Clanwars\Maps::get_map('id=all&orderby=title&order=asc&game_id=' . $game_id . '&limit=' . $limit . '&offset=' . ($limit * ($current_page-1)));
+		$stat = \WP_Clanwars\Maps::get_map('id=all&game_id=' . $game_id . '&limit=' . $limit, true);
+		$game = current(\WP_Clanwars\Games::get_game(array('id' => $game_id)));
 
 		foreach($maps as $map) {
 			$map->attach = wp_get_attachment_image($map->screenshot, 'thumbnail');
@@ -1996,138 +1690,6 @@ class WP_ClanWars {
 		$view->render( $context );
 	}
 
-	function get_map($p, $count = false)
-	{
-		global $wpdb;
-
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
-			'id' => false,
-			'game_id' => false,
-			'limit' => 0,
-			'offset' => 0,
-			'orderby' => 'id',
-			'order' => 'ASC')));
-		$where_query = '';
-		$limit_query = '';
-		$order_query = '';
-
-		$order = strtolower($order);
-		if($order != 'asc' && $order != 'desc')
-			$order = 'asc';
-
-		$order_query = 'ORDER BY `' . $orderby . '` ' . $order;
-
-		if($id != 'all' && $id !== false) {
-
-			if(!is_array($id))
-				$id = array($id);
-
-			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
-		}
-
-		if($game_id != 'all' && $game_id !== false) {
-
-			if(!is_array($game_id))
-				$game_id = array($game_id);
-
-			$game_id = array_map('intval', $game_id);
-			$where_query[] = 'game_id IN (' . implode(', ', $game_id) . ')';
-		}
-
-		if($limit > 0) {
-			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
-		}
-
-		if(!empty($where_query))
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
-
-		if($count) {
-
-			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . $this->tables['maps'] . '` ' . $where_query);
-
-			$ret = array('total_items' => 0, 'total_pages' => 1);
-
-			$ret['total_items'] = (int) $rslt->m_count;
-
-			if($limit > 0) {
-				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
-			}
-
-			return $ret;
-		}
-
-		$rslt = $wpdb->get_results('SELECT * FROM `' . $this->tables['maps'] . '` ' . implode(' ', array($where_query, $order_query, $limit_query)));
-
-		return $rslt;
-	}
-
-	function add_map($p)
-	{
-		global $wpdb;
-
-		$data = \WP_Clanwars\Utils::extract_args($p, array(
-					'title' => '',
-					'screenshot' => 0,
-					'game_id' => 0));
-
-		if($wpdb->insert($this->tables['maps'], $data, array('%s', '%d', '%d')))
-		{
-			$insert_id = $wpdb->insert_id;
-
-			return $insert_id;
-		}
-
-		return false;
-	}
-
-	function update_map($id, $p)
-	{
-		global $wpdb;
-
-		$fields = array('title' => '%s', 'screenshot' => '%d', 'game_id' => '%d');
-
-		$data = wp_parse_args($p, array());
-
-		$update_data = array();
-		$update_mask = array();
-
-		foreach($fields as $fld => $mask) {
-			if(isset($data[$fld])) {
-				$update_data[$fld] = $data[$fld];
-				$update_mask[] = $mask;
-			}
-		}
-
-		$result = $wpdb->update($this->tables['maps'], $update_data, array('id' => $id), $update_mask, array('%d'));
-
-		return $result;
-	}
-
-	function delete_map($id)
-	{
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['maps'] . '` WHERE id IN(' . implode(',', $id) . ')');
-	}
-
-	function delete_map_by_game($id)
-	{
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['maps'] . '` WHERE game_id IN(' . implode(',', $id) . ')');
-	}
-
 	function on_add_map()
 	{
 		$game_id = isset($_GET['game_id']) ? (int)$_GET['game_id'] : 0;
@@ -2148,7 +1710,7 @@ class WP_ClanWars {
 		$data = array();
 
 		if($id > 0) {
-			$t = $this->get_map(array('id' => $id, 'game_id' => $game_id));
+			$t = \WP_Clanwars\Maps::get_map(array('id' => $id, 'game_id' => $game_id));
 
 			if(!empty($t)){
 				$data = (array)$t[0];
@@ -2193,18 +1755,6 @@ class WP_ClanWars {
 		wp_redirect($referer);
 	}
 
-	function current_time_fixed( $type, $gmt = 0 ) {
-		$t = ( $gmt ) ? gmdate( 'Y-m-d H:i:s' ) : gmdate( 'Y-m-d H:i:s', ( time() + ( get_option( 'gmt_offset' ) * 3600 ) ) );
-		switch ( $type ) {
-			case 'mysql':
-				return $t;
-				break;
-			case 'timestamp':
-				return strtotime($t);
-				break;
-		}
-	}
-
 	function html_date_helper( $prefix, $time = 0, $tab_index = 0 )
 	{
 		global $wp_locale;
@@ -2215,7 +1765,7 @@ class WP_ClanWars {
 			$tab_index_attribute = " tabindex=\"$tab_index\"";
 
 		if($time == 0)
-			$time_adj = $this->current_time_fixed('timestamp', 0);
+			$time_adj = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
 		else
 			$time_adj = $time;
 
@@ -2250,376 +1800,6 @@ class WP_ClanWars {
 		return $date;
 	}
 
-	function get_match($p, $count = false)
-	{
-		global $wpdb;
-
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
-			'from_date' => 0,
-			'id' => false,
-			'game_id' => false,
-			'sum_tickets' => false,
-			'limit' => 0,
-			'offset' => 0,
-			'orderby' => 'id',
-			'order' => 'ASC')));
-
-		$where_query = '';
-		$limit_query = '';
-		$order_query = '';
-
-		$order = strtolower($order);
-		if($order != 'asc' && $order != 'desc')
-			$order = 'asc';
-
-		$order_query = 'ORDER BY t1.`' . $orderby . '` ' . $order;
-
-		if($id != 'all' && $id !== false) {
-
-			if(!is_array($id))
-				$id = array($id);
-
-			$id = array_map('intval', $id);
-			$where_query[] = 't1.id IN (' . implode(', ', $id) . ')';
-		}
-
-		if($game_id != 'all' && $game_id !== false) {
-
-			if(!is_array($game_id))
-				$game_id = array($game_id);
-
-			$game_id = array_map('intval', $game_id);
-			$where_query[] = 't1.game_id IN (' . implode(', ', $game_id) . ')';
-		}
-
-		if($from_date > 0) {
-			$where_query[] = 't1.date >= FROM_UNIXTIME(' . intval($from_date) . ')';
-		}
-
-		if($limit > 0) {
-			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
-		}
-
-		if(!empty($where_query)) {
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
-		}
-
-		if($count) {
-			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . $this->tables['matches'] . '` AS t1 ' . $where_query);
-			$ret = array('total_items' => 0, 'total_pages' => 1);
-			$ret['total_items'] = (int) $rslt->m_count;
-
-			if($limit > 0) {
-				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
-			}
-
-			return $ret;
-		}
-
-		if($sum_tickets) {
-			$rslt = $wpdb->get_results(
-					'SELECT t1.*, t2.title AS game_title, t2.abbr AS game_abbr, t2.icon AS game_icon,
-							tt1.title AS team1_title, tt2.title AS team2_title,
-							tt1.country AS team1_country, tt2.country AS team2_country,
-							(SELECT SUM(sumt1.tickets1) FROM `' . $this->tables['rounds'] . '` AS sumt1 WHERE sumt1.match_id = t1.id) AS team1_tickets,
-							(SELECT SUM(sumt2.tickets2) FROM `' . $this->tables['rounds'] . '` AS sumt2 WHERE sumt2.match_id = t1.id) AS team2_tickets
-
-					 FROM `' . $this->tables['matches'] . '` AS t1
-					 LEFT JOIN `' . $this->tables['games'] . '` AS t2 ON t1.game_id=t2.id
-					 LEFT JOIN `' . $this->tables['teams'] . '` AS tt1 ON t1.team1=tt1.id
-					 LEFT JOIN `' . $this->tables['teams'] . '` AS tt2 ON t1.team2=tt2.id ' .
-					 implode(' ', array($where_query, $order_query, $limit_query)));
-
-		} else {
-			$rslt = $wpdb->get_results(
-					'SELECT t1.*, t2.title AS game_title, t2.abbr AS game_abbr, t2.icon AS game_icon,
-							tt1.title AS team1_title, tt2.title AS team2_title,
-							tt1.country AS team1_country, tt2.country AS team2_country
-					 FROM `' . $this->tables['matches'] . '` AS t1
-					 LEFT JOIN `' . $this->tables['games'] . '` AS t2 ON t1.game_id=t2.id
-					 LEFT JOIN `' . $this->tables['teams'] . '` AS tt1 ON t1.team1=tt1.id
-					 LEFT JOIN `' . $this->tables['teams'] . '` AS tt2 ON t1.team2=tt2.id ' .
-					 implode(' ', array($where_query, $order_query, $limit_query)));
-		}
-
-		return $rslt;
-	}
-
-	function update_match_post($match_id) {
-		global $wpdb;
-
-		// Get match by ID
-		$matches = $this->get_match(array(
-			'id' => $match_id,
-			'sum_tickets' => true
-		));
-
-		if(empty($matches)) {
-			return false;
-		}
-
-		$match = $matches[0];
-
-		// Get post category
-		$post_category = get_option(WP_CLANWARS_CATEGORY, -1);
-
-		// New post data
-		$postarr = array(
-			'post_status' => 'publish',
-			'post_excerpt' => '',
-			'post_title' => ''
-		);
-
-		if($post_category !== -1) {
-			$postarr['post_category'] = array( (int)$post_category );
-		}
-
-		$post = get_post($match->post_id);
-
-		if(!is_null($post)) {
-			$postarr['ID'] = $post->ID;
-		}
-
-		$post_title = $match->title;
-		if(empty($post_title)) {
-			$post_title = sprintf(__('%s vs. %s', WP_CLANWARS_TEXTDOMAIN), $match->team1_title, $match->team2_title);
-		}
-
-		$post_excerpt = sprintf(_x('%s vs. %s', 'match_excerpt', WP_CLANWARS_TEXTDOMAIN), $match->team1_title, $match->team2_title) . "\n";
-		$post_excerpt .= sprintf(__('%d:%d'), $match->team1_tickets, $match->team2_tickets) . "\n";
-
-		if(!empty($match->description)) {
-			$description = nl2br(esc_html($match->description));
-			$description = make_clickable($description);
-			$description = wptexturize($description);
-			$description = convert_smilies($description);
-
-			// add target=_blank to all links
-			$description = preg_replace('#(<a.*?)(>.*?</a>)#i', '$1 target="_blank"$2', $description);
-
-			$post_excerpt .= $description . "\n";
-		}
-
-		$postarr['post_title'] = $post_title;
-		$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
-
-		if(!isset($postarr['ID'])) {
-			// generate shortcode only when creating post
-			$postarr['post_content'] = '[wp-clanwars match_id="' . $match->id . '"]';
-
-			$new_post_ID = wp_insert_post($postarr);
-		} else {
-			$new_post_ID = wp_update_post($postarr);
-		}
-
-		$result = $wpdb->update($this->tables['matches'], array('post_id' => $new_post_ID), array('id' => $match_id), array('%d'), array('%d'));
-
-		return $new_post_ID;
-	}
-
-	function add_match($p)
-	{
-		global $wpdb;
-
-		$data = \WP_Clanwars\Utils::extract_args($p, array(
-					'title' => '',
-					'date' => $this->current_time_fixed('timestamp', 0),
-					'post_id' => 0,
-					'team1' => 0,
-					'team2' => 0,
-					'game_id' => 0,
-					'match_status' => 0,
-					'description' => ''
-			));
-
-		if($wpdb->insert($this->tables['matches'], $data, array('%s', '%s', '%d', '%d', '%d', '%d', '%s')))
-		{
-			$insert_id = $wpdb->insert_id;
-
-			return $insert_id;
-		}
-
-		return false;
-	}
-
-	function update_match($id, $p)
-	{
-		global $wpdb;
-
-		$fields = array(
-			'title' => '%s',
-			'date' => '%s',
-			'post_id' => '%d',
-			'team1' => '%d',
-			'team2' => '%d',
-			'game_id' => '%d',
-			'match_status' => '%d',
-			'description' => '%s',
-			'external_url' => '%s'
-		);
-
-		$data = wp_parse_args($p, array());
-
-		$update_data = array();
-		$update_mask = array();
-
-		foreach($fields as $fld => $mask) {
-			if(isset($data[$fld])) {
-				$update_data[$fld] = $data[$fld];
-				$update_mask[] = $mask;
-			}
-		}
-
-		// filter external_url field
-		if(isset($update_data['external_url'])) {
-			$update_data['external_url'] = esc_url_raw($update_data['external_url']);
-		}
-
-		$result = $wpdb->update($this->tables['matches'], $update_data, array('id' => $id), $update_mask, array('%d'));
-
-		return $result;
-	}
-
-	// @TODO: remove post
-	function delete_match($id)
-	{
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-
-		$this->delete_rounds_by_match($id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['matches'] . '` WHERE id IN(' . implode(',', $id) . ')');
-	}
-
-	function delete_match_by_team($id) {
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-		$id_list = implode(',', $id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['matches'] . '` WHERE team1 IN(' . $id_list . ') OR team2 IN(' . $id_list . ')');
-	}
-
-	function delete_match_by_game($id) {
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['matches'] . '` WHERE game_id IN(' . implode(',', $id) . ')');
-	
-	}
-
-	function get_rounds($match_id)
-	{
-		global $wpdb;
-
-		return $wpdb->get_results(
-				$wpdb->prepare(
-						'SELECT t1.*, t2.title, t2.screenshot FROM `' . $this->tables['rounds'] . '` AS t1
-						 LEFT JOIN `' . $this->tables['maps'] . '` AS t2
-						 ON t2.id = t1.map_id
-						 WHERE t1.match_id=%d ORDER BY t1.id ASC, t1.group_n ASC',
-						$match_id)
-				);
-	}
-
-	function add_round($p)
-	{
-		global $wpdb;
-
-		$data = \WP_Clanwars\Utils::extract_args($p, array(
-					'match_id' => 0,
-					'group_n' => 0,
-					'map_id' => 0,
-					'tickets1' => 0,
-					'tickets2' => 0
-			));
-
-		if($wpdb->insert($this->tables['rounds'], $data, array('%d', '%d', '%d', '%d', '%d')))
-		{
-			$insert_id = $wpdb->insert_id;
-
-			return $insert_id;
-		}
-
-		return false;
-	}
-
-	function update_round($id, $p)
-	{
-		global $wpdb;
-
-		$fields = array(
-			'match_id' => '%d',
-			'group_n' => '%d',
-			'map_id' => '%d',
-			'tickets1' => '%d',
-			'tickets2' => '%d'
-		);
-
-		$data = wp_parse_args($p, array());
-
-		$update_data = array();
-		$update_mask = array();
-
-		foreach($fields as $fld => $mask) {
-			if(isset($data[$fld])) {
-				$update_data[$fld] = $data[$fld];
-				$update_mask[] = $mask;
-			}
-		}
-
-		$result = $wpdb->update($this->tables['rounds'], $update_data, array('id' => $id), $update_mask, array('%d'));
-
-		return $result;
-	}
-
-	function delete_round($id)
-	{
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['rounds'] . '` WHERE id IN(' . implode(',', $id) . ')');
-	}
-
-	function delete_rounds_not_in($match_id, $id)
-	{
-		global $wpdb;
-
-		if(!is_array($id))
-			$id = array($id);
-
-		$id = array_map('intval', $id);
-
-		return $wpdb->query($wpdb->prepare('DELETE FROM `' . $this->tables['rounds'] . '` WHERE match_id=%d AND id NOT IN(' . implode(',', $id) . ')', $match_id));
-	}
-
-	function delete_rounds_by_match($match_id)
-	{
-		global $wpdb;
-
-		if(!is_array($match_id))
-			$match_id = array($match_id);
-
-		$match_id = array_map('intval', $match_id);
-
-		return $wpdb->query('DELETE FROM `' . $this->tables['rounds'] . '` WHERE match_id IN(' . implode(',', $match_id) . ')');
-	}
-
 	// Get available games bundled with plugin
 	// This function simply reads and decodes import/import.json
 	// @return an array of avaialable games on success, otherwise false
@@ -2640,7 +1820,7 @@ class WP_ClanWars {
 	// @return bool a game object matching $title or $abbr, otherwise false
 	function is_game_installed($title, $abbr = '', $objects = false) {
 		if(!is_array($objects)) {
-			$objects = $this->get_game('');
+			$objects = \WP_Clanwars\Games::get_game('');
 		}
 
 		foreach($objects as $p) {
@@ -2656,7 +1836,7 @@ class WP_ClanWars {
 		return false;
 	}
 
-	function on_add_match() 
+	function on_add_match()
 	{
 		return $this->match_editor(__('Add Match', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-matches', __('Add Match', WP_CLANWARS_TEXTDOMAIN));
 	}
@@ -2677,7 +1857,7 @@ class WP_ClanWars {
 		$game_id = isset($_POST['game_id']) ? (int)$_POST['game_id'] : 0;
 
 		if($game_id > 0) {
-			$maps = $this->get_map(array('game_id' => $game_id, 'order' => 'asc', 'orderby' => 'title'));
+			$maps = \WP_Clanwars\Maps::get_map(array('game_id' => $game_id, 'order' => 'asc', 'orderby' => 'title'));
 
 			for($i = 0; $i < sizeof($maps); $i++) {
 				$url = wp_get_attachment_thumb_url($maps[$i]->screenshot);
@@ -2692,7 +1872,7 @@ class WP_ClanWars {
 	function match_editor($page_title, $page_action, $page_submit, $id = 0)
 	{
 		$match = new stdClass();
-		$current_time = $this->current_time_fixed('timestamp', 0);
+		$current_time = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
 
 		$defaults = array('game_id' => 0,
 			'title' => '',
@@ -2732,8 +1912,8 @@ class WP_ClanWars {
 		$num_comments = isset($match->post_id) ? get_comments_number($match->post_id) : 0;
 		$match_statuses = $this->match_status;
 
-		$games = $this->get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
-		$teams = $this->get_team('id=all&orderby=title&order=asc');
+		$games = \WP_Clanwars\Games::get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
+		$teams = \WP_Clanwars\Teams::get_team('id=all&orderby=title&order=asc');
 
 		$merged_data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($match, $defaults));
 		$merged_data['date'] = $this->date_array2time_helper($merged_data['date']);
@@ -2756,10 +1936,10 @@ class WP_ClanWars {
 	}
 
 	function quick_pick_team($title, $country) {
-		$team = $this->get_team(array('title' => $title, 'limit' => 1));
+		$team = \WP_Clanwars\Teams::get_team(array('title' => $title, 'limit' => 1));
 		$team_id = 0;
 		if(empty($team)) {
-			$new_team_id = $this->add_team(array('title' => $title, 'country' => $country));
+			$new_team_id = \WP_Clanwars\Teams::add_team(array('title' => $title, 'country' => $country));
 			if($new_team_id !== false)
 				$team_id = $new_team_id;
 		} else {
@@ -2773,7 +1953,7 @@ class WP_ClanWars {
 	{
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
-		
+
 		wp_enqueue_script('wp-cw-matches');
 		wp_localize_script('wp-cw-matches',
 				'wpCWL10n',
@@ -2811,7 +1991,7 @@ class WP_ClanWars {
 						'title' => '',
 						'description' => '',
 						'external_url' => '',
-						'date' => $this->current_time_fixed('timestamp', 0),
+						'date' => \WP_Clanwars\Utils::current_time_fixed('timestamp', 0),
 						'team1' => 0,
 						'team2' => 0,
 						'scores' => array(),
@@ -2870,7 +2050,7 @@ class WP_ClanWars {
 						'title' => '',
 						'description' => '',
 						'external_url' => '',
-						'date' => $this->current_time_fixed('timestamp', 0),
+						'date' => \WP_Clanwars\Utils::current_time_fixed('timestamp', 0),
 						'team1' => 0,
 						'team2' => 0,
 						'new_team_title' => '',
@@ -2982,10 +2162,10 @@ class WP_ClanWars {
 
 		$per_page = abs($per_page);
 		$current_page = max( 1, get_query_var('paged') );
-		$now = $this->current_time_fixed('timestamp');
+		$now = \WP_Clanwars\Utils::current_time_fixed('timestamp');
 		$current_game = isset($_GET['game']) ? $_GET['game'] : false;
 
-		$games = $this->get_game('id=all&orderby=title&order=asc');
+		$games = \WP_Clanwars\Games::get_game('id=all&orderby=title&order=asc');
 
 		$p = array(
 			'limit' => $per_page,
@@ -3073,7 +2253,7 @@ class WP_ClanWars {
 			if($match->post_id != 0)
 				$team2_title = '<a href="' . get_permalink($match->post_id) . '" title="' . esc_attr($match->title) . '">' . $team2_title . '</a>';
 
-			$output .= '<div class="opponent-team">' . 
+			$output .= '<div class="opponent-team">' .
 			$this->get_country_flag($match->team2_country, true) . ' ' . $team2_title .
 					'</div>';
 			//$output .= '<div class="home-team">' . $this->get_country_flag($match->team1_country, true) . ' ' . esc_html($match->team1_title) . '</div>';
@@ -3275,9 +2455,9 @@ class WP_ClanWars {
 			wp_die(__('Cheatin&#8217; uh?'));
 
 		check_admin_referer('wp-clanwars-import');
-		
+
 		extract(\WP_Clanwars\Utils::extract_args($_POST, array('import' => '', 'items' => array())));
-		
+
 		$url = remove_query_arg(array('upload', 'import'), $_POST['_wp_http_referer']);
 
 		switch($import) {
@@ -3341,7 +2521,7 @@ class WP_ClanWars {
 		// hide default styles checkbox on jumpstarter
 		$hide_default_styles = $this->is_jumpstarter();
 
-		$games = $this->get_game('id=all');
+		$games = \WP_Clanwars\Games::get_game('id=all');
 		$acl = $this->acl_get();
 		$acl_keys = $this->acl_keys;
 
@@ -3358,7 +2538,7 @@ class WP_ClanWars {
 		foreach($acl as $user_id => $user_acl) {
 			$user = get_userdata($user_id);
 			$allowed_games = $this->acl_user_can('which_games', false, $user_id);
-			$user_games = $this->get_game(array('id' => $allowed_games, 'orderby' => 'title', 'order' => 'asc'));
+			$user_games = \WP_Clanwars\Games::get_game(array('id' => $allowed_games, 'orderby' => 'title', 'order' => 'asc'));
 
 			// populate games with urls for icons
 			foreach ($user_games as $game) {
@@ -3386,7 +2566,7 @@ class WP_ClanWars {
 	// Import page hook
 	function on_import() {
 		$import_list = $this->get_available_games();
-		$installed_games = $this->get_game('');
+		$installed_games = \WP_Clanwars\Games::get_game('');
 
 		// mark installed games
 		foreach($import_list as $game) {
@@ -3417,7 +2597,6 @@ class WP_ClanWars {
  */
 
 $wpClanWars = new WP_ClanWars();
-add_action('init', array(&$wpClanWars, 'on_init'));
 
 register_activation_hook( __FILE__, array(&$wpClanWars, 'on_activate'));
 register_deactivation_hook( __FILE__, array(&$wpClanWars, 'on_deactivate'));
