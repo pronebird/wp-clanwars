@@ -37,6 +37,51 @@ class Utils {
 	}
 
 
+	static function html_date_helper( $prefix, $time = 0, $tab_index = 0 )
+	{
+		global $wp_locale;
+
+		$tab_index_attribute = '';
+		$tab_index = (int)$tab_index;
+		if ($tab_index > 0)
+			$tab_index_attribute = " tabindex=\"$tab_index\"";
+
+		if($time == 0)
+			$time_adj = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
+		else
+			$time_adj = $time;
+
+		$jj = date( 'd', $time_adj );
+		$mm = date( 'm', $time_adj );
+		$hh = date( 'H', $time_adj );
+		$mn = date( 'i', $time_adj );
+		$yy = date( 'Y', $time_adj );
+
+		$month = "<select name=\"{$prefix}[mm]\"$tab_index_attribute>\n";
+		for ( $i = 1; $i < 13; $i = $i +1 ) {
+				$month .= "\t\t\t" . '<option value="' . zeroise($i, 2) . '"';
+				if ( $i == $mm )
+						$month .= ' selected="selected"';
+				$month .= '>' . $wp_locale->get_month( $i ) . "</option>\n";
+		}
+		$month .= '</select>';
+
+		$day = '<input type="text" name="'.$prefix.'[jj]" value="' . $jj . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
+		$hour = '<input type="text" name="'.$prefix.'[hh]" value="' . $hh . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
+		$minute = '<input type="text" name="'.$prefix.'[mn]" value="' . $mn . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
+		$year = '<input type="text" name="'.$prefix.'[yy]" value="' . $yy . '" size="3" maxlength="4"' . $tab_index_attribute . ' autocomplete="off"  />';
+
+		printf(before_last_bar(__('%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input', WP_CLANWARS_TEXTDOMAIN)), $month, $day, $hour, $minute, $year);
+	}
+
+	static function date_array2time_helper($date)
+	{
+		if(is_array($date) && isset($date['hh'], $date['mn'], $date['mm'], $date['jj'], $date['yy'])) {
+			return mktime((int)$date['hh'], (int)$date['mn'], 0, (int)$date['mm'], (int)$date['jj'], (int)$date['yy']);
+		}
+		return $date;
+	}
+
 };
 
 
