@@ -58,14 +58,6 @@ require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
 class WP_ClanWars {
 
-	var $tables = array(
-		'teams' => 'cw_teams',
-		'games' => 'cw_games',
-		'maps' => 'cw_maps',
-		'matches' => 'cw_matches',
-		'rounds' => 'cw_rounds'
-	);
-
 	var $countries = array();
 	var $match_status = array();
 	var $acl_keys = array();
@@ -84,8 +76,6 @@ class WP_ClanWars {
 	const ErrorUploadFileTypeNotAllowed = -215;
 
 	function __construct() {
-		$this->tables = array_map(create_function('$t', 'global $table_prefix; return $table_prefix . $t; '), $this->tables);
-
 		load_plugin_textdomain(WP_CLANWARS_TEXTDOMAIN, PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)) . '/langs/', //2.5 Compatibility
 							   dirname(plugin_basename(__FILE__)) . '/langs/'); //2.6+, Works with custom wp-content dirs.
 
@@ -153,8 +143,17 @@ class WP_ClanWars {
 		delete_option(WP_CLANWARS_DEFAULTCSS);
 		delete_option(WP_CLANWARS_ACL);
 
-		foreach($this->tables as $t)
-		  $wpdb->query("DROP TABLE `$t`");
+		$tables = array();
+
+		array_push( \WP_Clanwars\Games::table() );
+		array_push( \WP_Clanwars\Maps::table() );
+		array_push( \WP_Clanwars\Rounds::table() );
+		array_push( \WP_Clanwars\Matches::table() );
+		array_push( \WP_Clanwars\Teams::table() );
+
+		foreach($tables as $table) {
+			$wpdb->query( "DROP TABLE `$table`" );
+		}
 	}
 
 	/**
@@ -633,36 +632,6 @@ class WP_ClanWars {
 	function on_widgets_init()
 	{
 		return register_widget('WP_ClanWars_Widget');
-	}
-
-	function most_popular_countries()
-	{
-		global $wpdb;
-
-		$limit = 10;
-
-		if($this->popular_countries === false)
-		{
-
-			$this->popular_countries = $wpdb->get_results(
-				$wpdb->prepare("(SELECT t1.country, COUNT(t2.id) AS cnt
-								FROM {$this->tables['teams']} AS t1, {$this->tables['matches']} AS t2
-								WHERE t1.id = t2.team1
-								GROUP BY t1.country
-								LIMIT %d)
-								UNION
-								(SELECT t1.country, COUNT(t2.id) AS cnt
-								FROM {$this->tables['teams']} AS t1, {$this->tables['matches']} AS t2
-								WHERE t1.id = t2.team2
-								GROUP BY t1.country
-								LIMIT %d)
-								ORDER BY cnt DESC
-								LIMIT %d", $limit, $limit, $limit),
-							ARRAY_A);
-
-		}
-
-		return $this->popular_countries;
 	}
 
 	function html_country_select_helper($p = array(), $print = true)
