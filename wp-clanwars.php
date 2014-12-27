@@ -256,8 +256,25 @@ class WP_ClanWars {
 
 		add_action('wp_ajax_get_maps', array($this, 'on_ajax_get_maps'));
 		add_shortcode('wp-clanwars', array($this, 'on_shortcode'));
+
+		add_action( 'print_media_templates', array( $this, 'print_mce_plugin_templates' ) );
+		add_action( 'admin_print_footer_scripts', array( $this, 'admin_print_shortcode_mce_plugin' ), 100 );
 		
 		$this->register_cssjs();
+	}
+
+	function print_mce_plugin_templates() {
+		?>
+		<script type="text/html" id="tmpl-wp-clanwars">
+            <div class="wp-clanwars-mce-view">{{ data.shortcode }}</div>
+            </div>
+        </script>
+		<?php
+	}
+
+	function admin_print_shortcode_mce_plugin() {
+		$script_url = esc_attr(WP_CLANWARS_URL . '/js/mce_plugin.js');
+		echo "<script src='$script_url'></script>\n";
 	}
 
 	/**
