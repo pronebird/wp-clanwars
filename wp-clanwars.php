@@ -45,9 +45,10 @@ define('WP_CLANWARS_IMPORTURL', WP_CLANWARS_URL . '/' . WP_CLANWARS_IMPORTDIR);
 define('WP_CLANWARS_EXPORTDIR', 'wp-clanwars');
 define('WP_CLANWARS_ZIPINDEX', 'index.json');
 
-require (dirname(__FILE__) . '/classes/view.class.php');
-require (dirname(__FILE__) . '/wp-clanwars-widget.php');
-require_once(ABSPATH . 'wp-admin/includes/class-pclzip.php');
+require_once (dirname(__FILE__) . '/classes/view.class.php');
+require_once (dirname(__FILE__) . '/classes/utils.class.php');
+require_once (dirname(__FILE__) . '/wp-clanwars-widget.php');
+require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
 class WP_ClanWars {
 
@@ -467,7 +468,7 @@ class WP_ClanWars {
 
 		$referer = $_REQUEST['_wp_http_referer'];
 
-		$data = $this->extract_args($_POST, array(
+		$data = \WP_Clanwars\Utils::extract_args($_POST, array(
 			'title' => '',
 			'country' => ''
 		));
@@ -486,7 +487,7 @@ class WP_ClanWars {
 
 		check_admin_referer('wp-clanwars-setupgames');
 
-		extract($this->extract_args($_POST, array(
+		extract(\WP_Clanwars\Utils::extract_args($_POST, array(
 				'import' => '',
 				'items' => array(),
 				'new_game_name' => ''
@@ -634,7 +635,7 @@ class WP_ClanWars {
 		);
 
 		$acl[$user_id]['games'] = isset($data['games']) ? array_unique(array_values($data['games'])) : array(0);
-		$acl[$user_id]['permissions'] = isset($data['permissions']) ? $this->extract_args($data['permissions'], $default_perms) : $default_perms;
+		$acl[$user_id]['permissions'] = isset($data['permissions']) ? \WP_Clanwars\Utils::extract_args($data['permissions'], $default_perms) : $default_perms;
 
 		update_option(WP_CLANWARS_ACL, $acl);
 
@@ -721,7 +722,7 @@ class WP_ClanWars {
 
 	function html_country_select_helper($p = array(), $print = true)
 	{
-		extract($this->extract_args($p, array(
+		extract(\WP_Clanwars\Utils::extract_args($p, array(
 			'select' => '',
 			'name' => '',
 			'id' => '',
@@ -906,28 +907,6 @@ class WP_ClanWars {
 		return self::ErrorOK;
 	}
 
-	/**
-	 * Parse arguments and return a list of values with keys from defaults
-	 *
-	 * @param array|string $args Input values
-	 * @param array $defaults Array of default values
-	 * @return array Merged array. Same behaviour as wp_parse_args except it generates array which only consists of keys from $defaults array
-	 */
-
-	function extract_args($args, $defaults) {
-		$rslt = array();
-
-		$options = wp_parse_args($args, $defaults);
-
-		if(is_array($defaults)) {
-			foreach(array_keys($defaults) as $key) {
-				$rslt[$key] = $options[$key];
-			}
-		}
-
-		return $rslt;
-	}
-
 	function get_country_flag($country, $deprecated = 0) {
 		return '<span class="flag ' . esc_attr($country) . '"><br/></span>';
 	}
@@ -943,7 +922,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		extract($this->extract_args($p, array(
+		extract(\WP_Clanwars\Utils::extract_args($p, array(
 					'id' => false,
 					'title' => false,
 					'limit' => 0,
@@ -1006,7 +985,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		$data = $this->extract_args($p, array(
+		$data = \WP_Clanwars\Utils::extract_args($p, array(
 					'title' => '',
 					'logo' => 0,
 					'country' => '',
@@ -1090,7 +1069,7 @@ class WP_ClanWars {
 		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
 
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract($this->extract_args($_REQUEST, array('delete' => array())));
+			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
 
 			$error = $this->delete_team($delete);
 			$referer = add_query_arg('delete', $error, $referer);
@@ -1108,7 +1087,7 @@ class WP_ClanWars {
 
 		$referer = $_REQUEST['_wp_http_referer'];
 
-		extract($this->extract_args($_REQUEST, array('id' => array())));
+		extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('id' => array())));
 
 		$error = $this->set_hometeam($id);
 
@@ -1139,7 +1118,7 @@ class WP_ClanWars {
 			}
 		}
 
-		extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
+		extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($data, $defaults)));
 
 		$country_select = $this->html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
 
@@ -1265,7 +1244,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		extract($this->extract_args($p, array(
+		extract(\WP_Clanwars\Utils::extract_args($p, array(
 			'id' => false,
 			'limit' => 0,
 			'offset' => 0,
@@ -1323,7 +1302,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		$data = $this->extract_args($p, array('title' => '', 'abbr' => '', 'icon' => 0));
+		$data = \WP_Clanwars\Utils::extract_args($p, array('title' => '', 'abbr' => '', 'icon' => 0));
 
 		if($wpdb->insert($this->tables['games'], $data, array('%s', '%s', '%d')))
 		{
@@ -1381,7 +1360,7 @@ class WP_ClanWars {
 
 		$referer = remove_query_arg(array('add', 'update', 'export'), $_REQUEST['_wp_http_referer']);
 
-		$args = $this->extract_args($_REQUEST, array('do_action' => '', 'do_action2' => '', 'items' => array()));
+		$args = \WP_Clanwars\Utils::extract_args($_REQUEST, array('do_action' => '', 'do_action2' => '', 'items' => array()));
 		extract($args);
 
 		$action = !empty($do_action) ? $do_action : (!empty($do_action2) ? $do_action2 : '');
@@ -1430,7 +1409,7 @@ class WP_ClanWars {
 		$upload_dir = wp_upload_dir();
 		$export_dir = trailingslashit($upload_dir['basedir']) . WP_CLANWARS_EXPORTDIR;
 
-		$game_data = $this->extract_args($game, array(
+		$game_data = \WP_Clanwars\Utils::extract_args($game, array(
 			'title' => '', 'abbr' => '',
 			'icon' => '', 'maplist' => array()
 		));
@@ -1606,7 +1585,7 @@ class WP_ClanWars {
 			return new WP_Error('plugin-error', 'Corrupted or missing contents from ZIP file.');
 		}
 
-		$game_data = $this->extract_args($game_data, array(
+		$game_data = \WP_Clanwars\Utils::extract_args($game_data, array(
 			'title' => '', 'abbr' => '',
 			'icon' => '', 'maplist' => array()
 		));
@@ -1702,7 +1681,7 @@ class WP_ClanWars {
 					case 'add':
 
 						$defaults = array('title' => '', 'abbr' => '', 'icon' => 0);
-						$data = $this->extract_args(stripslashes_deep($_POST), $defaults);
+						$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
 						extract($data);
 
 						if(!empty($title)) {
@@ -1729,7 +1708,7 @@ class WP_ClanWars {
 
 					case 'edit':
 						$defaults = array('title' => '', 'abbr' => '', 'delete_image' => false);
-						$data = $this->extract_args(stripslashes_deep($_POST), $defaults);
+						$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
 						extract($data);
 
 						unset($data['delete_image']);
@@ -1763,7 +1742,7 @@ class WP_ClanWars {
 						
 					case 'addmap':
 						$defaults = array('title' => '', 'game_id' => 0, 'id' => 0);
-						$data = $this->extract_args(stripslashes_deep($_POST), $defaults);
+						$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
 						extract($data);
 
 						if(!empty($title)) {
@@ -1791,7 +1770,7 @@ class WP_ClanWars {
 						
 					case 'editmap':
 						$defaults = array('title' => '', 'game_id' => 'all', 'id' => 0, 'delete_image' => false);
-						$data = $this->extract_args(stripslashes_deep($_POST), $defaults);
+						$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
 						extract($data);
 
 						$update_data = array('title' => $title);
@@ -1927,7 +1906,7 @@ class WP_ClanWars {
 
 		$view = new \WP_Clanwars\View( 'edit_game' );
 
-		$context = $this->extract_args(stripslashes_deep($_POST), $this->extract_args($game, $defaults));
+		$context = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($game, $defaults));
 		$context['attach'] = isset($game->icon) ? wp_get_attachment_image($game->icon, 'thumbnail') : '';
 		$context += compact( 'page_title', 'page_action', 'page_submit', 'game_id' );
 
@@ -1948,7 +1927,7 @@ class WP_ClanWars {
 		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
 
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract($this->extract_args($_REQUEST, array('delete' => array())));
+			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
 
 			$error = $this->delete_map($delete);
 			$referer = add_query_arg('delete', $error, $referer);
@@ -2021,7 +2000,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		extract($this->extract_args($p, array(
+		extract(\WP_Clanwars\Utils::extract_args($p, array(
 			'id' => false,
 			'game_id' => false,
 			'limit' => 0,
@@ -2087,7 +2066,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		$data = $this->extract_args($p, array(
+		$data = \WP_Clanwars\Utils::extract_args($p, array(
 					'title' => '',
 					'screenshot' => 0,
 					'game_id' => 0));
@@ -2177,7 +2156,7 @@ class WP_ClanWars {
 			}
 		}
 
-		extract($this->extract_args(stripslashes_deep($_POST), $this->extract_args($data, $defaults)));
+		extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($data, $defaults)));
 
 		$attach = wp_get_attachment_image($screenshot, 'thumbnail');
 
@@ -2205,7 +2184,7 @@ class WP_ClanWars {
 		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
 
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract($this->extract_args($_REQUEST, array('delete' => array())));
+			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
 
 			$error = $this->delete_match($delete);
 			$referer = add_query_arg('delete', $error, $referer);
@@ -2275,7 +2254,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		extract($this->extract_args($p, array(
+		extract(\WP_Clanwars\Utils::extract_args($p, array(
 			'from_date' => 0,
 			'id' => false,
 			'game_id' => false,
@@ -2442,7 +2421,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		$data = $this->extract_args($p, array(
+		$data = \WP_Clanwars\Utils::extract_args($p, array(
 					'title' => '',
 					'date' => $this->current_time_fixed('timestamp', 0),
 					'post_id' => 0,
@@ -2558,7 +2537,7 @@ class WP_ClanWars {
 	{
 		global $wpdb;
 
-		$data = $this->extract_args($p, array(
+		$data = \WP_Clanwars\Utils::extract_args($p, array(
 					'match_id' => 0,
 					'group_n' => 0,
 					'map_id' => 0,
@@ -2756,7 +2735,7 @@ class WP_ClanWars {
 		$games = $this->get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
 		$teams = $this->get_team('id=all&orderby=title&order=asc');
 
-		$merged_data = $this->extract_args(stripslashes_deep($_POST), $this->extract_args($match, $defaults));
+		$merged_data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($match, $defaults));
 		$merged_data['date'] = $this->date_array2time_helper($merged_data['date']);
 
 		if(isset($_GET['update'])) {
@@ -2827,7 +2806,7 @@ class WP_ClanWars {
 
 				case 'add':
 
-					extract($this->extract_args(stripslashes_deep($_POST), array(
+					extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), array(
 						'game_id' => 0,
 						'title' => '',
 						'description' => '',
@@ -2885,7 +2864,7 @@ class WP_ClanWars {
 
 			case 'edit':
 
-					extract($this->extract_args(stripslashes_deep($_POST), array(
+					extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), array(
 						'id' => 0,
 						'game_id' => 0,
 						'title' => '',
@@ -3271,7 +3250,7 @@ class WP_ClanWars {
 
 		check_admin_referer('wp-clanwars-deleteacl');
 
-		extract($this->extract_args($_POST, array(
+		extract(\WP_Clanwars\Utils::extract_args($_POST, array(
 			'doaction' => '', 'doaction2' => '',
 			'users' => array()
 			)));
@@ -3297,7 +3276,7 @@ class WP_ClanWars {
 
 		check_admin_referer('wp-clanwars-import');
 		
-		extract($this->extract_args($_POST, array('import' => '', 'items' => array())));
+		extract(\WP_Clanwars\Utils::extract_args($_POST, array('import' => '', 'items' => array())));
 		
 		$url = remove_query_arg(array('upload', 'import'), $_POST['_wp_http_referer']);
 
