@@ -81,7 +81,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 
 		$matches = array();
 		$games = array();
-		$_games = $wpClanWars->get_game(array(
+		$_games = \WP_Clanwars\Games::get_game(array(
                 'id' => empty($instance['visible_games']) ? 'all' : $instance['visible_games'],
                 'orderby' => 'title',
                 'order' => 'asc'
@@ -96,7 +96,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 		}
 			
 		foreach($_games as $g) {
-			$m = $wpClanWars->get_match(array('from_date' => $from_date, 'game_id' => $g->id, 'limit' => $instance['show_limit'], 'order' => 'desc', 'orderby' => 'date', 'sum_tickets' => true));
+			$m = \WP_Clanwars\Matches::get_match(array('from_date' => $from_date, 'game_id' => $g->id, 'limit' => $instance['show_limit'], 'order' => 'desc', 'orderby' => 'date', 'sum_tickets' => true));
 			
 			if(sizeof($m)) {
 				$games[] = $g;
