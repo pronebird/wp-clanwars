@@ -36,6 +36,13 @@ class Utils {
 		}
 	}
 
+	static function all_countries() {
+		static $countries = null;
+		if($countries === null) {
+			@include( realpath(dirname(__FILE__) . '/../countries.php') );
+		}
+		return $countries;
+	}
 
 	static function html_date_helper( $prefix, $time = 0, $tab_index = 0 )
 	{
@@ -72,6 +79,80 @@ class Utils {
 		$year = '<input type="text" name="'.$prefix.'[yy]" value="' . $yy . '" size="3" maxlength="4"' . $tab_index_attribute . ' autocomplete="off"  />';
 
 		printf(before_last_bar(__('%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input', WP_CLANWARS_TEXTDOMAIN)), $month, $day, $hour, $minute, $year);
+	}
+
+	static function html_country_select_helper($p = array(), $print = true)
+	{
+		$all_countries = self::all_countries();
+		extract(\WP_Clanwars\Utils::extract_args($p, array(
+			'select' => '',
+			'name' => '',
+			'id' => '',
+			'class' => '',
+			'show_popular' => false
+		)));
+
+		ob_start();
+
+		$attrs = array();
+
+		if(!empty($id))
+			$attrs[] = 'id="' . esc_attr($id) . '"';
+
+		if(!empty($name))
+			$attrs[] = 'name="' . esc_attr($name) . '"';
+
+		if(!empty($class))
+			$attrs[] = 'class="' . esc_attr($class) . '"';
+
+		$attrstr = implode(' ', $attrs);
+		if(!empty($attrstr)) $attrstr = ' ' . $attrstr;
+
+		echo '<select' . $attrstr . '>';
+
+		if($show_popular) {
+			$popular = \WP_Clanwars\Teams::most_popular_countries();
+
+			if(!empty($popular)) {
+				foreach($popular as $i => $data) :
+					$abbr = $data['country'];
+					$title = isset($all_countries[$abbr]) ? $all_countries[$abbr] : $abbr;
+
+					echo '<option value="' . esc_attr($abbr) . '">' . esc_html($title) . '</option>';
+				endforeach;
+				echo '<optgroup label="-----------------" style="font-family: monospace;"></optgroup>';
+			}
+		}
+
+		// copy array with array_merge so we don't sort global array
+		$sorted_countries = array_merge(array(), $all_countries);
+		asort($sorted_countries);
+
+		foreach($sorted_countries as $abbr => $title) :
+			echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
+		endforeach;
+		echo '</select>';
+
+		$output = ob_get_clean();
+
+		if($print) {
+			echo $output;
+			return;
+		}
+
+		return $output;
+	}
+
+	static function get_country_flag($country) {
+		return '<span class="flag ' . esc_attr($country) . '"><br/></span>';
+	}
+
+	static function get_country_title($country) {
+		$all_countries = $this->all_countries();
+		if(isset($all_countries[$country])) {
+			return $all_countries[$country];
+		}
+		return false;
 	}
 
 	static function date_array2time_helper($date)

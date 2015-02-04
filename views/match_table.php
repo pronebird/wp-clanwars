@@ -87,11 +87,11 @@
 							?>
 						</td>
 						<td class="team1 column-team1">
-							<?php echo $get_country_flag($item->team1_country, true); ?>
+							<?php echo $get_country_flag($item->team1_country); ?>
 							<?php esc_html_e($item->team1_title); ?>
 						</td>
 						<td class="team2 column-team2">
-							<?php echo $get_country_flag($item->team2_country, true); ?>
+							<?php echo $get_country_flag($item->team2_country); ?>
 							<?php esc_html_e($item->team2_title); ?>
 						</td>
 						<td class="tickets column-tickets">
