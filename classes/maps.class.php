@@ -4,6 +4,10 @@ namespace WP_Clanwars;
 
 class Maps {
 
+	/**
+	 * Get a database table
+	 * @return String
+	 */
 	static function table() {
 		static $table = null;
 		global $wpdb;
@@ -15,6 +19,10 @@ class Maps {
 		return $table;
 	}
 
+	/**
+	 * Get a database schema SQL
+	 * @return String
+	 */
 	static function schema() {
 		global $wpdb;
 
