@@ -69,8 +69,6 @@ class WP_ClanWars_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		global $wpClanWars;
-
 		extract($args);
 
 		$now = $this->current_time_fixed('timestamp');
@@ -172,7 +170,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 			<div class="scores <?php echo $wld_class; ?>"><?php echo sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2); ?></div>
 			<?php endif; ?>
 
-			<div class="opponent-team"><?php echo $wpClanWars->get_country_flag($match->team2_country, true); ?>
+			<div class="opponent-team"><?php echo \WP_Clanwars\Utils::get_country_flag($match->team2_country); ?>
 			<?php 
 				$team2_title = esc_html($match->team2_title);
 
@@ -200,15 +198,13 @@ class WP_ClanWars_Widget extends WP_Widget {
 	}
 
 	function form($instance) {
-        global $wpClanWars;
-        
 		$instance = wp_parse_args((array)$instance, $this->default_settings);
 
 		$show_limit = (int)$instance['show_limit'];
 		$title = esc_attr($instance['title']);
         $visible_games = $instance['visible_games'];
 
-        $games = $wpClanWars->get_game('id=all&orderby=title&order=asc');
+        $games = \WP_Clanwars\Games::get_game('id=all&orderby=title&order=asc');
 	?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', WP_CLANWARS_TEXTDOMAIN); ?></label> <input class="widefat" name="<?php echo $this->get_field_name('title'); ?>" id="<?php echo $this->get_field_id('title'); ?>" value="<?php echo esc_attr($title); ?>" type="text" /></p>
 

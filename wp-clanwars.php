@@ -58,7 +58,6 @@ require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
 class WP_ClanWars {
 
-	var $countries = array();
 	var $match_status = array();
 	var $acl_keys = array();
 	var $page_hooks = array();
@@ -113,7 +112,7 @@ class WP_ClanWars {
 		$dbstruct = '';
 		$dbstruct .= \WP_Clanwars\Games::schema();
 		$dbstruct .= \WP_Clanwars\Maps::schema();
-		$dbstruct .= \WP_Clanwars\Games::schema();
+		$dbstruct .= \WP_Clanwars\Matches::schema();
 		$dbstruct .= \WP_Clanwars\Rounds::schema();
 		$dbstruct .= \WP_Clanwars\Teams::schema();
 
@@ -177,9 +176,6 @@ class WP_ClanWars {
 			__('PCW', WP_CLANWARS_TEXTDOMAIN),
 			__('Official', WP_CLANWARS_TEXTDOMAIN)
 		);
-
-		$countries =& $this->countries;
-		@include(dirname(__FILE__) . '/countries.php');
 
 		add_action('admin_menu', array($this, 'on_admin_menu'));
 		add_action('template_redirect', array($this, 'on_template_redirect'));
@@ -371,7 +367,7 @@ class WP_ClanWars {
 
 		if(!$has_hometeam) {
 			$view = new \WP_Clanwars\View( 'setup_team' );
-			$view->add_helper('html_country_select_helper', array($this, 'html_country_select_helper'));
+			$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
 		} else {
 			$view = new \WP_Clanwars\View( 'setup_games' );
 
@@ -634,66 +630,6 @@ class WP_ClanWars {
 		return register_widget('WP_ClanWars_Widget');
 	}
 
-	function html_country_select_helper($p = array(), $print = true)
-	{
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
-			'select' => '',
-			'name' => '',
-			'id' => '',
-			'class' => '',
-			'show_popular' => false
-		)));
-
-		ob_start();
-
-		$attrs = array();
-
-		if(!empty($id))
-			$attrs[] = 'id="' . esc_attr($id) . '"';
-
-		if(!empty($name))
-			$attrs[] = 'name="' . esc_attr($name) . '"';
-
-		if(!empty($class))
-			$attrs[] = 'class="' . esc_attr($class) . '"';
-
-		$attrstr = implode(' ', $attrs);
-		if(!empty($attrstr)) $attrstr = ' ' . $attrstr;
-
-		echo '<select' . $attrstr . '>';
-
-		if($show_popular) {
-			$popular = \WP_Clanwars\Teams::most_popular_countries();
-
-			if(!empty($popular)) {
-				foreach($popular as $i => $data) :
-					$abbr = $data['country'];
-					$title = isset($this->countries[$abbr]) ? $this->countries[$abbr] : $abbr;
-
-					echo '<option value="' . esc_attr($abbr) . '">' . esc_html($title) . '</option>';
-				endforeach;
-				echo '<optgroup label="-----------------" style="font-family: monospace;"></optgroup>';
-			}
-		}
-
-		$sorted_countries = $this->countries;
-		asort($sorted_countries);
-
-		foreach($sorted_countries as $abbr => $title) :
-			echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
-		endforeach;
-		echo '</select>';
-
-		$output = ob_get_clean();
-
-		if($print) {
-			echo $output;
-			return;
-		}
-
-		return $output;
-	}
-
 	function html_notice_helper($message, $type = 'updated', $echo = true) {
 
 		$text = '<div class="' . $type . ' fade"><p>' . $message . '</p></div>';
@@ -821,17 +757,6 @@ class WP_ClanWars {
 		return self::ErrorOK;
 	}
 
-	function get_country_flag($country, $deprecated = 0) {
-		return '<span class="flag ' . esc_attr($country) . '"><br/></span>';
-	}
-
-	function get_country_title($country) {
-		if(isset($this->countries[$country]))
-			return $this->countries[$country];
-
-		return false;
-	}
-
 	function on_admin_post_deleteteams()
 	{
 		if(!$this->acl_user_can('manage_teams'))
@@ -893,7 +818,7 @@ class WP_ClanWars {
 
 		extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($data, $defaults)));
 
-		$country_select = $this->html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
+		$country_select = \WP_Clanwars\Utils::html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
 
 		$this->print_notices();
 
@@ -1001,8 +926,8 @@ class WP_ClanWars {
 		$view = new \WP_Clanwars\View( 'team_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
-		$view->add_helper( 'get_country_flag', array($this, 'get_country_flag') );
-		$view->add_helper( 'get_country_title', array($this, 'get_country_title') );
+		$view->add_helper( 'get_country_flag', array('\WP_Clanwars\Utils', 'get_country_flag') );
+		$view->add_helper( 'get_country_title', array('\WP_Clanwars\Utils', 'get_country_title') );
 
 		$context = compact('teams', 'page_links_text', 'table_columns');
 
@@ -1717,7 +1642,7 @@ class WP_ClanWars {
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
 			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
 
-			$error = $this->delete_match($delete);
+			$error = \WP_Clanwars\Matches::delete_match($delete);
 			$referer = add_query_arg('delete', $error, $referer);
 		}
 
@@ -1850,8 +1775,8 @@ class WP_ClanWars {
 
 		$view = new \WP_Clanwars\View( 'edit_match' );
 
-		$view->add_helper('html_date_helper', array('\WP_Clanwars::Utils', 'html_date_helper'));
-		$view->add_helper('html_country_select_helper', array('\WP_Clanwars::Utils', 'html_country_select_helper'));
+		$view->add_helper('html_date_helper', array('\WP_Clanwars\Utils', 'html_date_helper'));
+		$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
 
 		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'post_id', 'games', 'teams');
 		$context += $merged_data;
@@ -1933,8 +1858,10 @@ class WP_ClanWars {
 							$team2 = $pickteam;
 					}
 
-					$match_id = $this->add_match(array(
+					$match_id = \WP_Clanwars\Matches::add_match(array(
 							'title' => $title,
+							'description' => $description,
+							'external_url' => $external_url,
 							'date' => date('Y-m-d H:i:s', $date),
 							'post_id' => 0,
 							'team1' => $team1,
@@ -1945,10 +1872,9 @@ class WP_ClanWars {
 					));
 
 					if($match_id) {
-
 						foreach($scores as $round_group => $r) {
 							for($i = 0; $i < sizeof($r['team1']); $i++) {
-								$this->add_round(array('match_id' => $match_id,
+								\WP_Clanwars\Rounds::add_round(array('match_id' => $match_id,
 									'group_n' => abs($round_group),
 									'map_id' => $r['map_id'],
 									'tickets1' => $r['team1'][$i],
@@ -1957,7 +1883,7 @@ class WP_ClanWars {
 							}
 						}
 
-						$this->update_match_post($match_id);
+						\WP_Clanwars\Matches::update_match_post($match_id);
 
 						wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&add=1'));
 						exit();
@@ -1992,7 +1918,7 @@ class WP_ClanWars {
 							$team2 = $pickteam;
 					}
 
-					$this->update_match($id, array(
+					\WP_Clanwars\Matches::update_match($id, array(
 							'title' => $title,
 							'date' => date('Y-m-d H:i:s', $date),
 							'team1' => $team1,
@@ -2016,19 +1942,19 @@ class WP_ClanWars {
 									);
 
 							if($round_id > 0) {
-								$this->update_round($round_id, $round_data);
+								\WP_Clanwars\Rounds::update_round($round_id, $round_data);
 								$rounds_not_in[] = $round_id;
 							} else {
-								$new_round = $this->add_round($round_data);
+								$new_round = \WP_Clanwars\Rounds::add_round($round_data);
 								if($new_round !== false)
 									$rounds_not_in[] = $new_round;
 							}
 						}
 					}
 
-					$this->delete_rounds_not_in($id, $rounds_not_in);
+					\WP_Clanwars\Rounds::delete_rounds_not_in($id, $rounds_not_in);
 
-					$this->update_match_post($id);
+					\WP_Clanwars\Matches::update_match_post($id);
 
 					wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&act=edit&id=' . $id . '&update=1'));
 					exit();
@@ -2069,8 +1995,8 @@ class WP_ClanWars {
 		}
 
 		$match_status_text = $this->match_status[$match->match_status];
-		$team1_flag = $this->get_country_flag($match->team1_country, true);
-		$team2_flag = $this->get_country_flag($match->team2_country, true);
+		$team1_flag = \WP_Clanwars\Utils::get_country_flag($match->team1_country);
+		$team2_flag = \WP_Clanwars\Utils::get_country_flag($match->team2_country);
 
 		$view = new \WP_Clanwars\View( 'match_view' );
 
@@ -2178,9 +2104,9 @@ class WP_ClanWars {
 				$team2_title = '<a href="' . get_permalink($match->post_id) . '" title="' . esc_attr($match->title) . '">' . $team2_title . '</a>';
 
 			$output .= '<div class="opponent-team">' .
-			$this->get_country_flag($match->team2_country, true) . ' ' . $team2_title .
+						\WP_Clanwars\Utils::get_country_flag($match->team2_country) . ' ' . $team2_title .
 					'</div>';
-			//$output .= '<div class="home-team">' . $this->get_country_flag($match->team1_country, true) . ' ' . esc_html($match->team1_title) . '</div>';
+			//$output .= '<div class="home-team">' . \WP_Clanwars\Utils::get_country_flag($match->team1_country, true) . ' ' . esc_html($match->team1_title) . '</div>';
 
 			$output .= '<div class="date">' . esc_html($date)  . '</div>';
 
@@ -2292,7 +2218,7 @@ class WP_ClanWars {
 		$view = new \WP_Clanwars\View( 'match_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
-		$view->add_helper( 'get_country_flag', array($this, 'get_country_flag') );
+		$view->add_helper( 'get_country_flag', array('\WP_Clanwars\Utils', 'get_country_flag') );
 
 		$context = compact('table_columns', 'page_links_text', 'matches', 'match_statuses');
 		$view->render($context);

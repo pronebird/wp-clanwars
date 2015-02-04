@@ -228,10 +228,11 @@ KEY `date` (`date`)
 					'team2' => 0,
 					'game_id' => 0,
 					'match_status' => 0,
-					'description' => ''
+					'description' => '',
+					'external_url' => ''
 			));
 
-		if($wpdb->insert(self::table(), $data, array('%s', '%s', '%d', '%d', '%d', '%d', '%s')))
+		if($wpdb->insert(self::table(), $data, array('%s', '%s', '%d', '%d', '%d', '%d', '%s', '%s')))
 		{
 			$insert_id = $wpdb->insert_id;
 
