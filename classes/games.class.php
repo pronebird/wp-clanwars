@@ -4,6 +4,10 @@ namespace WP_Clanwars;
 
 class Games {
 
+	/**
+	 * Get a database table
+	 * @return String
+	 */
 	static function table() {
 		static $table = null;
 		global $wpdb;
@@ -15,6 +19,10 @@ class Games {
 		return $table;
 	}
 
+	/**
+	 * Get a database schema SQL
+	 * @return String
+	 */
 	static function schema() {
 		global $wpdb;
 
