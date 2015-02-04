@@ -1816,13 +1816,13 @@ class WP_ClanWars {
 				));
 
 		if($id > 0) {
-			$result = $this->get_match(array('id' => $id));
+			$result = \WP_Clanwars\Matches::get_match(array('id' => $id));
 			if(!empty($result)) {
 				$match = $result[0];
 				$match->date = mysql2date('U', $match->date);
 				$match->scores = array();
 
-				$rounds = $this->get_rounds($match->id);
+				$rounds = \WP_Clanwars\Rounds::get_rounds($match->id);
 
 				foreach($rounds as $round) {
 					$match->scores[$round->group_n]['map_id'] = $round->map_id;
@@ -1891,7 +1891,7 @@ class WP_ClanWars {
 
 		// Check match is really exists
 		if($act == 'edit') {
-			$m = $this->get_match(array('id' => $id));
+			$m = \WP_Clanwars\Matches::get_match(array('id' => $id));
 
 			if($id != 0 && empty($m))
 				wp_die( __('Cheatin&#8217; uh?') );
@@ -2050,14 +2050,14 @@ class WP_ClanWars {
 	}
 
 	function on_match_shortcode($match_id) {
-		$matches = $this->get_match(array('id' => $match_id, 'sum_tickets' => true));
+		$matches = \WP_Clanwars\Matches::get_match(array('id' => $match_id, 'sum_tickets' => true));
 
 		if(empty($matches)) {
 			return __("<p>Match with id = $match_id has been removed.</p>", WP_CLANWARS_TEXTDOMAIN);
 		}
 
 		$match = $matches[0];
-		$r = $this->get_rounds($match->id);
+		$r = \WP_Clanwars\Rounds::get_rounds($match->id);
 		$rounds = array();
 
 		// group rounds by map
@@ -2100,8 +2100,8 @@ class WP_ClanWars {
 			'offset' => ($current_page-1) * $per_page
 		);
 
-		$matches = $this->get_match($p, false);
-		$stat = $this->get_match($p, true);
+		$matches = \WP_Clanwars\Matches::get_match($p, false);
+		$stat = \WP_Clanwars\Matches::get_match($p, true);
 		$page_links = paginate_links(array(
 			'prev_text' => __('&larr;'),
 			'next_text' => __('&rarr;'),
@@ -2185,7 +2185,7 @@ class WP_ClanWars {
 			$output .= '<div class="date">' . esc_html($date)  . '</div>';
 
 			$rounds = array();
-			$r = $this->get_rounds($match->id);
+			$r = \WP_Clanwars\Rounds::get_rounds($match->id);
 			foreach($r as $v) {
 				if(isset($rounds[$v->group_n]))
 					continue;
@@ -2244,9 +2244,9 @@ class WP_ClanWars {
 			'limit' => $limit, 'offset' => ($limit * ($current_page-1))
 		);
 
-		$matches = $this->get_match($condition);
+		$matches = \WP_Clanwars\Matches::get_match($condition);
 		$match_statuses = $this->match_status;
-		$stat = $this->get_match($stat_condition, true);
+		$stat = \WP_Clanwars\Matches::get_match($stat_condition, true);
 
 		// populate games with urls for icons
 		foreach ($matches as $match) {
