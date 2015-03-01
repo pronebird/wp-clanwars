@@ -51,6 +51,14 @@ Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
 
 == Changelog ==
 
+= 1.6.3 =
+
+* Add German translation
+
+= 1.6.2 =
+
+* Add link to translation service
+
 = 1.6.1 =
 
 * Use ZipArchive when available
