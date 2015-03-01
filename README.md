@@ -4,6 +4,8 @@ Wanna see WP-ClanWars in your language? Help out to translate it!
 
 https://www.transifex.com/projects/p/wp-clanwars/
 
+Thanks everyone for participation!
+
 ## TODO
 
 - ❏ Set post date to match date to hide future posts
