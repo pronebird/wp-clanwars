@@ -69,8 +69,6 @@ class WP_ClanWars_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		global $wpClanWars;
-
 		extract($args);
 
 		$now = $this->current_time_fixed('timestamp');
@@ -81,7 +79,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 
 		$matches = array();
 		$games = array();
-		$_games = $wpClanWars->get_game(array(
+		$_games = \WP_Clanwars\Games::get_game(array(
                 'id' => empty($instance['visible_games']) ? 'all' : $instance['visible_games'],
                 'orderby' => 'title',
                 'order' => 'asc'
@@ -96,7 +94,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 		}
 			
 		foreach($_games as $g) {
-			$m = $wpClanWars->get_match(array('from_date' => $from_date, 'game_id' => $g->id, 'limit' => $instance['show_limit'], 'order' => 'desc', 'orderby' => 'date', 'sum_tickets' => true));
+			$m = \WP_Clanwars\Matches::get_match(array('from_date' => $from_date, 'game_id' => $g->id, 'limit' => $instance['show_limit'], 'order' => 'desc', 'orderby' => 'date', 'sum_tickets' => true));
 			
 			if(sizeof($m)) {
 				$games[] = $g;
@@ -121,6 +119,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 
 <ul class="clanwar-list">
 
+	<?php if(sizeof($games) > 1) : ?>
 	<li>
 		<ul class="tabs">
 		<?php
@@ -140,12 +139,13 @@ class WP_ClanWars_Widget extends WP_Widget {
 		<?php endfor; ?>
 		</ul>
 	</li>
+	<?php endif; ?>
 
 	<?php foreach($matches as $i => $match) :
 			$is_upcoming = false;
 			$t1 = $match->team1_tickets;
 			$t2 = $match->team2_tickets;
-			$wld_class = $t1 == $t2 ? 'draw' : ($t1 > $t2 ? 'win' : 'loose');
+			$wld_class = $t1 == $t2 ? 'draw' : ($t1 > $t2 ? 'win' : 'loss');
 			$date = mysql2date(get_option('date_format') . ', ' . get_option('time_format'), $match->date);
 			$timestamp = mysql2date('U', $match->date);
 
@@ -156,11 +156,12 @@ class WP_ClanWars_Widget extends WP_Widget {
 	?>
 	<li class="clanwar-item<?php if($i % 2 != 0) echo ' alt'; ?> game-<?php echo $match->game_id; ?>">
 
-		<?php if($game_icon !== false) : ?>
-		<img src="<?php echo $game_icon; ?>" alt="<?php echo esc_attr($match->game_title); ?>" class="icon" />
-		<?php endif; ?>
-		
 		<div class="wrap">
+
+			<?php if($game_icon !== false) : ?>
+			<img src="<?php echo $game_icon; ?>" alt="<?php echo esc_attr($match->game_title); ?>" class="icon" />
+			<?php endif; ?>
+
 			<?php if($is_upcoming) : ?>
 			<div class="upcoming"><?php _e('Upcoming', WP_CLANWARS_TEXTDOMAIN); ?></div>
 			<?php elseif($is_playing) : ?>
@@ -169,7 +170,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 			<div class="scores <?php echo $wld_class; ?>"><?php echo sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2); ?></div>
 			<?php endif; ?>
 
-			<div class="opponent-team"><?php echo $wpClanWars->get_country_flag($match->team2_country, true); ?>
+			<div class="opponent-team"><?php echo \WP_Clanwars\Utils::get_country_flag($match->team2_country); ?>
 			<?php 
 				$team2_title = esc_html($match->team2_title);
 
@@ -197,15 +198,13 @@ class WP_ClanWars_Widget extends WP_Widget {
 	}
 
 	function form($instance) {
-        global $wpClanWars;
-        
 		$instance = wp_parse_args((array)$instance, $this->default_settings);
 
 		$show_limit = (int)$instance['show_limit'];
 		$title = esc_attr($instance['title']);
         $visible_games = $instance['visible_games'];
 
-        $games = $wpClanWars->get_game('id=all&orderby=title&order=asc');
+        $games = \WP_Clanwars\Games::get_game('id=all&orderby=title&order=asc');
 	?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', WP_CLANWARS_TEXTDOMAIN); ?></label> <input class="widefat" name="<?php echo $this->get_field_name('title'); ?>" id="<?php echo $this->get_field_id('title'); ?>" value="<?php echo esc_attr($title); ?>" type="text" /></p>
 

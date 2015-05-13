@@ -1,21 +1,26 @@
+.widget_clanwars {
+	position: relative;
+}
+
 .widget_clanwars .home-team {
 	color: #777;
 	display: none;
 }
 
-.sidebar-content-block ul.container li.widget_clanwars {
+.widget_clanwars ul.clanwar-list  {
+	list-style: none;
 	margin: 0;
+	padding: 0;
 }
 
-.sidebar-content-block ul.container li.widget_clanwars .widgettitle {
-	margin: 12px 12px 0px 12px;
+.widget_clanwars ul.clanwar-list li {
+	margin: 0;
+	padding: 0;
 }
 
 .widget_clanwars ul.clanwar-list li.clanwar-item {
-	margin-bottom: 5px;
-	padding: 0 5px;
-	position: relative;
-	zoom: 1;
+	margin: 0;
+	padding: 0.4688em 0;
 }
 
 .no-js .widget_clanwars .tabs {
@@ -24,52 +29,51 @@
 
 .widget-area .widget .tabs,
 .widget_clanwars .tabs {
-	margin: 0 0 15px 0;
-	padding: 0 3px;
-	zoom: 1;
-}
-
-.sidebar-content-block ul.container .tabs li {
-	padding: 0 2px;
-	margin: 3px 3px 3px 0;
+	margin: 0 0 1em;
+	padding: 0.4688em 0;
+	border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+	padding-bottom: 12px;
 }
 
 .widget_clanwars .tabs li {
 	display: inline-block;
 	list-style: none;
 
-	border-radius: 14px;
-	-khtml-border-radius: 14px;
-	-webkit-border-radius: 14px;
-	-moz-border-radius: 14px;
-	background: #aaa;
+	border-radius: 3px;
 	text-transform: uppercase;
-}
 
-.widget_clanwars .tabs li:hover,
+	-webkit-transition: all 0.25s;
+	-moz-transition: all 0.25s;
+	transition: all 0.25s;
+}
 .widget_clanwars .tabs li.selected {
-	background: #888;
+	background-color: rgba(0, 0, 0, 0.15);
 }
 
-.widget_clanwars .tabs li a,
-.widget_clanwars .tabs li a:hover {
+.widget_clanwars .tabs li:hover a,
+.widget_clanwars .tabs li.selected a {
+	/*color: #707070;*/
+	/*color: rgba(51, 51, 51, 0.7);*/
+}
+
+.widget_clanwars .tabs li a {
 	text-decoration: none;
-	border: 0;
-	color: #fff;
-	font-size: 11px;
-	text-shadow: 0 1px 1px #000;
 	display: block;
 	padding: 3px 8px;
+	outline: 0;
 }
 
 .widget_clanwars ul.clanwar-list li.clanwar-item .wrap {
-	margin: 0 0 0 20px;
+	margin: 0;
 	padding: 0;
+	clear: both;
 }
 
 .widget_clanwars ul.clanwar-list li.clanwar-item .icon {
-	position: absolute;
-	top: 5px;
+	float: left;
+	margin: 2px 0 0 -25px;
+	padding: 0;
+
 }
 
 .widget_clanwars ul.clanwar-list li.clanwar-item.alt {}
@@ -78,20 +82,18 @@
 .widget_clanwars .upcoming,
 .widget_clanwars .playing
 {
-	float: right;
 	text-align: center;
 	min-width: 20px;
-	padding: 0 5px;
-	font-size: 11px;
+	font-size: 0.8em;
 	font-weight: normal;
-	font-family: Arial;
 	letter-spacing: 0.5px;
-	margin-top: 5px;
-	-moz-box-shadow: 0 1px 3px #000;
-	-webkit-box-shadow: 0 1px 3px #000;
-	-khtml-box-shadow: 0 1px 3px #000;
-	box-shadow: 0 1px 3px #000;
-	text-shadow: 0 1px 0 #222;
+	/*text-shadow: 0 1px 0 #222;*/
+	text-transform: uppercase;
+
+	position: absolute;
+	padding: 5px;
+	right: 0;
+	margin: 0;
 }
 
 .widget_clanwars .upcoming {
@@ -100,15 +102,39 @@
 	letter-spacing: 0;
 }
 
-@-webkit-keyframes pulse {
+@-webkit-keyframes wp-clanwars-pulse {
 	0% {
-	 background-color: #7a4a77;
+		background-color: #7a4a77;
 	}
 	50% {
-	 background-color: #6492ac;
+		background-color: #6492ac;
 	}
 	100% {
-	 background-color: #7a4a77;
+		background-color: #7a4a77;
+	}
+}
+
+@-moz-keyframes wp-clanwars-pulse {
+	0% {
+		background-color: #7a4a77;
+	}
+	50% {
+		background-color: #6492ac;
+	}
+	100% {
+		background-color: #7a4a77;
+	}
+}
+
+@keyframes wp-clanwars-pulse {
+	0% {
+		background-color: #7a4a77;
+	}
+	50% {
+		background-color: #6492ac;
+	}
+	100% {
+		background-color: #7a4a77;
 	}
 }
 
@@ -116,19 +142,20 @@
 	color: #fff;
 	background-color: #6492ac;
 	letter-spacing: 0;
-	-webkit-animation-name: pulse;
-	-webkit-animation-duration: 2s;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-timing-function: ease-in-out;
+
+	-webkit-animation: wp-clanwars-pulse 2s ease-in-out 0s infinite;
+	-moz-animation: wp-clanwars-pulse 2s ease-in-out 0s infinite;
+	animation: wp-clanwars-pulse 2s ease-in-out 0s infinite;
 }
 
 .widget_clanwars .date {
-	font-size: 11px;
+	font-size: 0.8em;
 	color: #777;
 }
 
 .widget_clanwars .opponent-team {
-	color: #fff;
+	line-height: 1.2em;
+	margin-bottom: 5px;
 }
 
 .widget_clanwars .scores.win
@@ -142,7 +169,8 @@
 	background-color: #c87800;
 }
 
-.widget_clanwars .scores.loose {
+.widget_clanwars .scores.loose,
+.widget_clanwars .scores.loss {
 	color: #fff;
 	background-color: #c00;
 }
