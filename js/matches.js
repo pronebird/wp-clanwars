@@ -16,7 +16,7 @@
 		this.round_ID = 0;
 		this.mapElement = $('<div class="map">\n\
 						<div class="title">\n\
-							<span></span><a href="#" title="' + wpCWL10n.excludeMap + '" class="remove remove-matchmap"><br/></a>\n\
+							<span></span> <a href="#" title="' + wpCWL10n.excludeMap + '" class="remove remove-matchmap"><span class="dashicons dashicons-trash"></span></a>\n\
 							<br class="clear"/>\n\
 						</div>\n\
 						<div class="leftcol">\n\
@@ -24,7 +24,7 @@
 							<select name="scores[' + this.id + '][map_id]" class="map-select" disabled="disabled"></select>\n\
 						</div>\n\
 						<div class="add-round">\n\
-							<input type="button" class="button button-secondary" value="' + wpCWL10n.addRound + '" />\n\
+							<button class="button button-secondary"><span class="dashicons dashicons-plus"></span> ' + wpCWL10n.addRound + '</button>\n\
 						</div>\n\
 						<br class="clear"/>\n\
 					</div>');
@@ -48,7 +48,7 @@
 							<input type="text" name="scores[' + this.id + '][team1][]" class="small-text" value="0" />\n\
 							<input type="text" name="scores[' + this.id + '][team2][]" class="small-text" value="0" />\n\
 							<input type="hidden" name="scores[' + this.id + '][round_id][]" value="' + round_id + '" />\n\
-							<a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><br/></a>\n\
+							<a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><span class="dashicons dashicons-trash"></span></a>\n\
 						</div>');
 			var i = n.find('input');
 
@@ -94,7 +94,7 @@
 						src = wpCWL10n.plugin_url + '/images/no-map.jpg';
 
 					othis.mapElement.find('.screenshot').attr('src', src);
-					othis.mapElement.find('.title span').text(option.text());
+					othis.mapElement.find('.title span').first().text(option.text());
 
 					othis.map_id = option.val();
 				});
@@ -109,9 +109,10 @@
 				}
 		}, 'json');
 
-		this.mapElement.find('.add-round input').bind('click', this.mapElement,
-			function(evt){
+		this.mapElement.find('.add-round button').bind('click', this.mapElement,
+			function(evt) {
 				othis.addRound();
+				evt.preventDefault();
 				$(this).blur();
 			});
 		
@@ -155,13 +156,14 @@
 			wpMatchManager.removeAll();
 		});
 
-		$('#wp-cw-addmap input').click(function(){
+		$('#wp-cw-addmap button').click(function (evt) {
 			var m = wpMatchManager.addMap();
 
 			// add two rounds by default
 			m.addRound(0, 0);
 			m.addRound(0, 0);
 
+			evt.preventDefault();
 			$(this).blur();
 		});
 

@@ -10,10 +10,13 @@ Thanks everyone for participation!
 
 - ❏ Set post date to match date to hide future posts
 - ❏ Add tournament logo
+- ❏ Add team logo
+- ❏ Add screenshots to match editor.
+- ❏ Add line up.
+- ❏ Limit game icon dimensions
 - ❏ Option to disable upcoming matches
 - ❏ Add sort options in widget
 - ❏ Match search
-- ❏ Add team logo
 - ❏ Pagination in widget or load more
 
 I work on this plugin in free time and I don't have much, so contributions are welcome.

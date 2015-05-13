@@ -1,3 +1,6 @@
+/*
+ * Global
+ */
 .clearfix:after {
 	content: ".";
 	display: block;
@@ -19,67 +22,83 @@ html[xmlns] .clearfix {
 	height: 1%;
 }
 
-@-webkit-keyframes pulse {
+@-webkit-keyframes wp-clanwars-pulse {
 	0% {
-	 background-color: #7a4a77;
+		background-color: #7a4a77;
 	}
 	50% {
-	 background-color: #6492ac;
+		background-color: #6492ac;
 	}
 	100% {
-	 background-color: #7a4a77;
+		background-color: #7a4a77;
+	}
+}
+
+@-moz-keyframes wp-clanwars-pulse {
+	0% {
+		background-color: #7a4a77;
+	}
+	50% {
+		background-color: #6492ac;
+	}
+	100% {
+		background-color: #7a4a77;
+	}
+}
+
+@keyframes wp-clanwars-pulse {
+	0% {
+		background-color: #7a4a77;
+	}
+	50% {
+		background-color: #6492ac;
+	}
+	100% {
+		background-color: #7a4a77;
 	}
 }
 
 .wp-clanwars-list {
-	margin: 0 0 10px 0;
+	margin: 0 0 1em 0;
 	padding: 0;
-	background-color: #fff;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	list-style: none;
 }
 
 .wp-clanwars-list li {
-	list-style: none;
-	padding: 5px 0;
+	padding: 1em 0;
 	margin: 0;
 	position: relative;
-	border-bottom: 1px solid #ccc;
 	overflow: hidden;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.wp-clanwars-list li.even {}
 .wp-clanwars-list .wrap {
 	margin: 0 0 0 30px;
 	padding: 0;
+	position: relative;
 }
 
 .wp-clanwars-list .opponent-team {
-	font-size: 12px;
+	font-size: 1em;
 }
 
 .wp-clanwars-list .date {
 	color: #333333;
-	font-family: Verdana, Arial, Helvetica, serif;
-	font-size: 11px;
+	font-size: 1em;
 }
 
 .wp-clanwars-list .icon {
 	position: absolute;
-	left: 5px;
-	top: 10px;
+	left: -30px;
+	top: 0.5em;
 }
 
 .wp-clanwars-list .maplist {
-	position: absolute;
-	left: 200px;
-	width: 200px;
-	top: 5px;
-	font-size: 12px;
+	display: inline-block;
 }
 
 .wp-clanwars-list .match-link {
-	font-size: 11px;
+	font-size: 1em;
 	padding: 0 21px 0 5px;
 	background: transparent url('../images/page_url.gif') 98% 50% no-repeat;
 	margin-right: 5px;
@@ -88,6 +107,7 @@ html[xmlns] .clearfix {
 
 .wp-clanwars-pagination {
 	text-align: right;
+	overflow: hidden;
 }
 
 .wp-clanwars-pagination .displaying-num {
@@ -95,56 +115,54 @@ html[xmlns] .clearfix {
 }
 
 .wp-clanwars-pagination .page-numbers {
-	padding: 2px 5px;
+	display: inline-block;
+	min-width: 30px;
+	text-align: center;
+	border: 0;
+	outline: 0;
 }
 
 .wp-clanwars-pagination .page-numbers.current {
-	color: #000;
-	font-weight: bold;
+	background-color: rgba(0,0,0,0.05);
+	border-radius: 3px;
 }
 
-.wp-clanwars-page .scores,
+.wp-clanwars-page-v2 .scores,
 .wp-clanwars-list .scores,
 .wp-clanwars-list .upcoming,
 .wp-clanwars-list .playing {
 	float: right;
 	text-align: center;
 	min-width: 20px;
-	padding: 0 5px;
-	margin-right: 5px;
-	font-size: 11px;
+	padding: 5px 5px;
+	font-size: 0.8em;
 	font-weight: normal;
-	font-family: Arial;
 	letter-spacing: 0.5px;
-	margin-top: 5px;
-	/*-moz-box-shadow: 1px 1px 0px #444;
-	-webkit-box-shadow: 1px 1px 0px #444;
-	-khtml-box-shadow: 1px 1px 0px #444;
-	box-shadow: 0 1px 1px #000;*/
-	text-shadow: 0 1px 0 #222;
 }
 
-.wp-clanwars-page .scores {
-	float: none;
+.wp-clanwars-page-v2 .scores {
 	padding: 2px 5px;
+	float: none;
 }
 
 .wp-clanwars-list .scores.win,
-.wp-clanwars-page .scores.win
+.wp-clanwars-page-v2 .scores.win
 {
 	color: #fff;
 	background-color: #567632; /*#5f6e43;*/
 }
 
 .wp-clanwars-list .scores.draw,
-.wp-clanwars-page .scores.draw
+.wp-clanwars-page-v2 .scores.draw
 {
 	color: #fff;
 	background-color: #c87800;
 }
 
 .wp-clanwars-list .scores.loose,
-.wp-clanwars-page .scores.loose
+.wp-clanwars-page-v2 .scores.loose,
+.wp-clanwars-list .scores.loss,
+.wp-clanwars-page-v2 .scores.loss
 {
 	color: #fff;
 	background-color: #c00;
@@ -160,169 +178,136 @@ html[xmlns] .clearfix {
 	color: #fff;
 	background-color: #6492ac;
 	letter-spacing: 0;
-   -webkit-animation-name: pulse;
-   -webkit-animation-duration: 2s;
-   -webkit-animation-iteration-count: infinite;
-   -webkit-animation-timing-function: ease-in-out;
+	-webkit-animation: wp-clanwars-pulse 2s ease-in-out 0s infinite;
+	-moz-animation: wp-clanwars-pulse 2s ease-in-out 0s infinite;
+	animation: wp-clanwars-pulse 2s ease-in-out 0s infinite;
 }
 
 .wp-clanwars-filter {
-	margin: 0 !important;
+	margin: 0 0 1em !important;
 	padding: 0;
 	display: block;
-	background: transparent url('../images/tabs.png') 0% 100% repeat-x;
-	zoom: 1;
-	border-bottom: 1px solid #ccc;
+	list-style: none;
 }
 
 .wp-clanwars-filter li {
-	float: left;
-	list-style: none;
+	display: inline-block;
 	padding: 0;
-	margin: 0 0 0 3px;
-	text-shadow: 0 1px white;
+	margin: 0;
 }
 
-.wp-clanwars-filter li:first-child {
-	margin-left: 0;
-}
-
-.wp-clanwars-filter li:hover,
 .wp-clanwars-filter li.selected {
-	background: #fff url('../images/tabs-active.png') 0% 100% repeat-x;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	border-top: 1px solid #ccc;
-	-webkit-border-radius: 3px 3px 0 0;
-	-moz-border-radius: 3px 3px 0 0;
-	border-radius: 3px 3px 0 0;
-}
-
-.wp-clanwars-filter li:hover a ,
-.wp-clanwars-filter li.selected a {
-	color: #000;
+	background-color: rgba(0, 0, 0, 0.05);
+	border-radius: 3px;
 }
 
 .wp-clanwars-filter li a {
 	text-decoration: none;
 	border: 0;
-	color: #222;
 	display: block;
 	padding: 5px 12px;
+	outline: 0;
 }
 
-.wp-clanwars-filter li:hover a,
-.wp-clanwars-filter li.selected a {
-	padding: 4px 11px 5px;
+/*
+ * Match shortcode CSS
+ */
+
+.wp-clanwars-page-v2 {
+	margin-bottom: 1em;
 }
 
-.wp-clanwars-page {
-	overflow: hidden;
-}
-
-.wp-clanwars-page .maplist {
-	display: block;
-	margin: 0 auto;
-	width: 468px;
-}
-
-.wp-clanwars-page .teams {
-	margin: 5px auto;
-	padding: 0 42px;
-	font-family: Georgia, Palatino, times, serif;
+.wp-clanwars-page-v2 .teams {
+	margin: 0 0 1em;
+	padding: 0;
 	line-height: 1.5em;
-	color: #000;
-	text-shadow:0 1px 0 #666666;
-	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
 }
 
-.wp-clanwars-page p.status.type-1 {
+.wp-clanwars-page-v2 .teams .team1 { padding-right: 10px; }
+.wp-clanwars-page-v2 .teams .team2 { padding-left: 10px; }
+.wp-clanwars-page-v2 .teams .vs { font-style: italic; }
+
+.wp-clanwars-page-v2 p.status.type-1 {
 	color: #c00;
 }
 
-.wp-clanwars-page .teams .team1 {
-	float: left;
+.wp-clanwars-page-v2 .maplist {
+	display: block;
+	text-align: center;
+	margin-left: -50px;
 }
 
-.wp-clanwars-page .teams .team2 {
-	float: right;
+.wp-clanwars-page-v2 .maplist > .item {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-left: 50px;
 }
 
-.wp-clanwars-page .maplist .item {
-	width: 150px;
-	margin: 5px 42px;
-	float: left;
-}
-
-.wp-clanwars-page .maplist .item.aligncenter {
-	float: none;
-	margin: 5px auto;
-}
-
-.wp-clanwars-page .maplist .item .map-screenshot {
-	/*border: 1px solid #222;*/
+.wp-clanwars-page-v2 .maplist > .item > .map {
 	position: relative;
+	display: inline-block;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	margin: 0 0 1em 0;
+	padding: 0;
 }
-.wp-clanwars-page .maplist .item .map-screenshot img {
+
+.wp-clanwars-page-v2 .maplist > .item > .map > img {
 	display: block;
 }
 
-.wp-clanwars-page .maplist .item .map-title,
-.tipsy  .map-title {
+.wp-clanwars-page-v2 .maplist > .item > .map > .title,
+.tipsy .map-title {
 	position: absolute;
 	bottom: 0;
-	width: 100%;
-	font-size: 12px;
-	line-height: 18px;
+	left: 0;
+	right: 0;
+
 	font-family: monospace;
+	line-height: 1em;
+	font-size: 1em;
+
 	color: #fff;
-	text-shadow: 0 0px 1px #000;
+
 	text-align: center;
-	background: rgba(0,0,0,.5);
+	background: rgba(0, 0, 0, 0.5);
+	padding: 6px 0;
 }
 
-.wp-clanwars-page .maplist .item .round {
+.wp-clanwars-page-v2 .maplist > .item > .round {
 	text-align: center;
-	padding: 2px 0;
+	padding: 0;
+	margin: 0 0 1em 0;
+}
+
+.wp-clanwars-page-v2 .maplist > .item > .round > span {
+	letter-spacing: 0.5px;
+	font-size: 1em;
+	line-height: 1em;
+	padding: 4px 8px;
+}
+
+.wp-clanwars-page-v2 .summary {
+	margin: 0 0 1em 0;
+}
+
+.wp-clanwars-page-v2 .summary .scores {
+	padding: 10px;
+	margin: 0;
+	text-align: center;
+	font-size: 1.2em;
+	line-height: 1.2em;
 	letter-spacing: 0.5px;
 }
 
-.wp-clanwars-page .summary {
-	margin: 15px 0;
-	text-align: center;
-	font-size: 14px;
-	font-weight: normal;
-	letter-spacing: 0.5px;
+.wp-clanwars-page-v2 ul.match-props {
+	margin: 0 0 1em 0;
 }
 
-.wp-clanwars-page .summary .scores {
-	font-size: 18px;
-	padding: 5px 10px;
-	-moz-box-shadow: 0 1px 5px #444;
-	-webkit-box-shadow: 0 1px 5px #444;
-	-khtml-box-shadow: 0 1px 5px #444;
-	box-shadow: 0 1px 5px #444;
-}
-
-.wp-clanwars-page ul.match-props {
-	margin: 5px 0;
-}
-
-.wp-clanwars-page ul.match-props li {
+.wp-clanwars-page-v2 ul.match-props li {
 	list-style: none;
 	margin: 0;
-	padding: 0 0 0 22px;
-	line-height: 25px;
-}
-
-.wp-clanwars-page ul.match-props li.external_url {
-	background: transparent url(../images/icon-link16.png) 0% 50% no-repeat;
-}
-
-.wp-clanwars-page ul.match-props li.date {
-	background: transparent url(../images/icon-clocks16.png) 0% 50% no-repeat;
-}
-
-.wp-clanwars-page ul.match-props li.status {
-	background: transparent url(../images/icon-flag16.png) 0% 50% no-repeat;
+	padding: 0;
 }

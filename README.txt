@@ -1,9 +1,9 @@
 === WP-ClanWars ===
 Contributors: andddd
 Tags: cybersport, clanwar, team, clan, cyber, sport, match
-Requires at least: 3.0.1
-Tested up to: 4.0
-Stable tag: 1.6.3
+Requires at least: 4.1
+Tested up to: 4.1
+Stable tag: 1.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
