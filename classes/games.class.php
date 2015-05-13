@@ -139,6 +139,8 @@ KEY `abbr` (`abbr`)
 
 	static function delete_game($id) {
 		global $wpdb;
+		
+		$table = self::table();
 
 		if(!is_array($id)) {
 			$id = array($id);
@@ -150,7 +152,7 @@ KEY `abbr` (`abbr`)
 		\WP_Clanwars\Matches::delete_match_by_game($id);
 
 		$id_list = implode(',', $id);
-		return $wpdb->query( "DELETE FROM `{self::table()}` WHERE id IN($id_list)" );
+		return $wpdb->query( "DELETE FROM `$table` WHERE id IN($id_list)" );
 	}
 
 };
