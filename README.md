@@ -9,6 +9,7 @@ https://www.transifex.com/projects/p/wp-clanwars/
 - ❏ Set post date to match date to hide future posts
 - ❏ Add tournament logo
 - ❏ Add team logo
+- ❏ Add screenshots to match editor.
 - ❏ Limit game icon dimensions
 - ❏ Option to disable upcoming matches
 - ❏ Add sort options in widget
