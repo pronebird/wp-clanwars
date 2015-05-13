@@ -10,6 +10,7 @@ https://www.transifex.com/projects/p/wp-clanwars/
 - ❏ Add tournament logo
 - ❏ Add team logo
 - ❏ Add screenshots to match editor.
+- ❏ Add line up.
 - ❏ Limit game icon dimensions
 - ❏ Option to disable upcoming matches
 - ❏ Add sort options in widget
