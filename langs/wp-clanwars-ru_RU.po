@@ -1,1012 +1,1014 @@
 #
 # Translators:
-# ChiefMcClane <karl-kornwachs@t-online.de>, 2015
+# Andrej Mihajlov <and@codeispoetry.ru>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "POT-Creation-Date: 2014-11-09 19:20+0100\n"
-"PO-Revision-Date: 2015-05-13 17:20-0000\n"
+"PO-Revision-Date: 2015-05-13 17:38-0000\n"
 "Last-Translator: Andrej Mihajlov <and@codeispoetry.ru>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/wp-clanwars/language/de/)\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/wp-clanwars/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
+"1 : 2);\n"
 "X-Generator: Poedit 1.7.6\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
-"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;"
+"_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: countries.php:20
 msgid "Afghanistan"
-msgstr "Afghanistan"
+msgstr "Афганистан"
 
 #: countries.php:21
 msgid "Albania"
-msgstr "Albanien"
+msgstr "Албания"
 
 #: countries.php:22
 msgid "Algeria"
-msgstr "Alegrien"
+msgstr "Алжир"
 
 #: countries.php:23
 msgid "American Samoa"
-msgstr "Amerikanisch-Samoa"
+msgstr "Американское Самоа"
 
 #: countries.php:24
 msgid "Andorra"
-msgstr "Andorra"
+msgstr "Андорра"
 
 #: countries.php:25
 msgid "Angola"
-msgstr "Angola"
+msgstr "Ангола"
 
 #: countries.php:26
 msgid "Anguilla"
-msgstr "Anguilla"
+msgstr "Ангилья"
 
 #: countries.php:27
 msgid "Antigua and Barbuda"
-msgstr "Antigua und Barbuda"
+msgstr "Антигуа и Барбуда"
 
 #: countries.php:28
 msgid "Argentina"
-msgstr "Argentinien"
+msgstr "Аргентина"
 
 #: countries.php:29
 msgid "Armenia"
-msgstr "Armenien"
+msgstr "Армения"
 
 #: countries.php:30
 msgid "Aruba"
-msgstr "Aruba"
+msgstr "Аруба"
 
 #: countries.php:31
 msgid "Australia"
-msgstr "Australien"
+msgstr "Австралия"
 
 #: countries.php:32
 msgid "Austria"
-msgstr "Österreich"
+msgstr "Австрия"
 
 #: countries.php:33
 msgid "Azerbaijan"
-msgstr "Aserbaidschan"
+msgstr "Азербайджан"
 
 #: countries.php:34
 msgid "Bahamas"
-msgstr "Bahamas"
+msgstr "Багамские острова"
 
 #: countries.php:35
 msgid "Bahrain"
-msgstr "Bahrain"
+msgstr "Бахрейн"
 
 #: countries.php:36
 msgid "Bangladesh"
-msgstr "Bangladesch"
+msgstr "Бангладеш"
 
 #: countries.php:37
 msgid "Barbados"
-msgstr "Barbados"
+msgstr "Барбадос"
 
 #: countries.php:38
 msgid "Belarus"
-msgstr "Weißrussland"
+msgstr "Белоруссия"
 
 #: countries.php:39
 msgid "Belgium"
-msgstr "Belgien"
+msgstr "Бельгия"
 
 #: countries.php:40
 msgid "Belize"
-msgstr "Belize"
+msgstr "Белиз"
 
 #: countries.php:41
 msgid "Benin"
-msgstr "Benin"
+msgstr "Бенин"
 
 #: countries.php:42
 msgid "Bermuda"
-msgstr "Bermuda"
+msgstr "Бермудские острова"
 
 #: countries.php:43
 msgid "Bhutan"
-msgstr "Bhutan"
+msgstr "Бутан"
 
 #: countries.php:44
 msgid "Bolivia"
-msgstr "Bolivien"
+msgstr "Боливия"
 
 #: countries.php:45
 msgid "Bosnia and Herzegowina"
-msgstr "Bosnien und Herzegowina"
+msgstr "Босния и Герцеговина"
 
 #: countries.php:46
 msgid "Botswana"
-msgstr "Botswana"
+msgstr "Ботсвана"
 
 #: countries.php:47
 msgid "Bouvet Island"
-msgstr "Bouvetinsel"
+msgstr "Остров Буве"
 
 #: countries.php:48
 msgid "Brazil"
-msgstr "Brasilien"
+msgstr "Бразилия"
 
 #: countries.php:49
 msgid "British Indian Ocean Territory"
-msgstr "Britisches Territorium im Indischen Ozean"
+msgstr "Британская территория Индийского океана"
 
 #: countries.php:50
 msgid "Brunei Darussalam"
-msgstr "Brunei"
+msgstr "Бруней Дар-эс-Салам"
 
 #: countries.php:51
 msgid "Bulgaria"
-msgstr "Bulgarien"
+msgstr "Болгария"
 
 #: countries.php:52
 msgid "Burkina Faso"
-msgstr "Burkina Faso"
+msgstr "Буркина-Фасо"
 
 #: countries.php:53
 msgid "Burundi"
-msgstr "Burundi"
+msgstr "Бурунди"
 
 #: countries.php:54
 msgid "Cambodia"
-msgstr "Kambodscha"
+msgstr "Камбоджа"
 
 #: countries.php:55
 msgid "Cameroon"
-msgstr "Kamerun"
+msgstr "Камерун"
 
 #: countries.php:56
 msgid "Canada"
-msgstr "Kanada"
+msgstr "Канада"
 
 #: countries.php:57
 msgid "Cape Verde"
-msgstr "Kap Verde"
+msgstr "Кабо-Верде"
 
 #: countries.php:58
 msgid "Catalonia"
-msgstr "Katalonien"
+msgstr "Каталония"
 
 #: countries.php:59
 msgid "Cayman Islands"
-msgstr "Cayman Islands"
+msgstr "Каймановы острова"
 
 #: countries.php:60
 msgid "Central African Republic"
-msgstr "Zentralafrikanische Republik"
+msgstr "Центральноафриканская Республика"
 
 #: countries.php:61
 msgid "Chad"
-msgstr "Tschad"
+msgstr "Чад"
 
 #: countries.php:62
 msgid "Chile"
-msgstr "Chile"
+msgstr "Чили"
 
 #: countries.php:63
 msgid "China"
-msgstr "Volksrepublik China"
+msgstr "Китай"
 
 #: countries.php:64
 msgid "Christmas Island"
-msgstr "Weihnachtsinsel"
+msgstr "Остров Рождества"
 
 #: countries.php:65
 msgid "Cocos (Keeling) Islands"
-msgstr "Kokosinseln()"
+msgstr "Кокосовые (Килинг) острова"
 
 #: countries.php:66
 msgid "Colombia"
-msgstr "Kolumbien"
+msgstr "Колумбия"
 
 #: countries.php:67
 msgid "Comoros"
-msgstr "Komoren"
+msgstr "Коморские острова"
 
 #: countries.php:68
 msgid "Congo"
-msgstr "Republik Kongo"
+msgstr "Конго"
 
 #: countries.php:69
 msgid "Congo, the DRC"
-msgstr "Demokratische Republik Kongo"
+msgstr "Конго, ДРК"
 
 #: countries.php:70
 msgid "Cook Islands"
-msgstr "Cookinseln"
+msgstr "Острова Кука"
 
 #: countries.php:71
 msgid "Costa Rica"
-msgstr "Costa Rica"
+msgstr "Коста Рика"
 
 #: countries.php:72
 msgid "Cote D'Ivoire"
-msgstr "Elfenbeinküste"
+msgstr "Кот д ' Ивуар"
 
 #: countries.php:73
 msgid "Croatia"
-msgstr "Kroatien"
+msgstr "Хорватия"
 
 #: countries.php:74
 msgid "Cuba"
-msgstr "Kuba"
+msgstr "Куба"
 
 #: countries.php:75
 msgid "Cyprus"
-msgstr "Republik Zypern"
+msgstr "Кипр"
 
 #: countries.php:76
 msgid "Czech Republic"
-msgstr "Tschechien"
+msgstr "Чехия"
 
 #: countries.php:77
 msgid "Denmark"
-msgstr "Dänemark"
+msgstr "Дания"
 
 #: countries.php:78
 msgid "Djibouti"
-msgstr "Dschibuti"
+msgstr "Джибути"
 
 #: countries.php:79
 msgid "Dominica"
-msgstr "Dominica"
+msgstr "Доминика"
 
 #: countries.php:80
 msgid "Dominican Republic"
-msgstr "Dominikanische Republik"
+msgstr "Доминиканская Республика"
 
 #: countries.php:81
 msgid "Ecuador"
-msgstr "Ecuador"
+msgstr "Эквадор"
 
 #: countries.php:82
 msgid "Egypt"
-msgstr "Ägypten"
+msgstr "Египет"
 
 #: countries.php:83
 msgid "El Salvador"
-msgstr "El Salvador"
+msgstr "Сальвадор"
 
 #: countries.php:84
 msgid "England"
-msgstr "England"
+msgstr "Англия"
 
 #: countries.php:85
 msgid "Equatorial Guinea"
-msgstr "Äquatorialguinea"
+msgstr "Экваториальная Гвинея"
 
 #: countries.php:86
 msgid "Eritrea"
-msgstr "Eritrea"
+msgstr "Эритрея"
 
 #: countries.php:87
 msgid "Estonia"
-msgstr "Estland"
+msgstr "Эстония"
 
 #: countries.php:88
 msgid "Ethiopia"
-msgstr "Äthiopien"
+msgstr "Эфиопия"
 
 #: countries.php:89
 msgid "European Union"
-msgstr "Europäische Union"
+msgstr "Европейский Союз"
 
 #: countries.php:90
 msgid "Falkland Islands (Malvinas)"
-msgstr "Falklandinseln (Malwinen)"
+msgstr "Фолклендские (Мальвинские) острова"
 
 #: countries.php:91
 msgid "Faroe Islands"
-msgstr "Färöer"
+msgstr "Фарерские о-ва"
 
 #: countries.php:92
 msgid "Fiji"
-msgstr "Fidschi"
+msgstr "Фиджи"
 
 #: countries.php:93
 msgid "Finland"
-msgstr "Finnland"
+msgstr "Финляндия"
 
 #: countries.php:94
 msgid "France"
-msgstr "Frankreich"
+msgstr "Франция"
 
 #: countries.php:95
 msgid "French Guiana"
-msgstr "Französisch-Guayana"
+msgstr "Французская Гвиана"
 
 #: countries.php:96
 msgid "French Polynesia"
-msgstr "Französisch-Polynesien"
+msgstr "Французская Полинезия"
 
 #: countries.php:97
 msgid "French Southern Territories"
-msgstr "Französische Süd- und Antarktisgebiete"
+msgstr "Французские Южные территории"
 
 #: countries.php:98
 msgid "Gabon"
-msgstr "Gabun"
+msgstr "Габон"
 
 #: countries.php:99
 msgid "Gambia"
-msgstr "Gambia"
+msgstr "Гамбия"
 
 #: countries.php:100
 msgid "Georgia"
-msgstr "Georgia"
+msgstr "Грузия"
 
 #: countries.php:101
 msgid "Germany"
-msgstr "Deutschland"
+msgstr "Германия"
 
 #: countries.php:102
 msgid "Ghana"
-msgstr "Ghana"
+msgstr "Гана"
 
 #: countries.php:103
 msgid "Gibraltar"
-msgstr "Gibraltar"
+msgstr "Гибралтар"
 
 #: countries.php:104
 msgid "Greece"
-msgstr "Griechenland"
+msgstr "Греция"
 
 #: countries.php:105
 msgid "Greenland"
-msgstr "Grönland"
+msgstr "Гренландия"
 
 #: countries.php:106
 msgid "Grenada"
-msgstr "Grenada"
+msgstr "Гренада"
 
 #: countries.php:107
 msgid "Guadeloupe"
-msgstr "Guadeloupe"
+msgstr "Гваделупа"
 
 #: countries.php:108
 msgid "Guam"
-msgstr "Guam"
+msgstr "Гуам"
 
 #: countries.php:109
 msgid "Guatemala"
-msgstr "Guatemala"
+msgstr "Гватемала"
 
 #: countries.php:110
 msgid "Guinea"
-msgstr "Guinea"
+msgstr "Гвинея"
 
 #: countries.php:111
 msgid "Guinea-Bissau"
-msgstr "Guinea-Bissau"
+msgstr "Гвинея-Бисау"
 
 #: countries.php:112
 msgid "Guyana"
-msgstr "Guyana"
+msgstr "Гайана"
 
 #: countries.php:113
 msgid "Haiti"
-msgstr "Haiti"
+msgstr "Гаити"
 
 #: countries.php:114
 msgid "Heard Island and McDonald Islands"
-msgstr "Heard und McDonaldinseln"
+msgstr "Остров Херд и острова Макдональд"
 
 #: countries.php:115
 msgid "Holy See (Vatican City State)"
-msgstr "Vatikanstadt ()"
+msgstr "Святейший Престол (Ватикан)"
 
 #: countries.php:116
 msgid "Honduras"
-msgstr "Honduras"
+msgstr "Гондурас"
 
 #: countries.php:117
 msgid "Hong Kong"
-msgstr "Hongkong"
+msgstr "Hong Kong"
 
 #: countries.php:118
 msgid "Hungary"
-msgstr "Ungarn"
+msgstr "Венгрия"
 
 #: countries.php:119
 msgid "Iceland"
-msgstr "Island"
+msgstr "Исландия"
 
 #: countries.php:120
 msgid "India"
-msgstr "Indien"
+msgstr "Индия"
 
 #: countries.php:121
 msgid "Indonesia"
-msgstr "Indonesien"
+msgstr "Индонезия"
 
 #: countries.php:122
 msgid "Iran, Islamic Republic of"
-msgstr "Iran"
+msgstr "Иран, Исламская Республика"
 
 #: countries.php:123
 msgid "Iraq"
-msgstr "Irak"
+msgstr "Ирак"
 
 #: countries.php:124
 msgid "Ireland"
-msgstr "Irland"
+msgstr "Ирландия"
 
 #: countries.php:125
 msgid "Israel"
-msgstr "Israel"
+msgstr "Израиль"
 
 #: countries.php:126
 msgid "Italy"
-msgstr "Italien"
+msgstr "Италия"
 
 #: countries.php:127
 msgid "Jamaica"
-msgstr "Jamaika"
+msgstr "Ямайка"
 
 #: countries.php:128
 msgid "Japan"
-msgstr "Japan"
+msgstr "Япония"
 
 #: countries.php:129
 msgid "Jordan"
-msgstr "Jordan"
+msgstr "Иордан"
 
 #: countries.php:130
 msgid "Kazakhstan"
-msgstr "Kasachstan"
+msgstr "Казахстан"
 
 #: countries.php:131
 msgid "Kenya"
-msgstr "Kenia"
+msgstr "Кения"
 
 #: countries.php:132
 msgid "Kiribati"
-msgstr "Kiribati"
+msgstr "Кирибати"
 
 #: countries.php:133
 msgid "Korea, Democratic People's Republic of"
-msgstr "Nordkorea"
+msgstr "Корея, Демократическая Народная Республика"
 
 #: countries.php:134
 msgid "Korea, Republic of"
-msgstr "Südkorea"
+msgstr "Республика Корея"
 
 #: countries.php:135
 msgid "Kuwait"
-msgstr "Kuwait"
+msgstr "Кувейт"
 
 #: countries.php:136
 msgid "Kyrgyzstan"
-msgstr "Kirgisistan"
+msgstr "Киргизия"
 
 #: countries.php:137
 msgid "Lao People's Democratic Republic"
-msgstr "Laos"
+msgstr "Лаосская Народно-Демократическая Республика"
 
 #: countries.php:138
 msgid "Latvia"
-msgstr "Lettland"
+msgstr "Латвия"
 
 #: countries.php:139
 msgid "Lebanon"
-msgstr "Libanon"
+msgstr "Ливан"
 
 #: countries.php:140
 msgid "Lesotho"
-msgstr "Lesotho"
+msgstr "Лесото"
 
 #: countries.php:141
 msgid "Liberia"
-msgstr "Liberia"
+msgstr "Либерия"
 
 #: countries.php:142
 msgid "Libyan Arab Jamahiriya"
-msgstr "Libyen"
+msgstr "Ливийская Арабская Джамахирия"
 
 #: countries.php:143
 msgid "Liechtenstein"
-msgstr "Liechtenstein"
+msgstr "Лихтенштейн"
 
 #: countries.php:144
 msgid "Lithuania"
-msgstr "Litauen"
+msgstr "Литва"
 
 #: countries.php:145
 msgid "Luxembourg"
-msgstr "Luxemburg"
+msgstr "Люксембург"
 
 #: countries.php:146
 msgid "Macao"
-msgstr "Macau"
+msgstr "Макао"
 
 #: countries.php:147
 msgid "Macedonia, the former Yugoslav Republic of"
-msgstr "Mazedonien"
+msgstr "Македония, бывшая югославская Республика"
 
 #: countries.php:148
 msgid "Madagascar"
-msgstr "Madagaskar"
+msgstr "Мадагаскар"
 
 #: countries.php:149
 msgid "Malawi"
-msgstr "Malawi"
+msgstr "Малави"
 
 #: countries.php:150
 msgid "Malaysia"
-msgstr "Malaysia"
+msgstr "Малазия"
 
 #: countries.php:151
 msgid "Maldives"
-msgstr "Malediven"
+msgstr "Мальдивские острова"
 
 #: countries.php:152
 msgid "Mali"
-msgstr "Mali"
+msgstr "Мали"
 
 #: countries.php:153
 msgid "Malta"
-msgstr "Malta"
+msgstr "Мальта"
 
 #: countries.php:154
 msgid "Marshall Islands"
-msgstr "Marshallinseln"
+msgstr "Маршалловы острова"
 
 #: countries.php:155
 msgid "Martinique"
-msgstr "Martinique"
+msgstr "Мартиника"
 
 #: countries.php:156
 msgid "Mauritania"
-msgstr "Mauretanien"
+msgstr "Мавритания"
 
 #: countries.php:157
 msgid "Mauritius"
-msgstr "Mauritius"
+msgstr "Маврикий"
 
 #: countries.php:158
 msgid "Mayotte"
-msgstr "Mayotte"
+msgstr "Майотта"
 
 #: countries.php:159
 msgid "Mexico"
-msgstr "Mexiko"
+msgstr "Мексика"
 
 #: countries.php:160
 msgid "Micronesia, Federated States of"
-msgstr "Föderierte Staaten von Mikronesien"
+msgstr "Микронезия, Федеративные Штаты"
 
 #: countries.php:161
 msgid "Moldova, Republic of"
-msgstr "Moldawien"
+msgstr "Молдова, Республика"
 
 #: countries.php:162
 msgid "Monaco"
-msgstr "Monaco"
+msgstr "Монако"
 
 #: countries.php:163
 msgid "Mongolia"
-msgstr "Mongolei"
+msgstr "Монголия"
 
 #: countries.php:164
 msgid "Montenegro"
-msgstr "Montenegro"
+msgstr "Черногория"
 
 #: countries.php:165
 msgid "Montserrat"
-msgstr "Montserrat"
+msgstr "Монтсеррат"
 
 #: countries.php:166
 msgid "Morocco"
-msgstr "Marokko"
+msgstr "Марокко"
 
 #: countries.php:167
 msgid "Mozambique"
-msgstr "Mosambik"
+msgstr "Мозамбик"
 
 #: countries.php:168
 msgid "Myanmar"
-msgstr "Myanmar"
+msgstr "Мьянма"
 
 #: countries.php:169
 msgid "Namibia"
-msgstr "Namibia"
+msgstr "Намибия"
 
 #: countries.php:170
 msgid "Nauru"
-msgstr "Nauru"
+msgstr "Науру"
 
 #: countries.php:171
 msgid "Nepal"
-msgstr "Nepal"
+msgstr "Непал"
 
 #: countries.php:172
 msgid "Netherlands"
-msgstr "Niederlande"
+msgstr "Голландия"
 
 #: countries.php:173
 msgid "Netherlands Antilles"
-msgstr "Niederländische Antillen"
+msgstr "Нидерландские Антильские острова"
 
 #: countries.php:174
 msgid "New Caledonia"
-msgstr "Neukaledonien"
+msgstr "Новая Каледония"
 
 #: countries.php:175
 msgid "New Zealand"
-msgstr "Neuseeland"
+msgstr "Новая Зеландия"
 
 #: countries.php:176
 msgid "Nicaragua"
-msgstr "Nicaragua"
+msgstr "Никарагуа"
 
 #: countries.php:177
 msgid "Niger"
-msgstr "Niger"
+msgstr "Нигер"
 
 #: countries.php:178
 msgid "Nigeria"
-msgstr "Nigeria"
+msgstr "Нигерия"
 
 #: countries.php:179
 msgid "Niue"
-msgstr "Niue"
+msgstr "Ниуэ"
 
 #: countries.php:180
 msgid "Norfolk Island"
-msgstr "Norfolkinsel"
+msgstr "Остров Норфолк"
 
 #: countries.php:181
 msgid "Northern Mariana Islands"
-msgstr "Nördliche Marianen"
+msgstr "Северные Марианские острова"
 
 #: countries.php:182
 msgid "Norway"
-msgstr "Norwegen"
+msgstr "Норвегия"
 
 #: countries.php:183
 msgid "Oman"
-msgstr "Oman"
+msgstr "Оман"
 
 #: countries.php:184
 msgid "Pakistan"
-msgstr "Pakistan"
+msgstr "Пакистан"
 
 #: countries.php:185
 msgid "Palau"
-msgstr "Palau"
+msgstr "Палау"
 
 #: countries.php:186
 msgid "Palestinian Territory, Occupied"
-msgstr "Palästinensische Autonomiegebiete"
+msgstr "Палестинская территория, оккупированная"
 
 #: countries.php:187
 msgid "Panama"
-msgstr "Panama"
+msgstr "Панама"
 
 #: countries.php:188
 msgid "Papua New Guinea"
-msgstr "Papua-Neuguinea"
+msgstr "Папуа-Новая Гвинея"
 
 #: countries.php:189
 msgid "Paraguay"
-msgstr "Paraguay"
+msgstr "Парагвай"
 
 #: countries.php:190
 msgid "Peru"
-msgstr "Peru"
+msgstr "Перу"
 
 #: countries.php:191
 msgid "Philippines"
-msgstr "Philippinen"
+msgstr "Филиппины"
 
 #: countries.php:192
 msgid "Pitcairn"
-msgstr "Pitcairninseln"
+msgstr "Питкэрн"
 
 #: countries.php:193
 msgid "Poland"
-msgstr "Polen"
+msgstr "Польша"
 
 #: countries.php:194
 msgid "Portugal"
-msgstr "Portugal"
+msgstr "Португалия"
 
 #: countries.php:195
 msgid "Puerto Rico"
-msgstr "Puerto Rico"
+msgstr "Пуэрто-Рико"
 
 #: countries.php:196
 msgid "Qatar"
-msgstr "Katar"
+msgstr "Катар"
 
 #: countries.php:197
 msgid "Romania"
-msgstr "Rumänien"
+msgstr "Румыния"
 
 #: countries.php:198
 msgid "Russia"
-msgstr "Russland"
+msgstr "Россия"
 
 #: countries.php:199
 msgid "Rwanda"
-msgstr "Ruanda"
+msgstr "Руанда"
 
 #: countries.php:200
 msgid "Réunion"
-msgstr "Réunion"
+msgstr "Реюньон"
 
 #: countries.php:201
 msgid "Saint Helena, Ascension and Tristan da Cunha"
-msgstr "St. Helena, Ascension und Tristan da Cunha"
+msgstr "Остров Святой Елены, Вознесения и Тристан-да-Кунья"
 
 #: countries.php:202
 msgid "Saint Kitts and Nevis"
-msgstr "St. Kitts und Nevis"
+msgstr "Сент-Китс и Невис"
 
 #: countries.php:203
 msgid "Saint Lucia"
-msgstr "St. Lucia"
+msgstr "Сент-Люсия"
 
 #: countries.php:204
 msgid "Saint Pierre and Miquelon"
-msgstr "Saint-Pierre und Miquelon"
+msgstr "Saint Pierre и Микелон"
 
 #: countries.php:205
 msgid "Saint Vincent and the Grenadines"
-msgstr "St. Vincent und die Grenadinen"
+msgstr "Saint Vincent и Гренадины"
 
 #: countries.php:206
 msgid "Samoa"
-msgstr "Samoa"
+msgstr "Самоа"
 
 #: countries.php:207
 msgid "San Marino"
-msgstr "San Marino"
+msgstr "Сан-Марино"
 
 #: countries.php:208
 msgid "Sao Tome and Principe"
-msgstr "São Tomé und Príncipe"
+msgstr "Сан-Томе и Принсипи"
 
 #: countries.php:209
 msgid "Saudi Arabia"
-msgstr "Saudi-Arabien"
+msgstr "Саудовская Аравия"
 
 #: countries.php:210
 msgid "Scotland"
-msgstr "Schottland"
+msgstr "Шотландия"
 
 #: countries.php:211
 msgid "Senegal"
-msgstr "Senegal"
+msgstr "Сенегал"
 
 #: countries.php:212
 msgid "Serbia"
-msgstr "Serbien"
+msgstr "Сербия"
 
 #: countries.php:213
 msgid "Serbia and Montenegro"
-msgstr "Serbien und Montenegro"
+msgstr "Сербия и Черногория"
 
 #: countries.php:214
 msgid "Seychelles"
-msgstr "Seychellen"
+msgstr "Сейшельские острова"
 
 #: countries.php:215
 msgid "Sierra Leone"
-msgstr "Sierra Leone"
+msgstr "Сьерра-Леоне"
 
 #: countries.php:216
 msgid "Singapore"
-msgstr "Singapur"
+msgstr "Сингапур"
 
 #: countries.php:217
 msgid "Slovakia"
-msgstr "Slowakei"
+msgstr "Словакия"
 
 #: countries.php:218
 msgid "Slovenia"
-msgstr "Slowenien"
+msgstr "Словения"
 
 #: countries.php:219
 msgid "Solomon Islands"
-msgstr "Salomonen"
+msgstr "Соломоновы острова"
 
 #: countries.php:220
 msgid "Somalia"
-msgstr "Somalia"
+msgstr "Сомали"
 
 #: countries.php:221
 msgid "South Africa"
-msgstr "Südafrika"
+msgstr "Южная Африка"
 
 #: countries.php:222
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Südgeorgien und die Südlichen Sandwichinseln"
+msgstr "Южная Георгия и южных Сандвичевых островов"
 
 #: countries.php:223
 msgid "Spain"
-msgstr "Spanien"
+msgstr "Испания"
 
 #: countries.php:224
 msgid "Sri Lanka"
-msgstr "Sri Lanka"
+msgstr "Шри-Ланка"
 
 #: countries.php:225
 msgid "Sudan"
-msgstr "Sudan"
+msgstr "Судан"
 
 #: countries.php:226
 msgid "Suriname"
-msgstr "Suriname"
+msgstr "Суринам"
 
 #: countries.php:227
 msgid "Svalbard and Jan Mayen"
-msgstr "Svalbard und Jan Mayen"
+msgstr "Шпицберген и Ян Майен"
 
 #: countries.php:228
 msgid "Swaziland"
-msgstr "Swasiland"
+msgstr "Свазиленд"
 
 #: countries.php:229
 msgid "Sweden"
-msgstr "Schweden"
+msgstr "Швеция"
 
 #: countries.php:230
 msgid "Switzerland"
-msgstr "Schweiz"
+msgstr "Швейцария"
 
 #: countries.php:231
 msgid "Syrian Arab Republic"
-msgstr "Syrien"
+msgstr "Сирийская Арабская Республика"
 
 #: countries.php:232
 msgid "Taiwan, Province of China"
-msgstr "Taiwan, Republik China"
+msgstr "Тайвань, провинция Китая"
 
 #: countries.php:233
 msgid "Tajikistan"
-msgstr "Tadschikistan"
+msgstr "Таджикистан"
 
 #: countries.php:234
 msgid "Tanzania, United Republic of"
-msgstr "Tansania"
+msgstr "Танзания, Объединенная Республика"
 
 #: countries.php:235
 msgid "Thailand"
-msgstr "Thailand"
+msgstr "Тайланд"
 
 #: countries.php:236
 msgid "Timor-Leste"
-msgstr "Osttimor"
+msgstr "Тимор Лешти"
 
 #: countries.php:237
 msgid "Togo"
-msgstr "Togo"
+msgstr "Того"
 
 #: countries.php:238
 msgid "Tokelau"
-msgstr "Tokelau"
+msgstr "Токелау"
 
 #: countries.php:239
 msgid "Tonga"
-msgstr "Tonga"
+msgstr "Тонга"
 
 #: countries.php:240
 msgid "Trinidad and Tobago"
-msgstr "Trinidad und Tobago"
+msgstr "Тринидад и Тобаго"
 
 #: countries.php:241
 msgid "Tunisia"
-msgstr "Tunesien"
+msgstr "Тунис"
 
 #: countries.php:242
 msgid "Turkey"
-msgstr "Türkei"
+msgstr "Турция"
 
 #: countries.php:243
 msgid "Turkmenistan"
-msgstr "Turkmenistan"
+msgstr "Туркменистан"
 
 #: countries.php:244
 msgid "Turks and Caicos Islands"
-msgstr "Turks- und Caicosinseln"
+msgstr "Острова Теркс и Кайкос"
 
 #: countries.php:245
 msgid "Tuvalu"
-msgstr "Tuvalu"
+msgstr "Тувалу"
 
 #: countries.php:246
 msgid "Uganda"
-msgstr "Uganda"
+msgstr "Уганда"
 
 #: countries.php:247
 msgid "Ukraine"
-msgstr "Ukraine"
+msgstr "Украина"
 
 #: countries.php:248
 msgid "United Arab Emirates"
-msgstr "Vereinigte Arabische Emirate"
+msgstr "Объединенные Арабские Эмираты"
 
 #: countries.php:249
 msgid "United Kingdom"
-msgstr "Vereinigtes Königreich"
+msgstr "Великобритания"
 
 #: countries.php:250
 msgid "United States"
-msgstr "Vereinigte Staaten von Amerika"
+msgstr "США"
 
 #: countries.php:251
 msgid "United States Minor Outlying Islands"
-msgstr "United States Minor Outlying Islands"
+msgstr "Малые Удалённые Острова США"
 
 #: countries.php:252
 msgid "Uruguay"
-msgstr "Uruguay"
+msgstr "Уругвай"
 
 #: countries.php:253
 msgid "Uzbekistan"
-msgstr "Usbekistan"
+msgstr "Узбекистан"
 
 #: countries.php:254
 msgid "Vanuatu"
-msgstr "Vanuatu"
+msgstr "Вануату"
 
 #: countries.php:255
 msgid "Venezuela, Bolivarian Republic of"
-msgstr "Venezuela"
+msgstr "Венесуэла, Боливарианская Республика"
 
 #: countries.php:256
 msgid "Viet Nam"
-msgstr "Vietnam"
+msgstr "Вьетнам"
 
 #: countries.php:257
 msgid "Virgin Islands, British"
-msgstr "Britische Jungferninseln"
+msgstr "Британские Виргинские острова"
 
 #: countries.php:258
 msgid "Virgin Islands, U.S."
-msgstr "Amerikanische Jungferninseln"
+msgstr "Виргинские острова, США"
 
 #: countries.php:259
 msgid "Wales"
-msgstr "Wales"
+msgstr "Уэльс"
 
 #: countries.php:260
 msgid "Wallis and Futuna"
-msgstr "Wallis und Futuna"
+msgstr "Уоллис и Футуна"
 
 #: countries.php:261
 msgid "Western Sahara"
-msgstr "Westsahara"
+msgstr "Западная Сахара"
 
 #: countries.php:262
 msgid "Yemen"
-msgstr "Jemen"
+msgstr "Йемен"
 
 #: countries.php:263
 msgid "Zambia"
-msgstr "Sambia"
+msgstr "Замбия"
 
 #: countries.php:264
 msgid "Zimbabwe"
-msgstr "Simbabwe"
+msgstr "Зимбабве"
 
 #: countries.php:265
 msgid "Åland"
-msgstr "Åland"
+msgstr "Аландские острова"
 
 #: wp-clanwars-widget.php:32
 msgid "ClanWars widget"
-msgstr "ClanWars Widget"
+msgstr "ClanWars виджет"
 
 #: wp-clanwars-widget.php:33 wp-clanwars-widget.php:35 wp-clanwars-widget.php:80 wp-clanwars.php:290
 msgid "ClanWars"
@@ -1014,52 +1016,52 @@ msgstr "ClanWars"
 
 #: wp-clanwars-widget.php:42
 msgid "Show all"
-msgstr "Zeige alle"
+msgstr "Показать все"
 
 #: wp-clanwars-widget.php:43
 msgid "1 week"
-msgstr "1 Woche"
+msgstr "1 неделя"
 
 #: wp-clanwars-widget.php:44
 msgid "2 weeks"
-msgstr "2 Wochen"
+msgstr "2 недели"
 
 #: wp-clanwars-widget.php:45
 msgid "3 weeks"
-msgstr "3 Wochen"
+msgstr "3 недели"
 
 #: wp-clanwars-widget.php:46
 msgid "1 month"
-msgstr "1 Monat"
+msgstr "1 месяц"
 
 #: wp-clanwars-widget.php:47
 msgid "2 months"
-msgstr "2 Monate"
+msgstr "2 месяца"
 
 #: wp-clanwars-widget.php:48
 msgid "3 months"
-msgstr "3 Monate"
+msgstr "3 месяца"
 
 #: wp-clanwars-widget.php:49
 msgid "6 months"
-msgstr "6 Monate"
+msgstr "6 месяцев"
 
 #: wp-clanwars-widget.php:50
 msgid "1 year"
-msgstr "1 Jahr"
+msgstr "1 год"
 
-#: wp-clanwars-widget.php:129 wp-clanwars-widget.php:130 wp-clanwars.php:3347 wp-clanwars.php:3348 wp-clanwars.php:3776 wp-clanwars.php:3777
-#: wp-clanwars.php:3893
+#: wp-clanwars-widget.php:129 wp-clanwars-widget.php:130 wp-clanwars.php:3347 wp-clanwars.php:3348
+#: wp-clanwars.php:3776 wp-clanwars.php:3777 wp-clanwars.php:3893
 msgid "All"
-msgstr "Alle"
+msgstr "Все"
 
 #: wp-clanwars-widget.php:165 wp-clanwars.php:3382
 msgid "Upcoming"
-msgstr "Bevorstehend"
+msgstr "Предстоящий"
 
 #: wp-clanwars-widget.php:167 wp-clanwars.php:3384
 msgid "Playing"
-msgstr "Laufendes Spiel"
+msgstr "Идет игра"
 
 #: wp-clanwars-widget.php:169 wp-clanwars.php:2619 wp-clanwars.php:2634 wp-clanwars.php:3386
 #, php-format
@@ -1068,126 +1070,127 @@ msgstr "%d:%d"
 
 #: wp-clanwars-widget.php:210
 msgid "Title:"
-msgstr "Titel:"
+msgstr "Название:"
 
 #: wp-clanwars-widget.php:213
 msgid "Hide title"
-msgstr "Titel ausblenden"
+msgstr "Скрыть название"
 
 #: wp-clanwars-widget.php:217
 msgid "Show games:"
-msgstr "Spiele zeigen:"
+msgstr "Показывать игры:"
 
 #: wp-clanwars-widget.php:223
 msgid "Do not check any game if you want to show all games."
-msgstr "Markiere kein Spiel, wenn Sie alle Spiele sehen wollen."
+msgstr "Не выбирайте игры, чтобы показать все."
 
 #: wp-clanwars-widget.php:225
 msgid "Show matches:"
-msgstr "Zeuge Matches:"
+msgstr "Показать матчи:"
 
 #: wp-clanwars-widget.php:226
 msgid "Hide older than"
-msgstr "Älter als ausblenden"
+msgstr "Скрыть старше чем"
 
 #: wp-clanwars.php:212
 msgid "Manage matches"
-msgstr "Matches verwalten"
+msgstr "Управление матчами"
 
 #: wp-clanwars.php:213
 msgid "Manage games"
-msgstr "Spiele verwalten"
+msgstr "Управление играми"
 
 #: wp-clanwars.php:214
 msgid "Manage teams"
-msgstr "Teams verwalten"
+msgstr "Управление командами"
 
 #: wp-clanwars.php:218
 msgid "PCW"
-msgstr "PCW"
+msgstr "Тренировка"
 
 #: wp-clanwars.php:219
 msgid "Official"
-msgstr "Offiziell"
+msgstr "Официальный"
 
 #: wp-clanwars.php:292 wp-clanwars.php:3511
 msgid "Matches"
-msgstr "Matches"
+msgstr "Матчи"
 
 #: wp-clanwars.php:293 wp-clanwars.php:1029
 msgid "Teams"
-msgstr "Teams"
+msgstr "Команды"
 
 #: wp-clanwars.php:294 wp-clanwars.php:1786
 msgid "Games"
-msgstr "Spiele"
+msgstr "Игры"
 
 #: wp-clanwars.php:295 wp-clanwars.php:4063
 msgid "Import"
-msgstr "Import"
+msgstr "Импорт"
 
 #: wp-clanwars.php:296 wp-clanwars.php:3785
 msgid "Settings"
-msgstr "Einstellungen "
+msgstr "Настройки"
 
 #: wp-clanwars.php:449
 msgid "Are you sure you want to delete this map?"
-msgstr "Sind Sie sicher, dass Sie diese Map löschen wollen?"
+msgstr "Вы уверены, что хотите удалить эту карту?"
 
 #: wp-clanwars.php:450
 msgid "Are you sure you want to delete this game?"
-msgstr "Sind Sie sicher, dass Sie dieses Spiel löschen wollen?"
+msgstr "Вы уверены, что хотите удалить эту игру?"
 
 #: wp-clanwars.php:451
 msgid "Are you sure you want to delete this team?"
-msgstr "Sind Sie sicher, dass Sie dieses Team löschen wollen?"
+msgstr "Вы уверены, что хотите удалить эту команду"
 
 #: wp-clanwars.php:452
 msgid "Are you sure you want to delete this match?"
-msgstr "Sind Sie sicher, dass Sie dieses Match löschen wollen?"
+msgstr "Вы уверены, что хотите удалить этот матч?"
 
-#: wp-clanwars.php:836 wp-clanwars.php:855 wp-clanwars.php:943 wp-clanwars.php:1264 wp-clanwars.php:1570 wp-clanwars.php:1965 wp-clanwars.php:2354
-#: wp-clanwars.php:2915 wp-clanwars.php:3154 wp-clanwars.php:3157 wp-clanwars.php:3164 wp-clanwars.php:3649 wp-clanwars.php:3667 wp-clanwars.php:3693
-#: wp-clanwars.php:3719
+#: wp-clanwars.php:836 wp-clanwars.php:855 wp-clanwars.php:943 wp-clanwars.php:1264 wp-clanwars.php:1570
+#: wp-clanwars.php:1965 wp-clanwars.php:2354 wp-clanwars.php:2915 wp-clanwars.php:3154 wp-clanwars.php:3157
+#: wp-clanwars.php:3164 wp-clanwars.php:3649 wp-clanwars.php:3667 wp-clanwars.php:3693 wp-clanwars.php:3719
 msgid "Cheatin&#8217; uh?"
 msgstr "Cheatin&#8217; uh?"
 
 #: wp-clanwars.php:870
 msgid "New Team"
-msgstr "Neues Team"
+msgstr "Новая команда"
 
 #: wp-clanwars.php:870
 msgid "Add Team"
-msgstr "Team hinzufügen"
+msgstr "Добавить команду"
 
 #: wp-clanwars.php:877
 msgid "Edit Team"
-msgstr "Bearbeite Team"
+msgstr "Изменить команду"
 
 #: wp-clanwars.php:877
 msgid "Update Team"
-msgstr "Team aktualisieren"
+msgstr "Обновить команду"
 
-#: wp-clanwars.php:909 wp-clanwars.php:1009 wp-clanwars.php:1766 wp-clanwars.php:1919 wp-clanwars.php:2008 wp-clanwars.php:2316 wp-clanwars.php:3036
-#: wp-clanwars.php:3490
+#: wp-clanwars.php:909 wp-clanwars.php:1009 wp-clanwars.php:1766 wp-clanwars.php:1919 wp-clanwars.php:2008
+#: wp-clanwars.php:2316 wp-clanwars.php:3036 wp-clanwars.php:3490
 msgid "Title"
-msgstr "Titel"
+msgstr "Название"
 
 #: wp-clanwars.php:909 wp-clanwars.php:1919 wp-clanwars.php:2316
 msgid "required"
-msgstr "erforderlich"
+msgstr "Обязательно"
 
 #: wp-clanwars.php:916 wp-clanwars.php:1010
 msgid "Country"
-msgstr "Land"
+msgstr "Страна"
 
-#: wp-clanwars.php:956 wp-clanwars.php:964 wp-clanwars.php:1607 wp-clanwars.php:1641 wp-clanwars.php:1668 wp-clanwars.php:1703 wp-clanwars.php:3222
+#: wp-clanwars.php:956 wp-clanwars.php:964 wp-clanwars.php:1607 wp-clanwars.php:1641 wp-clanwars.php:1668
+#: wp-clanwars.php:1703 wp-clanwars.php:3222
 msgid "An error occurred."
-msgstr "Ein Fehler ist aufgetreten."
+msgstr "Возникла ошибка."
 
 #: wp-clanwars.php:969
 msgid "Team title is required field."
-msgstr "Team Titel ist ein benötigtes Feld."
+msgstr "Название команды является обязательным полем."
 
 #: wp-clanwars.php:995 wp-clanwars.php:1752 wp-clanwars.php:1993 wp-clanwars.php:3330 wp-clanwars.php:3476
 msgid "&laquo;"
@@ -1200,430 +1203,435 @@ msgstr "&raquo;"
 #: wp-clanwars.php:1001 wp-clanwars.php:1758 wp-clanwars.php:1999 wp-clanwars.php:3336 wp-clanwars.php:3482
 #, php-format
 msgid "Displaying %s&#8211;%s of %s"
-msgstr "Anzeige %s&#8211;%s von %s"
+msgstr "Показываем %s&#8211;%s из %s"
 
 #: wp-clanwars.php:1013
 msgid "Team is successfully added."
-msgstr "Team erfolgreich hinzugefügt."
+msgstr "Команда успешно добавлена."
 
 #: wp-clanwars.php:1017
 msgid "Team is successfully updated."
-msgstr "Team erfolgreich aktualisiert."
+msgstr "Команда успешно обновлена."
 
 #: wp-clanwars.php:1022
 #, php-format
 msgid "%d Team deleted."
 msgid_plural "%d Teams deleted"
-msgstr[0] "%d Team gelöscht."
-msgstr[1] "%d Teams gelöscht."
+msgstr[0] "%d команда удалена."
+msgstr[1] "%d команды удалены."
+msgstr[2] "%d команд удалено."
 
 #: wp-clanwars.php:1029 wp-clanwars.php:1787 wp-clanwars.php:2027 wp-clanwars.php:3511
 msgid "Add New"
-msgstr "Neu hinzufügen"
+msgstr "Создать"
 
-#: wp-clanwars.php:1045 wp-clanwars.php:1110 wp-clanwars.php:1804 wp-clanwars.php:1868 wp-clanwars.php:2044 wp-clanwars.php:2108 wp-clanwars.php:3527
-#: wp-clanwars.php:3624
+#: wp-clanwars.php:1045 wp-clanwars.php:1110 wp-clanwars.php:1804 wp-clanwars.php:1868 wp-clanwars.php:2044
+#: wp-clanwars.php:2108 wp-clanwars.php:3527 wp-clanwars.php:3624
 msgid "Bulk Actions"
-msgstr "Bulk Aktionen"
+msgstr "Множественные действия"
 
-#: wp-clanwars.php:1046 wp-clanwars.php:1087 wp-clanwars.php:1111 wp-clanwars.php:1805 wp-clanwars.php:1848 wp-clanwars.php:1869 wp-clanwars.php:2045
-#: wp-clanwars.php:2091 wp-clanwars.php:2109 wp-clanwars.php:3528 wp-clanwars.php:3575 wp-clanwars.php:3625 wp-clanwars.php:3842 wp-clanwars.php:3919
+#: wp-clanwars.php:1046 wp-clanwars.php:1087 wp-clanwars.php:1111 wp-clanwars.php:1805 wp-clanwars.php:1848
+#: wp-clanwars.php:1869 wp-clanwars.php:2045 wp-clanwars.php:2091 wp-clanwars.php:2109 wp-clanwars.php:3528
+#: wp-clanwars.php:3575 wp-clanwars.php:3625 wp-clanwars.php:3842 wp-clanwars.php:3919
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Удалить"
 
-#: wp-clanwars.php:1048 wp-clanwars.php:1113 wp-clanwars.php:1807 wp-clanwars.php:1871 wp-clanwars.php:2047 wp-clanwars.php:2111 wp-clanwars.php:3530
-#: wp-clanwars.php:3627 wp-clanwars.php:3844 wp-clanwars.php:3921
+#: wp-clanwars.php:1048 wp-clanwars.php:1113 wp-clanwars.php:1807 wp-clanwars.php:1871 wp-clanwars.php:2047
+#: wp-clanwars.php:2111 wp-clanwars.php:3530 wp-clanwars.php:3627 wp-clanwars.php:3844 wp-clanwars.php:3921
 msgid "Apply"
-msgstr "Bewerben"
+msgstr "Применить"
 
 #: wp-clanwars.php:1052 wp-clanwars.php:1811 wp-clanwars.php:3534
 msgid "Search Teams:"
-msgstr "Suche Teams:"
+msgstr "Поиск команд:"
 
 #: wp-clanwars.php:1055
 msgid "Search Teams"
-msgstr "Suche Teams"
+msgstr "Поиск команд"
 
 #: wp-clanwars.php:1084 wp-clanwars.php:1843
 #, php-format
 msgid "Edit &#8220;%s&#8221; Team"
-msgstr "Bearbeite &#8220;%s&#8221; Team"
+msgstr "Изменить команду &#8220;%s&#8221;"
 
 #: wp-clanwars.php:1084
 msgid "(Home Team)"
-msgstr "(Heim Team)"
+msgstr "(Домашняя команда)"
 
 #: wp-clanwars.php:1086 wp-clanwars.php:1845 wp-clanwars.php:2090 wp-clanwars.php:3574
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Изменить"
 
 #: wp-clanwars.php:1088
 msgid "Set As Home Team"
-msgstr "Als Heim Team setzen"
+msgstr "Сделать домашней командой"
 
 #: wp-clanwars.php:1534
 msgid "New Game"
-msgstr "Neues Spiel"
+msgstr "Новая игра"
 
 #: wp-clanwars.php:1534
 msgid "Add Game"
-msgstr "Spiel hinzufügen"
+msgstr "Добавить игру"
 
 #: wp-clanwars.php:1541
 msgid "Edit Game"
-msgstr "Spiel bearbeiten"
+msgstr "Изменить игру"
 
 #: wp-clanwars.php:1541
 msgid "Update Game"
-msgstr "Spiel aktualisieren"
+msgstr "Обновить игру"
 
 #: wp-clanwars.php:1575
 msgid "Database error."
-msgstr "Datenbank Fehler"
+msgstr "Ошибка базы данных."
 
 #: wp-clanwars.php:1576
 msgid "The game is updated."
-msgstr "Das Spiel wurde aktualisiert."
+msgstr "Игра обновлена."
 
 #: wp-clanwars.php:1577
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in <code>php.ini</code>."
-msgstr "Die hochgeladene Datei überschreitet die Maximalgröße von <code> upload_max_filesize </ code>, die in <code> php.ini </ code> angegeben wurde."
+msgstr "Загруженный файл превышает значение <code>upload_max_filesize</code> директивы в <code>php.ini</code>."
 
 #: wp-clanwars.php:1578
 msgid "The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was specified in the HTML form."
-msgstr "Die hochgeladene Datei überschreitet die Maximalgröße von <em> MAX_FILE_SIZE </ em>, die im HTML-Formular angegeben wurde."
+msgstr "Загруженный файл превышает значение <em>MAX_FILE_SIZE</em> директиву указанную в HTML форме."
 
 #: wp-clanwars.php:1579
 msgid "The uploaded file was only partially uploaded."
-msgstr "Die Datei wurde nur teilweise hochgeladen."
+msgstr "Файл был загружен не полностью."
 
 #: wp-clanwars.php:1580
 msgid "No file was uploaded."
-msgstr "Es wurde keine Datei hochgeladen."
+msgstr "Файл не был загружен."
 
 #: wp-clanwars.php:1581
 msgid "Missing a temporary folder."
-msgstr "Fehlender temporärer Ordner."
+msgstr "Невозможно папку для хранения временных файлов."
 
 #: wp-clanwars.php:1582
 msgid "Failed to write file to disk."
-msgstr "Fehler beim schreiben auf Festplatte."
+msgstr "Ошибка при записи файла на диск."
 
 #: wp-clanwars.php:1583
 msgid "File upload stopped by extension."
-msgstr "Datei-Upload durch Erweiterung gestoppt."
+msgstr "Загрузка файла была прервана PHP-расширением."
 
 #: wp-clanwars.php:1584
 msgid "File type does not meet security guidelines. Try another."
-msgstr "Dateityp erfüllt nicht die Sicherheitsrichtlinien. Versuch eine andere."
+msgstr "Файл не удовлетворяет правилам безопасности. Попробуйте другой."
 
 #: wp-clanwars.php:1613 wp-clanwars.php:1647
 msgid "Game title is required field."
-msgstr "Spiel Titel ist ein Pflichtfeld."
+msgstr "Название игры является обязательным полем."
 
 #: wp-clanwars.php:1674 wp-clanwars.php:1709
 msgid "Map title is required field."
-msgstr "Karten Titel ist ein Pflichtfeld."
+msgstr "Название карты является обязательным полем."
 
 #: wp-clanwars.php:1767 wp-clanwars.php:1926
 msgid "Game tag"
-msgstr "Spiel-Tag"
+msgstr "Тег игры"
 
 #: wp-clanwars.php:1770
 msgid "Game is successfully added."
-msgstr "Spiel erfolgreich hinzugefügt."
+msgstr "Игра успешно добавлена."
 
 #: wp-clanwars.php:1774
 msgid "Game is successfully updated."
-msgstr "Spiel erfolgreich aktualisiert."
+msgstr "Игра успешно обновлена."
 
 #: wp-clanwars.php:1779
 #, php-format
 msgid "%d Game deleted."
 msgid_plural "%d Games deleted"
-msgstr[0] "%d Spiel gelöscht."
-msgstr[1] "%d Spiele gelöscht."
+msgstr[0] "%d игра удалена."
+msgstr[1] "%d игры удалены."
+msgstr[2] "%d игр удалено."
 
 #: wp-clanwars.php:1814 wp-clanwars.php:3537
 msgid "Search Games"
-msgstr "Suche Spiele"
+msgstr "Поиск игр"
 
 #: wp-clanwars.php:1846 wp-clanwars.php:2027
 msgid "Maps"
-msgstr "Karten"
+msgstr "Карты"
 
 #: wp-clanwars.php:1847
 msgid "Export"
-msgstr "Exportieren"
+msgstr "Экспорт"
 
 #: wp-clanwars.php:1929
 msgid "For example: for Left 4 Dead 2 it can be L4D2."
-msgstr "Zum Beispiel: L4D2 für Left 4 Dead 2."
+msgstr "Например: Left 4 Dead 2 может быть L4D2"
 
 #: wp-clanwars.php:1934
 msgid "Icon"
-msgstr "Icon"
+msgstr "Иконка"
 
 #: wp-clanwars.php:1941
 msgid "Delete Icon"
-msgstr "Icon löschen"
+msgstr "Удалить иконку"
 
 #: wp-clanwars.php:2011
 msgid "Map is successfully added."
-msgstr "Karte erfolgreich hinzugefügt."
+msgstr "Карта успешно добавлена."
 
 #: wp-clanwars.php:2015
 msgid "Map is successfully updated."
-msgstr "Karte erfolgreich aktualisiert."
+msgstr "Карта успешно обновлена."
 
 #: wp-clanwars.php:2020
 #, php-format
 msgid "%d Map deleted."
 msgid_plural "%d Maps deleted"
-msgstr[0] "%d Karte gelöscht."
-msgstr[1] "%d Karten gelöscht"
+msgstr[0] "%d карта удалена."
+msgstr[1] "%d карты удалены."
+msgstr[2] "%d карт удалено."
 
 #: wp-clanwars.php:2051
 msgid "Search Maps:"
-msgstr "Suche Karten:"
+msgstr "Поиск карт:"
 
 #: wp-clanwars.php:2054
 msgid "Search Maps"
-msgstr "Suche Karten"
+msgstr "Поиск карт"
 
 #: wp-clanwars.php:2088
 #, php-format
 msgid "Edit &#8220;%s&#8221; Map"
-msgstr "Bearbeite &#8220;%s&#8221; Karte"
+msgstr "Редактировать карту &#8220;%s&#8221;"
 
 #: wp-clanwars.php:2266
 msgid "Add Map"
-msgstr "Karte hinzufügen"
+msgstr "Добавить карту"
 
 #: wp-clanwars.php:2273
 msgid "Edit Map"
-msgstr "Karte bearbeiten"
+msgstr "Изменить карту"
 
 #: wp-clanwars.php:2273
 msgid "Update Map"
-msgstr "Karte updaten"
+msgstr "Обновить карту"
 
 #: wp-clanwars.php:2323
 msgid "Screenshot"
-msgstr "Screenshot"
+msgstr "Скриншот"
 
 #: wp-clanwars.php:2330
 msgid "Delete Screenshot"
-msgstr "Screenshot löschen"
+msgstr "Удалить скриншот"
 
 #: wp-clanwars.php:2416
 #, php-format
 msgid "%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input"
-msgstr "%1$s%5$s %2$s @ %3$s : %4$s|1: Monat, 2: Tag, 3: Stunde, 4: Minute, 5: Jahr"
+msgstr "%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input"
 
 #: wp-clanwars.php:2562
 #, php-format
 msgid "%s vs %s"
-msgstr "%s vs %s"
+msgstr "%s против %s"
 
 #: wp-clanwars.php:2564 wp-clanwars.php:3566
 msgid "Regular match"
-msgstr "Regelmäßiges Match"
+msgstr "Обычный матч"
 
 #: wp-clanwars.php:2575
 #, php-format
 msgctxt "match_excerpt"
 msgid "%s vs %s"
-msgstr "%s vs %s"
+msgstr "%s против %s"
 
 #: wp-clanwars.php:2642
 msgid "Match description"
-msgstr "Match Beschreibung"
+msgstr "Описание матча"
 
 #: wp-clanwars.php:2901
 msgid "Add Match"
-msgstr "Match hinzufügen"
+msgstr "Добавить матч"
 
 #: wp-clanwars.php:2908
 msgid "Edit Match"
-msgstr "Match bearbeiten"
+msgstr "Изменить матч"
 
 #: wp-clanwars.php:2983
 msgid "Match is successfully updated."
-msgstr "Match erfolgreich aktualisiert."
+msgstr "Матч успешно обновлен."
 
 #: wp-clanwars.php:3025 wp-clanwars.php:3491
 msgid "Game"
-msgstr "Spiel"
+msgstr "Игра"
 
 #: wp-clanwars.php:3043
 msgid "Description"
-msgstr "Beschreibung"
+msgstr "Описание"
 
 #: wp-clanwars.php:3050
 msgid "External URL"
-msgstr "Externe URL"
+msgstr "Внешний URL-адрес "
 
 #: wp-clanwars.php:3054
 msgid "Enter league or external match URL."
-msgstr "Liga oder externe Match URL."
+msgstr "Введите URL-адрес лиги или внешний адрес матча."
 
 #: wp-clanwars.php:3059 wp-clanwars.php:3493
 msgid "Match status"
-msgstr "Match Status"
+msgstr "Статус матча"
 
 #: wp-clanwars.php:3068 wp-clanwars.php:3492
 msgid "Date"
-msgstr "Datum"
+msgstr "Дата"
 
 #: wp-clanwars.php:3084
 msgid "vs"
-msgstr "vs"
+msgstr "против"
 
 #: wp-clanwars.php:3093
 msgid "or just type opponent team here:"
-msgstr "oder geben Sie einfach hier das gegnerische Team ein:"
+msgstr "или введите название команды соперника:"
 
 #: wp-clanwars.php:3101
 msgid "Add map"
-msgstr "Karte hinzufügen"
+msgstr "Добавить карту"
 
 #: wp-clanwars.php:3143
 msgid "Add Round"
-msgstr "Runde hinzufügen"
+msgstr "Добавить раунд"
 
 #: wp-clanwars.php:3144
 msgid "Exclude map from match"
-msgstr "Karte vom Spiel ausschließen"
+msgstr "Исключить карту из матча"
 
 #: wp-clanwars.php:3145
 msgid "Remove round"
-msgstr "Runde entfernen"
+msgstr "Удалить раунд"
 
 #: wp-clanwars.php:3494
 msgid "Team 1"
-msgstr "Team 1"
+msgstr "Команда 1"
 
 #: wp-clanwars.php:3495
 msgid "Team 2"
-msgstr "Team 2"
+msgstr "Команда 2"
 
 #: wp-clanwars.php:3496
 msgid "Tickets"
-msgstr "Tickets"
+msgstr "Очки"
 
 #: wp-clanwars.php:3499
 msgid "Match is successfully added."
-msgstr "Match wurde erfolgreich hinzugefügt."
+msgstr "Матч успешно добавлен."
 
 #: wp-clanwars.php:3504
 #, php-format
 msgid "%d Match deleted."
 msgid_plural "%d Matches deleted"
-msgstr[0] "%d Match gelöscht."
-msgstr[1] "%d Matches gelöscht"
+msgstr[0] "%d матч удален."
+msgstr[1] "%d матча удалено."
+msgstr[2] "%d матчей удалено."
 
 #: wp-clanwars.php:3572
 #, php-format
 msgid "Edit &#8220;%s&#8221; Match"
-msgstr "Bearbeite &#8220;%s&#8221; Match"
+msgstr "Изменить &#8220;%s&#8221; матч"
 
 #: wp-clanwars.php:3768
 msgid "User Login"
-msgstr "Benutzer Login"
+msgstr "Имя пользователя"
 
 #: wp-clanwars.php:3769
 msgid "Permissions"
-msgstr "Berechtigungen"
+msgstr "Разрешения"
 
 #: wp-clanwars.php:3788
 msgid "Settings saved."
-msgstr "Einstellungen gespeichert."
+msgstr "Настройки сохранены."
 
 #: wp-clanwars.php:3797
 msgid "Matches Category"
-msgstr "Match Kategorie"
+msgstr "Категория для матчей"
 
 #: wp-clanwars.php:3806
 msgid "None"
-msgstr "Nichts"
+msgstr "Ничего"
 
 #: wp-clanwars.php:3816
 msgid "Enable default styles"
-msgstr "Aktiviere standart Styles"
+msgstr "Использовать стили по-умолчанию"
 
 #: wp-clanwars.php:3822
 msgid "Save Changes"
-msgstr "Änderungen speichern"
+msgstr "Сохранить изменения"
 
 #: wp-clanwars.php:3827
 msgid "User Access"
-msgstr "Benutzerzugriff"
+msgstr "Права пользователя"
 
 #: wp-clanwars.php:3841 wp-clanwars.php:3918
 msgid "Actions"
-msgstr "Aktionen"
+msgstr "Действия"
 
 #: wp-clanwars.php:3884
 msgid "Yes"
-msgstr "Ja"
+msgstr "Да"
 
 #: wp-clanwars.php:3884
 msgid "No"
-msgstr "Nein"
+msgstr "Нет"
 
 #: wp-clanwars.php:3933
 msgid "Add New User"
-msgstr "Neuen Benutzer hinzufügen"
+msgstr "Добавить нового пользователя"
 
 #: wp-clanwars.php:3940
 msgid "User"
-msgstr "Benutzer"
+msgstr "Пользователь"
 
 #: wp-clanwars.php:3945
 msgid "Allow user manage specified games only:"
-msgstr "Erlaube es Benutzern nur spezielle Spiele zu bearbeiten:"
+msgstr "Разрешить пользователю управлять указанными играми:"
 
 #: wp-clanwars.php:3952
 msgid "User can create new games <strong>only if &ldquo;All&rdquo; option is checked.</strong>"
-msgstr "Benutzer kann nur neue Spiele hinzfügen<strong>wenn&ldquo;All&rdquo; Option aktiviert ist.</strong>"
+msgstr "Пользователь может создавать игры <strong>только если опция &ldquo;Все&rdquo; была выбрана.</strong>"
 
 #: wp-clanwars.php:3956
 msgid "Allow user:"
-msgstr "Benutzer erlauben:"
+msgstr "Разрешить пользователю:"
 
 #: wp-clanwars.php:3966
 msgid "Add User"
-msgstr "Benutzer hinzufügen"
+msgstr "Добавить пользователя"
 
 #: wp-clanwars.php:4011
 msgid "An upload error occurred while import."
-msgstr "Upload Fehler beim Import."
+msgstr "Во время импорта произошла ошибка загрузки."
 
 #: wp-clanwars.php:4014
 msgid "File(s) successfully imported."
-msgstr "Datei(en) erfolgreich importiert."
+msgstr "Файл(ы) успешно импортированы."
 
 #: wp-clanwars.php:4014
 msgid "An error occurred while import."
-msgstr "Fehler beim Import."
+msgstr "Произошла ошибка при импорте."
 
 #: wp-clanwars.php:4021
 msgid "Import games"
-msgstr "Spiele importieren"
+msgstr "Импорт игр"
 
 #: wp-clanwars.php:4022
 msgid "Import may take some time. Please do not refresh browser when in progress."
-msgstr "Das Importieren dauert einen Augenblick. Bitte aktualisiere während des Vorgangs nicht dienen Browser!"
+msgstr "Импорт может занять некоторое время. Пожалуйста, не обновляйте страницу во время импорта."
 
 #: wp-clanwars.php:4032
 msgid "Import available games"
-msgstr "Importiere verfügbare Spiele"
+msgstr "Импорт доступных игр"
 
 #: wp-clanwars.php:4046
 msgid "installed"
-msgstr "installiert"
+msgstr "Установлено"
 
 #: wp-clanwars.php:4059
 msgid "Upload package (ZIP file)"
-msgstr "Uploade Paket (ZIP Datei)"
+msgstr "Загрузить пакет (ZIP файл)"
