@@ -205,9 +205,8 @@ class WP_ClanWars {
 	function on_admin_print_styles() {
 echo <<<EOT
 <style type="text/css">
-#toplevel_page_wp-clanwars-matches img {
-    width: 16px;
-    height: 16px;
+#toplevel_page_wp-clanwars-matches .wp-menu-image {
+	background-size: 16px 16px !important;
 }
 </style>
 EOT;
@@ -259,13 +258,17 @@ EOT;
 		// place plugin below dashboard on jumpstarter
 		$menu_position = $this->is_jumpstarter() ? 3 : null;
 
+		// prepare SVG data URI image for menu
+		$iconData = file_get_contents( dirname(__FILE__) . '/images/plugin-icon.svg' );
+		$iconDataURI = 'data:image/svg+xml;base64,' . base64_encode($iconData);
+
 		$top = add_menu_page(
 			__('ClanWars', WP_CLANWARS_TEXTDOMAIN),
 			__('ClanWars', WP_CLANWARS_TEXTDOMAIN),
 			$user_role,
 			$top_level_slug,
 			null,
-			WP_CLANWARS_URL . '/images/plugin-icon.svg',
+			$iconDataURI,
 			$menu_position
 		);
 
