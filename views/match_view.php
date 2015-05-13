@@ -4,7 +4,9 @@
 	<span class="vs"><?php _e('vs.', WP_CLANWARS_TEXTDOMAIN); ?></span>
 	<span class="team2"><?php esc_html_e($match->team2_title); ?> <?php echo $team2_flag; ?></span>
 </p>
-<div class="maplist clearfix">
+
+<div class="maplist">
+
 <?php
 // render maps/rounds
 foreach($rounds as $map_group) :
@@ -36,6 +38,7 @@ foreach($rounds as $map_group) :
 	</div>
 
 <?php endforeach; // maps ?>
+
 </div> <!-- .maplist -->
 
 <div class="summary">
