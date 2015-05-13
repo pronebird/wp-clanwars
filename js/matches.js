@@ -1,176 +1,266 @@
 //
 // Admin page match management
+// (c) 2015 Andrej Mihajlov
 //
 
-(function ($) {
+(function ($, window) {
 
-	function matchMap(id, game_id, map_id) {
+    /**
+     * Match map constructor.
+     * @param {Number} id
+     * @param {Number} game_id
+     * @param {Number} map_id
+     */
+    function MatchMap(id, game_id, map_id) {
+        MatchMap.prototype._init.apply(this, arguments);
+    }
 
-		var othis = this;
+    MatchMap.prototype = {
+        /**
+         * Initializer.
+         * @private
+         * @param {Number} id
+         * @param {Number} game_id
+         * @param {Number} map_id
+         */
+        _init: function (id, game_id, map_id) {
+            var self = this;
 
-		this.id = id;
-		this.map_id = typeof(map_id) != 'undefined' ? parseInt(map_id) : 0;
-		this.game_id = game_id;
-		this.mapSite = $('#mapsite');
-		this.rounds = {};
-		this.round_ID = 0;
-		this.mapElement = $('<div class="map">\n\
-						<div class="title">\n\
-							<span></span> <a href="#" title="' + wpCWL10n.excludeMap + '" class="remove remove-matchmap"><span class="dashicons dashicons-trash"></span></a>\n\
-							<br class="clear"/>\n\
-						</div>\n\
-						<div class="leftcol">\n\
-							<img src="' + wpCWL10n.plugin_url + '/images/no-map.jpg" class="screenshot" style="width: 150px;" />\n\
-							<select name="scores[' + this.id + '][map_id]" class="map-select" disabled="disabled"></select>\n\
-						</div>\n\
-						<div class="add-round">\n\
-							<button class="button button-secondary"><span class="dashicons dashicons-plus"></span> ' + wpCWL10n.addRound + '</button>\n\
-						</div>\n\
-						<br class="clear"/>\n\
-					</div>');
-		
-		this.remove = function() {
-			this.mapElement.remove();
-		}
+            this._id = id;
+            this._mapID = typeof(map_id) !== 'undefined' ? parseInt(map_id, 10) : 0;
+            this._gameID = game_id;
+            this._rounds = {};
+            this._roundID = 0;
+            this._mapsContainer = $('#mapsite');
+            this._mapElement = $('<div class="map">\n\
+                            <div class="title">\n\
+                                <span></span> <a href="#" title="' + wpCWL10n.excludeMap + '" class="remove remove-matchmap"><span class="dashicons dashicons-trash"></span></a>\n\
+                                <br class="clear"/>\n\
+                            </div>\n\
+                            <div class="leftcol">\n\
+                                <img src="' + wpCWL10n.plugin_url + '/images/no-map.jpg" class="screenshot" style="width: 150px;" />\n\
+                                <select name="scores[' + this._id + '][map_id]" class="map-select" disabled="disabled"></select>\n\
+                            </div>\n\
+                            <div class="add-round">\n\
+                                <button class="button button-secondary"><span class="dashicons dashicons-plus"></span> ' + wpCWL10n.addRound + '</button>\n\
+                            </div>\n\
+                            <br class="clear"/>\n\
+                        </div>');
+            
+            this._mapElement
+                .on('click', '.remove-matchmap', function (evt) {
+                    self.remove();
+                    evt.preventDefault();
+                })
+                .on('click', '.add-round button', function (evt) {
+                    self.addRound();
+                    evt.preventDefault();
+                    $(this).blur();
+                });
+            
+            this._mapsContainer.append(this._mapElement);
 
-		this.removeRound = function(i) {
-			this.rounds[i].remove();
-			delete this.rounds[i];
-		}
+            this._getMapList();
+        },
 
-		this.addRound = function(score1, score2, round_id) {
+        /**
+         * Request map list from backend.
+         * @private
+         */
+        _getMapList: function () {
+            var postData = {
+                action: 'get_maps',
+                game_id: this._gameID
+            };
+            $.post(ajaxurl, postData, this._createOptions.bind(this), 'json');
+        },
 
-			if(typeof(round_id) == 'undefined')
-				round_id = 0;
+        /**
+         * Fill select element with options.
+         * @param {Object} json
+         */
+        _createOptions: function (json) {
+            var self = this;
+            var select = this._mapElement.find('.map-select');
 
-			var x = ++this.round_ID;
-			var n = $('<div class="round">\n\
-							<input type="text" name="scores[' + this.id + '][team1][]" class="small-text" value="0" />\n\
-							<input type="text" name="scores[' + this.id + '][team2][]" class="small-text" value="0" />\n\
-							<input type="hidden" name="scores[' + this.id + '][round_id][]" value="' + round_id + '" />\n\
-							<a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><span class="dashicons dashicons-trash"></span></a>\n\
-						</div>');
-			var i = n.find('input');
+            $.each(json, function (i, map) {
+                select.append($('<option></option>')
+                    .attr('rel', map.screenshot_url)
+                    .val(map.id)
+                    .text(map.title));
+            });
 
-			i.eq(0).val(score1); i.eq(1).val(score2);
+            select.change(function () {
+                var option = $(this).find('option:selected');
+                var src = option.attr('rel');
 
-			n.insertBefore(this.mapElement.find('.add-round'));
-			
-			this.rounds[x] = n;
+                if(!src.length) {
+                    src = wpCWL10n.plugin_url + '/images/no-map.jpg';
+                }
 
-			n.find('.remove').click(function(e){
-			   othis.removeRound(x);
-			   return false;
-			});
+                self._mapElement
+                    .find('.screenshot')
+                        .attr('src', src)
+                    .end()
+                    .find('.title span')
+                        .first()
+                        .text(option.text())
+                    .end();
 
-			return x;
-		}
-		
-		this.mapElement.find('.remove-matchmap')
-			.click(function(evt){
-				othis.remove();
-				return false;
-			});
+                self._mapID = option.val();
+            });
 
-		// load map list
-		jQuery.post(ajaxurl, {
-				action: 'get_maps',
-				game_id: this.game_id
-			}, function(json) {
-				var select = othis.mapElement.find('.map-select');
+            select.removeAttr('disabled');
 
-				for(var i = 0; i < json.length; i++) {
-					select.append($('<option></option>')
-							.attr('rel', json[i].screenshot_url)
-							.val(json[i].id)
-							.text(json[i].title));
-				}
+            if(self._mapID > 0) {
+                select.find('option[value=' + self._mapID + ']')
+                    .attr('selected', 'selected').trigger('change');
+            } 
+            else {
+                select.find('option:first').trigger('change');
+            }
+        },
 
-				select.change(function(){
-					var option = $(this).find('option:selected');
-					var src = option.attr('rel');
+        // public
 
-					if(src.length < 1)
-						src = wpCWL10n.plugin_url + '/images/no-map.jpg';
+        /**
+         * Remove from DOM.
+         */
+        remove: function () {
+            this._mapElement.remove();
+        },
+        
+        /**
+         * Remove a round.
+         * @param {String} id
+         */
+        removeRound: function (id) {
+            if(!this._rounds.hasOwnProperty(id)) {
+                return;
+            }
+            this._rounds[id].remove();
+            delete this._rounds[id];
+        },
 
-					othis.mapElement.find('.screenshot').attr('src', src);
-					othis.mapElement.find('.title span').first().text(option.text());
+        /**
+         * Add a round.
+         * @param {Number} score1
+         * @param {Number} score2
+         * @param {String} round_id
+         */
+        addRound: function (score1, score2, round_id) {
+            var self = this;
 
-					othis.map_id = option.val();
-				});
+            if(typeof(round_id) == 'undefined') {
+                round_id = 0;
+            }
 
-				select.removeAttr('disabled');
+            var x = ++this._roundID;
+            var n = $('<div class="round">\n\
+                            <input type="text" name="scores[' + this._id + '][team1][]" class="small-text" value="0" />\n\
+                            <input type="text" name="scores[' + this._id + '][team2][]" class="small-text" value="0" />\n\
+                            <input type="hidden" name="scores[' + this._id + '][round_id][]" value="' + round_id + '" />\n\
+                            <a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><span class="dashicons dashicons-trash"></span></a>\n\
+                        </div>');
+            var i = n.find('input');
 
-				if(othis.map_id > 0) {
-					select.find('option[value=' + othis.map_id + ']')
-						.attr('selected', 'selected').trigger('change');
-				} else {
-					select.find('option:first').trigger('change');
-				}
-		}, 'json');
+            i.eq(0).val(score1);
+            i.eq(1).val(score2);
 
-		this.mapElement.find('.add-round button').bind('click', this.mapElement,
-			function(evt) {
-				othis.addRound();
-				evt.preventDefault();
-				$(this).blur();
-			});
-		
-		this.mapSite.append(this.mapElement);
-	}
+            n.insertBefore(this._mapElement.find('.add-round'));
+            
+            this._rounds[x] = n;
 
-	function matchManager() {
-		this.last_id = userSettings.time * -1;
-		this.matchSite = $('#matchsite');
-		this.maps = {};
+            n.find('.remove').click(function (e) {
+               self.removeRound(x);
+               return false;
+            });
 
-		this.addMap = function (field_id, map_id) {
-			if(typeof(field_id) == 'undefined')
-				field_id = --this.last_id;
+            return x;
+        }
+    };
 
-			this.maps[field_id] = new matchMap(field_id, $('#game_id').val(), map_id);
+    /**
+     * Match manager constructor.
+     */
+    function MatchManager() {
+        MatchManager.prototype._init.apply(this, arguments);
+    }
 
-			return this.maps[field_id];
-		}
+    MatchManager.prototype = {
+        /**
+         * Initializer.
+         * @private
+         */
+        _init: function () {
+            var self = this;
 
-		this.remove = function (id) {
-			if(typeof(this.maps[id]) == 'object')
-				this.maps[id].remove();
-				delete this.maps[id];
-		}
+            this._last_id = userSettings.time * -1;
+            this._matchSite = $('#matchsite');
+            this._maps = {};
 
-		this.removeAll = function () {
-			for(var i in this.maps) {
-				this.maps[i].remove();
-			}
+            $(document).ready(function () {
+                $('#game_id').change(function () {
+                    self.removeAll();
+                });
 
-			this.maps = {};
-		}
-	}
+                $('#wp-cw-addmap button').click(function (evt) {
+                    var map = self.addMap();
 
-	var wpMatchManager = new matchManager();
-	window.wpMatchManager = wpMatchManager;
+                    // add two rounds by default
+                    map.addRound(0, 0);
+                    map.addRound(0, 0);
 
-	$(document).ready(function ($) {
-		$('#game_id').change(function(){
-			wpMatchManager.removeAll();
-		});
+                    evt.preventDefault();
+                    $(this).blur();
+                });
 
-		$('#wp-cw-addmap button').click(function (evt) {
-			var m = wpMatchManager.addMap();
+                $('#matchsite [name=team2]').change(function () {
+                    $('#new_team_title').val('');
+                });
+            });
+        },
 
-			// add two rounds by default
-			m.addRound(0, 0);
-			m.addRound(0, 0);
+        /**
+         * Add a map.
+         * @param {String} field_id
+         * @param {map_id} map_id
+         */
+        addMap: function (field_id, map_id) {
+            if(typeof(field_id) === 'undefined') {
+                field_id = --this._last_id;
+            }
 
-			evt.preventDefault();
-			$(this).blur();
-		});
+            var game_id = $('#game_id').val();
+            var map = new MatchMap(field_id, game_id, map_id);
+            
+            this._maps[field_id] = map;
 
-		$('#matchsite [name=team2]').change(function () {
-			$('#new_team_title').val('');
-		});
-	});
+            return map;
+        },
 
-})(jQuery);
+        /**
+         * Remove a map.
+         * @param {String} id
+         */
+        remove: function (id) {
+            if(this._maps.hasOwnProperty(id)) {
+                this._maps[id].remove();
+                delete this._maps[id];
+            }
+        },
 
+        /**
+         * Remove all maps.
+         */
+        removeAll: function () {
+            $.each(this._maps, function (k, map) {
+                map.remove();
+            });
+            this._maps = {};
+        }
+    };
+
+    window.wpMatchManager = new MatchManager();
+
+})(jQuery, window);

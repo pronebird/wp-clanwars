@@ -1,16 +1,15 @@
 <script type="text/javascript">
-//<![CDATA[
 jQuery(document).ready(function ($) {
-	var data = <?php echo json_encode($scores); ?>;
-
-	$.each(data, function (i, item) {
-		var m = wpMatchManager.addMap(i, item.map_id);
-		for(var j = 0; j < item.team1.length; j++) {
-			m.addRound(item.team1[j], item.team2[j], item.round_id[j]);
-		};
+	// payload
+	var payload = <?php echo json_encode($scores); ?>;
+	$.each(payload, function (i, item) {
+		var match = wpMatchManager.addMap(i, item.map_id);
+		var len = item.team1.length;
+		for(var j = 0; j < len; j++) {
+			match.addRound(item.team1[j], item.team2[j], item.round_id[j]);
+		}
 	});
 });
-//]]>
 </script>
 
 <div class="wrap wp-cw-matcheditor">
