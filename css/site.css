@@ -236,13 +236,14 @@ html[xmlns] .clearfix {
 .wp-clanwars-page-v2 .maplist {
 	display: block;
 	text-align: center;
+	margin-left: -50px;
 }
 
 .wp-clanwars-page-v2 .maplist > .item {
-	width: 50%;
+	display: inline-block;
 	margin: 0;
 	padding: 0;
-	float: left;
+	margin-left: 50px;
 }
 
 .wp-clanwars-page-v2 .maplist > .item > .map {
