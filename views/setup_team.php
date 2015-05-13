@@ -9,7 +9,7 @@
 
 		<?php wp_nonce_field('wp-clanwars-setupteam'); ?>
 
-		<p><?php _e( 'Hello there! Just a couple of things to complete your installation.', WP_CLANWARS_TEXTDOMAIN ); ?></p>
+		<p><?php _e( 'Hey there! Just a couple of things to complete your installation.', WP_CLANWARS_TEXTDOMAIN ); ?></p>
 
 		<p><?php _e( 'What is the name of your team?', WP_CLANWARS_TEXTDOMAIN ); ?></p>
 		<p>
