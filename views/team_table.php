@@ -49,7 +49,6 @@
 
 				<tbody>
 
-				<!-- .no-items  -->
 				<?php if(empty($teams)) : ?>
 
 				<tr class="no-items">

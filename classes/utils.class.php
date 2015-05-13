@@ -148,7 +148,7 @@ class Utils {
 	}
 
 	static function get_country_title($country) {
-		$all_countries = $this->all_countries();
+		$all_countries = self::all_countries();
 		if(isset($all_countries[$country])) {
 			return $all_countries[$country];
 		}
