@@ -177,6 +177,7 @@ class WP_ClanWars {
 			__('Official', WP_CLANWARS_TEXTDOMAIN)
 		);
 
+		add_action('admin_print_styles', array($this, 'on_admin_print_styles'));
 		add_action('admin_menu', array($this, 'on_admin_menu'));
 		add_action('template_redirect', array($this, 'on_template_redirect'));
 		add_action('wp_footer', array($this, 'on_wp_footer'));
@@ -201,6 +202,17 @@ class WP_ClanWars {
 		$this->register_cssjs();
 	}
 
+	function on_admin_print_styles() {
+echo <<<EOT
+<style type="text/css">
+#toplevel_page_wp-clanwars-matches img {
+    width: 16px;
+    height: 16px;
+}
+</style>
+EOT;
+	}
+
 	/**
 	 * WP admin_menu hook
 	 *
@@ -208,7 +220,6 @@ class WP_ClanWars {
 	 *
 	 * @return void
 	 */
-
 	function on_admin_menu()
 	{
 		global $current_user;
@@ -254,7 +265,7 @@ class WP_ClanWars {
 			$user_role,
 			$top_level_slug,
 			null,
-			WP_CLANWARS_URL . '/images/plugin-icon.png',
+			WP_CLANWARS_URL . '/images/plugin-icon.svg',
 			$menu_position
 		);
 
