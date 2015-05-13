@@ -357,41 +357,58 @@ class WP_ClanWars {
 		$has_hometeam = is_object( \WP_Clanwars\Teams::get_hometeam() );
 		$has_games = ($games_result['total_items'] > 0);
 
-		$context = array();
-
 		if(!$has_hometeam && !$has_games) {
-			$context['page_submit'] = __( 'Continue', WP_CLANWARS_TEXTDOMAIN );
-		} else {
-			$context['page_submit'] = __( 'Get started', WP_CLANWARS_TEXTDOMAIN );
+			$page_submit = __( 'Continue', WP_CLANWARS_TEXTDOMAIN );
+		} 
+		else {
+			$page_submit = __( 'Get started', WP_CLANWARS_TEXTDOMAIN );
 		}
 
 		if(!$has_hometeam) {
-			$view = new \WP_Clanwars\View( 'setup_team' );
-			$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
-		} else {
-			$view = new \WP_Clanwars\View( 'setup_games' );
+			$this->onboarding_setup_team_page($page_submit);
+		} 
+		else if(!$has_games) {
+			$this->onboarding_setup_games_page($page_submit);
+		}
+	}
 
-			$import_list = $this->get_available_games();
-			$installed_games = \WP_Clanwars\Games::get_game('');
+	function onboarding_setup_team_page($page_submit) {
+		$view = new \WP_Clanwars\View( 'setup_team' );
+		$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
+		$context = compact('page_submit');
 
-			// mark installed games
-			foreach($import_list as $game) {
-				$game->is_installed = ($this->is_game_installed($game->title, $game->abbr, $installed_games) !== false);
-			}
+		if(isset($_GET['error'])) {
+			$this->add_notice(__('Please fill in all required fields.', WP_CLANWARS_TEXTDOMAIN), 'error');
+		}
 
-			$context += compact('import_list');
+		$this->print_notices();
 
-			if(isset($_GET['upload'])) {
-				$this->add_notice(__('An upload error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 'error');
-			}
+		$view->render( $context );
+	}
 
-			if(isset($_GET['import'])) {
-				$this->add_notice($_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), $_GET['import'] === 'success' ? 'updated' : 'error');
-			}
+	function onboarding_setup_games_page($page_submit) {
+		$view = new \WP_Clanwars\View( 'setup_games' );
+		$context = compact('page_submit');
+		$import_list = $this->get_available_games();
+		$installed_games = \WP_Clanwars\Games::get_game('');
 
-			if(isset($_GET['create'])) {
-				$this->add_notice($_GET['create'] === 'success' ? __('Done.', WP_CLANWARS_TEXTDOMAIN) : __('An unknown error occurred while creating a new game.', WP_CLANWARS_TEXTDOMAIN), $_GET['create'] === 'success' ? 'updated' : 'error');
-			}
+		// mark installed games
+		foreach($import_list as $game) {
+			$game->is_installed = ($this->is_game_installed($game->title, $game->abbr, $installed_games) !== false);
+		}
+
+		$context += compact('import_list');
+
+		if(isset($_GET['upload'])) {
+			$this->add_notice(__('An upload error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 'error');
+		}
+
+		if(isset($_GET['import'])) {
+			$this->add_notice($_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), $_GET['import'] === 'success' ? 'updated' : 'error');
+		}
+
+		if(isset($_GET['create'])) {
+			$this->add_notice($_GET['create'] === 'success' ? __('Done.', WP_CLANWARS_TEXTDOMAIN) : __('An unknown error occurred while creating a new game.', WP_CLANWARS_TEXTDOMAIN), $_GET['create'] === 'success' ? 'updated' : 'error');
 		}
 
 		$this->print_notices();
@@ -415,7 +432,12 @@ class WP_ClanWars {
 
 		$data['home_team'] = 1;
 
-		\WP_Clanwars\Teams::add_team( $data );
+		if(!empty($data['title']) && !empty($data['country'])) {
+			\WP_Clanwars\Teams::add_team( $data );
+		}
+		else {
+			$referer = add_query_arg('error', true, $referer);
+		}
 
 		wp_redirect($referer);
 	}
