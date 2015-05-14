@@ -2061,7 +2061,7 @@ EOT;
 	function on_browser_shortcode($atts) {
 		$output = '';
 
-		extract(shortcode_atts(array('per_page' => 1), $atts));
+		extract(shortcode_atts(array('per_page' => 20), $atts));
 
 		$per_page = abs($per_page);
 		$current_page = max( 1, get_query_var('paged') );
