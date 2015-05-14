@@ -150,12 +150,22 @@ html[xmlns] .clearfix {
     margin-left: -20px;
 }
 
-.wp-cw-matcheditor .screenshots .sshot {
+.wp-cw-matcheditor .screenshots .sshot,
+.wp-cw-matcheditor .screenshots .sortable-placeholder {
     display: inline-block;
+    vertical-align: top;
     width: 128px;
     height: 128px;
     margin-left: 20px;
     margin-bottom: 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.wp-cw-matcheditor .screenshots .sortable-placeholder {
+    border: 1px dashed #ddd;
+    background-color: #eee;
 }
 
 .wp-cw-matcheditor .screenshots .sshot img {
