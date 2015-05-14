@@ -1870,7 +1870,8 @@ EOT;
 					'addRound' => __('Add Round', WP_CLANWARS_TEXTDOMAIN),
 					'excludeMap' => __('Exclude map from match', WP_CLANWARS_TEXTDOMAIN),
 					'removeRound' => __('Remove round', WP_CLANWARS_TEXTDOMAIN),
-					'addScreenshots' => __('Add screenshots', WP_CLANWARS_TEXTDOMAIN)
+					'addScreenshots' => __('Add screenshots', WP_CLANWARS_TEXTDOMAIN),
+					'confirmDeleteScreenshot' => __('Are you sure you want to delete this screenshot?', WP_CLANWARS_TEXTDOMAIN)
 				)
 			);
 
