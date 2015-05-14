@@ -35,6 +35,11 @@
                     });
                 });
             });
+
+            this._container.sortable({
+                items: '> .sshot',
+                placeholder: 'sortable-placeholder'
+            });
         },
 
         add: function (id, url) {

@@ -331,7 +331,7 @@ EOT;
 	function register_cssjs()
 	{
 		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery'), WP_CLANWARS_VERSION);
-		wp_register_script('wp-cw-screenshots', WP_CLANWARS_URL . '/js/screenshots.js', array('jquery', 'media-upload'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-screenshots', WP_CLANWARS_URL . '/js/screenshots.js', array('jquery', 'jquery-ui-sortable', 'media-upload'), WP_CLANWARS_VERSION);
 		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery'), WP_CLANWARS_VERSION);
 
 		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_VERSION);
