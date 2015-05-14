@@ -146,6 +146,22 @@ html[xmlns] .clearfix {
     text-decoration: none;
 }
 
+.wp-cw-matcheditor .screenshots {
+    margin-left: -20px;
+}
+
+.wp-cw-matcheditor .screenshots .sshot {
+    display: inline-block;
+    width: 128px;
+    height: 128px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.wp-cw-matcheditor .screenshots .sshot img {
+    max-height: 100%;
+}
+
 .available-games img {
 	vertical-align: middle;
 }

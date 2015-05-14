@@ -1,14 +1,23 @@
 <script type="text/javascript">
 jQuery(document).ready(function ($) {
-	// payload
-	var payload = <?php echo json_encode($scores); ?>;
-	$.each(payload, function (i, item) {
+	// add maps
+	var maps_payload = <?php echo json_encode($scores); ?>;
+	$.each(maps_payload, function (i, item) {
 		var match = wpMatchManager.addMap(i, item.map_id);
 		var len = item.team1.length;
 		for(var j = 0; j < len; j++) {
 			match.addRound(item.team1[j], item.team2[j], item.round_id[j]);
 		}
 	});
+
+	// add screenshots
+	var sshots_payload = <?php echo json_encode($screenshots); ?>;
+	if(sshots_payload.hasOwnProperty('ids')) {
+		var ids = sshots_payload.ids.split(',');
+		$.each(ids, function (i, id) {
+			wpScreenshotManager.add(id, sshots_payload.src[i]);
+		});
+	}
 });
 </script>
 
@@ -119,6 +128,16 @@ jQuery(document).ready(function ($) {
 					</div>
 
 				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row" valign="top"><label for="_unique_name"><?php _e('Screenshots', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
+			<td>
+				<div id="screenshots-container" class="screenshots"></div>
+				<p>
+					<button id="add-screenshots-button" type="button" class="button button-secondary"><span class="dashicons dashicons-plus"></span> <?php _e('Add screenshots', WP_CLANWARS_TEXTDOMAIN); ?></button>
+				</p>
 			</td>
 		</tr>
 

@@ -331,6 +331,7 @@ EOT;
 	function register_cssjs()
 	{
 		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-screenshots', WP_CLANWARS_URL . '/js/screenshots.js', array('jquery', 'media-upload'), WP_CLANWARS_VERSION);
 		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery'), WP_CLANWARS_VERSION);
 
 		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_VERSION);
@@ -1814,7 +1815,13 @@ EOT;
 		$view->add_helper('html_date_helper', array('\WP_Clanwars\Utils', 'html_date_helper'));
 		$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
 
-		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'post_id', 'games', 'teams');
+		// get screenshots
+		$screenshots = get_post_gallery($match->post_id, false);
+		if(!is_array($screenshots)) {
+			$screenshots = new stdClass();
+		}
+
+		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'games', 'teams', 'screenshots');
 		$context += $merged_data;
 
 		$view->render( $context );
@@ -1838,17 +1845,7 @@ EOT;
 	{
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
-
-		wp_enqueue_script('wp-cw-matches');
-		wp_localize_script('wp-cw-matches',
-				'wpCWL10n',
-				array(
-					'plugin_url' => WP_CLANWARS_URL,
-					'addRound' => __('Add Round', WP_CLANWARS_TEXTDOMAIN),
-					'excludeMap' => __('Exclude map from match', WP_CLANWARS_TEXTDOMAIN),
-					'removeRound' => __('Remove round', WP_CLANWARS_TEXTDOMAIN)
-				)
-			);
+		$media_options = array();
 
 		// Check match is really exists
 		if($act == 'edit') {
@@ -1859,7 +1856,23 @@ EOT;
 
 			if(!$this->acl_user_can('manage_game', $m[0]->game_id))
 				wp_die( __('Cheatin&#8217; uh?') );
+
+			$media_options['post'] = $m[0]->post_id;
 		}
+
+		wp_enqueue_media($media_options);
+		wp_enqueue_script('wp-cw-matches');
+		wp_enqueue_script('wp-cw-screenshots');
+		wp_localize_script('wp-cw-matches',
+				'wpCWL10n',
+				array(
+					'plugin_url' => WP_CLANWARS_URL,
+					'addRound' => __('Add Round', WP_CLANWARS_TEXTDOMAIN),
+					'excludeMap' => __('Exclude map from match', WP_CLANWARS_TEXTDOMAIN),
+					'removeRound' => __('Remove round', WP_CLANWARS_TEXTDOMAIN),
+					'addScreenshots' => __('Add screenshots', WP_CLANWARS_TEXTDOMAIN)
+				)
+			);
 
 		if(sizeof($_POST) > 0)
 		{
@@ -1882,7 +1895,8 @@ EOT;
 						'scores' => array(),
 						'new_team_title' => '',
 						'new_team_country' => '',
-						'match_status' => 0
+						'match_status' => 0,
+						'screenshots' => array()
 						)));
 
 					$date = \WP_Clanwars\Utils::date_array2time_helper($date);
@@ -1919,12 +1933,13 @@ EOT;
 							}
 						}
 
-						\WP_Clanwars\Matches::update_match_post($match_id);
+						\WP_Clanwars\Matches::update_match_post($match_id, $screenshots);
 
 						wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&add=1'));
 						exit();
-					} else
+					} else {
 						$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
+					}
 
 				break;
 
@@ -1942,7 +1957,8 @@ EOT;
 						'new_team_title' => '',
 						'new_team_country' => '',
 						'match_status' => 0,
-						'scores' => array()
+						'scores' => array(),
+						'screenshots' => array()
 						)));
 
 					$date = \WP_Clanwars\Utils::date_array2time_helper($date);
@@ -1990,7 +2006,7 @@ EOT;
 
 					\WP_Clanwars\Rounds::delete_rounds_not_in($id, $rounds_not_in);
 
-					\WP_Clanwars\Matches::update_match_post($id);
+					\WP_Clanwars\Matches::update_match_post($id, $screenshots);
 
 					wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&act=edit&id=' . $id . '&update=1'));
 					exit();

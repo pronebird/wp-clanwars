@@ -152,8 +152,11 @@ KEY `date` (`date`)
 		return $rslt;
 	}
 
-	static function update_match_post($match_id) {
+	static function update_match_post($match_id, $screenshots = array()) {
 		global $wpdb;
+
+		// validate screenshot IDs
+		$screenshots = array_map('intval', $screenshots);
 
 		// Get match by ID
 		$matches = self::get_match(array(
@@ -210,10 +213,12 @@ KEY `date` (`date`)
 		$postarr['post_title'] = $post_title;
 		$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
 
-		if(!isset($postarr['ID'])) {
-			// generate shortcode only when creating post
-			$postarr['post_content'] = '[wp-clanwars match_id="' . $match->id . '"]';
+		$postarr['post_content'] = '[wp-clanwars match_id="' . $match->id . '"]';
+		if(!empty($screenshots)) {
+			$postarr['post_content'] .= '[gallery ids="' . implode(',', $screenshots) . '"]';
+		}
 
+		if(!isset($postarr['ID'])) {
 			$new_post_ID = wp_insert_post($postarr);
 		} else {
 			$new_post_ID = wp_update_post($postarr);
