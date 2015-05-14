@@ -10,12 +10,12 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
-	// add screenshots
-	var sshots_payload = <?php echo json_encode($screenshots); ?>;
-	if(sshots_payload.hasOwnProperty('ids')) {
-		var ids = sshots_payload.ids.split(',');
+	// add gallery
+	var gallery = <?php echo json_encode($gallery); ?>;
+	if(gallery.ids) {
+		var ids = gallery.ids.split(',');
 		$.each(ids, function (i, id) {
-			wpScreenshotManager.add(id, sshots_payload.src[i]);
+			wpGalleryManager.add(id, gallery.src[i]);
 		});
 	}
 });
@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
 		<tr class="form-field">
 			<th scope="row" valign="top"><label for="description"><?php _e('Description', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 			<td>
-				<textarea name="description" id="description" placeholder="<?php _e('Optional: Drop a line or two about match. You can always edit post directly and add screenshots to gallery.', WP_CLANWARS_TEXTDOMAIN); ?>"><?php esc_html_e($description); ?></textarea>
+				<textarea name="description" id="description" placeholder="<?php _e('Optional: Drop a line or two about match.', WP_CLANWARS_TEXTDOMAIN); ?>"><?php esc_html_e($description); ?></textarea>
 			</td>
 		</tr>
 
@@ -132,12 +132,58 @@ jQuery(document).ready(function ($) {
 		</tr>
 
 		<tr>
-			<th scope="row" valign="top"><label for="_unique_name"><?php _e('Screenshots', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
+			<th scope="row" valign="top"><label for="_unique_name"><?php _e('Gallery', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 			<td>
-				<div id="screenshots-container" class="screenshots"></div>
+				<div id="gallery-container" class="gallery"></div>
 				<p>
-					<button id="add-screenshots-button" type="button" class="button button-secondary"><span class="dashicons dashicons-plus"></span> <?php _e('Add screenshots', WP_CLANWARS_TEXTDOMAIN); ?></button>
+					<button id="add-gallery-button" type="button" class="button button-secondary"><span class="dashicons dashicons-plus"></span> <?php _e('Add images', WP_CLANWARS_TEXTDOMAIN); ?></button>
 				</p>
+
+				<div class="gallery-settings">
+					<div class="gallery-option">
+						<label for="gallery-size"><?php _e('Gallery size:', WP_CLANWARS_TEXTDOMAIN); ?></label>
+						<select name="gallery[size]" id="gallery-size">
+						<?php
+						$sizes = array(
+							'thumbnail' => __('Thumbnail', WP_CLANWARS_TEXTDOMAIN), 
+							'medium' => __('Medium', WP_CLANWARS_TEXTDOMAIN), 
+							'large' => __('Large', WP_CLANWARS_TEXTDOMAIN), 
+							'full' => __('Full Size', WP_CLANWARS_TEXTDOMAIN)
+						);
+						$size = isset($gallery['size']) ? $gallery['size'] : 'thumbnail';
+						foreach($sizes as $key => $title) : ?>
+							<option value="<?php esc_attr_e($key); ?>"<?php selected($size, $key, true); ?>><?php esc_html_e($title); ?></option>
+						<?php endforeach; ?>
+						</select>
+					</div>
+
+					<div class="gallery-option">
+						<label for="gallery-columns"><?php _e('Columns:', WP_CLANWARS_TEXTDOMAIN); ?></label>
+						<select name="gallery[columns]" id="gallery-columns">
+						<?php
+						$columns = isset($gallery['columns']) ? $gallery['columns'] : 3; 
+						for($i = 1; $i < 10; $i++) : ?>
+							<option value="<?php esc_attr_e($i); ?>"<?php selected($columns, $i, true); ?>><?php esc_html_e($i); ?></option>
+						<?php endfor; ?>
+						</select>
+					</div>
+
+					<div class="gallery-option">
+						<label for="gallery-link"><?php _e('Link to: ', WP_CLANWARS_TEXTDOMAIN); ?></label>
+						<select name="gallery[link]" id="gallery-link">
+						<?php 
+						$links = array(
+							'' => __('Attachment page', WP_CLANWARS_TEXTDOMAIN),
+							'file' => __('Media File', WP_CLANWARS_TEXTDOMAIN),
+							'none' => __('None', WP_CLANWARS_TEXTDOMAIN)
+						);
+						$link = isset($gallery['link']) ? $gallery['link'] : '';
+						foreach($links as $key => $title) : ?>
+							<option value="<?php esc_attr_e($key); ?>"<?php selected($link, $key, true); ?>><?php esc_html_e($title); ?></option>
+						<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
 			</td>
 		</tr>
 
