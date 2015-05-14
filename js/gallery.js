@@ -28,8 +28,10 @@
                     
                     $.each(models, function (i, model) {
                         var atts = model.attributes;
+                        var sizes = atts.sizes;
+                        var url = (sizes && sizes.thumbnail && sizes.thumbnail.url) || atts.url;
 
-                        self.add(atts.id, atts.url);
+                        self.add(atts.id, url);
                     });
                 });
             });
