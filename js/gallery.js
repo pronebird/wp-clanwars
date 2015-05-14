@@ -1,24 +1,24 @@
 //
-// Admin page: screenshots management
+// Admin page: gallery management
 // (c) 2015 Andrej Mihajlov
 //
 
 (function ($, window) {
 
-    function ScreenshotManager() {
-        ScreenshotManager.prototype._init.apply(this, arguments);
+    function GalleryManager() {
+        GalleryManager.prototype._init.apply(this, arguments);
     }
 
-    ScreenshotManager.prototype = {
+    GalleryManager.prototype = {
 
         _init: function () {
             var self = this;
 
-            this._container = $('#screenshots-container');
+            this._container = $('#gallery-container');
 
-            $('#add-screenshots-button').on('click', function (e) {
+            $('#add-gallery-button').on('click', function (e) {
                 var image = wp.media({
-                    title: wpCWL10n.addScreenshots,
+                    title: wpCWL10n.addGallery,
                     multiple: true
                 })
                 .open()
@@ -35,12 +35,12 @@
             });
 
             this._container.sortable({
-                items: '> .sshot',
+                items: '> .gallery-item',
                 placeholder: 'sortable-placeholder',
                 revert: true
             });
 
-            this._container.on('click', '.sshot a.remove', this._onRemove);
+            this._container.on('click', '.gallery-item a.remove', this._onRemove);
         },
 
         _onRemove: function (e) {
@@ -53,13 +53,13 @@
         },
 
         add: function (id, url) {
-            var el = $('<div class="sshot"><input type="hidden" name="screenshots[]" /> \
+            var el = $('<div class="gallery-item"><input type="hidden" name="gallery[ids][]" /> \
                             <a href="#" class="remove"><span class="dashicons dashicons-no"></span></a> \
                             <img /> \
                         </div>');
 
             el.attr('data-id', id)
-                .attr('id', 'sshot-' + id)
+                .attr('id', 'gallery-item-' + id)
                 .find('input')
                     .val(id)
                 .end()
@@ -72,7 +72,7 @@
     };
 
     $(document).ready(function () {
-        window.wpScreenshotManager = new ScreenshotManager();
+        window.wpGalleryManager = new GalleryManager();
     });
 
 })(jQuery, window);

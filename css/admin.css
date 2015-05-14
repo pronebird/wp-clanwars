@@ -146,12 +146,12 @@ html[xmlns] .clearfix {
     text-decoration: none;
 }
 
-.wp-cw-matcheditor .screenshots {
+.wp-cw-matcheditor .gallery {
     margin-left: -20px;
 }
 
-.wp-cw-matcheditor .screenshots .sshot,
-.wp-cw-matcheditor .screenshots .sortable-placeholder {
+.wp-cw-matcheditor .gallery .gallery-item,
+.wp-cw-matcheditor .gallery .sortable-placeholder {
     position: relative;
     display: inline-block;
     vertical-align: top;
@@ -165,11 +165,11 @@ html[xmlns] .clearfix {
     box-sizing: border-box;
 }
 
-.wp-cw-matcheditor .screenshots .sshot:hover {
+.wp-cw-matcheditor .gallery .gallery-item:hover {
     box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1e8cbe;
 }
 
-.wp-cw-matcheditor .screenshots .sshot a.remove {
+.wp-cw-matcheditor .gallery .gallery-item a.remove {
     position: absolute;
     top: -4px;
     right: -4px;
@@ -180,21 +180,31 @@ html[xmlns] .clearfix {
     color: rgba(255,255,255,.8);
 }
 
-.wp-cw-matcheditor .screenshots .sshot a.remove:hover {
+.wp-cw-matcheditor .gallery .gallery-item a.remove:hover {
     color: #fff;
 }
 
-.wp-cw-matcheditor .screenshots .sshot:hover a.remove {
+.wp-cw-matcheditor .gallery .gallery-item:hover a.remove {
     display: block;
 }
 
-.wp-cw-matcheditor .screenshots .sortable-placeholder {
+.wp-cw-matcheditor .gallery .sortable-placeholder {
     border: 1px dashed #ddd;
     background-color: #eee;
 }
 
-.wp-cw-matcheditor .screenshots .sshot img {
+.wp-cw-matcheditor .gallery .gallery-item img {
     max-height: 100%;
+}
+
+.wp-cw-matcheditor .gallery-settings {
+    margin-left: -10px;
+    padding: 20px 0;
+}
+
+.wp-cw-matcheditor .gallery-settings .gallery-option {
+    display: inline-block;
+    margin-left: 10px;
 }
 
 .available-games img {

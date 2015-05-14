@@ -331,7 +331,7 @@ EOT;
 	function register_cssjs()
 	{
 		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery'), WP_CLANWARS_VERSION);
-		wp_register_script('wp-cw-screenshots', WP_CLANWARS_URL . '/js/screenshots.js', array('jquery', 'jquery-ui-sortable', 'media-upload'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-gallery', WP_CLANWARS_URL . '/js/gallery.js', array('jquery', 'jquery-ui-sortable', 'media-upload'), WP_CLANWARS_VERSION);
 		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery'), WP_CLANWARS_VERSION);
 
 		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_VERSION);
@@ -1760,7 +1760,8 @@ EOT;
 		$match = new stdClass();
 		$current_time = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
 
-		$defaults = array('game_id' => 0,
+		$defaults = array(
+			'game_id' => 0,
 			'title' => '',
 			'post_id' => 0,
 			'team1' => 0,
@@ -1774,8 +1775,9 @@ EOT;
 							'yy' => date('Y', $current_time),
 							'jj' => date('j', $current_time),
 							'hh' => date('H', $current_time),
-							'mn' => date('i', $current_time)
-				));
+							'mn' => date('i', $current_time)),
+			'gallery' => array()
+		);
 
 		if($id > 0) {
 			$result = \WP_Clanwars\Matches::get_match(array('id' => $id));
@@ -1791,6 +1793,12 @@ EOT;
 					$match->scores[$round->group_n]['round_id'][] = $round->id;
 					$match->scores[$round->group_n]['team1'][] = $round->tickets1;
 					$match->scores[$round->group_n]['team2'][] = $round->tickets2;
+				}
+
+				// get gallery
+				$gallery = get_post_gallery($match->post_id, false);
+				if(!is_array($gallery)) {
+					$gallery = array();
 				}
 			}
 		}
@@ -1815,13 +1823,7 @@ EOT;
 		$view->add_helper('html_date_helper', array('\WP_Clanwars\Utils', 'html_date_helper'));
 		$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
 
-		// get screenshots
-		$screenshots = get_post_gallery($match->post_id, false);
-		if(!is_array($screenshots)) {
-			$screenshots = new stdClass();
-		}
-
-		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'games', 'teams', 'screenshots');
+		$context = compact('page_title', 'page_action', 'page_submit', 'num_comments', 'match_statuses', 'id', 'games', 'teams', 'gallery');
 		$context += $merged_data;
 
 		$view->render( $context );
@@ -1862,7 +1864,7 @@ EOT;
 
 		wp_enqueue_media($media_options);
 		wp_enqueue_script('wp-cw-matches');
-		wp_enqueue_script('wp-cw-screenshots');
+		wp_enqueue_script('wp-cw-gallery');
 		wp_localize_script('wp-cw-matches',
 				'wpCWL10n',
 				array(
@@ -1870,7 +1872,7 @@ EOT;
 					'addRound' => __('Add Round', WP_CLANWARS_TEXTDOMAIN),
 					'excludeMap' => __('Exclude map from match', WP_CLANWARS_TEXTDOMAIN),
 					'removeRound' => __('Remove round', WP_CLANWARS_TEXTDOMAIN),
-					'addScreenshots' => __('Add screenshots', WP_CLANWARS_TEXTDOMAIN),
+					'addGallery' => __('Add images', WP_CLANWARS_TEXTDOMAIN),
 					'confirmDeleteScreenshot' => __('Are you sure you want to delete this screenshot?', WP_CLANWARS_TEXTDOMAIN)
 				)
 			);
@@ -1897,7 +1899,7 @@ EOT;
 						'new_team_title' => '',
 						'new_team_country' => '',
 						'match_status' => 0,
-						'screenshots' => array()
+						'gallery' => array()
 						)));
 
 					$date = \WP_Clanwars\Utils::date_array2time_helper($date);
@@ -1934,7 +1936,7 @@ EOT;
 							}
 						}
 
-						\WP_Clanwars\Matches::update_match_post($match_id, $screenshots);
+						\WP_Clanwars\Matches::update_match_post($match_id, $gallery);
 
 						wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&add=1'));
 						exit();
@@ -1959,7 +1961,7 @@ EOT;
 						'new_team_country' => '',
 						'match_status' => 0,
 						'scores' => array(),
-						'screenshots' => array()
+						'gallery' => array()
 						)));
 
 					$date = \WP_Clanwars\Utils::date_array2time_helper($date);
@@ -2007,7 +2009,7 @@ EOT;
 
 					\WP_Clanwars\Rounds::delete_rounds_not_in($id, $rounds_not_in);
 
-					\WP_Clanwars\Matches::update_match_post($id, $screenshots);
+					\WP_Clanwars\Matches::update_match_post($id, $gallery);
 
 					wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&act=edit&id=' . $id . '&update=1'));
 					exit();

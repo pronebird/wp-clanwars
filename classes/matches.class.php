@@ -152,11 +152,8 @@ KEY `date` (`date`)
 		return $rslt;
 	}
 
-	static function update_match_post($match_id, $screenshots = array()) {
+	static function update_match_post($match_id, $gallery = array()) {
 		global $wpdb;
-
-		// validate screenshot IDs
-		$screenshots = array_map('intval', $screenshots);
 
 		// Get match by ID
 		$matches = self::get_match(array(
@@ -214,8 +211,25 @@ KEY `date` (`date`)
 		$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
 
 		$postarr['post_content'] = '[wp-clanwars match_id="' . $match->id . '"]';
-		if(!empty($screenshots)) {
-			$postarr['post_content'] .= '[gallery ids="' . implode(',', $screenshots) . '"]';
+
+		if(is_array($gallery) && isset($gallery['ids']) && is_array($gallery['ids'])) {
+			$ids = array_map('intval', $gallery['ids']);
+			$shortcode = '[gallery ids="' . implode(',', $ids) . '"';
+
+			if(!empty($gallery['size'])) {
+				$shortcode .= ' size="' . esc_attr($gallery['size']) . '"';
+			}
+
+			if(!empty($gallery['columns'])) {
+				$shortcode .= ' columns="' . esc_attr($gallery['columns']) . '"';
+			}
+
+			if(!empty($gallery['link'])) {
+				$shortcode .= ' link="' . esc_attr($gallery['link']) . '"';
+			}
+
+			$shortcode .= ']';
+			$postarr['post_content'] .= $shortcode;
 		}
 
 		if(!isset($postarr['ID'])) {
