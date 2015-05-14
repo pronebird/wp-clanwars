@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Battlefield 1942",
+    "abbr": "BF1942",
+    "package": "gamepack-BF1942.zip",
+    "icon": "bf1942.png"
+  },
+  {
+    "title": "Battlefield 2",
+    "abbr": "BF2",
+    "package": "gamepack-BF2.zip",
+    "icon": "bf2.png"
+  },
+  {
+    "title": "Battlefield 3",
+    "abbr": "BF3",
+    "package": "gamepack-BF3.zip",
+    "icon": "bf3.jpg"
+  },
+  {
+    "title": "Bad Company 2",
+    "abbr": "BC2",
+    "package": "gamepack-BC2.zip",
+    "icon": "bc2.png"
+  },
+  {
+    "title": "Bad Company 2 Vietnam",
+    "abbr": "BC2V",
+    "package": "gamepack-BC2V.zip",
+    "icon": "bc2v.png"
+  },
+  {
+    "title": "Left 4 Dead 2",
+    "abbr": "L4D2",
+    "package": "gamepack-L4D2.zip",
+    "icon": "l4d2.png"
+  },
+  {
+    "title": "Team Fortress 2",
+    "abbr": "TF2",
+    "package": "gamepack-TF2.zip",
+    "icon": "tf2.gif"
+  }
+]
