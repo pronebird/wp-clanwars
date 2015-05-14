@@ -51,6 +51,12 @@ Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
 
 == Changelog ==
 
+= 1.7.0 =
+
+* Add gallery support
+* Add Spanish and Russian translations
+* Lots of optimizations
+
 = 1.6.3 =
 
 * Add German translation
