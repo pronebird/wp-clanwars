@@ -14,8 +14,6 @@
         _init: function () {
             var self = this;
 
-            this._media = [];
-
             this._container = $('#screenshots-container');
 
             $('#add-screenshots-button').on('click', function (e) {
@@ -38,12 +36,27 @@
 
             this._container.sortable({
                 items: '> .sshot',
-                placeholder: 'sortable-placeholder'
+                placeholder: 'sortable-placeholder',
+                revert: true
             });
+
+            this._container.on('click', '.sshot a.remove', this._onRemove);
+        },
+
+        _onRemove: function (e) {
+            if(confirm(wpCWL10n.confirmDeleteScreenshot)) {
+                $(this).parent().remove();
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
         },
 
         add: function (id, url) {
-            var el = $('<div class="sshot"><input type="hidden" name="screenshots[]" /><img /></div>');
+            var el = $('<div class="sshot"><input type="hidden" name="screenshots[]" /> \
+                            <a href="#" class="remove"><span class="dashicons dashicons-no"></span></a> \
+                            <img /> \
+                        </div>');
 
             el.attr('data-id', id)
                 .attr('id', 'sshot-' + id)
@@ -54,8 +67,6 @@
                     .attr('src', url);
 
             this._container.append(el);
-
-            this._media.push(id);
         }
 
     };
