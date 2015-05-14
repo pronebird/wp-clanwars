@@ -11,7 +11,7 @@ Thanks everyone for participation!
 - ❏ Set post date to match date to hide future posts
 - ❏ Add tournament logo
 - ❏ Add team logo
-- ❏ Add screenshots to match editor.
+- ☑ Add screenshots to match editor.
 - ❏ Add line up.
 - ❏ Limit game icon dimensions
 - ❏ Option to disable upcoming matches
