@@ -193,6 +193,12 @@ html[xmlns] .clearfix {
     background-color: #eee;
 }
 
+.wp-cw-matcheditor .gallery .gallery-item .centered {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
 .wp-cw-matcheditor .gallery .gallery-item img {
     max-height: 100%;
 }
