@@ -55,7 +55,7 @@
         add: function (id, url) {
             var el = $('<div class="gallery-item"><input type="hidden" name="gallery[ids][]" /> \
                             <a href="#" class="remove"><span class="dashicons dashicons-no"></span></a> \
-                            <img /> \
+                            <div class="centered"><img /></div> \
                         </div>');
 
             el.attr('data-id', id)
