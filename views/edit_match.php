@@ -132,7 +132,7 @@ jQuery(document).ready(function ($) {
 		</tr>
 
 		<tr>
-			<th scope="row" valign="top"><label for="_unique_name"><?php _e('Gallery', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
+			<th scope="row" valign="top"><label for=""><?php _e('Gallery', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 			<td>
 				<div id="gallery-container" class="gallery"></div>
 				<p>
