@@ -2476,7 +2476,9 @@ EOT;
 
 		$popular = \WP_Clanwars\API::get_popular();
 
-		//var_dump($popular);
+		foreach($popular as $i => $game) {
+			$game->is_installed = ($this->is_game_installed($game->title, $game->tag, $installed_games) !== false);
+		}
 
 		// mark installed games
 		foreach($import_list as $game) {
