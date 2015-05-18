@@ -10,13 +10,13 @@ class API {
     protected static $api_url = 'http://localhost:3000/v1/';
 
     static function get_popular() {
-        $response = wp_remote_get( self::$api_url . 'gamepacks/popular' );
+        $response = wp_remote_get( self::$api_url . 'games/popular' );
 
         return self::get_response_payload($response);
     }
 
     static function search($term) {
-        $response = wp_remote_get( self::$api_url, 'gamepacks/search?q=' . urlencode($term) );
+        $response = wp_remote_get( self::$api_url, 'games/search?q=' . urlencode($term) );
 
         return self::get_response_payload($response);
     }
@@ -26,14 +26,14 @@ class API {
             return $response;
         }
 
-        $api_response = json_decode(wp_remote_retrieve_body($response), true);
+        $api_response = json_decode(wp_remote_retrieve_body($response));
 
-        if(!$api_response['success']) {
-            $error = $api_response['error'];
-            return new \WP_Error( $error['code'], $error['message'] );
+        if(!$api_response->success) {
+            $error = $api_response->error;
+            return new \WP_Error( $error->code, $error->message );
         }
 
-        return $api_response['payload'];
+        return $api_response->payload;
     }
 
 }
