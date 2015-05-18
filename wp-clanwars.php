@@ -52,6 +52,7 @@ require_once (dirname(__FILE__) . '/classes/teams.class.php');
 require_once (dirname(__FILE__) . '/classes/maps.class.php');
 require_once (dirname(__FILE__) . '/classes/rounds.class.php');
 require_once (dirname(__FILE__) . '/classes/matches.class.php');
+require_once (dirname(__FILE__) . '/classes/api.class.php');
 
 require_once (dirname(__FILE__) . '/wp-clanwars-widget.php');
 require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
@@ -2473,6 +2474,10 @@ EOT;
 		$import_list = $this->get_available_games();
 		$installed_games = \WP_Clanwars\Games::get_game('');
 
+		$popular = \WP_Clanwars\API::get_popular();
+
+		//var_dump($popular);
+
 		// mark installed games
 		foreach($import_list as $game) {
 			$game->is_installed = ($this->is_game_installed($game->title, $game->abbr, $installed_games) !== false);
@@ -2490,7 +2495,7 @@ EOT;
 
 		$view = new \WP_Clanwars\View( 'import' );
 
-		$context = compact('import_list');
+		$context = compact('import_list', 'popular');
 
 		$view->render( $context );
 	}

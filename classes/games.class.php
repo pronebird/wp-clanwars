@@ -2,6 +2,9 @@
 
 namespace WP_Clanwars;
 
+/**
+ * Games class.
+ */
 class Games {
 
 	/**
