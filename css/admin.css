@@ -266,3 +266,225 @@ html[xmlns] .clearfix {
 .wp-cw-onboarding p.submit > input {
     min-width: 100px;
 }
+
+/**
+ * Import
+ */
+
+.wp-clanwars-gamepacks {
+    margin: 0;
+    padding: 0;
+    margin-left: -10px;
+}
+
+.wp-clanwars-gamepacks .item {
+    display: block;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #dedede;
+    background: #fff;
+    padding: 0;
+    margin: 0;
+    width: calc(50% - 10px);
+    min-height: 276px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+
+.wp-clanwars-gamepacks .item .top {
+    padding: 20px 20px 10px;
+}
+
+.wp-clanwars-gamepacks .item .bottom {
+    background-color: #fafafa;
+    border-top: 1px solid #dedede;
+    padding: 10px 20px 10px;
+    overflow: hidden;
+}
+
+.wp-clanwars-gamepacks .item h4 {
+    margin: 0 0 10px;
+    padding: 0;
+}
+
+.wp-clanwars-gamepacks .item .icon {
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+.wp-clanwars-gamepacks .item .author {
+    font-style: italic;
+}
+
+.wp-clanwars-gamepacks .item .maps {
+    display: block;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+}
+
+.wp-clanwars-gamepacks .item .maps li {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.wp-clanwars-gamepacks .item .maps .screenshot {
+    width: 150px;
+    height: 150px;
+    display: block;
+    border: 1px solid #eee;
+}
+
+.wp-clanwars-gamepacks .item .maps .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    font-family: monospace;
+    line-height: 1em;
+    font-size: 1em;
+
+    color: #fff;
+
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 6px 0;
+}
+
+.wp-clanwars-gamepacks .item .column-rating,
+.wp-clanwars-gamepacks .item .column-published,
+.wp-clanwars-gamepacks .item .column-downloaded,
+.wp-clanwars-gamepacks .item .column-author
+{
+    line-height: 1.5em;
+}
+
+.wp-clanwars-gamepacks .item .column-published,
+.wp-clanwars-gamepacks .item .column-author
+{
+    float: right;
+    clear: right;
+}
+
+.wp-clanwars-gamepacks .item .column-rating,
+.wp-clanwars-gamepacks .item .column-downloaded {
+    float: left;
+    clear: left;
+}
+
+.wp-clanwars-gamepacks .item .column-rating {
+    margin: 0;
+    padding: 0;
+}
+
+.wp-clanwars-gamepacks .item .column-published,
+.wp-clanwars-gamepacks .item .column-rating
+{
+    margin-bottom: 4px;    
+}
+
+.wp-clanwars-gamepacks .item .column-install {
+    float: right;
+    clear: right;
+    margin-top: -8px;
+}
+
+.wp-clanwars-gamepacks .item .star-rating {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 0;
+}
+
+.wp-clanwars-gamepacks .item .star-rating .star {
+    font-family: dashicons;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    color: #ffb900;
+    margin: 0;
+    padding: 0;
+}
+
+.wp-clanwars-gamepacks .item .star-rating .star-full {
+    content:'\f155'
+}
+
+.wp-clanwars-gamepacks .item .star-rating .star-empty {
+    content:'\f155'
+}
+
+.wp-clanwars-gamepacks .item .star-rating .star-half {
+    content:'\f459'
+}
+
+@media screen and ( max-width: 782px ) {
+    .wp-clanwars-gamepacks {
+        margin-left: 0;
+    }
+
+    .wp-clanwars-gamepacks .item {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+        float: none;
+    }
+}
+
+/* Override .wp-filter media queries to avoid search form breaking on two lines.  */
+.wp-clanwars-import-page .wp-filter .search-form {
+    float: right;
+    max-width: none;
+    position: static;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
