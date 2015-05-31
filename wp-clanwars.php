@@ -785,21 +785,34 @@ EOT;
 
 	function on_admin_post_deleteteams()
 	{
-		if(!$this->acl_user_can('manage_teams'))
+		if(!$this->acl_user_can('manage_teams')) {
 			wp_die( __('Cheatin&#8217; uh?') );
+		}
 
 		check_admin_referer('wp-clanwars-deleteteams');
 
-		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
+		$redirect_url = $_REQUEST['_wp_http_referer'];
 
-		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract(Utils::extract_args($_REQUEST, array('delete' => array())));
+		$args = Utils::extract_args( $_REQUEST, array(
+				'do_action' => '',
+				'do_action2' => '',
+				'delete' => array()
+			) 
+		);
+		extract( $args );
 
-			$error = \WP_Clanwars\Teams::delete_team($delete);
-			$referer = add_query_arg('delete', $error, $referer);
+		if( $do_action == 'delete' || $do_action2 == 'delete' ) {
+			$result = \WP_Clanwars\Teams::delete_team( $delete );
+
+			if( is_wp_error( $result ) ) {
+				Flash::flash_error( sprintf( __( 'Failed to delete a team. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+			}
+			else {
+				Flash::flash_success( sprintf( _n( 'Deleted %d team.', 'Deleted %d teams.', $result, WP_CLANWARS_TEXTDOMAIN), $result ) );
+			}
 		}
 
-		wp_redirect($referer);
+		wp_redirect( $redirect_url );
 	}
 
 	function on_admin_post_sethometeam()
@@ -857,42 +870,54 @@ EOT;
 
 	function on_load_manage_teams()
 	{
-		$act = isset($_GET['act']) ? $_GET['act'] : '';
-		$id = isset($_GET['id']) ? $_GET['id'] : 0;
+		$args = Utils::extract_args( $_GET, array(
+				'act' => '',
+				'id' => 0 
+			) );		
+		extract($args);
+
+		$redirect_url = admin_url( 'admin.php?page=wp-clanwars-teams' );
 
 		// ACL checks on edit
 		if($act == 'edit') {
-			$t = \WP_Clanwars\Teams::get_team(array('id' => $id));
+			$team = \WP_Clanwars\Teams::get_team( compact('id') );
 
-			if($id != 0 && empty($t))
+			if( $id != 0 && empty( $team ) ) {
 				wp_die( __('Cheatin&#8217; uh?') );
+			}
 		}
 
-		if(sizeof($_POST)) {
+		// check if POST
+		if( !Utils::is_post() ) {
+			return;
+		}
 
-			if(isset($_POST['title']) && !empty($_POST['title'])) {
+		// validate title
+		if( empty( $_POST['title'] ) ) {
+			Flash::flash_error( __( 'Team title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+			return;
+		}
 
-				switch($act) {
-					case 'add':
-						if(\WP_Clanwars\Teams::add_team(stripslashes_deep($_POST))) {
-							wp_redirect(admin_url('admin.php?page=wp-clanwars-teams&add=1'));
-							exit();
-						} else
-							$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
-					break;
-
-					case 'edit':
-						if(\WP_Clanwars\Teams::update_team($id, stripslashes_deep($_POST)) !== false) {
-							wp_redirect(admin_url('admin.php?page=wp-clanwars-teams&update=1'));
-							exit();
-						} else
-							$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
-						break;
-				}
-
-			} else
-				$this->add_notice(__('Team title is required field.', WP_CLANWARS_TEXTDOMAIN), 'error');
-
+		// add team?
+		if( $act == 'add' ) {
+			if(\WP_Clanwars\Teams::add_team( stripslashes_deep( $_POST ) )) {
+				Flash::flash_success( __( 'Added a new team.', WP_CLANWARS_TEXTDOMAIN ) );
+				wp_redirect( $redirect_url );
+				exit();
+			} 
+			else {
+				Flash::flash_error( __( 'Failed to add a team.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
+		}
+		else if( $act == 'edit' ) { // update team?
+			if(\WP_Clanwars\Teams::update_team( $id, stripslashes_deep( $_POST ) ) !== false) {
+				Flash::flash_success( __( 'Updated a team.', WP_CLANWARS_TEXTDOMAIN ) );
+				wp_redirect( $redirect_url );
+				exit();
+			} 
+			else {
+				Flash::flash_error( __('Failed to update a team.', WP_CLANWARS_TEXTDOMAIN) );
+			}
 		}
 	}
 
@@ -933,21 +958,6 @@ EOT;
 		$table_columns = array('cb' => '<input type="checkbox" />',
 					'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
 					'country' => __('Country', WP_CLANWARS_TEXTDOMAIN));
-
-		if(isset($_GET['add'])) {
-			$this->add_notice(__('Team is successfully added.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		if(isset($_GET['update'])) {
-			$this->add_notice(__('Team is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		if(isset($_GET['delete'])) {
-			$deleted = (int)$_GET['delete'];
-			$this->add_notice(sprintf(_n('%d Team deleted.', '%d Teams deleted', $deleted, WP_CLANWARS_TEXTDOMAIN), $deleted), 'updated');
-		}
-
-		$this->print_notices();
 
 		$view = new View( 'team_table' );
 

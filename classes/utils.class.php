@@ -24,6 +24,14 @@ class Utils {
 		return $result;
 	}
 
+	/**
+	 * Detect whether POST request was sent to server.
+	 * @return boolean true if POST request, otherwise false.
+	 */
+	static function is_post() {
+		return 'POST' == $_SERVER['REQUEST_METHOD'];
+	}
+
 	static function current_time_fixed( $type, $gmt = 0 ) {
 		$t = ( $gmt ) ? gmdate( 'Y-m-d H:i:s' ) : gmdate( 'Y-m-d H:i:s', ( time() + ( get_option( 'gmt_offset' ) * 3600 ) ) );
 		switch ( $type ) {
