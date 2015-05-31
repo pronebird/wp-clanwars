@@ -468,7 +468,7 @@ html[xmlns] .clearfix {
     padding: 30px;
     margin: 30px auto;
     max-width: 380px;
-    clear: both;
+    overflow: hidden;
 }
 
 .wp-clanwars-import-page .wp-clanwars-install-help {
@@ -485,8 +485,20 @@ html[xmlns] .clearfix {
     font-size: 1em;
 }
 
-.wp-clanwars-import-page .wp-clanwars-install-button {
+.wp-clanwars-import-page .wp-clanwars-upload-form input {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+}
+
+.wp-clanwars-import-page .wp-clanwars-upload-form input[type=file] {
+    width: 70%;
+}
+
+.wp-clanwars-import-page .wp-clanwars-upload-form .wp-clanwars-install-button {
     float: right;
+    max-width: 30%;
 }
 
 
