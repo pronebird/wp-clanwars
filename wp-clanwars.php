@@ -785,7 +785,7 @@ EOT;
 
 	function on_admin_post_deleteteams()
 	{
-		if(!$this->acl_user_can('manage_teams')) {
+		if( !$this->acl_user_can('manage_teams') ) {
 			wp_die( __('Cheatin&#8217; uh?') );
 		}
 
@@ -805,10 +805,10 @@ EOT;
 			$result = \WP_Clanwars\Teams::delete_team( $delete );
 
 			if( is_wp_error( $result ) ) {
-				Flash::flash_error( sprintf( __( 'Failed to delete a team. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+				Flash::error( sprintf( __( 'Failed to delete a team. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
 			}
 			else {
-				Flash::flash_success( sprintf( _n( 'Deleted %d team.', 'Deleted %d teams.', $result, WP_CLANWARS_TEXTDOMAIN), $result ) );
+				Flash::success( sprintf( _n( 'Deleted %d team.', 'Deleted %d teams.', $result, WP_CLANWARS_TEXTDOMAIN), $result ) );
 			}
 		}
 
@@ -894,29 +894,29 @@ EOT;
 
 		// validate title
 		if( empty( $_POST['title'] ) ) {
-			Flash::flash_error( __( 'Team title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+			Flash::error( __( 'Team title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
 			return;
 		}
 
 		// add team?
 		if( $act == 'add' ) {
 			if(\WP_Clanwars\Teams::add_team( stripslashes_deep( $_POST ) )) {
-				Flash::flash_success( __( 'Added a new team.', WP_CLANWARS_TEXTDOMAIN ) );
+				Flash::success( __( 'Added a new team.', WP_CLANWARS_TEXTDOMAIN ) );
 				wp_redirect( $redirect_url );
 				exit();
 			} 
 			else {
-				Flash::flash_error( __( 'Failed to add a team.', WP_CLANWARS_TEXTDOMAIN ) );
+				Flash::error( __( 'Failed to add a team.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
 		}
 		else if( $act == 'edit' ) { // update team?
 			if(\WP_Clanwars\Teams::update_team( $id, stripslashes_deep( $_POST ) ) !== false) {
-				Flash::flash_success( __( 'Updated a team.', WP_CLANWARS_TEXTDOMAIN ) );
+				Flash::success( __( 'Updated a team.', WP_CLANWARS_TEXTDOMAIN ) );
 				wp_redirect( $redirect_url );
 				exit();
 			} 
 			else {
-				Flash::flash_error( __('Failed to update a team.', WP_CLANWARS_TEXTDOMAIN) );
+				Flash::error( __('Failed to update a team.', WP_CLANWARS_TEXTDOMAIN) );
 			}
 		}
 	}
@@ -2357,14 +2357,14 @@ EOT;
 				$err = $this->import_game( $file['tmp_name'] );
 
 				if(is_wp_error( $err )) {
-					Flash::flash_error( $err->get_error_message() );
+					Flash::error( $err->get_error_message() );
 				}
 				else {
-					Flash::flash_success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
+					Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
 				}
 			} 
 			else {
-				Flash::flash_error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
+				Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
 		}
 
