@@ -37,15 +37,12 @@ define('WP_CLANWARS_DEFAULTCSS', '_wp_clanwars_defaultcss');
 define('WP_CLANWARS_ACL', '_wp_clanwars_acl');
 define('WP_CLANWARS_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
 
-define('WP_CLANWARS_IMPORTDIR', 'import');
-define('WP_CLANWARS_IMPORTPATH', dirname(__FILE__) . '/' . WP_CLANWARS_IMPORTDIR);
-define('WP_CLANWARS_IMPORTURL', WP_CLANWARS_URL . '/' . WP_CLANWARS_IMPORTDIR);
-
 // this folder is created in wp-content/
 define('WP_CLANWARS_EXPORTDIR', 'wp-clanwars');
 define('WP_CLANWARS_ZIPINDEX', 'index.json');
 
 require_once (dirname(__FILE__) . '/classes/view.class.php');
+require_once (dirname(__FILE__) . '/classes/flash.class.php');
 require_once (dirname(__FILE__) . '/classes/utils.class.php');
 require_once (dirname(__FILE__) . '/classes/games.class.php');
 require_once (dirname(__FILE__) . '/classes/teams.class.php');
@@ -56,6 +53,9 @@ require_once (dirname(__FILE__) . '/classes/api.class.php');
 
 require_once (dirname(__FILE__) . '/wp-clanwars-widget.php');
 require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
+
+// namespace import
+use \WP_Clanwars\Flash;
 
 class WP_ClanWars {
 
@@ -179,6 +179,7 @@ class WP_ClanWars {
 		);
 
 		add_action('admin_print_styles', array($this, 'on_admin_print_styles'));
+		add_action('admin_init', array($this, 'on_admin_init'));
 		add_action('admin_menu', array($this, 'on_admin_menu'));
 		add_action('template_redirect', array($this, 'on_template_redirect'));
 		add_action('wp_footer', array($this, 'on_wp_footer'));
@@ -211,6 +212,10 @@ echo <<<EOT
 }
 </style>
 EOT;
+	}
+
+	function on_admin_init() {
+		Flash::setup();
 	}
 
 	/**
@@ -487,26 +492,6 @@ EOT;
 						$redirect_url = add_query_arg('upload', 'error', $redirect_url);
 					}
 				}
-
-				break;
-
-			case 'available':
-
-				$available_games = $this->get_available_games();
-				$result = true;
-
-				foreach($items as $item) {
-					if(isset($available_games[$item])) {
-						$r = $available_games[$item];
-						$filename = trailingslashit(WP_CLANWARS_IMPORTPATH) . $r->package;
-						$result = $this->import_game($filename);
-						if($result !== true) {
-							break;
-						}
-					}
-				}
-
-				$redirect_url = add_query_arg('import', ($result === true ? 'success' : 'error'), $redirect_url);
 
 				break;
 
@@ -1193,22 +1178,24 @@ EOT;
 
 		$result = unzip_file($zip_file, $unzip_dir);
 
-		if(!$result) {
+		if(is_wp_error($result)) {
 			$clean_unzip_dir();
-			return new WP_Error('plugin-error', 'Unable to unzip file.');
+
+			$message = sprintf( __( 'Unable to unzip file: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() );
+			return new WP_Error('plugin-error', $message );
 		}
 
 		$index_file = trailingslashit($unzip_dir) . WP_CLANWARS_ZIPINDEX;
 		if(!file_exists($index_file)) {
 			$clean_unzip_dir();
-			return new WP_Error('plugin-error', 'Index file is not found in ZIP.');
+			return new WP_Error('plugin-error', __( 'Index file is not found in ZIP.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
 		$game_data = @json_decode( $wp_filesystem->get_contents($index_file) );
 
 		if(!is_object($game_data)) {
 			$clean_unzip_dir();
-			return new WP_Error('plugin-error', 'Corrupted or missing contents from ZIP file.');
+			return new WP_Error('plugin-error', __( 'Corrupted or missing contents from ZIP file.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
 		$game_data = \WP_Clanwars\Utils::extract_args($game_data, array(
@@ -1218,7 +1205,7 @@ EOT;
 
 		if(empty($game_data['title'])) {
 			$clean_unzip_dir();
-			return new WP_Error('plugin-error', 'Corrupted or missing contents from ZIP file.');
+			return new WP_Error('plugin-error', __( 'Corrupted or missing contents from ZIP file.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
 		$p = $game_data;
@@ -1230,7 +1217,7 @@ EOT;
 
 		if(empty($game_id)) {
 			$clean_unzip_dir();
-			return new WP_Error('plugin-error', 'Failed to add game.');
+			return new WP_Error('plugin-error', __( 'Failed to add game.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
 		foreach($maplist as $map) {
@@ -1685,19 +1672,6 @@ EOT;
 		}
 
 		wp_redirect($referer);
-	}
-
-	// Get available games bundled with plugin
-	// This function simply reads and decodes import/import.json
-	// @return an array of avaialable games on success, otherwise false
-	function get_available_games() {
-		$content = file_get_contents(trailingslashit(WP_CLANWARS_IMPORTPATH) . 'import.json');
-
-		if($content !== false) {
-			return json_decode($content);
-		}
-
-		return false;
 	}
 
 	// Match game by title and or abbreviation
@@ -2357,51 +2331,31 @@ EOT;
 	}
 
 	function on_admin_post_import() {
-		if(!current_user_can('manage_options'))
+		if(!current_user_can('manage_options')) {
 			wp_die(__('Cheatin&#8217; uh?'));
+		}
 
 		check_admin_referer('wp-clanwars-import');
 
-		extract(\WP_Clanwars\Utils::extract_args($_POST, array('import' => '', 'items' => array())));
+		if(isset($_FILES['userfile'])) {
+			$file = $_FILES['userfile'];
 
-		$url = remove_query_arg(array('upload', 'import'), $_POST['_wp_http_referer']);
+			if($file['error'] === 0) {
+				$err = $this->import_game( $file['tmp_name'] );
 
-		switch($import) {
-			case 'upload':
-				if(isset($_FILES['userfile'])) {
-					$file = $_FILES['userfile'];
-
-					if($file['error'] == 0) {
-						$result = $this->import_game($file['tmp_name']);
-						$url = add_query_arg('import', ($result === true ? 'success' : 'error'), $url);
-					} else {
-						$url = add_query_arg('upload', 'error', $url);
-					}
+				if(is_wp_error( $err )) {
+					Flash::flash_error( $err->get_error_message() );
 				}
-				break;
-
-			case 'available':
-
-				$available_games = $this->get_available_games();
-				$result = true;
-
-				foreach($items as $item) {
-					if(isset($available_games[$item])) {
-						$r = $available_games[$item];
-						$filename = trailingslashit(WP_CLANWARS_IMPORTPATH) . $r->package;
-						$result = $this->import_game($filename);
-						if($result !== true) {
-							break;
-						}
-					}
+				else {
+					Flash::flash_success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
 				}
-
-				$url = add_query_arg('import', ($result === true ? 'success' : 'error'), $url);
-
-				break;
+			} 
+			else {
+				Flash::flash_error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
 		}
 
-		wp_redirect($url);
+		wp_redirect( $_POST['_wp_http_referer'] );
 	}
 
 	// Settings page hook
@@ -2471,18 +2425,31 @@ EOT;
 
 	// Import page hook
 	function on_import() {
-		$import_list = $this->get_available_games();
-		$installed_games = \WP_Clanwars\Games::get_game('');
+		$tab = isset($_GET['tab']) ? $_GET['tab'] : 'browse';
 
+		if($tab === 'upload') {
+			$this->on_import_upload();
+		}
+		else {
+			$this->on_import_browse();
+		}
+	}
+
+	function on_import_upload() {
+		$view = new \WP_Clanwars\View( 'import_upload' );
+		$context = array();
+
+		$this->print_notices();
+		$view->render( $context );
+	}
+
+	function on_import_browse() {
+		$installed_games = \WP_Clanwars\Games::get_game('');
 		$popular = \WP_Clanwars\API::get_popular();
 
 		foreach($popular as $i => $game) {
-			$game->is_installed = ($this->is_game_installed($game->title, $game->tag, $installed_games) !== false);
-		}
-
-		// mark installed games
-		foreach($import_list as $game) {
-			$game->is_installed = ($this->is_game_installed($game->title, $game->abbr, $installed_games) !== false);
+			$is_installed = $this->is_game_installed($game->title, $game->tag, $installed_games);
+			$game->is_installed = ($is_installed !== false);
 		}
 
 		if(isset($_GET['upload'])) {
@@ -2490,15 +2457,16 @@ EOT;
 		}
 
 		if(isset($_GET['import'])) {
-			$this->add_notice($_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), $_GET['import'] === 'success' ? 'updated' : 'error');
+			$this->add_notice(
+				$_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 
+				$_GET['import'] === 'success' ? 'updated' : 'error'
+			);
 		}
 
+		$view = new \WP_Clanwars\View( 'import_browse' );
+		$context = compact( 'popular' );
+		
 		$this->print_notices();
-
-		$view = new \WP_Clanwars\View( 'import' );
-
-		$context = compact('import_list', 'popular');
-
 		$view->render( $context );
 	}
 
