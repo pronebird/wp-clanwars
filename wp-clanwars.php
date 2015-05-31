@@ -2261,7 +2261,7 @@ EOT;
 		$view = new View( 'match_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
-		$view->add_helper( 'get_country_flag', array('Utils', 'get_country_flag') );
+		$view->add_helper( 'get_country_flag', array('\WP_Clanwars\Utils', 'get_country_flag') );
 
 		$context = compact('table_columns', 'page_links_text', 'matches', 'match_statuses');
 		$view->render($context);
