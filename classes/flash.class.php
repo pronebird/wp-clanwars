@@ -26,7 +26,7 @@ class Flash {
         register_shutdown_function( '\\WP_Clanwars\\Flash::_shutdown' );
     }
 
-    static function flash($message, $type = self::FLASH_SUCCESS_KEY, $is_safe = false, $show_above_h2 = false) {
+    static function add($message, $type = self::FLASH_SUCCESS_KEY, $is_safe = false, $show_above_h2 = false) {
         if(!isset(static::$_messages[$type])) {
             static::$_messages[$type] = array();
         }
@@ -38,15 +38,15 @@ class Flash {
         );
     }
 
-    static function flash_error($message, $is_safe = false, $show_above_h2 = false) {
-        return static::flash($message, self::FLASH_ERROR_KEY, $is_safe, $show_above_h2);
+    static function error($message, $is_safe = false, $show_above_h2 = false) {
+        return static::add($message, self::FLASH_ERROR_KEY, $is_safe, $show_above_h2);
     }
 
-    static function flash_success($message, $is_safe = false, $show_above_h2 = false) {
-        return static::flash($message, self::FLASH_SUCCESS_KEY, $is_safe, $show_above_h2);
+    static function success($message, $is_safe = false, $show_above_h2 = false) {
+        return static::add($message, self::FLASH_SUCCESS_KEY, $is_safe, $show_above_h2);
     }
 
-    static function display_flash() {
+    static function display() {
         foreach(static::$_messages as $key => $items) {
             foreach($items as $index => $item) {
                 $content = $item[ self::FLASH_CONTENT_KEY ];
@@ -86,7 +86,7 @@ class Flash {
     }
 
     static function _print_admin_notices() {
-        static::display_flash();
+        static::display();
         static::mark_messages_displayed();
     }
 
