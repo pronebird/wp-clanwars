@@ -4,7 +4,11 @@
 	<div class="wp-filter">
 		<ul class="filter-links">
 			<li>
-				<a href="<?php echo admin_url('admin.php?page=wp-clanwars-import'); ?>" class="current"><?php _e('Popular', WP_CLANWARS_TEXTDOMAIN); ?></a>
+			<?php if( $active_tab == 'search' ) : ?>
+				<a href="<?php esc_attr_e( $_SERVER['REQUEST_URI'] ); ?>" class="current"><?php _e( 'Search Results', WP_CLANWARS_TEXTDOMAIN ); ?></a>
+			<?php endif; ?>
+
+				<a href="<?php echo admin_url('admin.php?page=wp-clanwars-import'); ?>"<?php if($active_tab == 'popular') : ?> class="current"<?php endif; ?>><?php _e( 'Popular', WP_CLANWARS_TEXTDOMAIN ); ?></a>
 			</li>
 		</ul>
 		<form class="search-form" method="get" action="<?php echo admin_url( 'admin.php' ); ?>">
@@ -14,8 +18,10 @@
 	</div>
 
 	<?php if ( isset( $api_error_message ) ) : ?>
+	
 	<p class="wp-clanwars-api-error"><?php _e( 'Cannot connect to API.', WP_CLANWARS_TEXTDOMAIN ); ?></p>
 	<p class="wp-clanwars-api-error small"><?php echo sprintf( __( 'Error: %s.', WP_CLANWARS_TEXTDOMAIN ), $api_error_message ); ?></p>
+
 	<?php endif; ?>
 
 	<ul class="wp-clanwars-gamepacks clearfix">
