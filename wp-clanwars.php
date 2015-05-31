@@ -859,8 +859,6 @@ EOT;
 
 		$country_select = Utils::html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
 
-		$this->print_notices();
-
 		$view = new View( 'edit_team' );
 		$context = compact('page_title', 'page_action', 'page_submit',
 					'team_id', 'title', 'logo', 'country', 'home_team', 'action',
@@ -984,7 +982,12 @@ EOT;
 
 		$referer = remove_query_arg(array('add', 'update', 'export'), $_REQUEST['_wp_http_referer']);
 
-		$args = Utils::extract_args($_REQUEST, array('do_action' => '', 'do_action2' => '', 'items' => array()));
+		$args = Utils::extract_args( $_REQUEST, array(
+				'do_action' => '', 
+				'do_action2' => '', 
+				'items' => array()
+			)
+		);
 		extract($args);
 
 		$action = !empty($do_action) ? $do_action : (!empty($do_action2) ? $do_action2 : '');
@@ -993,8 +996,14 @@ EOT;
 
 			switch($action) {
 				case 'delete':
-					$error = \WP_Clanwars\Games::delete_game($items);
-					$referer = add_query_arg('delete', $error, $referer);
+					$result = \WP_Clanwars\Games::delete_game($items);
+
+					if( is_wp_error( $result ) ) {
+						Flash::error( sprintf( __( 'Failed ot delete games. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+					}
+					else {
+						Flash::success( sprintf( _n( 'Deleted %d game.', 'Deleted %d games.', $result, WP_CLANWARS_TEXTDOMAIN ), $result ) );
+					}
 				break;
 				case 'export':
 					$game_id = current($items);
@@ -1288,7 +1297,7 @@ EOT;
 		if($die)
 			wp_die( __('Cheatin&#8217; uh?') );
 
-		if(sizeof($_POST)) {
+		if( Utils::is_post() ) {
 
 			$edit_maps_errors = array(
 				self::ErrorDatabase => __('Database error.', WP_CLANWARS_TEXTDOMAIN),
@@ -1305,31 +1314,35 @@ EOT;
 
 			switch($act) {
 				case 'add':
+					$defaults = array( 'title' => '', 'abbr' => '', 'icon' => 0 );
+					$data = Utils::extract_args( stripslashes_deep( $_POST ), $defaults );
+					extract( $data );
 
-					$defaults = array('title' => '', 'abbr' => '', 'icon' => 0);
-					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
-					extract($data);
+					if( !empty($title) ) {
+						$data['icon'] = $this->handle_upload( 'icon_file' );
 
-					if(!empty($title)) {
-
-						$data['icon'] = $this->handle_upload('icon_file');
-
-						if($data['icon'] == self::ErrorUploadNoFile)
+						if($data['icon'] == self::ErrorUploadNoFile) {
 							$data['icon'] = 0;
+						}
 
 						if($data['icon'] >= 0) {
-
 							if(\WP_Clanwars\Games::add_game($data)) {
-								wp_redirect(admin_url('admin.php?page=wp-clanwars-games&add=1'));
+								Flash::success( __( 'Added a new game.', WP_CLANWARS_TEXTDOMAIN ) );
+								wp_redirect( admin_url( 'admin.php?page=wp-clanwars-games' ) );
 								exit();
-							} else
-								$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
-						} else
-							$this->add_notice($edit_maps_errors[$attach_id], 'error');
+							} 
+							else {
+								Flash::error( __( 'Failed to add a game.', WP_CLANWARS_TEXTDOMAIN ) );
+							}
+						} 
+						else {
+							Flash::error( $edit_maps_errors[ $attach_id ] );
+						}
 
-
-					} else
-						$this->add_notice(__('Game title is required field.', WP_CLANWARS_TEXTDOMAIN), 'error');
+					} 
+					else {
+						Flash::error( __( 'Game title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+					}
 				break;
 
 				case 'edit':
@@ -1339,31 +1352,38 @@ EOT;
 
 					unset($data['delete_image']);
 
-					if(!empty($title)) {
+					if( !empty($title) ) {
 
-						if(!empty($delete_image))
+						if( !empty($delete_image) ) {
 							$data['icon'] = 0;
+						}
 
-						$attach_id = $this->handle_upload('icon_file');
+						$attach_id = $this->handle_upload( 'icon_file' );
 
-						if($attach_id == self::ErrorUploadNoFile)
+						if($attach_id == self::ErrorUploadNoFile) {
 							$attach_id = 0;
-						else if($attach_id > 0)
+						}
+						else if($attach_id > 0) {
 							$data['icon'] = $attach_id;
+						}
 
 						if($attach_id >= 0) {
-
 							if(\WP_Clanwars\Games::update_game($id, $data) !== false) {
-								wp_redirect(admin_url('admin.php?page=wp-clanwars-games&update=1'));
+								Flash::success( __( 'Updated a game.', WP_CLANWARS_TEXTDOMAIN ) );
+								wp_redirect( admin_url( 'admin.php?page=wp-clanwars-games' ) );
 								exit();
-							} else
-								$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
+							} 
+							else {
+								Flash::error( __( 'Failed to update a game.', WP_CLANWARS_TEXTDOMAIN ) );
+							}
+						} else {
+							Flash::error( $edit_maps_errors[ $attach_id ] );
+						}
 
-						} else
-							$this->add_notice($edit_maps_errors[$attach_id], 'error');
+					} else {
+						Flash::error( __( 'Game title is required field.', WP_CLANWARS_TEXTDOMAIN ) );
+					}
 
-					} else
-						$this->add_notice(__('Game title is required field.', WP_CLANWARS_TEXTDOMAIN), 'error');
 					break;
 
 				case 'addmap':
@@ -1371,26 +1391,31 @@ EOT;
 					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
 					extract($data);
 
-					if(!empty($title)) {
+					if( !empty($title) ) {
 
 						$attach_id = $this->handle_upload('screenshot_file');
 
-						if($attach_id == self::ErrorUploadNoFile)
+						if($attach_id == self::ErrorUploadNoFile) {
 							$attach_id = 0;
+						}
 
 						if($attach_id >= 0) {
 
 							if(\WP_Clanwars\Maps::add_map(array('title' => $title, 'screenshot' => $attach_id, 'game_id' => $game_id)) !== false) {
-								wp_redirect(admin_url(sprintf('admin.php?page=wp-clanwars-games&act=maps&game_id=%d&add=1', $game_id)));
+								Flash::success( __( 'Added a map.', WP_CLANWARS_TEXTDOMAIN ) );
+								wp_redirect( admin_url( sprintf( 'admin.php?page=wp-clanwars-games&act=maps&game_id=%d', $game_id ) ) );
 								exit();
-							} else
-								$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
+							} else {
+								Flash::error( __( 'Failed to add a map.', WP_CLANWARS_TEXTDOMAIN ) );
+							}
 
-						} else
-							$this->add_notice($edit_maps_errors[$attach_id], 'error');
+						} else {
+							Flash::error( $edit_maps_errors[ $attach_id ] );
+						}
 
-					} else
-						$this->add_notice(__('Map title is required field.', WP_CLANWARS_TEXTDOMAIN), 'error');
+					} else {
+						Flash::error( __( 'Map title is required field.', WP_CLANWARS_TEXTDOMAIN ) );
+					}
 
 					break;
 
@@ -1401,31 +1426,39 @@ EOT;
 
 					$update_data = array('title' => $title);
 
-					if(!empty($title)) {
+					if( !empty($title) ) {
 
-						if(!empty($delete_image))
+						if(!empty($delete_image)) {
 							$update_data['screenshot'] = 0;
+						}
 
 						$attach_id = $this->handle_upload('screenshot_file');
 
-						if($attach_id == self::ErrorUploadNoFile)
+						if($attach_id == self::ErrorUploadNoFile) {
 							$attach_id = 0;
-						else if($attach_id > 0)
+						}
+						else if($attach_id > 0) {
 							$update_data['screenshot'] = $attach_id;
+						}
 
 						if($attach_id >= 0) {
 
 							if(\WP_Clanwars\Maps::update_map($id, $update_data) !== false) {
-								wp_redirect(admin_url(sprintf('admin.php?page=wp-clanwars-games&act=maps&game_id=%d&update=1', $game_id)));
+								Flash::success( __( 'Updated a map.', WP_CLANWARS_TEXTDOMAIN ) );
+								wp_redirect( admin_url( sprintf( 'admin.php?page=wp-clanwars-games&act=maps&game_id=%d', $game_id ) ) );
 								exit();
-							} else
-								$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
+							} else {
+								Flash::error( __( 'Failed to update a map.', WP_CLANWARS_TEXTDOMAIN ) );
+							}
 
-						} else
-							$this->add_notice($edit_maps_errors[$attach_id], 'error');
+						} 
+						else {
+							Flash::error( $edit_maps_errors[ $attach_id ] );
+						}
 
-					} else
-						$this->add_notice(__('Map title is required field.', WP_CLANWARS_TEXTDOMAIN), 'error');
+					} else {
+						Flash::error( __( 'Map title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+					}
 
 					break;
 			}
@@ -1492,21 +1525,6 @@ EOT;
 					  'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
 					  'abbr' => __('Game tag', WP_CLANWARS_TEXTDOMAIN));
 
-		if(isset($_GET['add'])) {
-			$this->add_notice(__('Game is successfully added.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		if(isset($_GET['update'])) {
-			$this->add_notice(__('Game is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		if(isset($_GET['delete'])) {
-			$deleted = (int)$_GET['delete'];
-			$this->add_notice(sprintf(_n('%d Game deleted.', '%d Games deleted', $deleted, WP_CLANWARS_TEXTDOMAIN), $deleted), 'updated');
-		}
-
-		$this->print_notices();
-
 		$view = new View( 'game_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
@@ -1528,8 +1546,6 @@ EOT;
 			}
 		}
 
-		$this->print_notices();
-
 		$view = new View( 'edit_game' );
 
 		$context = Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($game, $defaults));
@@ -1550,16 +1566,27 @@ EOT;
 
 		check_admin_referer('wp-clanwars-deletemaps');
 
-		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
+		$redirect_url = $_REQUEST['_wp_http_referer'];
 
-		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract(Utils::extract_args($_REQUEST, array('delete' => array())));
+		$args = Utils::extract_args( $_REQUEST, array(
+				'do_action' => '',
+				'do_action2' => '',
+				'delete' => array()
+			) );
+		extract( $args );
 
-			$error = \WP_Clanwars\Maps::delete_map($delete);
-			$referer = add_query_arg('delete', $error, $referer);
+		if($do_action == 'delete' || $do_action2 == 'delete') {;
+			$result = \WP_Clanwars\Maps::delete_map( $delete );
+
+			if( is_wp_error( $result ) ) {
+				Flash::error( sprintf( __( 'Failed to delete maps. Error: %s' ), $result->get_error_message() ) );
+			}
+			else {
+				Flash::success( sprintf( _n( 'Deleted %d map.', 'Deleted %d maps.', $result, WP_CLANWARS_TEXTDOMAIN ), $result ) );
+			}
 		}
 
-		wp_redirect($referer);
+		wp_redirect( $redirect_url );
 	}
 
 	function on_edit_maps()
@@ -1597,21 +1624,6 @@ EOT;
 				'icon' => '',
 				'title' => __('Title', WP_CLANWARS_TEXTDOMAIN)
 		);
-
-		if(isset($_GET['add'])) {
-			$this->add_notice(__('Map is successfully added.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		if(isset($_GET['update'])) {
-			$this->add_notice(__('Map is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		if(isset($_GET['delete'])) {
-			$deleted = (int)$_GET['delete'];
-			$this->add_notice(sprintf(_n('%d Map deleted.', '%d Maps deleted', $deleted, WP_CLANWARS_TEXTDOMAIN), $deleted), 'updated');
-		}
-
-		$this->print_notices();
 
 		$view = new View( 'map_table' );
 
@@ -1654,8 +1666,6 @@ EOT;
 
 		$attach = wp_get_attachment_image($screenshot, 'thumbnail');
 
-		$this->print_notices();
-
 		$view = new View( 'edit_map' );
 
 		$context = compact('page_title', 'page_action', 'page_submit', 'game_id', 'id',
@@ -1675,16 +1685,25 @@ EOT;
 
 		check_admin_referer('wp-clanwars-deletematches');
 
-		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
+		$args = Utils::extract_args( $_REQUEST, array(
+				'do_action' => '',
+				'do_action2' => '',
+				'delete' => array()
+			) );
+		extract( $args );
 
-		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract(Utils::extract_args($_REQUEST, array('delete' => array())));
+		if($do_action == 'delete' || $do_action2 == 'delete') {
+			$result = \WP_Clanwars\Matches::delete_match($delete);
 
-			$error = \WP_Clanwars\Matches::delete_match($delete);
-			$referer = add_query_arg('delete', $error, $referer);
+			if( is_wp_error( $result ) ) {
+				Flash::error( sprintf( __( 'Failed to delete matches. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+			}
+			else {
+				Flash::success( sprintf( _n( 'Deleted %d match.', 'Deleted %d matches.', $result, WP_CLANWARS_TEXTDOMAIN ), $result ) );
+			}
 		}
 
-		wp_redirect($referer);
+		wp_redirect( $_REQUEST['_wp_http_referer'] );
 	}
 
 	// Match game by title and or abbreviation
@@ -1800,12 +1819,6 @@ EOT;
 		$merged_data = Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($match, $defaults));
 		$merged_data['date'] = Utils::date_array2time_helper($merged_data['date']);
 
-		if(isset($_GET['update'])) {
-			$this->add_notice(__('Match is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		$this->print_notices();
-
 		$view = new View( 'edit_match' );
 
 		$view->add_helper('html_date_helper', array('\WP_Clanwars\Utils', 'html_date_helper'));
@@ -1865,11 +1878,11 @@ EOT;
 				)
 			);
 
-		if(sizeof($_POST) > 0)
+		if( Utils::is_post() )
 		{
-
-			if(isset($_POST['game_id']) && !$this->acl_user_can('manage_game', $_POST['game_id']))
+			if( isset( $_POST['game_id'] ) && !$this->acl_user_can( 'manage_game', $_POST['game_id'] ) ) {
 				wp_die( __('Cheatin&#8217; uh?') );
+			}
 
 			switch($act) {
 
@@ -1926,10 +1939,13 @@ EOT;
 
 						\WP_Clanwars\Matches::update_match_post($match_id, $gallery);
 
-						wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&add=1'));
+						Flash::success( __( 'Added a match.', WP_CLANWARS_TEXTDOMAIN ) );
+
+						wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches' ) );
 						exit();
-					} else {
-						$this->add_notice(__('An error occurred.', WP_CLANWARS_TEXTDOMAIN), 'error');
+					} 
+					else {
+						Flash::error( __( 'Failed to add a match.', WP_CLANWARS_TEXTDOMAIN ) );
 					}
 
 				break;
@@ -1999,7 +2015,9 @@ EOT;
 
 					\WP_Clanwars\Matches::update_match_post($id, $gallery);
 
-					wp_redirect(admin_url('admin.php?page=wp-clanwars-matches&act=edit&id=' . $id . '&update=1'));
+					Flash::success( __('Updated a match.', WP_CLANWARS_TEXTDOMAIN) );
+
+					wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches&act=edit&id=' . $id ) );
 					exit();
 
 				break;
@@ -2247,17 +2265,6 @@ EOT;
 				'team2' => __('Team 2', WP_CLANWARS_TEXTDOMAIN),
 				'tickets' => __('Tickets', WP_CLANWARS_TEXTDOMAIN));
 
-		if(isset($_GET['add'])) {
-			$this->add_notice(__('Match is successfully added.', WP_CLANWARS_TEXTDOMAIN), 'updated');
-		}
-
-		if(isset($_GET['delete'])) {
-			$deleted = (int)$_GET['delete'];
-			$this->add_notice(sprintf(_n('%d Match deleted.', '%d Matches deleted', $deleted, WP_CLANWARS_TEXTDOMAIN), $deleted), 'updated');
-		}
-
-		$this->print_notices();
-
 		$view = new View( 'match_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
@@ -2268,89 +2275,88 @@ EOT;
 	}
 
 	function on_admin_post_settings() {
-		global $wpdb;
-
-		if(!current_user_can('manage_options'))
+		if( !current_user_can('manage_options') ) {
 			wp_die(__('Cheatin&#8217; uh?'));
+		}
 
 		check_admin_referer('wp-clanwars-settings');
 
-		if(isset($_POST['category'])) {
-			update_option(WP_CLANWARS_CATEGORY, (int)$_POST['category']);
+		if( isset($_POST['category']) ) {
+			update_option( WP_CLANWARS_CATEGORY, (int) $_POST['category'] );
 		}
 
 		// keep default styles always enabled on jumpstarter
-		$enable_default_styles = isset($_POST['enable_default_styles']) || $this->is_jumpstarter();
+		$enable_default_styles = isset( $_POST['enable_default_styles'] ) || $this->is_jumpstarter();
 
-		update_option(WP_CLANWARS_DEFAULTCSS, $enable_default_styles);
+		update_option( WP_CLANWARS_DEFAULTCSS, $enable_default_styles );
 
-		$url = add_query_arg('saved', 'true', $_POST['_wp_http_referer']);
+		Flash::success( __('Settings saved.', WP_CLANWARS_TEXTDOMAIN) );
 
-		wp_redirect($url);
+		wp_redirect( $_POST['_wp_http_referer'] );
 	}
 
 	function on_admin_post_acl() {
-		global $wpdb;
-
-		if(!current_user_can('manage_options'))
+		if(!current_user_can('manage_options')) {
 			wp_die(__('Cheatin&#8217; uh?'));
+		}
 
 		check_admin_referer('wp-clanwars-acl');
 
-		if(isset($_POST['user'])) {
-			$user_id = (int)$_POST['user'];
+		if( isset( $_POST['user'] ) ) {
+			$user_id = (int) $_POST['user'];
 			$data = array();
 
-			if(isset($_POST['permissions']))
+			if( isset( $_POST['permissions'] ) ) {
 				$data['permissions'] = $_POST['permissions'];
+			}
 
-			if(isset($_POST['games']))
+			if( isset( $_POST['games'] ) ) {
 				$data['games'] = $_POST['games'];
+			}
 
-			$this->acl_update($user_id, $data);
+			$this->acl_update( $user_id, $data );
 		}
 
-		$url = add_query_arg('saved', 'true', $_POST['_wp_http_referer']);
+		Flash::success( __( 'Settings saved.', WP_CLANWARS_TEXTDOMAIN ) );
 
-		wp_redirect($url);
+		wp_redirect( $_POST['_wp_http_referer'] );
 	}
 
 	function on_admin_post_deleteacl() {
-		global $wpdb;
-
-		if(!current_user_can('manage_options'))
+		if( !current_user_can('manage_options') ) {
 			wp_die(__('Cheatin&#8217; uh?'));
+		}
 
 		check_admin_referer('wp-clanwars-deleteacl');
 
-		extract(Utils::extract_args($_POST, array(
-			'doaction' => '', 'doaction2' => '',
+		$args = Utils::extract_args( $_POST, array(
+			'do_action' => '', 
+			'do_action2' => '',
 			'users' => array()
-			)));
+		) );
+		extract($args);
 
-		$url = $_POST['_wp_http_referer'];
+		if($do_action == 'delete' || $do_action2 == 'delete') {
+			$users = array_unique( array_values( $users ) );
 
-		if($doaction == 'delete' || $doaction2 == 'delete') {
-
-			$users = array_unique(array_values($users));
-
-			foreach($users as $key => $user_id)
-				$this->acl_delete($user_id);
-
-			$url = add_query_arg('saved', 'true', $url);
+			foreach( $users as $key => $user_id ) {
+				$this->acl_delete( $user_id );
+			}
 		}
 
-		wp_redirect($url);
+		Flash::success( __( 'Settings saved.', WP_CLANWARS_TEXTDOMAIN ) );
+
+		wp_redirect( $_POST['_wp_http_referer'] );
 	}
 
 	function on_admin_post_import() {
-		if(!current_user_can('manage_options')) {
+		if( !current_user_can('manage_options') ) {
 			wp_die(__('Cheatin&#8217; uh?'));
 		}
 
 		check_admin_referer('wp-clanwars-import');
 
-		if(isset($_FILES['userfile'])) {
+		if( isset( $_FILES['userfile'] ) ) {
 			$file = $_FILES['userfile'];
 
 			if($file['error'] === 0) {

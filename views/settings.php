@@ -2,13 +2,6 @@
 
 	<h2><?php _e('Settings', WP_CLANWARS_TEXTDOMAIN); ?></h2>
 
-	<!-- Saved message -->
-	<?php if(isset($_GET['saved'])) : ?>
-
-	<div class="updated fade"><p><?php _e('Settings saved.', WP_CLANWARS_TEXTDOMAIN); ?></p></div>
-
-	<?php endif; ?>
-
 	<!-- Basic Settings -->
 	<form method="post" action="<?php echo admin_url('admin-post.php'); ?>">
 		<?php wp_nonce_field('wp-clanwars-settings'); ?>
