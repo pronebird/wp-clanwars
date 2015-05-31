@@ -198,8 +198,8 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-deleteacl', array($this, 'on_admin_post_deleteacl'));
 		add_action('admin_post_wp-clanwars-import', array($this, 'on_admin_post_import'));
 
-		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setupteam'));
-		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setupgames'));
+		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setup_team'));
+		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setup_games'));
 
 		add_action('wp_ajax_get_maps', array($this, 'on_ajax_get_maps'));
 		add_shortcode('wp-clanwars', array($this, 'on_shortcode'));
@@ -401,27 +401,13 @@ EOT;
 		$view->add_helper('html_country_select_helper', array('\\WP_Clanwars\\Utils', 'html_country_select_helper'));
 		$context = compact('page_submit');
 
-		if(isset($_GET['error'])) {
-			$this->add_notice(__('Please fill in all required fields.', WP_CLANWARS_TEXTDOMAIN), 'error');
-		}
-
-		$this->print_notices();
-
 		$view->render( $context );
 	}
 
 	function onboarding_setup_games_page($page_submit) {
 		$view = new View( 'setup_games' );
 		$context = compact('page_submit');
-		$import_list = $this->get_available_games();
 		$installed_games = \WP_Clanwars\Games::get_game('');
-
-		// mark installed games
-		foreach($import_list as $game) {
-			$game->is_installed = ($this->is_game_installed($game->title, $game->abbr, $installed_games) !== false);
-		}
-
-		$context += compact('import_list');
 
 		if(isset($_GET['upload'])) {
 			$this->add_notice(__('An upload error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 'error');
@@ -440,33 +426,31 @@ EOT;
 		$view->render( $context );
 	}
 
-	function on_admin_post_setupteam() {
-		if(!current_user_can('manage_options')) {
+	function on_admin_post_setup_team() {
+		if( !current_user_can('manage_options') ) {
 			wp_die(__('Cheatin&#8217; uh?'));
 		}
 
 		check_admin_referer('wp-clanwars-setupteam');
 
-		$referer = $_REQUEST['_wp_http_referer'];
-
-		$data = Utils::extract_args($_POST, array(
+		$data = Utils::extract_args( $_POST, array(
 			'title' => '',
 			'country' => ''
-		));
+		) );
 
 		$data['home_team'] = 1;
 
-		if(!empty($data['title']) && !empty($data['country'])) {
+		if( !empty( $data['title'] ) && !empty( $data['country'] ) ) {
 			\WP_Clanwars\Teams::add_team( $data );
 		}
 		else {
-			$referer = add_query_arg('error', true, $referer);
+			Flash::error( __( 'Please fill in all required fields.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
-		wp_redirect($referer);
+		wp_redirect( $_REQUEST['_wp_http_referer'] );
 	}
 
-	function on_admin_post_setupgames() {
+	function on_admin_post_setup_games() {
 		if(!current_user_can('manage_options')) {
 			wp_die(__('Cheatin&#8217; uh?'));
 		}
@@ -2464,12 +2448,17 @@ EOT;
 
 		$search_query = trim( (string) $query_args['q'] );
 		$installed_games = \WP_Clanwars\Games::get_game('');
+		$active_tab = '';
 
 		if( empty($search_query) ) {
 			$api_response = CloudAPI::get_popular();
+
+			$active_tab = 'popular';
 		}
 		else {
 			$api_response = CloudAPI::search( $search_query );
+
+			$active_tab = 'search';
 		}
 
 		$api_games = array();
@@ -2487,7 +2476,7 @@ EOT;
 		}
 
 		$view = new View( 'import_browse' );
-		$context = compact( 'api_games', 'api_error_message', 'search_query' );
+		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab' );
 		
 		$view->render( $context );
 	}
