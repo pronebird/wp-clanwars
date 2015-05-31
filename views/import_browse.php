@@ -7,14 +7,20 @@
 				<a href="<?php echo admin_url('admin.php?page=wp-clanwars-import'); ?>" class="current"><?php _e('Popular', WP_CLANWARS_TEXTDOMAIN); ?></a>
 			</li>
 		</ul>
-		<form class="search-form">
-			<input type="search" name="q" value="" class="wp-filter-search" placeholder="<?php esc_attr_e(__('Search Games', WP_CLANWARS_TEXTDOMAIN)); ?>"
+		<form class="search-form" method="get" action="<?php echo admin_url( 'admin.php' ); ?>">
+			<input type="hidden" name="page" value="wp-clanwars-import" />
+			<input type="search" name="q" value="<?php esc_attr_e( $search_query ); ?>" class="wp-filter-search" placeholder="<?php esc_attr_e(__('Search Games', WP_CLANWARS_TEXTDOMAIN)); ?>" />
 		</form>
 	</div>
 
+	<?php if ( isset( $api_error_message ) ) : ?>
+	<p class="wp-clanwars-api-error"><?php _e( 'Cannot connect to API.', WP_CLANWARS_TEXTDOMAIN ); ?></p>
+	<p class="wp-clanwars-api-error small"><?php echo sprintf( __( 'Error: %s.', WP_CLANWARS_TEXTDOMAIN ), $api_error_message ); ?></p>
+	<?php endif; ?>
+
 	<ul class="wp-clanwars-gamepacks clearfix">
 
-	<?php foreach($popular as $game) : ?>
+	<?php foreach ( $api_games as $game ) : ?>
 		<li class="wp-clanwars-item">
 			<div class="wp-clanwars-item-top">
 				<div class="wp-clanwars-item-header clearfix">
@@ -44,19 +50,19 @@
 			<div class="wp-clanwars-item-bottom">
 				<div class="wp-clanwars-column-rating">
 					<div class="star-rating">
-						<div class="star star-full"></div>
-						<div class="star star-full"></div>
-						<div class="star star-full"></div>
-						<div class="star star-full"></div>
+						<div class="star star-empty"></div>
+						<div class="star star-empty"></div>
+						<div class="star star-empty"></div>
+						<div class="star star-empty"></div>
 						<div class="star star-empty"></div>
 					</div>
-					<span class="num-ratings"><?php echo sprintf( _x('(%d)', 'Number of ratings', WP_CLANWARS_TEXTDOMAIN), 599+$game->votes ); ?></span>
+					<span class="num-ratings"><?php echo sprintf( _x('(%d)', 'Number of ratings', WP_CLANWARS_TEXTDOMAIN), $game->votes ); ?></span>
 				</div>
 				<div class="wp-clanwars-column-published">
 					<strong><?php _e('Published:', WP_CLANWARS_TEXTDOMAIN); ?></strong>
 					<span><?php esc_html_e( mysql2date(get_option('date_format'), $game->date, true) ); ?></span>
 				</div>
-				<div class="wp-clanwars-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), 1000+$game->downloads ); ?></div>
+				<div class="wp-clanwars-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), $game->downloads ); ?></div>
 				<div class="wp-clanwars-column-author">
 					<strong><?php _e('Author:', WP_CLANWARS_TEXTDOMAIN); ?></strong> <?php esc_html_e($game->author); ?>
 				</div>

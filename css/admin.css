@@ -471,6 +471,7 @@ html[xmlns] .clearfix {
     overflow: hidden;
 }
 
+.wp-clanwars-import-page .wp-clanwars-api-error,
 .wp-clanwars-import-page .wp-clanwars-install-help {
     color: #999;
     font-size: 1.4em;
@@ -480,6 +481,7 @@ html[xmlns] .clearfix {
     text-align: center;
 }
 
+.wp-clanwars-import-page .wp-clanwars-api-error.small,
 .wp-clanwars-import-page .wp-clanwars-install-help.small {
     padding: 10px 0 0;
     font-size: 1em;

@@ -56,6 +56,8 @@ require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
 // namespace import
 use \WP_Clanwars\Flash;
+use \WP_Clanwars\Utils;
+use \WP_Clanwars\API as CloudAPI;
 
 class WP_ClanWars {
 
@@ -2437,36 +2439,39 @@ EOT;
 
 	function on_import_upload() {
 		$view = new \WP_Clanwars\View( 'import_upload' );
-		$context = array();
-
-		$this->print_notices();
-		$view->render( $context );
+		$view->render();
 	}
 
 	function on_import_browse() {
+		$query_args = Utils::extract_args( $_GET, array( 'q' => '' ) );
+
+		$search_query = trim( (string) $query_args['q'] );
 		$installed_games = \WP_Clanwars\Games::get_game('');
-		$popular = \WP_Clanwars\API::get_popular();
 
-		foreach($popular as $i => $game) {
-			$is_installed = $this->is_game_installed($game->title, $game->tag, $installed_games);
-			$game->is_installed = ($is_installed !== false);
+		if( empty($search_query) ) {
+			$api_response = CloudAPI::get_popular();
+		}
+		else {
+			$api_response = CloudAPI::search( $search_query );
 		}
 
-		if(isset($_GET['upload'])) {
-			$this->add_notice(__('An upload error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 'error');
-		}
+		$api_games = array();
 
-		if(isset($_GET['import'])) {
-			$this->add_notice(
-				$_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 
-				$_GET['import'] === 'success' ? 'updated' : 'error'
-			);
+		if( !is_wp_error( $api_response ) ) {
+			foreach($api_response as $i => $game) {
+				$is_installed = $this->is_game_installed($game->title, $game->tag, $installed_games);
+				$game->is_installed = ($is_installed !== false);
+			}
+
+			$api_games = $api_response;
+		}
+		else {
+			$api_error_message = $api_response->get_error_message();
 		}
 
 		$view = new \WP_Clanwars\View( 'import_browse' );
-		$context = compact( 'popular' );
+		$context = compact( 'api_games', 'api_error_message', 'search_query' );
 		
-		$this->print_notices();
 		$view->render( $context );
 	}
 
