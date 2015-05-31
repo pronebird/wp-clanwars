@@ -16,7 +16,7 @@ class API {
     }
 
     static function search($term) {
-        $response = wp_remote_get( self::$api_url, 'games/search?q=' . urlencode($term) );
+        $response = wp_remote_get( self::$api_url . 'games/search?q=' . urlencode($term) );
 
         return self::get_response_payload($response);
     }
@@ -29,8 +29,8 @@ class API {
         $api_response = json_decode(wp_remote_retrieve_body($response));
 
         if(!$api_response->success) {
-            $error = $api_response->error;
-            return new \WP_Error( $error->code, $error->message );
+            $response_error = $api_response->error;
+            return new \WP_Error( 'api-error-' . $response_error->code, $response_error->message );
         }
 
         return $api_response->payload;
