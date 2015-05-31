@@ -57,6 +57,7 @@ require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
 // namespace import
 use \WP_Clanwars\Flash;
 use \WP_Clanwars\Utils;
+use \WP_Clanwars\View;
 use \WP_Clanwars\API as CloudAPI;
 
 class WP_ClanWars {
@@ -396,8 +397,8 @@ EOT;
 	}
 
 	function onboarding_setup_team_page($page_submit) {
-		$view = new \WP_Clanwars\View( 'setup_team' );
-		$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
+		$view = new View( 'setup_team' );
+		$view->add_helper('html_country_select_helper', array('\\WP_Clanwars\\Utils', 'html_country_select_helper'));
 		$context = compact('page_submit');
 
 		if(isset($_GET['error'])) {
@@ -410,7 +411,7 @@ EOT;
 	}
 
 	function onboarding_setup_games_page($page_submit) {
-		$view = new \WP_Clanwars\View( 'setup_games' );
+		$view = new View( 'setup_games' );
 		$context = compact('page_submit');
 		$import_list = $this->get_available_games();
 		$installed_games = \WP_Clanwars\Games::get_game('');
@@ -448,7 +449,7 @@ EOT;
 
 		$referer = $_REQUEST['_wp_http_referer'];
 
-		$data = \WP_Clanwars\Utils::extract_args($_POST, array(
+		$data = Utils::extract_args($_POST, array(
 			'title' => '',
 			'country' => ''
 		));
@@ -472,7 +473,7 @@ EOT;
 
 		check_admin_referer('wp-clanwars-setupgames');
 
-		extract(\WP_Clanwars\Utils::extract_args($_POST, array(
+		extract(Utils::extract_args($_POST, array(
 				'import' => '',
 				'items' => array(),
 				'new_game_name' => ''
@@ -600,7 +601,7 @@ EOT;
 		);
 
 		$acl[$user_id]['games'] = isset($data['games']) ? array_unique(array_values($data['games'])) : array(0);
-		$acl[$user_id]['permissions'] = isset($data['permissions']) ? \WP_Clanwars\Utils::extract_args($data['permissions'], $default_perms) : $default_perms;
+		$acl[$user_id]['permissions'] = isset($data['permissions']) ? Utils::extract_args($data['permissions'], $default_perms) : $default_perms;
 
 		update_option(WP_CLANWARS_ACL, $acl);
 
@@ -792,7 +793,7 @@ EOT;
 		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
 
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
+			extract(Utils::extract_args($_REQUEST, array('delete' => array())));
 
 			$error = \WP_Clanwars\Teams::delete_team($delete);
 			$referer = add_query_arg('delete', $error, $referer);
@@ -810,7 +811,7 @@ EOT;
 
 		$referer = $_REQUEST['_wp_http_referer'];
 
-		extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('id' => array())));
+		extract(Utils::extract_args($_REQUEST, array('id' => array())));
 
 		$error = \WP_Clanwars\Teams::set_hometeam($id);
 
@@ -841,13 +842,13 @@ EOT;
 			}
 		}
 
-		extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($data, $defaults)));
+		extract(Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($data, $defaults)));
 
-		$country_select = \WP_Clanwars\Utils::html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
+		$country_select = Utils::html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'edit_team' );
+		$view = new View( 'edit_team' );
 		$context = compact('page_title', 'page_action', 'page_submit',
 					'team_id', 'title', 'logo', 'country', 'home_team', 'action',
 					'country_select');
@@ -948,7 +949,7 @@ EOT;
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'team_table' );
+		$view = new View( 'team_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 		$view->add_helper( 'get_country_flag', array('\WP_Clanwars\Utils', 'get_country_flag') );
@@ -973,7 +974,7 @@ EOT;
 
 		$referer = remove_query_arg(array('add', 'update', 'export'), $_REQUEST['_wp_http_referer']);
 
-		$args = \WP_Clanwars\Utils::extract_args($_REQUEST, array('do_action' => '', 'do_action2' => '', 'items' => array()));
+		$args = Utils::extract_args($_REQUEST, array('do_action' => '', 'do_action2' => '', 'items' => array()));
 		extract($args);
 
 		$action = !empty($do_action) ? $do_action : (!empty($do_action2) ? $do_action2 : '');
@@ -1022,7 +1023,7 @@ EOT;
 		$upload_dir = wp_upload_dir();
 		$export_dir = trailingslashit($upload_dir['basedir']) . WP_CLANWARS_EXPORTDIR;
 
-		$game_data = \WP_Clanwars\Utils::extract_args($game, array(
+		$game_data = Utils::extract_args($game, array(
 			'title' => '', 'abbr' => '',
 			'icon' => '', 'maplist' => array()
 		));
@@ -1200,7 +1201,7 @@ EOT;
 			return new WP_Error('plugin-error', __( 'Corrupted or missing contents from ZIP file.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
-		$game_data = \WP_Clanwars\Utils::extract_args($game_data, array(
+		$game_data = Utils::extract_args($game_data, array(
 			'title' => '', 'abbr' => '',
 			'icon' => '', 'maplist' => array()
 		));
@@ -1296,7 +1297,7 @@ EOT;
 				case 'add':
 
 					$defaults = array('title' => '', 'abbr' => '', 'icon' => 0);
-					$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
+					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
 					extract($data);
 
 					if(!empty($title)) {
@@ -1323,7 +1324,7 @@ EOT;
 
 				case 'edit':
 					$defaults = array('title' => '', 'abbr' => '', 'delete_image' => false);
-					$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
+					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
 					extract($data);
 
 					unset($data['delete_image']);
@@ -1357,7 +1358,7 @@ EOT;
 
 				case 'addmap':
 					$defaults = array('title' => '', 'game_id' => 0, 'id' => 0);
-					$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
+					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
 					extract($data);
 
 					if(!empty($title)) {
@@ -1385,7 +1386,7 @@ EOT;
 
 				case 'editmap':
 					$defaults = array('title' => '', 'game_id' => 'all', 'id' => 0, 'delete_image' => false);
-					$data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), $defaults);
+					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
 					extract($data);
 
 					$update_data = array('title' => $title);
@@ -1496,7 +1497,7 @@ EOT;
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'game_table' );
+		$view = new View( 'game_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 
@@ -1519,9 +1520,9 @@ EOT;
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'edit_game' );
+		$view = new View( 'edit_game' );
 
-		$context = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($game, $defaults));
+		$context = Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($game, $defaults));
 		$context['attach'] = isset($game->icon) ? wp_get_attachment_image($game->icon, 'thumbnail') : '';
 		$context += compact( 'page_title', 'page_action', 'page_submit', 'game_id' );
 
@@ -1542,7 +1543,7 @@ EOT;
 		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
 
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
+			extract(Utils::extract_args($_REQUEST, array('delete' => array())));
 
 			$error = \WP_Clanwars\Maps::delete_map($delete);
 			$referer = add_query_arg('delete', $error, $referer);
@@ -1602,7 +1603,7 @@ EOT;
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'map_table' );
+		$view = new View( 'map_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 
@@ -1639,13 +1640,13 @@ EOT;
 			}
 		}
 
-		extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($data, $defaults)));
+		extract(Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($data, $defaults)));
 
 		$attach = wp_get_attachment_image($screenshot, 'thumbnail');
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'edit_map' );
+		$view = new View( 'edit_map' );
 
 		$context = compact('page_title', 'page_action', 'page_submit', 'game_id', 'id',
 			'attach', 'title', 'screenshot', 'abbr', 'action');
@@ -1667,7 +1668,7 @@ EOT;
 		$referer = remove_query_arg(array('add', 'update'), $_REQUEST['_wp_http_referer']);
 
 		if($_REQUEST['do_action'] == 'delete' || $_REQUEST['do_action2'] == 'delete') {
-			extract(\WP_Clanwars\Utils::extract_args($_REQUEST, array('delete' => array())));
+			extract(Utils::extract_args($_REQUEST, array('delete' => array())));
 
 			$error = \WP_Clanwars\Matches::delete_match($delete);
 			$referer = add_query_arg('delete', $error, $referer);
@@ -1735,7 +1736,7 @@ EOT;
 	function match_editor($page_title, $page_action, $page_submit, $id = 0)
 	{
 		$match = new stdClass();
-		$current_time = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
+		$current_time = Utils::current_time_fixed('timestamp', 0);
 
 		$defaults = array(
 			'game_id' => 0,
@@ -1786,8 +1787,8 @@ EOT;
 		$games = \WP_Clanwars\Games::get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
 		$teams = \WP_Clanwars\Teams::get_team('id=all&orderby=title&order=asc');
 
-		$merged_data = \WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), \WP_Clanwars\Utils::extract_args($match, $defaults));
-		$merged_data['date'] = \WP_Clanwars\Utils::date_array2time_helper($merged_data['date']);
+		$merged_data = Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($match, $defaults));
+		$merged_data['date'] = Utils::date_array2time_helper($merged_data['date']);
 
 		if(isset($_GET['update'])) {
 			$this->add_notice(__('Match is successfully updated.', WP_CLANWARS_TEXTDOMAIN), 'updated');
@@ -1795,7 +1796,7 @@ EOT;
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'edit_match' );
+		$view = new View( 'edit_match' );
 
 		$view->add_helper('html_date_helper', array('\WP_Clanwars\Utils', 'html_date_helper'));
 		$view->add_helper('html_country_select_helper', array('\WP_Clanwars\Utils', 'html_country_select_helper'));
@@ -1864,12 +1865,12 @@ EOT;
 
 				case 'add':
 
-					extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), array(
+					extract(Utils::extract_args(stripslashes_deep($_POST), array(
 						'game_id' => 0,
 						'title' => '',
 						'description' => '',
 						'external_url' => '',
-						'date' => \WP_Clanwars\Utils::current_time_fixed('timestamp', 0),
+						'date' => Utils::current_time_fixed('timestamp', 0),
 						'team1' => 0,
 						'team2' => 0,
 						'scores' => array(),
@@ -1879,7 +1880,7 @@ EOT;
 						'gallery' => array()
 						)));
 
-					$date = \WP_Clanwars\Utils::date_array2time_helper($date);
+					$date = Utils::date_array2time_helper($date);
 
 					if(!empty($new_team_title) && !empty($new_team_country)) {
 						$pickteam = $this->quick_pick_team($new_team_title, $new_team_country);
@@ -1925,13 +1926,13 @@ EOT;
 
 			case 'edit':
 
-					extract(\WP_Clanwars\Utils::extract_args(stripslashes_deep($_POST), array(
+					extract(Utils::extract_args(stripslashes_deep($_POST), array(
 						'id' => 0,
 						'game_id' => 0,
 						'title' => '',
 						'description' => '',
 						'external_url' => '',
-						'date' => \WP_Clanwars\Utils::current_time_fixed('timestamp', 0),
+						'date' => Utils::current_time_fixed('timestamp', 0),
 						'team1' => 0,
 						'team2' => 0,
 						'new_team_title' => '',
@@ -1941,7 +1942,7 @@ EOT;
 						'gallery' => array()
 						)));
 
-					$date = \WP_Clanwars\Utils::date_array2time_helper($date);
+					$date = Utils::date_array2time_helper($date);
 
 					if(!empty($new_team_title) && !empty($new_team_country)) {
 						$pickteam = $this->quick_pick_team($new_team_title, $new_team_country);
@@ -2027,10 +2028,10 @@ EOT;
 		}
 
 		$match_status_text = $this->match_status[$match->match_status];
-		$team1_flag = \WP_Clanwars\Utils::get_country_flag($match->team1_country);
-		$team2_flag = \WP_Clanwars\Utils::get_country_flag($match->team2_country);
+		$team1_flag = Utils::get_country_flag($match->team1_country);
+		$team2_flag = Utils::get_country_flag($match->team2_country);
 
-		$view = new \WP_Clanwars\View( 'match_view' );
+		$view = new View( 'match_view' );
 
 		$context = compact('match', 'rounds', 'match_status_text', 'team1_flag', 'team2_flag');
 
@@ -2044,7 +2045,7 @@ EOT;
 
 		$per_page = abs($per_page);
 		$current_page = max( 1, get_query_var('paged') );
-		$now = \WP_Clanwars\Utils::current_time_fixed('timestamp');
+		$now = Utils::current_time_fixed('timestamp');
 		$current_game = isset($_GET['game']) ? $_GET['game'] : false;
 
 		$games = \WP_Clanwars\Games::get_game('id=all&orderby=title&order=asc');
@@ -2136,9 +2137,9 @@ EOT;
 				$team2_title = '<a href="' . get_permalink($match->post_id) . '" title="' . esc_attr($match->title) . '">' . $team2_title . '</a>';
 
 			$output .= '<div class="opponent-team">' .
-						\WP_Clanwars\Utils::get_country_flag($match->team2_country) . ' ' . $team2_title .
+						Utils::get_country_flag($match->team2_country) . ' ' . $team2_title .
 					'</div>';
-			//$output .= '<div class="home-team">' . \WP_Clanwars\Utils::get_country_flag($match->team1_country, true) . ' ' . esc_html($match->team1_title) . '</div>';
+			//$output .= '<div class="home-team">' . Utils::get_country_flag($match->team1_country, true) . ' ' . esc_html($match->team1_title) . '</div>';
 
 			$output .= '<div class="date">' . esc_html($date)  . '</div>';
 
@@ -2247,10 +2248,10 @@ EOT;
 
 		$this->print_notices();
 
-		$view = new \WP_Clanwars\View( 'match_table' );
+		$view = new View( 'match_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
-		$view->add_helper( 'get_country_flag', array('\WP_Clanwars\Utils', 'get_country_flag') );
+		$view->add_helper( 'get_country_flag', array('Utils', 'get_country_flag') );
 
 		$context = compact('table_columns', 'page_links_text', 'matches', 'match_statuses');
 		$view->render($context);
@@ -2312,7 +2313,7 @@ EOT;
 
 		check_admin_referer('wp-clanwars-deleteacl');
 
-		extract(\WP_Clanwars\Utils::extract_args($_POST, array(
+		extract(Utils::extract_args($_POST, array(
 			'doaction' => '', 'doaction2' => '',
 			'users' => array()
 			)));
@@ -2416,7 +2417,7 @@ EOT;
 			array_push($user_acl_info, $item);
 		}
 
-		$view = new \WP_Clanwars\View( 'settings' );
+		$view = new View( 'settings' );
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 
 		$context = compact('table_columns', 'games', 'acl_keys', 'user_acl_info',
@@ -2438,7 +2439,7 @@ EOT;
 	}
 
 	function on_import_upload() {
-		$view = new \WP_Clanwars\View( 'import_upload' );
+		$view = new View( 'import_upload' );
 		$view->render();
 	}
 
@@ -2469,7 +2470,7 @@ EOT;
 			$api_error_message = $api_response->get_error_message();
 		}
 
-		$view = new \WP_Clanwars\View( 'import_browse' );
+		$view = new View( 'import_browse' );
 		$context = compact( 'api_games', 'api_error_message', 'search_query' );
 		
 		$view->render( $context );
