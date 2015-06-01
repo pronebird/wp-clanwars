@@ -339,15 +339,19 @@ EOT;
 
 	function register_cssjs()
 	{
-		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array( 'jquery', 'select2' ), WP_CLANWARS_VERSION);
 		wp_register_script('wp-cw-gallery', WP_CLANWARS_URL . '/js/gallery.js', array('jquery', 'jquery-ui-sortable', 'media-upload'), WP_CLANWARS_VERSION);
-		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery', 'select2'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-game-browser', WP_CLANWARS_URL . '/js/game-browser.js', array('jquery'), WP_CLANWARS_VERSION);
 
-		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array(), WP_CLANWARS_VERSION);
+		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array( 'select2', 'wp-admin' ), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
 
 		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/jquery.tipsy.js', array('jquery'), '0.1.7');
 		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/tipsy.css', array(), '0.1.7');
+
+		wp_register_script('select2', WP_CLANWARS_URL . '/js/select2/select2.full.min.js', array('jquery'), '4.0.0');
+		wp_register_style('select2', WP_CLANWARS_URL . '/js/select2/select2.min.css', array(), '4.0.0');
 
 		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_VERSION);
 
@@ -841,7 +845,7 @@ EOT;
 
 		extract(Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($data, $defaults)));
 
-		$country_select = Utils::html_country_select_helper('name=country&id=country&show_popular=1&select=' . $country, false);
+		$country_select = Utils::html_country_select_helper('name=country&id=country&show_popular=1&class=select2&select=' . $country, false);
 
 		$view = new View( 'edit_team' );
 		$context = compact('page_title', 'page_action', 'page_submit',
@@ -2510,6 +2514,8 @@ EOT;
 		$view = new View( 'import_browse' );
 		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action' );
 		
+		wp_enqueue_script( 'wp-cw-game-browser' );
+
 		$view->render( $context );
 	}
 

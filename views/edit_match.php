@@ -47,7 +47,7 @@ jQuery(document).ready(function ($) {
 		<tr class="form-field form-required">
 			<th scope="row" valign="top"><label for="game_id"><?php _e('Game', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 			<td>
-				<select id="game_id" name="game_id">
+				<select id="game_id" class="select2" name="game_id">
 					<?php foreach($games as $item) : ?>
 					<option value="<?php esc_attr_e($item->id); ?>"<?php selected($item->id, $game_id); ?>><?php esc_html_e($item->title); ?></option>
 					<?php endforeach; ?>
@@ -94,7 +94,7 @@ jQuery(document).ready(function ($) {
 		<tr class="form-required">
 			<th scope="row" valign="top"><label for=""><?php _e('Date', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 			<td>
-				<?php $html_date_helper('date', $date); ?>
+				<?php $html_date_helper('date', $date, 0, 'select2'); ?>
 			</td>
 		</tr>
 
@@ -104,11 +104,11 @@ jQuery(document).ready(function ($) {
 				<div class="match-results" id="matchsite">
 
 					<div class="teams">
-					<select name="team1" class="team-select">
+					<select name="team1" class="select2 team-select">
 					<?php foreach($teams as $team) : ?>
 						<option value="<?php echo $team->id; ?>"<?php selected(true, $team1 > 0 ? ($team->id == $team1) : $team->home_team, true); ?>><?php esc_html_e($team->title); ?></option>
 					<?php endforeach; ?>
-					</select>&nbsp;<?php _e('vs', WP_CLANWARS_TEXTDOMAIN); ?>&nbsp;<select name="team2" class="team-select">
+					</select>&nbsp;<?php _e('vs', WP_CLANWARS_TEXTDOMAIN); ?>&nbsp;<select name="team2" class="select2 team-select">
 					<?php foreach($teams as $team) : ?>
 						<option value="<?php echo $team->id; ?>"<?php selected(true, $team->id==$team2, true); ?>><?php esc_html_e($team->title); ?></option>
 					<?php endforeach; ?>
@@ -119,7 +119,7 @@ jQuery(document).ready(function ($) {
 						<p><label for="new_team_title"><?php _e('or quickly add new opponent:', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
 						<p class="clearfix">
 						<input name="new_team_title" id="new_team_title" type="text" value="" placeholder="<?php _e('New Team', WP_CLANWARS_TEXTDOMAIN); ?>" maxlength="200" autocomplete="off" aria-required="true" />
-						<?php $html_country_select_helper('name=new_team_country&show_popular=1&id=country'); ?>
+						<?php $html_country_select_helper('name=new_team_country&show_popular=1&id=country&class=select2'); ?>
 						</p>
 					</div>
 					<div id="mapsite"></div>
@@ -142,7 +142,7 @@ jQuery(document).ready(function ($) {
 				<div class="gallery-settings">
 					<div class="gallery-option">
 						<label for="gallery-size"><?php _e('Gallery size:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-						<select name="gallery[size]" id="gallery-size">
+						<select name="gallery[size]" id="gallery-size" class="select2" data-minimum-results-for-search="-1">
 						<?php
 						$sizes = array(
 							'thumbnail' => __('Thumbnail', WP_CLANWARS_TEXTDOMAIN), 
@@ -159,7 +159,7 @@ jQuery(document).ready(function ($) {
 
 					<div class="gallery-option">
 						<label for="gallery-columns"><?php _e('Columns:', WP_CLANWARS_TEXTDOMAIN); ?></label>
-						<select name="gallery[columns]" id="gallery-columns">
+						<select name="gallery[columns]" id="gallery-columns" class="select2" data-minimum-results-for-search="-1" >
 						<?php
 						$columns = isset($gallery['columns']) ? $gallery['columns'] : 3; 
 						for($i = 1; $i < 10; $i++) : ?>
@@ -170,7 +170,7 @@ jQuery(document).ready(function ($) {
 
 					<div class="gallery-option">
 						<label for="gallery-link"><?php _e('Link to: ', WP_CLANWARS_TEXTDOMAIN); ?></label>
-						<select name="gallery[link]" id="gallery-link">
+						<select name="gallery[link]" id="gallery-link" class="select2" data-minimum-results-for-search="-1">
 						<?php 
 						$links = array(
 							'' => __('Attachment page', WP_CLANWARS_TEXTDOMAIN),
