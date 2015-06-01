@@ -1167,6 +1167,25 @@ EOT;
 		return 0;
 	}
 
+	function import_remote_game($zip_url) {
+		$filename = tempnam( get_temp_dir(), 'wp-clanwars-' );
+		$response = wp_remote_get( $zip_url, array(
+			'timeout' => 15, 
+			'stream' => true,
+			'filename' => $filename
+		) );
+
+		if( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$result = $this->import_game( $filename );
+
+		@unlink( $filename );
+
+		return $result;
+	}
+
 	function import_game($zip_file) {
 		global $wp_filesystem;
 		WP_Filesystem();
@@ -2346,7 +2365,7 @@ EOT;
 			if($file['error'] === 0) {
 				$err = $this->import_game( $file['tmp_name'] );
 
-				if(is_wp_error( $err )) {
+				if( is_wp_error( $err ) ) {
 					Flash::error( $err->get_error_message() );
 				}
 				else {
@@ -2355,6 +2374,16 @@ EOT;
 			} 
 			else {
 				Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
+		}
+		else if( isset( $_POST['remote_url'] ) ) {
+			$err = $this->import_remote_game( (string) $_POST['remote_url'] );
+
+			if( is_wp_error( $err ) ) {
+				Flash::error( $err->get_error_message() );
+			}
+			else {
+				Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
 		}
 
@@ -2439,8 +2468,10 @@ EOT;
 	}
 
 	function on_import_upload() {
+		$install_action = 'wp-clanwars-import';
 		$view = new View( 'import_upload' );
-		$view->render();
+		$context = compact( 'install_action' );
+		$view->render( $context );
 	}
 
 	function on_import_browse() {
@@ -2449,6 +2480,7 @@ EOT;
 		$search_query = trim( (string) $query_args['q'] );
 		$installed_games = \WP_Clanwars\Games::get_game('');
 		$active_tab = '';
+		$install_action = 'wp-clanwars-import';
 
 		if( empty($search_query) ) {
 			$api_response = CloudAPI::get_popular();
@@ -2476,7 +2508,7 @@ EOT;
 		}
 
 		$view = new View( 'import_browse' );
-		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab' );
+		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action' );
 		
 		$view->render( $context );
 	}

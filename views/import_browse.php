@@ -38,9 +38,18 @@
 					</div>
 					<div class="wp-clanwars-column-install">
 					<?php if($game->is_installed) : ?>
-						<button type="button" class="button" disabled="disabled">Installed</button>
+						<button type="button" class="button" disabled="disabled"><?php _e( 'Installed', WP_CLANWARS_TEXTDOMAIN ); ?></button>
 					<?php else : ?>
-						<a href="#" class="button"><?php _e('Install Now', WP_CLANWARS_TEXTDOMAIN); ?></a>
+						<form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+						
+						<input type="hidden" name="action" value="<?php esc_attr_e( $install_action ); ?>" />
+						<input type="hidden" name="remote_url" value="<?php esc_attr_e( $game->zipUrl ); ?>" />
+
+						<?php wp_nonce_field( $install_action ); ?>
+
+						<button type="submit" class="button"><?php _e( 'Install Now', WP_CLANWARS_TEXTDOMAIN ); ?></button>
+						
+						</form>
 					<?php endif; ?>
 					</div>
 				</div>
