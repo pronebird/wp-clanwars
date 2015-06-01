@@ -24,7 +24,7 @@
 
 	<?php endif; ?>
 
-	<ul class="wp-clanwars-gamepacks clearfix">
+	<ul class="wp-clanwars-gamepacks clearfix" id="wp-clanwars-gamepacks">
 
 	<?php foreach ( $api_games as $game ) : ?>
 		<li class="wp-clanwars-item">
@@ -38,7 +38,7 @@
 					</div>
 					<div class="wp-clanwars-column-install">
 					<?php if($game->is_installed) : ?>
-						<button type="button" class="button" disabled="disabled"><?php _e( 'Installed', WP_CLANWARS_TEXTDOMAIN ); ?></button>
+						<button type="button" class="button wp-clanwars-install-button" disabled="disabled"><?php _e( 'INSTALLED', WP_CLANWARS_TEXTDOMAIN ); ?></button>
 					<?php else : ?>
 						<form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
 						
@@ -47,7 +47,7 @@
 
 						<?php wp_nonce_field( $install_action ); ?>
 
-						<button type="submit" class="button"><?php _e( 'Install Now', WP_CLANWARS_TEXTDOMAIN ); ?></button>
+						<button type="submit" class="button wp-clanwars-install-button" data-text-toggle="<?php esc_attr_e( __( 'INSTALL NOW', WP_CLANWARS_TEXTDOMAIN ) ); ?>"><?php _e( 'GET', WP_CLANWARS_TEXTDOMAIN ); ?></button>
 						
 						</form>
 					<?php endif; ?>

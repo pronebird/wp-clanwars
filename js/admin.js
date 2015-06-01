@@ -1,14 +1,13 @@
 
 jQuery(document).ready(function ($) {
 	var arr = {
-		'wp-cw-maps' : wpCWAdminL10n.confirmDeleteMap,
-		'wp-cw-games' : wpCWAdminL10n.confirmDeleteGame,
-		'wp-cw-teams' : wpCWAdminL10n.confirmDeleteTeam,
-		'wp-cw-matches' : wpCWAdminL10n.confirmDeleteMatch
+		'wp-cw-maps': wpCWAdminL10n.confirmDeleteMap,
+		'wp-cw-games': wpCWAdminL10n.confirmDeleteGame,
+		'wp-cw-teams': wpCWAdminL10n.confirmDeleteTeam,
+		'wp-cw-matches': wpCWAdminL10n.confirmDeleteMatch
 	};
 
 	for(var i in arr) {
-
 		$('.' + i + ' span.delete a').each(function(){
 			var data = {
 				link : $(this).attr('href'),
@@ -24,8 +23,9 @@ jQuery(document).ready(function ($) {
 				});
 				
 		});
-
 	}
+
+	$('select.select2').select2();
 
 });
 

@@ -42,7 +42,7 @@
 
 				<div class="tablenav">
 					<div class="alignleft actions">
-					<select name="doaction">
+					<select name="do_action">
 						<option value="" selected="selected"><?php _e('Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
 						<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
 					</select>
@@ -112,7 +112,7 @@
 
 				<div class="tablenav">
 					<div class="alignleft actions">
-					<select name="doaction2">
+					<select name="do_action2">
 						<option value="" selected="selected"><?php _e('Actions', WP_CLANWARS_TEXTDOMAIN); ?></option>
 						<option value="delete"><?php _e('Delete', WP_CLANWARS_TEXTDOMAIN); ?></option>
 					</select>

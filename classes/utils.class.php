@@ -52,19 +52,27 @@ class Utils {
 		return $countries;
 	}
 
-	static function html_date_helper( $prefix, $time = 0, $tab_index = 0 )
+	static function html_date_helper( $prefix, $time = 0, $tab_index = 0, $select_class = '' )
 	{
 		global $wp_locale;
 
 		$tab_index_attribute = '';
 		$tab_index = (int)$tab_index;
-		if ($tab_index > 0)
+		if( $tab_index > 0 ) {
 			$tab_index_attribute = " tabindex=\"$tab_index\"";
+		}
 
-		if($time == 0)
+		$select_class_attribute = '';
+		if( !empty($select_class) ) {
+			$select_class_attribute = ' class="' . esc_attr($select_class) . '"';
+		}
+
+		if($time == 0) {
 			$time_adj = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
-		else
+		}
+		else {
 			$time_adj = $time;
+		}
 
 		$jj = date( 'd', $time_adj );
 		$mm = date( 'm', $time_adj );
@@ -72,7 +80,7 @@ class Utils {
 		$mn = date( 'i', $time_adj );
 		$yy = date( 'Y', $time_adj );
 
-		$month = "<select name=\"{$prefix}[mm]\"$tab_index_attribute>\n";
+		$month = "<select name=\"{$prefix}[mm]\"$select_class_attribute$tab_index_attribute>\n";
 		for ( $i = 1; $i < 13; $i = $i +1 ) {
 				$month .= "\t\t\t" . '<option value="' . zeroise($i, 2) . '"';
 				if ( $i == $mm )

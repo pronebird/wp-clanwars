@@ -39,7 +39,7 @@
                             </div>\n\
                             <div class="leftcol">\n\
                                 <img src="' + wpCWL10n.plugin_url + '/images/no-map.jpg" class="screenshot" style="width: 150px;" />\n\
-                                <select name="scores[' + this._id + '][map_id]" class="map-select" disabled="disabled"></select>\n\
+                                <select name="scores[' + this._id + '][map_id]" class="select2 map-select" data-width="style" disabled="disabled"></select>\n\
                             </div>\n\
                             <div class="add-round">\n\
                                 <button class="button button-secondary"><span class="dashicons dashicons-plus"></span> ' + wpCWL10n.addRound + '</button>\n\
@@ -57,6 +57,8 @@
                     evt.preventDefault();
                     $(this).blur();
                 });
+
+            this._mapElement.find('.select2').select2();
             
             this._mapsContainer.append(this._mapElement);
 
