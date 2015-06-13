@@ -12,7 +12,7 @@
 		<p><?php _e( 'Choose one of the options:', WP_CLANWARS_TEXTDOMAIN ); ?></p>
 
 		<fieldset>
-			<p><label for="upload"><input type="radio" name="import" id="upload" value="upload" /> <?php _e('Upload previously saved game (ZIP file)', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
+			<p><label for="upload"><input type="radio" name="import" id="upload" value="upload" checked="checked" /> <?php _e('Upload previously saved game (ZIP file)', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
 			<p><input type="file" name="userfile" /></p>
 		</fieldset>
 
