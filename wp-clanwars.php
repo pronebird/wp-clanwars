@@ -1184,6 +1184,10 @@ EOT;
 			return $response;
 		}
 
+		if( $response['response']['code'] !== 200 ) {
+			return new WP_Error( 'import-error', __('File is not found on server.', WP_CLANWARS_TEXTDOMAIN) );
+		}
+
 		$result = $this->import_game( $filename );
 
 		@unlink( $filename );
@@ -2383,20 +2387,13 @@ EOT;
 		}
 		else if( isset( $_POST['remote_id'] ) ) {
 			$remote_id = (string) $_POST['remote_id'];
-			$remote_game = CloudAPI::get_game( $remote_id );
+			$err = $this->import_remote_game( CloudAPI::get_download_url( $remote_id ) );
 
-			if( !is_wp_error($remote_game) ) {
-				$err = $this->import_remote_game( CloudAPI::get_download_url( $remote_id ) );
-
-				if( is_wp_error( $err ) ) {
-					Flash::error( $err->get_error_message() );
-				}
-				else {
-					Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
-				}
+			if( is_wp_error( $err ) ) {
+				Flash::error( $err->get_error_message() );
 			}
 			else {
-				Flash::error( $remote_game->get_error_message() );
+				Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
 		}
 
