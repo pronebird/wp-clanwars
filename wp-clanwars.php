@@ -479,7 +479,7 @@ EOT;
 
 					if($file['error'] == 0) {
 						$result = $this->import_game($file['tmp_name']);
-						$redirect_url = add_query_arg('import', ($result === true ? 'success' : 'error'), $redirect_url);
+						$redirect_url = add_query_arg('import', ($result !== false ? 'success' : 'error'), $redirect_url);
 					} else {
 						$redirect_url = add_query_arg('upload', 'error', $redirect_url);
 					}
@@ -1262,7 +1262,7 @@ EOT;
 
 		$clean_unzip_dir();
 
-		return true;
+		return $game_id;
 	}
 
 	function on_add_game()
@@ -2381,14 +2381,22 @@ EOT;
 				Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
 		}
-		else if( isset( $_POST['remote_url'] ) ) {
-			$err = $this->import_remote_game( (string) $_POST['remote_url'] );
+		else if( isset( $_POST['remote_id'] ) ) {
+			$remote_id = (string) $_POST['remote_id'];
+			$remote_game = CloudAPI::get_game( $remote_id );
 
-			if( is_wp_error( $err ) ) {
-				Flash::error( $err->get_error_message() );
+			if( !is_wp_error($remote_game) ) {
+				$err = $this->import_remote_game( $remote_game->zipUrl );
+
+				if( is_wp_error( $err ) ) {
+					Flash::error( $err->get_error_message() );
+				}
+				else {
+					Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
+				}
 			}
 			else {
-				Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
+				Flash::error( $remote_game->get_error_message() );
 			}
 		}
 

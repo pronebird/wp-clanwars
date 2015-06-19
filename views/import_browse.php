@@ -29,7 +29,7 @@
 						<form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
 						
 						<input type="hidden" name="action" value="<?php esc_attr_e( $install_action ); ?>" />
-						<input type="hidden" name="remote_url" value="<?php esc_attr_e( $game->zipUrl ); ?>" />
+						<input type="hidden" name="remote_id" value="<?php esc_attr_e( $game->_id ); ?>" />
 
 						<?php wp_nonce_field( $install_action ); ?>
 
