@@ -42,7 +42,7 @@
 				<ul class="maps">
 				<?php foreach($game->maps as $map) : ?>
 					<li>
-						<img class="screenshot" src="<?php esc_attr_e($map->imageUrl); ?>" alt="<?php esc_attr_e($map->title); ?>" />
+						<img class="screenshot" src="<?php esc_attr_e($map->imageUrl); ?>" alt="<?php esc_attr_e($map->title); ?>" draggable="false" />
 						<div class="title"><?php esc_html_e($map->title); ?></div>
 					</li>
 				<?php endforeach; ?>
