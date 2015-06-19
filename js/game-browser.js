@@ -46,5 +46,5 @@ $gps.on('click', '.wp-clanwars-install-button:not(:disabled)',
             cancelTimer();
         }
     });
-    
+
 });
