@@ -179,6 +179,16 @@ class Utils {
 		return $date;
 	}
 
+	static function gravatar_image_url( $email, $size = false ) {
+		$url = 'http://www.gravatar.com/avatar/' . md5( strtolower($email) ) . '.jpg';
+
+		if($size !== false) {
+			$url .= '?s=' . (int)$size;
+		}
+
+		return $url;
+	}
+
 };
 
 
