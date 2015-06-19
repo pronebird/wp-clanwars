@@ -9,6 +9,10 @@ class API {
 
     protected static $api_url = 'http://localhost:3000/v1/';
 
+    static function get_download_url($id) {
+        return self::$api_url . 'games/download/' . $id;
+    }
+
     static function get_game($id) {
         $response = self::remote_get( self::$api_url . 'games/' . $id );
 

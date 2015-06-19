@@ -1725,11 +1725,11 @@ EOT;
 		}
 
 		foreach($objects as $p) {
-			if(!empty($abbr) && preg_match('#' . preg_quote($abbr, '#') . '#i', $p->abbr)) {
+			if(!empty($abbr) && $abbr === $p->abbr) {
 				return $p;
 			}
 
-			if(!empty($title) && preg_match('#' . preg_quote($title, '#') . '#i', $p->title)) {
+			if(!empty($title) && $title === $p->title) {
 				return $p;
 			}
 		}
@@ -2386,7 +2386,7 @@ EOT;
 			$remote_game = CloudAPI::get_game( $remote_id );
 
 			if( !is_wp_error($remote_game) ) {
-				$err = $this->import_remote_game( $remote_game->zipUrl );
+				$err = $this->import_remote_game( CloudAPI::get_download_url( $remote_game->_id ) );
 
 				if( is_wp_error( $err ) ) {
 					Flash::error( $err->get_error_message() );
