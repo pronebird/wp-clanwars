@@ -36,6 +36,7 @@ class Games {
 
 CREATE TABLE `$table` (
 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`remote_id` varchar(64) DEFAULT NULL,
 `title` varchar(200) NOT NULL,
 `abbr` varchar(20) DEFAULT NULL,
 `icon` bigint(20) unsigned DEFAULT NULL,
