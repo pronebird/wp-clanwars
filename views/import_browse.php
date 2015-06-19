@@ -1,21 +1,7 @@
 <div class="wrap wp-clanwars-import-page">
 	<h2><?php _e('Import games', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-import&tab=upload' ); ?>" class="upload add-new-h2"><?php _e('Upload Game', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
 
-	<div class="wp-filter">
-		<ul class="filter-links">
-			<li>
-			<?php if( $active_tab == 'search' ) : ?>
-				<a href="<?php esc_attr_e( $_SERVER['REQUEST_URI'] ); ?>" class="current"><?php _e( 'Search Results', WP_CLANWARS_TEXTDOMAIN ); ?></a>
-			<?php endif; ?>
-
-				<a href="<?php echo admin_url('admin.php?page=wp-clanwars-import'); ?>"<?php if($active_tab == 'popular') : ?> class="current"<?php endif; ?>><?php _e( 'Popular', WP_CLANWARS_TEXTDOMAIN ); ?></a>
-			</li>
-		</ul>
-		<form class="search-form" method="get" action="<?php echo admin_url( 'admin.php' ); ?>">
-			<input type="hidden" name="page" value="wp-clanwars-import" />
-			<input type="search" name="q" value="<?php esc_attr_e( $search_query ); ?>" class="wp-filter-search" placeholder="<?php esc_attr_e(__('Search Games', WP_CLANWARS_TEXTDOMAIN)); ?>" />
-		</form>
-	</div>
+	<?php $partial('partials/import_nav', compact('active_tab', 'search_query')); ?>
 
 	<?php if ( isset( $api_error_message ) ) : ?>
 	
@@ -79,7 +65,7 @@
 				</div>
 				<div class="wp-clanwars-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), $game->downloads ); ?></div>
 				<div class="wp-clanwars-column-author">
-					<strong><?php _e('Author:', WP_CLANWARS_TEXTDOMAIN); ?></strong> <?php esc_html_e($game->author); ?>
+					<img src="<?php esc_attr_e( $game->gravatar_url ); ?>" alt="" class="gravatar" /> <?php esc_html_e($game->author); ?>
 				</div>
 			</div>
 		</li>
