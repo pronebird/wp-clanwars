@@ -374,6 +374,13 @@ html[xmlns] .clearfix {
     padding: 6px 0;
 }
 
+.wp-clanwars-gamepacks .wp-clanwars-item .wp-clanwars-column-author .gravatar {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
 .wp-clanwars-gamepacks .wp-clanwars-item .wp-clanwars-column-rating,
 .wp-clanwars-gamepacks .wp-clanwars-item .wp-clanwars-column-published,
 .wp-clanwars-gamepacks .wp-clanwars-item .wp-clanwars-column-downloaded,
@@ -468,13 +475,25 @@ html[xmlns] .clearfix {
     position: static;
 }
 
-.wp-clanwars-import-page .wp-clanwars-upload-form {
+.wp-clanwars-import-page .wp-clanwars-upload-form,
+.wp-clanwars-import-page .wp-clanwars-publish-form {
     background: #fafafa;
     border: 1px solid #e5e5e5;
     padding: 30px;
     margin: 30px auto;
     max-width: 380px;
     overflow: hidden;
+}
+
+.wp-clanwars-import-page .wp-clanwars-publish-form .form-table .regular-text {
+    width: 100%;
+    display: block;
+}
+
+.wp-clanwars-import-page .wp-clanwars-publish-form .submit {
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .wp-clanwars-import-page .wp-clanwars-api-error,

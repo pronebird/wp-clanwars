@@ -197,6 +197,7 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-acl', array($this, 'on_admin_post_acl'));
 		add_action('admin_post_wp-clanwars-deleteacl', array($this, 'on_admin_post_deleteacl'));
 		add_action('admin_post_wp-clanwars-import', array($this, 'on_admin_post_import'));
+		add_action('admin_post_wp-clanwars-publish', array($this, 'on_admin_post_publish'));
 
 		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setup_team'));
 		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setup_games'));
@@ -2394,6 +2395,43 @@ EOT;
 		wp_redirect( $_POST['_wp_http_referer'] );
 	}
 
+	function on_admin_post_publish() {
+		if( !current_user_can('manage_options') ) {
+			wp_die(__('Cheatin&#8217; uh?'));
+		}
+
+		check_admin_referer('wp-clanwars-publish');
+
+		if( isset( $_FILES['userfile'] ) ) {
+			$file = $_FILES['userfile'];
+
+			if($file['error'] === 0) {
+
+				extract( Utils::extract_args( stripslashes_deep($_POST), array( 'author' => '', 'email' => '', 'terms_confirm' => false ) ), EXTR_SKIP );
+
+				// agree to licensing terms?
+				if($terms_confirm !== false) {
+					$err = CloudAPI::publish( $author, $email, $file['tmp_name'] );
+
+					if( is_wp_error( $err ) ) {
+						Flash::error( $err->get_error_message() );
+					}
+					else {
+						Flash::success( __( 'The game has been published and will be publicly available after moderation. You will be notified via e-mail.', WP_CLANWARS_TEXTDOMAIN ) );
+					}
+				}
+				else {
+					Flash::error( __( 'You must agree to the licensing terms.', WP_CLANWARS_TEXTDOMAIN ) );
+				}
+			} 
+			else {
+				Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
+		}
+
+		wp_redirect( $_POST['_wp_http_referer'] );
+	}
+
 	// Settings page hook
 	function on_settings() {
 		$table_columns = array(
@@ -2466,9 +2504,21 @@ EOT;
 		if($tab === 'upload') {
 			$this->on_import_upload();
 		}
+		else if($tab === 'publish') {
+			$this->on_import_publish();
+		}
 		else {
 			$this->on_import_browse();
 		}
+	}
+
+	function on_import_publish() {
+		$publish_action = 'wp-clanwars-publish';
+		$active_tab = 'publish';
+
+		$view = new View( 'import_publish' );
+		$context = compact( 'publish_action', 'active_tab' );
+		$view->render( $context );
 	}
 
 	function on_import_upload() {
@@ -2509,6 +2559,11 @@ EOT;
 		}
 		else {
 			$api_error_message = $api_response->get_error_message();
+		}
+
+		// populate dataset with gravatar images
+		foreach($api_games as $game) {
+			$game->gravatar_url = Utils::gravatar_image_url( $game->email, 64 );
 		}
 
 		$view = new View( 'import_browse' );
