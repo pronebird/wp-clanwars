@@ -2386,7 +2386,7 @@ EOT;
 			$remote_game = CloudAPI::get_game( $remote_id );
 
 			if( !is_wp_error($remote_game) ) {
-				$err = $this->import_remote_game( CloudAPI::get_download_url( $remote_game->_id ) );
+				$err = $this->import_remote_game( CloudAPI::get_download_url( $remote_id ) );
 
 				if( is_wp_error( $err ) ) {
 					Flash::error( $err->get_error_message() );
