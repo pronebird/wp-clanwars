@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd "$(dirname "$0")"
+$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 
 cp -R tools ../../tools
 cp pot.sh ../../
