@@ -65,7 +65,6 @@ class WP_ClanWars {
 	var $match_status = array();
 	var $acl_keys = array();
 	var $page_hooks = array();
-	var $page_notices = array();
 
 	const ErrorOK = 0;
 	const ErrorDatabase = -199;
@@ -412,21 +411,6 @@ EOT;
 	function onboarding_setup_games_page($page_submit) {
 		$view = new View( 'setup_games' );
 		$context = compact('page_submit');
-		$installed_games = \WP_Clanwars\Games::get_game('');
-
-		if(isset($_GET['upload'])) {
-			$this->add_notice(__('An upload error occurred while import.', WP_CLANWARS_TEXTDOMAIN), 'error');
-		}
-
-		if(isset($_GET['import'])) {
-			$this->add_notice($_GET['import'] === 'success' ? __('File(s) successfully imported.', WP_CLANWARS_TEXTDOMAIN) : __('An error occurred while import.', WP_CLANWARS_TEXTDOMAIN), $_GET['import'] === 'success' ? 'updated' : 'error');
-		}
-
-		if(isset($_GET['create'])) {
-			$this->add_notice($_GET['create'] === 'success' ? __('Done.', WP_CLANWARS_TEXTDOMAIN) : __('An unknown error occurred while creating a new game.', WP_CLANWARS_TEXTDOMAIN), $_GET['create'] === 'success' ? 'updated' : 'error');
-		}
-
-		$this->print_notices();
 
 		$view->render( $context );
 	}
@@ -464,44 +448,45 @@ EOT;
 
 		extract(Utils::extract_args($_POST, array(
 				'import' => '',
-				'items' => array(),
 				'new_game_name' => ''
 			)
 		));
 
-		$redirect_url = remove_query_arg(array('upload', 'import'), $_POST['_wp_http_referer']);
+		$redirect_url = $_POST['_wp_http_referer'];
 
-		switch($import) {
-			case 'upload':
+		if( $import === 'upload') {
+			if(isset($_FILES['userfile'])) {
+				$file = $_FILES['userfile'];
 
-				if(isset($_FILES['userfile'])) {
-					$file = $_FILES['userfile'];
+				if($file['error'] === 0) {
+					$err = $this->import_game( $file['tmp_name'] );
 
-					if($file['error'] == 0) {
-						$result = $this->import_game($file['tmp_name']);
-						$redirect_url = add_query_arg('import', ($result !== false ? 'success' : 'error'), $redirect_url);
-					} else {
-						$redirect_url = add_query_arg('upload', 'error', $redirect_url);
+					if( is_wp_error( $err ) ) {
+						Flash::error( $err->get_error_message() );
 					}
+					else {
+						Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
+					}
+				} 
+				else {
+					Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
 				}
+			}
+		}
+		else if( $import === 'create' ) {
+			$new_game_id = \WP_Clanwars\Games::add_game(array(
+				'title' => $new_game_name,
+				'abbr' => strtoupper($new_game_name)
+			));
 
-				break;
+			if($new_game_id === false) {
+				Flash::error( __( 'Failed to create a game.', WP_CLANWARS_TEXTDOMAIN ) );
+			} else {
+				Flash::success( __( 'Created a game.', WP_CLANWARS_TEXTDOMAIN ) );
 
-			case 'create':
-
-				$new_game_id = \WP_Clanwars\Games::add_game(array(
-					'title' => $new_game_name,
-					'abbr' => strtoupper($new_game_name)
-				));
-
-				if(empty($new_game_id)) {
-					$redirect_url = add_query_arg('create', 'error', $redirect_url);
-				} else {
-					// take user to maps management
-					$redirect_url = admin_url('admin.php?page=wp-clanwars-games&act=maps&game_id=' . $new_game_id);
-				}
-
-				break;
+				// take user to maps management
+				$redirect_url = admin_url('admin.php?page=wp-clanwars-games&act=maps&game_id=' . $new_game_id);
+			}
 		}
 
 		wp_redirect( $redirect_url );
@@ -670,25 +655,6 @@ EOT;
 		?>
 			<th scope="col" <?php echo $id ? "id=\"$column_key\"" : ""; echo $class; ?>><?php echo $column_display_name; ?></th>
 		<?php }
-	}
-
-	function add_notice($message, $type = 'updated') {
-
-		if(empty($type)) $type = 'updated';
-
-		if(!isset($this->page_notices[$type])) {
-			$this->page_notices[$type] = array();
-		}
-
-		$this->page_notices[$type][] = $message;
-	}
-
-	function print_notices() {
-		foreach($this->page_notices as $type => $e) {
-			foreach($e as $msg) {
-				$this->html_notice_helper($msg, $type, true);
-			}
-		}
 	}
 
 	/**

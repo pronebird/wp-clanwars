@@ -11,6 +11,6 @@
     </ul>
     <form class="search-form" method="get" action="<?php echo admin_url( 'admin.php' ); ?>">
         <input type="hidden" name="page" value="wp-clanwars-import" />
-        <input type="search" name="q" value="<?php esc_attr_e( $search_query ); ?>" class="wp-filter-search" placeholder="<?php esc_attr_e(__('Search Games', WP_CLANWARS_TEXTDOMAIN)); ?>" />
+        <input type="search" name="q" value="<?php if(isset($search_query)) esc_attr_e($search_query); ?>" class="wp-filter-search" placeholder="<?php esc_attr_e(__('Search Games', WP_CLANWARS_TEXTDOMAIN)); ?>" />
     </form>
 </div>
