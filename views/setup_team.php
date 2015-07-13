@@ -18,7 +18,7 @@
 
 		<p><?php _e( 'Where is it from?', WP_CLANWARS_TEXTDOMAIN ); ?></p>
 		<p>
-			<?php $html_country_select_helper('name=country'); ?>
+			<?php $html_country_select_helper('name=country&class=select2'); ?>
 		</p>
 
 		<p class="submit">
