@@ -115,7 +115,7 @@ KEY `abbr` (`abbr`)
 		$defaults = array('title' => '', 'abbr' => '', 'icon' => 0);
 		$data = \WP_Clanwars\Utils::extract_args($options, $defaults);
 
-		if($wpdb->insert(self::table(), $data, array('%s', '%s', '%d'))) {
+		if( $wpdb->insert( self::table(), $data, array('%s', '%s', '%d') ) ) {
 			return $wpdb->insert_id;
 		}
 

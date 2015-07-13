@@ -3,7 +3,7 @@
 	<h2><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
 	<h3><?php _e( 'Install games', WP_CLANWARS_TEXTDOMAIN ); ?></h3>
 
-	<form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
+	<form action="<?php echo admin_url('admin-post.php'); ?>" method="post" enctype="multipart/form-data">
 
 		<input type="hidden" name="action" value="wp-clanwars-setupgames" />
 

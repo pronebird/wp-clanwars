@@ -331,6 +331,7 @@ html[xmlns] .clearfix {
 .wp-clanwars-gamepacks .wp-clanwars-item .maps {
     display: block;
     overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
     white-space: nowrap;
     margin: 0;
     padding: 0;
