@@ -32,6 +32,8 @@ global $wpClanWars;
 define('WP_CLANWARS_VERSION', '1.7.1');
 
 define('WP_CLANWARS_TEXTDOMAIN', 'wp-clanwars');
+define('WP_CLANWARS_COUNTRIES_TEXTDOMAIN', 'wp-clanwars-countries');
+
 define('WP_CLANWARS_CATEGORY', '_wp_clanwars_category');
 define('WP_CLANWARS_DEFAULTCSS', '_wp_clanwars_defaultcss');
 define('WP_CLANWARS_ACL', '_wp_clanwars_acl');
