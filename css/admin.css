@@ -298,9 +298,9 @@ html[xmlns] .clearfix {
 }
 
 .wp-cw-onboarding .left-column {
-    width: 30%;
+    width: 25%;
     float: left;
-    padding-right: 5%;
+    margin-right: 5%;
 }
 
 .wp-cw-onboarding .right-column {
