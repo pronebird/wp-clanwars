@@ -31,13 +31,13 @@ class API {
         return self::get_response_payload($response);
     }
 
-    static function publish($author, $email, $zip_file) {
+    static function publish($zip_file) {
         if(!function_exists('curl_init')) {
             return new WP_Error( 'api-error', 0, 'Unable to locate cURL extension.' );
         }
 
         $zip_file = realpath($zip_file);
-        $data = compact( 'author', 'email' );
+        $data = array();
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, self::$api_url . 'games');
@@ -74,6 +74,12 @@ class API {
             $err = curl_error($ch);
             $code = curl_errno($ch);
             return new WP_Error( 'api-error-curl', $code, $err );
+        }
+
+        $info = curl_getinfo($ch);
+        $http_code = (int) $info['http_code'];
+        if( $http_code === 401 ) {
+            return new \WP_Error( 'api-error-authorization', __( 'Authorization required.', WP_CLANWARS_TEXTDOMAIN ) );
         }
 
         return self::get_response_payload($response);

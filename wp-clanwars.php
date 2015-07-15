@@ -411,8 +411,42 @@ EOT;
 	}
 
 	function onboarding_setup_games_page($page_submit) {
+		$query_args = Utils::extract_args( $_GET, array( 'q' => '' ) );
+
+		$search_query = trim( (string) $query_args['q'] );
+		$installed_games = \WP_Clanwars\Games::get_game('');
+		$active_tab = '';
+		$install_action = 'wp-clanwars-import';
+
+		if( empty($search_query) ) {
+			$api_response = CloudAPI::get_popular();
+
+			$active_tab = 'popular';
+		}
+		else {
+			$api_response = CloudAPI::search( $search_query );
+
+			$active_tab = 'search';
+		}
+
+		$api_games = array();
+
+		if( !is_wp_error( $api_response ) ) {
+			foreach($api_response as $i => $game) {
+				$is_installed = $this->is_game_installed($game->title, $game->tag, $installed_games);
+				$game->is_installed = ($is_installed !== false);
+			}
+
+			$api_games = $api_response;
+		}
+		else {
+			$api_error_message = $api_response->get_error_message();
+		}
+
 		$view = new View( 'setup_games' );
-		$context = compact('page_submit');
+		$context = compact( 'page_submit', 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action' );
+		
+		wp_enqueue_script( 'wp-cw-game-browser' );
 
 		$view->render( $context );
 	}
@@ -1152,7 +1186,7 @@ EOT;
 			return $response;
 		}
 
-		if( $response['response']['code'] !== 200 ) {
+		if( wp_remote_retrieve_response_code($response) !== 200 ) {
 			return new WP_Error( 'import-error', __('File is not found on server.', WP_CLANWARS_TEXTDOMAIN) );
 		}
 
@@ -2379,12 +2413,9 @@ EOT;
 			$file = $_FILES['userfile'];
 
 			if($file['error'] === 0) {
-
-				extract( Utils::extract_args( stripslashes_deep($_POST), array( 'author' => '', 'email' => '', 'terms_confirm' => false ) ), EXTR_SKIP );
-
 				// agree to licensing terms?
-				if($terms_confirm !== false) {
-					$err = CloudAPI::publish( $author, $email, $file['tmp_name'] );
+				if( isset( $_POST['terms_confirm'] ) ) {
+					$err = CloudAPI::publish( $file['tmp_name'] );
 
 					if( is_wp_error( $err ) ) {
 						Flash::error( $err->get_error_message() );
@@ -2532,11 +2563,6 @@ EOT;
 		}
 		else {
 			$api_error_message = $api_response->get_error_message();
-		}
-
-		// populate dataset with gravatar images
-		foreach($api_games as $game) {
-			$game->gravatar_url = Utils::gravatar_image_url( $game->email, 64 );
 		}
 
 		$view = new View( 'import_browse' );
