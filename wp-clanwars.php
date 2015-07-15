@@ -510,18 +510,26 @@ EOT;
 			}
 		}
 		else if( $import === 'create' ) {
-			$new_game_id = \WP_Clanwars\Games::add_game(array(
-				'title' => $new_game_name,
-				'abbr' => strtoupper($new_game_name)
-			));
 
-			if($new_game_id === false) {
-				Flash::error( __( 'Failed to create a game.', WP_CLANWARS_TEXTDOMAIN ) );
-			} else {
-				Flash::success( __( 'Created a game.', WP_CLANWARS_TEXTDOMAIN ) );
+			$new_game_name = trim($new_game_name);
 
-				// take user to maps management
-				$redirect_url = admin_url('admin.php?page=wp-clanwars-games&act=maps&game_id=' . $new_game_id);
+			if( !empty ( $new_game_name ) ) {
+				$new_game_id = \WP_Clanwars\Games::add_game(array(
+					'title' => $new_game_name,
+					'abbr' => strtoupper($new_game_name)
+				));
+
+				if($new_game_id === false) {
+					Flash::error( __( 'Failed to create a game.', WP_CLANWARS_TEXTDOMAIN ) );
+				} else {
+					Flash::success( __( 'Created a game.', WP_CLANWARS_TEXTDOMAIN ) );
+
+					// take user to maps management
+					$redirect_url = admin_url('admin.php?page=wp-clanwars-games&act=maps&game_id=' . $new_game_id);
+				}
+			}
+			else {
+				Flash::error( __( 'Please fill in the game name.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
 		}
 
