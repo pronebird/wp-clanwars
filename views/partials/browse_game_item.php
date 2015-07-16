@@ -35,11 +35,19 @@
 <div class="wp-clanwars-item-bottom">
     <div class="wp-clanwars-column-rating">
         <div class="star-rating">
-            <div class="star star-empty"></div>
-            <div class="star star-empty"></div>
-            <div class="star star-empty"></div>
-            <div class="star star-empty"></div>
-            <div class="star star-empty"></div>
+            <?php
+            for($i = 1; $i <= 5; $i++) :
+                $star_class = 'empty';
+                
+                if( $game->rating >= $i ) {
+                    $star_class = 'full';
+                }
+                else if( ceil($game->rating) >= $i ) {
+                    $star_class = 'half';
+                }
+            ?>
+            <div class="star star-<?php echo $star_class; ?>"></div>
+            <?php endfor; ?>
         </div>
         <span class="num-ratings"><?php echo sprintf( _x('(%d)', 'Number of ratings', WP_CLANWARS_TEXTDOMAIN), $game->votes ); ?></span>
     </div>
