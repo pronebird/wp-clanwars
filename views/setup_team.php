@@ -1,4 +1,4 @@
-<div class="wrap wp-cw-onboarding setup-team">
+<div class="wrap wp-clanwars-onboarding-page setup-team">
 
 	<h2><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
 	<h3><?php _e( 'Setup your team', WP_CLANWARS_TEXTDOMAIN ); ?></h3>

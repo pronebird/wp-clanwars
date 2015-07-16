@@ -1,4 +1,4 @@
-<div class="wrap wp-cw-onboarding setup-games">
+<div class="wrap wp-clanwars-onboarding-page setup-games">
 
     <h2><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
 
@@ -31,7 +31,7 @@
 
         </form>
 
-    </div>
+    </div><!-- .left-column -->
 
     <div class="right-column">
         
@@ -56,6 +56,6 @@
 
         </ul>
 
-    </div>
+    </div><!-- .right-column -->
 
 </div><!-- .wrap -->
