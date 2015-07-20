@@ -6,6 +6,8 @@
     <p class="wp-clanwars-install-help"><?php _e('You can share created games with others.', WP_CLANWARS_TEXTDOMAIN); ?></p>
     <p class="wp-clanwars-install-help small"><?php _e('Upload may take some time. Please do not refresh browser when in progress.', WP_CLANWARS_TEXTDOMAIN); ?></p>
 
+<?php if($logged_into_cloud) : ?>
+
     <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" enctype="multipart/form-data" class="wp-clanwars-publish-form">
 
         <input type="hidden" name="action" value="<?php esc_attr_e( $publish_action ); ?>" />
@@ -30,5 +32,17 @@
         </p>
 
     </form>
+
+<?php else : ?>
+
+    <div class="wp-clanwars-signin-form">
+    <p><strong><?php _e( 'You have to log in first. Choose one of available log in methods:' ); ?></strong></p>
+    <ul class="wp-clanwars-choose-signin-method">
+        <li><a href="javascript:window.open('<?php esc_attr_e($steam_login_url); ?>', 'login', 'width=500,height=300')"><img src="../wp-content/plugins/wp-clanwars/images/steam-login.png" alt=""></a></li>
+        <li><a href="javascript:window.open('<?php esc_attr_e($facebook_login_url); ?>', 'login', 'width=500,height=300')"><img src="../wp-content/plugins/wp-clanwars/images/facebook-login.png" alt=""></a></li>
+    </ul>
+    </div>
+
+<?php endif;?>
 
 </div>
