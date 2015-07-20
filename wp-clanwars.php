@@ -417,6 +417,11 @@ EOT;
 
 		$search_query = trim( (string) $query_args['q'] );
 		$installed_games = \WP_Clanwars\Games::get_game('');
+		$store_ids = array_filter(
+			array_map( function ($game) {
+				return $game->store_id;
+			}, $installed_games)
+		);
 		$active_tab = '';
 		$install_action = 'wp-clanwars-import';
 
@@ -434,11 +439,9 @@ EOT;
 		$api_games = array();
 
 		if( !is_wp_error( $api_response ) ) {
-			foreach($api_response as $i => $game) {
-				$is_installed = $this->is_game_installed($game->title, $game->tag, $installed_games);
-				$game->is_installed = ($is_installed !== false);
-			}
-
+			array_walk($api_response, function (&$game) use ($store_ids) {
+				$game->is_installed = in_array($game->_id, $store_ids);
+			});
 			$api_games = $api_response;
 		}
 		else {
@@ -1751,29 +1754,6 @@ EOT;
 		wp_redirect( $_REQUEST['_wp_http_referer'] );
 	}
 
-	// Match game by title and or abbreviation
-	// @param $title a game title
-	// @param $abbr a game abbreviation (optional)
-	// @param $objects a list of all available games (optional)
-	// @return bool a game object matching $title or $abbr, otherwise false
-	function is_game_installed($title, $abbr = '', $objects = false) {
-		if(!is_array($objects)) {
-			$objects = \WP_Clanwars\Games::get_game('');
-		}
-
-		foreach($objects as $p) {
-			if(!empty($abbr) && $abbr === $p->abbr) {
-				return $p;
-			}
-
-			if(!empty($title) && $title === $p->title) {
-				return $p;
-			}
-		}
-
-		return false;
-	}
-
 	function on_add_match()
 	{
 		return $this->match_editor(__('Add Match', WP_CLANWARS_TEXTDOMAIN), 'wp-clanwars-matches', __('Add Match', WP_CLANWARS_TEXTDOMAIN));
@@ -2568,6 +2548,11 @@ EOT;
 
 		$search_query = trim( (string) $query_args['q'] );
 		$installed_games = \WP_Clanwars\Games::get_game('');
+		$store_ids = array_filter(
+				array_map( function ($game) {
+					return $game->store_id;
+				}, $installed_games)
+			);
 		$active_tab = '';
 		$install_action = 'wp-clanwars-import';
 
@@ -2585,11 +2570,9 @@ EOT;
 		$api_games = array();
 
 		if( !is_wp_error( $api_response ) ) {
-			foreach($api_response as $i => $game) {
-				$is_installed = $this->is_game_installed($game->title, $game->tag, $installed_games);
-				$game->is_installed = ($is_installed !== false);
-			}
-
+			array_walk($api_response, function (&$game) use ($store_ids) {
+				$game->is_installed = in_array($game->_id, $store_ids);
+			});
 			$api_games = $api_response;
 		}
 		else {
