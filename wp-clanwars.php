@@ -1211,7 +1211,7 @@ EOT;
 
 		$upload_dir = wp_upload_dir();
 		$export_dir = trailingslashit($upload_dir['basedir']) . WP_CLANWARS_EXPORTDIR;
-		$unzip_dir = sprintf('%s/unzip-' . md5(microtime(true)), $export_dir);
+		$unzip_dir = $export_dir . '/unzip-' . md5(microtime(true));
 
 		$clean_unzip_dir = function () use ($wp_filesystem, $unzip_dir) {
 			$wp_filesystem->rmdir($unzip_dir, true);
@@ -1219,6 +1219,18 @@ EOT;
 
 		$wp_filesystem->mkdir($export_dir);
 		$wp_filesystem->mkdir($unzip_dir);
+
+		// make sure wp-content/uploads/wp-clanwars is not availabe from outside
+		$stub_files = array(
+			'.htaccess' => 'deny from all',
+			'index.php' => "<?php\n// Silence is golden.\n"
+		);
+		foreach($stub_files as $file => $content) {
+			$path = $export_dir . '/' . $file;
+			if( !file_exists($path) ) {
+				@file_put_contents($path, $content);
+			}
+		}
 
 		$result = unzip_file($zip_file, $unzip_dir);
 
