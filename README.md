@@ -37,7 +37,7 @@ I published plugin on WordPress.org, so you can install it thru admin now.
 
 https://wordpress.org/plugins/wp-clanwars/
 
-Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
+__This plugin requires at least PHP 5.3__
 
 ### Features
 
