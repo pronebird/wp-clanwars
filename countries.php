@@ -14,7 +14,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if(!function_exists('add_action')) die('Cheatin’ uh?');
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 $countries = array(
 	'af' => __('Afghanistan', WP_CLANWARS_COUNTRIES_TEXTDOMAIN),

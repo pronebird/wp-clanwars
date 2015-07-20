@@ -1,6 +1,6 @@
 <?php
 /**
- * This is a part of  WP-ClanWars plugin
+ * This is a part of WP-ClanWars plugin
  * Description: WP-ClanWars Widget
  * Author: Andrej Mihajlov
  **/
@@ -20,7 +20,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if(!function_exists('add_action')) die('Cheatin&#8217; uh?');
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 class WP_ClanWars_Widget extends WP_Widget {
 	
