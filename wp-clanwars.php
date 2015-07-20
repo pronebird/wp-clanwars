@@ -114,16 +114,18 @@ class WP_ClanWars {
 
 		$charset_collate = $wpdb->get_charset_collate();
 
-		$dbstruct = '';
-		$dbstruct .= \WP_Clanwars\Games::schema();
-		$dbstruct .= \WP_Clanwars\Maps::schema();
-		$dbstruct .= \WP_Clanwars\Matches::schema();
-		$dbstruct .= \WP_Clanwars\Rounds::schema();
-		$dbstruct .= \WP_Clanwars\Teams::schema();
+		$dbstruct = array();
+		$dbstruct[] = \WP_Clanwars\Games::schema();
+		$dbstruct[] = \WP_Clanwars\Maps::schema();
+		$dbstruct[] = \WP_Clanwars\Matches::schema();
+		$dbstruct[] = \WP_Clanwars\Rounds::schema();
+		$dbstruct[] = \WP_Clanwars\Teams::schema();
 
 		add_option(WP_CLANWARS_CATEGORY, -1);
 		add_option(WP_CLANWARS_DEFAULTCSS, true);
 		add_option(WP_CLANWARS_ACL, array());
+
+		$dbstruct = implode("\n", $dbstruct);
 
 		// update database
 		dbDelta($dbstruct);
@@ -1256,7 +1258,8 @@ EOT;
 
 		$game_data = Utils::extract_args($game_data, array(
 			'title' => '', 'abbr' => '',
-			'icon' => '', 'maplist' => array()
+			'icon' => '', 'maplist' => array(),
+			'store' => array( '_id' => '' )
 		));
 
 		if(empty($game_data['title'])) {
