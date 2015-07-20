@@ -25,7 +25,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if(!function_exists('add_action')) die('Cheatin&#8217; uh?');
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 global $wpClanWars;
 
