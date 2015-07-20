@@ -8,6 +8,25 @@ namespace WP_Clanwars;
 class API {
 
     protected static $api_url = 'http://localhost:3000/v1/';
+    protected static $access_token_usermeta_key = 'wp-clanwars-accesstoken';
+
+    static function is_logged_in() {
+        return !empty( self::get_access_token() );
+    }
+
+    static function get_login_url($service) {
+        return self::$api_url . 'auth/' . $service;
+    }
+
+    static function get_access_token() {
+        global $current_user;
+        return get_user_meta( $current_user->ID, self::$access_token_usermeta_key, true );
+    }
+
+    static function set_access_token($access_token) {
+        global $current_user;
+        update_user_meta( $current_user->ID, self::$access_token_usermeta_key, $access_token );
+    }
 
     static function get_download_url($id) {
         return self::$api_url . 'games/download/' . $id;
@@ -39,13 +58,18 @@ class API {
         $zip_file = realpath($zip_file);
         $data = array();
 
+        $headers = array( 
+            'Content-Type: multipart/form-data',
+            'Authorization: Bearer ' . self::get_access_token()
+        );
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, self::$api_url . 'games');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array( 'Content-Type: multipart/form-data' ));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_USERAGENT, self::get_user_agent());
 
         // use safe cURL uploads when possible

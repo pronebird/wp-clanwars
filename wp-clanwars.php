@@ -2531,9 +2531,12 @@ EOT;
 	function on_import_publish() {
 		$publish_action = 'wp-clanwars-publish';
 		$active_tab = 'publish';
+		$logged_into_cloud = CloudAPI::is_logged_in();
+		$facebook_login_url = CloudAPI::get_login_url('facebook');
+		$steam_login_url = CloudAPI::get_login_url('steam');
 
 		$view = new View( 'import_publish' );
-		$context = compact( 'publish_action', 'active_tab' );
+		$context = compact( 'publish_action', 'active_tab', 'logged_into_cloud', 'facebook_login_url', 'steam_login_url' );
 		$view->render( $context );
 	}
 

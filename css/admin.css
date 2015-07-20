@@ -615,6 +615,22 @@ html[xmlns] .clearfix {
     box-shadow: none;
 }
 
+.wp-clanwars-import-page .wp-clanwars-signin-form {
+    max-width: 500px;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    background: #fff;
+}
+
+.wp-clanwars-import-page ul.wp-clanwars-choose-signin-method {
+    text-align: center;
+}
+.wp-clanwars-import-page ul.wp-clanwars-choose-signin-method li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
 
 /**
  * Select2 compatibility with WordPress admin
