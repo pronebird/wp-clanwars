@@ -31,21 +31,21 @@ class Teams {
 
 		$schema = "
 
-CREATE TABLE `$table` (
-`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-`title` varchar(200) NOT NULL,
-`logo` bigint(20) unsigned DEFAULT NULL,
-`country` varchar(20) DEFAULT NULL,
-`home_team` tinyint(1) DEFAULT '0',
-PRIMARY KEY (`id`),
-KEY `country` (`country`),
-KEY `home_team` (`home_team`),
-KEY `title` (`title`)
+CREATE TABLE $table (
+ id int(10) unsigned NOT NULL AUTO_INCREMENT,
+ title varchar(200) NOT NULL,
+ logo bigint(20) unsigned DEFAULT NULL,
+ country varchar(20) DEFAULT NULL,
+ home_team tinyint(1) DEFAULT '0',
+ PRIMARY KEY  (id),
+ KEY country (country),
+ KEY home_team (home_team),
+ KEY title (title)
 ) $charset_collate;
 
 ";
 
-		return $schema;
+		return trim($schema);
 	}
 
 	static function get_team($p, $count = false)

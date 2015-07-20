@@ -31,30 +31,30 @@ class Matches {
 
 		$schema = "
 
-CREATE TABLE `$table` (
-`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-`title` varchar(200) DEFAULT NULL,
-`date` datetime NOT NULL,
-`post_id` bigint(20) unsigned DEFAULT NULL,
-`team1` int(10) unsigned NOT NULL,
-`team2` int(10) unsigned NOT NULL,
-`game_id` int(10) unsigned NOT NULL,
-`match_status` tinyint(1) DEFAULT '0',
-`description` text,
-`external_url` varchar(200) DEFAULT NULL,
-PRIMARY KEY (`id`),
-KEY `post_id` (`post_id`),
-KEY `post_title` (`title`),
-KEY `game_id` (`game_id`),
-KEY `team1` (`team1`),
-KEY `team2` (`team2`),
-KEY `match_status` (`match_status`),
-KEY `date` (`date`)
+CREATE TABLE $table (
+ id int(10) unsigned NOT NULL AUTO_INCREMENT,
+ title varchar(200) DEFAULT NULL,
+ date datetime NOT NULL,
+ post_id bigint(20) unsigned DEFAULT NULL,
+ team1 int(10) unsigned NOT NULL,
+ team2 int(10) unsigned NOT NULL,
+ game_id int(10) unsigned NOT NULL,
+ match_status tinyint(1) DEFAULT '0',
+ description text,
+ external_url varchar(200) DEFAULT NULL,
+ PRIMARY KEY  (id),
+ KEY post_id (post_id),
+ KEY post_title (title),
+ KEY game_id (game_id),
+ KEY team1 (team1),
+ KEY team2 (team2),
+ KEY match_status (match_status),
+ KEY date (date)
 ) $charset_collate;
 
 ";
 
-		return $schema;
+		return trim($schema);
 	}
 
 	static function get_match($p, $count = false)

@@ -31,22 +31,22 @@ class Rounds {
 
 		$schema = "
 
-CREATE TABLE `$table` (
-`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-`match_id` int(10) unsigned NOT NULL,
-`group_n` int(10) NOT NULL,
-`map_id` int(10) unsigned NOT NULL,
-`tickets1` int(10) NOT NULL,
-`tickets2` int(10) NOT NULL,
-PRIMARY KEY (`id`),
-KEY `match_id` (`match_id`),
-KEY `group_n` (`group_n`),
-KEY `map_id` (`map_id`)
+CREATE TABLE $table (
+ id int(10) unsigned NOT NULL AUTO_INCREMENT,
+ match_id int(10) unsigned NOT NULL,
+ group_n int(10) NOT NULL,
+ map_id int(10) unsigned NOT NULL,
+ tickets1 int(10) NOT NULL,
+ tickets2 int(10) NOT NULL,
+ PRIMARY KEY  (id),
+ KEY match_id (match_id),
+ KEY group_n (group_n),
+ KEY map_id (map_id)
 ) $charset_collate;
 
 ";
 
-		return $schema;
+		return trim($schema);
 	}
 
 	static function get_rounds($match_id)

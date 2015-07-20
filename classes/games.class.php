@@ -34,22 +34,22 @@ class Games {
 
 		$schema = "
 
-CREATE TABLE `$table` (
-`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-`global_id` varchar(64) DEFAULT NULL,
-`title` varchar(200) NOT NULL,
-`abbr` varchar(20) DEFAULT NULL,
-`icon` bigint(20) unsigned DEFAULT NULL,
-PRIMARY KEY (`id`),
-KEY `global_id` (`global_id`)
-KEY `icon` (`icon`),
-KEY `title` (`title`),
-KEY `abbr` (`abbr`)
+CREATE TABLE $table (
+ id int(10) unsigned NOT NULL AUTO_INCREMENT,
+ store_id varchar(64) DEFAULT NULL,
+ title varchar(200) NOT NULL,
+ abbr varchar(20) DEFAULT NULL,
+ icon bigint(20) unsigned DEFAULT NULL,
+ PRIMARY KEY  (id),
+ KEY store_id (store_id),
+ KEY icon (icon),
+ KEY title (title),
+ KEY abbr (abbr)
 ) $charset_collate;
 
 ";
 
-		return $schema;
+		return trim($schema);
 	}
 
 	static function get_game($options, $count = false) {

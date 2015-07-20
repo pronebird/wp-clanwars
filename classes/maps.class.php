@@ -31,18 +31,18 @@ class Maps {
 
 		$schema = "
 
-CREATE TABLE `$table` (
-`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-`game_id` int(10) unsigned NOT NULL,
-`title` varchar(200) NOT NULL,
-`screenshot` bigint(20) unsigned DEFAULT NULL,
-PRIMARY KEY (`id`),
-KEY `game_id` (`game_id`,`screenshot`)
+CREATE TABLE $table (
+ id int(10) unsigned NOT NULL AUTO_INCREMENT,
+ game_id int(10) unsigned NOT NULL,
+ title varchar(200) NOT NULL,
+ screenshot bigint(20) unsigned DEFAULT NULL,
+ PRIMARY KEY  (id),
+ KEY game_id (game_id,screenshot)
 ) $charset_collate;
 
 ";
 
-		return $schema;
+		return trim($schema);
 	}
 
 	static function get_map($options, $count = false)
