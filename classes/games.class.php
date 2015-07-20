@@ -113,10 +113,10 @@ CREATE TABLE $table (
 	static function add_game($options) {
 		global $wpdb;
 
-		$defaults = array('title' => '', 'abbr' => '', 'icon' => 0);
+		$defaults = array('title' => '', 'abbr' => '', 'icon' => 0, 'store_id' => '');
 		$data = \WP_Clanwars\Utils::extract_args($options, $defaults);
 
-		if( $wpdb->insert( self::table(), $data, array('%s', '%s', '%d') ) ) {
+		if( $wpdb->insert( self::table(), $data, array('%s', '%s', '%d', '%s') ) ) {
 			return $wpdb->insert_id;
 		}
 

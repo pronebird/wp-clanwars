@@ -1259,7 +1259,7 @@ EOT;
 		$game_data = Utils::extract_args($game_data, array(
 			'title' => '', 'abbr' => '',
 			'icon' => '', 'maplist' => array(),
-			'store' => array( '_id' => '' )
+			'store' => array()
 		));
 
 		if(empty($game_data['title'])) {
@@ -1269,8 +1269,16 @@ EOT;
 
 		$p = $game_data;
 		$p['icon'] = $this->_import_image((array)$p['icon'], $unzip_dir);
+
 		$maplist = $p['maplist'];
 		unset($p['maplist']);
+
+		$store_info = $p['store'];
+		unset($p['store']);
+
+		if(is_object($store_info) && isset($store_info->_id)) {
+			$p['store_id'] = (string) $store_info->_id;
+		}
 
 		$game_id = \WP_Clanwars\Games::add_game($p);
 
@@ -2556,7 +2564,7 @@ EOT;
 	}
 
 	function on_import_browse() {
-		$query_args = Utils::extract_args( $_GET, array( 'q' => '' ) );
+		$query_args = Utils::extract_args( stripslashes_deep($_GET), array( 'q' => '' ) );
 
 		$search_query = trim( (string) $query_args['q'] );
 		$installed_games = \WP_Clanwars\Games::get_game('');
