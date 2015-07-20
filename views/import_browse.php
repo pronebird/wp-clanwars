@@ -7,6 +7,10 @@
 	<?php $partial( 'partials/browse_games_error', compact( 'api_error_message' ) ) ?>
 	<?php endif; ?>
 
+	<?php if ( empty($api_games) ) : ?>
+	<p class="wp-clanwars-api-error"><?php _e( 'No games found.', WP_CLANWARS_TEXTDOMAIN ); ?></p>
+	<?php endif; ?>
+
 	<ul class="wp-clanwars-gamepacks clearfix" id="wp-clanwars-gamepacks">
 
 	<?php foreach ( $api_games as $game ) : ?>
