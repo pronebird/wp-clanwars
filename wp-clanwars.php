@@ -346,8 +346,20 @@ EOT;
 	{
 		wp_register_script('wp-cw-matches', WP_CLANWARS_URL . '/js/matches.js', array( 'jquery', 'select2' ), WP_CLANWARS_VERSION);
 		wp_register_script('wp-cw-gallery', WP_CLANWARS_URL . '/js/gallery.js', array('jquery', 'jquery-ui-sortable', 'media-upload'), WP_CLANWARS_VERSION);
+		
 		wp_register_script('wp-cw-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery', 'select2'), WP_CLANWARS_VERSION);
+		wp_localize_script('wp-cw-admin',
+			'wpCWAdminL10n',
+			array(
+				'confirmDeleteMap' => __('Are you sure you want to delete this map?', WP_CLANWARS_TEXTDOMAIN),
+				'confirmDeleteGame' => __('Are you sure you want to delete this game?', WP_CLANWARS_TEXTDOMAIN),
+				'confirmDeleteTeam' => __('Are you sure you want to delete this team?', WP_CLANWARS_TEXTDOMAIN),
+				'confirmDeleteMatch' => __('Are you sure you want to delete this match?', WP_CLANWARS_TEXTDOMAIN)
+			)
+		);
+
 		wp_register_script('wp-cw-game-browser', WP_CLANWARS_URL . '/js/game-browser.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-login', WP_CLANWARS_URL . '/js/login.js', array('jquery'), WP_CLANWARS_VERSION);
 
 		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array( 'select2', 'wp-admin' ), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
@@ -362,6 +374,13 @@ EOT;
 
 		wp_register_style('wp-cw-sitecss', WP_CLANWARS_URL . '/css/site.css', array(), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-widgetcss', WP_CLANWARS_URL . '/css/widget.css', array(), WP_CLANWARS_VERSION);
+
+		$facebook_login_url = CloudAPI::get_login_url('facebook');
+		$steam_login_url = CloudAPI::get_login_url('steam');
+		wp_localize_script('wp-cw-login',
+			'wpClanwarsLoginSettings',
+			compact('facebook_login_url', 'steam_login_url')
+		);
 	}
 
 	function onboarding_or_page($page_method) {
@@ -662,17 +681,7 @@ EOT;
 	function on_load_any() {
 		wp_enqueue_style('wp-cw-admin');
 		wp_enqueue_style('wp-cw-flags');
-
 		wp_enqueue_script('wp-cw-admin');
-		wp_localize_script('wp-cw-admin',
-				'wpCWAdminL10n',
-				array(
-					'confirmDeleteMap' => __('Are you sure you want to delete this map?', WP_CLANWARS_TEXTDOMAIN),
-					'confirmDeleteGame' => __('Are you sure you want to delete this game?', WP_CLANWARS_TEXTDOMAIN),
-					'confirmDeleteTeam' => __('Are you sure you want to delete this team?', WP_CLANWARS_TEXTDOMAIN),
-					'confirmDeleteMatch' => __('Are you sure you want to delete this match?', WP_CLANWARS_TEXTDOMAIN)
-				)
-			);
 	}
 
 	function on_widgets_init()
@@ -2532,11 +2541,12 @@ EOT;
 		$publish_action = 'wp-clanwars-publish';
 		$active_tab = 'publish';
 		$logged_into_cloud = CloudAPI::is_logged_in();
-		$facebook_login_url = CloudAPI::get_login_url('facebook');
-		$steam_login_url = CloudAPI::get_login_url('steam');
 
 		$view = new View( 'import_publish' );
-		$context = compact( 'publish_action', 'active_tab', 'logged_into_cloud', 'facebook_login_url', 'steam_login_url' );
+		$context = compact( 'publish_action', 'active_tab', 'logged_into_cloud' );
+
+		wp_enqueue_script('wp-cw-login');
+
 		$view->render( $context );
 	}
 

@@ -38,8 +38,8 @@
     <div class="wp-clanwars-signin-form">
     <p><strong><?php _e( 'You have to log in first. Choose one of available log in methods:' ); ?></strong></p>
     <ul class="wp-clanwars-choose-signin-method">
-        <li><a href="javascript:window.open('<?php esc_attr_e($steam_login_url); ?>', 'login', 'width=500,height=300')"><img src="../wp-content/plugins/wp-clanwars/images/steam-login.png" alt=""></a></li>
-        <li><a href="javascript:window.open('<?php esc_attr_e($facebook_login_url); ?>', 'login', 'width=500,height=300')"><img src="../wp-content/plugins/wp-clanwars/images/facebook-login.png" alt=""></a></li>
+        <li><a href="#" class="button" id="steam-login"><?php _e( 'Log in with Steam', WP_CLANWARS_TEXTDOMAIN ); ?></a></li>
+        <li><a href="#" class="button" id="facebook-login"><?php _e( 'Log in with Facebook', WP_CLANWARS_TEXTDOMAIN ); ?></a></li>
     </ul>
     </div>
 
