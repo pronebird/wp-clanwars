@@ -652,8 +652,45 @@ html[xmlns] .clearfix {
 
 
 
+/**
+ * Cloud
+ */
 
+.wp-clanwars-cloud-account-wrap {
+    float: right;
+    margin-top: 9px;
+}
 
+.wp-clanwars-cloud-account {
+    background: #333;
+    overflow: hidden;
+    vertical-align: middle;
+    color: #fff;
+    line-height: 1em;
+    padding: 6px;
+}
+
+.wp-clanwars-cloud-account-why-login {
+    padding: 6px 0 6px 6px;
+}
+
+.wp-clanwars-cloud-account, .wp-clanwars-cloud-account .username img {
+    border-radius: 3px;
+}
+
+.wp-clanwars-cloud-account .username,
+.wp-clanwars-cloud-account .logout {
+    display: inline-block;
+}
+
+.wp-clanwars-cloud-account .logout span {
+    color: #555;
+}
+
+.wp-clanwars-cloud-account .username img {
+    vertical-align: middle;
+    height: 24px;
+}
 
 
 

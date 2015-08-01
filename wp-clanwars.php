@@ -2479,12 +2479,16 @@ EOT;
 		$status = CloudAPI::get_auth_status($token);
 
 		if(!is_wp_error($status) && is_object($status) && isset($status->socialId)) {
-			Flash::success( sprintf( __( 'Logged in as %s via %s.', WP_CLANWARS_TEXTDOMAIN ), $status->name, $status->provider ) );
 			CloudAPI::set_access_token($token);
+			CloudAPI::set_user_info($status);
+
+			Flash::success( sprintf( __( 'Logged in as %s via %s.', WP_CLANWARS_TEXTDOMAIN ), $status->name, ucfirst($status->provider) ) );
 		}
 		else {
-			Flash::error( __( 'Failed to log in.', WP_CLANWARS_TEXTDOMAIN ) );
 			CloudAPI::set_access_token('');
+			CloudAPI::set_user_info(new stdClass());
+
+			Flash::error( __( 'Failed to log in.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
 		$view = new View( 'login_complete' );
@@ -2576,9 +2580,10 @@ EOT;
 		$publish_action = 'wp-clanwars-publish';
 		$active_tab = 'publish';
 		$logged_into_cloud = CloudAPI::is_logged_in();
+		$cloud_account = CloudAPI::get_user_info();
 
 		$view = new View( 'import_publish' );
-		$context = compact( 'publish_action', 'active_tab', 'logged_into_cloud' );
+		$context = compact( 'publish_action', 'active_tab', 'logged_into_cloud', 'cloud_account' );
 
 		wp_enqueue_script('wp-cw-login');
 
@@ -2594,6 +2599,9 @@ EOT;
 
 	function on_import_browse() {
 		$query_args = Utils::extract_args( stripslashes_deep($_GET), array( 'q' => '' ) );
+
+		$logged_into_cloud = CloudAPI::is_logged_in();
+		$cloud_account = CloudAPI::get_user_info();
 
 		$search_query = trim( (string) $query_args['q'] );
 		$installed_games = \WP_Clanwars\Games::get_game('');
@@ -2629,7 +2637,7 @@ EOT;
 		}
 
 		$view = new View( 'import_browse' );
-		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action' );
+		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action', 'logged_into_cloud', 'cloud_account' );
 		
 		wp_enqueue_script( 'wp-cw-game-browser' );
 

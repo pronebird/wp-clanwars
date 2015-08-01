@@ -1,6 +1,10 @@
 <div class="wrap wp-clanwars-import-page">
-    <h2><?php _e('Publish game', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-import&tab=upload' ); ?>" class="upload add-new-h2"><?php _e('Upload Game', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
-    
+
+    <div class="clearfix">
+        <?php $partial('partials/account_info', compact('cloud_account', 'logged_into_cloud')); ?>
+        <h2><?php _e('Publish game', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-import&tab=upload' ); ?>" class="upload add-new-h2"><?php _e('Upload Game', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+    </div>
+
     <?php $partial('partials/import_nav', compact('active_tab')); ?>
 
     <p class="wp-clanwars-install-help"><?php _e('You can share created games with others.', WP_CLANWARS_TEXTDOMAIN); ?></p>

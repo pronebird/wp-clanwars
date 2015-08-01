@@ -9,6 +9,7 @@ class API {
 
     protected static $api_url = 'http://localhost:3000/v1/';
     protected static $access_token_usermeta_key = 'wp-clanwars-server-accesstoken';
+    protected static $user_info_usermeta_key = 'wp-clanwars-server-userinfo';
 
     static function is_logged_in() {
         return !empty( self::get_access_token() );
@@ -26,6 +27,16 @@ class API {
     static function set_access_token($access_token) {
         global $current_user;
         update_user_meta( $current_user->ID, self::$access_token_usermeta_key, $access_token );
+    }
+
+    static function set_user_info($userInfo) {
+        global $current_user;
+        update_user_meta( $current_user->ID, self::$user_info_usermeta_key, $userInfo );
+    }
+
+    static function get_user_info($userInfo) {
+        global $current_user;
+        return get_user_meta( $current_user->ID, self::$user_info_usermeta_key, true );
     }
 
     static function get_auth_status( $access_token = '' ) {
