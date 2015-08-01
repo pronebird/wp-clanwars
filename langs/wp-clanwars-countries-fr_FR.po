@@ -1,0 +1,1001 @@
+# Copyright (C) 2015 {name}
+# This file is distributed under the same license as the {name} package.
+# Translators:
+# Andrej Mihajlov <and@codeispoetry.ru>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-ClanWars\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/{slug}\n"
+"POT-Creation-Date: 2015-07-13 10:51:45+00:00\n"
+"PO-Revision-Date: 2015-07-13 20:36+0000\n"
+"Last-Translator: Andrej Mihajlov <and@codeispoetry.ru>\n"
+"Language-Team: French (France) (http://www.transifex.com/projects/p/wp-clanwars/language/fr_FR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: countries.php:20
+msgid "Afghanistan"
+msgstr "Afghanistan"
+
+#: countries.php:21
+msgid "Albania"
+msgstr "Albanie"
+
+#: countries.php:22
+msgid "Algeria"
+msgstr "Algérie"
+
+#: countries.php:23
+msgid "American Samoa"
+msgstr "Samoa américaines"
+
+#: countries.php:24
+msgid "Andorra"
+msgstr "Andorre"
+
+#: countries.php:25
+msgid "Angola"
+msgstr "Angola"
+
+#: countries.php:26
+msgid "Anguilla"
+msgstr "Anguilla"
+
+#: countries.php:27
+msgid "Antigua and Barbuda"
+msgstr "Antigua et Barbuda"
+
+#: countries.php:28
+msgid "Argentina"
+msgstr "Argentine"
+
+#: countries.php:29
+msgid "Armenia"
+msgstr "Arménie"
+
+#: countries.php:30
+msgid "Aruba"
+msgstr "Aruba"
+
+#: countries.php:31
+msgid "Australia"
+msgstr "Australie"
+
+#: countries.php:32
+msgid "Austria"
+msgstr "Autriche"
+
+#: countries.php:33
+msgid "Azerbaijan"
+msgstr "Azerbaïdjan"
+
+#: countries.php:34
+msgid "Bahamas"
+msgstr "Bahamas"
+
+#: countries.php:35
+msgid "Bahrain"
+msgstr "Bahreïn"
+
+#: countries.php:36
+msgid "Bangladesh"
+msgstr "Bangladesh"
+
+#: countries.php:37
+msgid "Barbados"
+msgstr "Barbade"
+
+#: countries.php:38
+msgid "Belarus"
+msgstr "Biélorussie"
+
+#: countries.php:39
+msgid "Belgium"
+msgstr "Belgique"
+
+#: countries.php:40
+msgid "Belize"
+msgstr "Belize"
+
+#: countries.php:41
+msgid "Benin"
+msgstr "Bénin"
+
+#: countries.php:42
+msgid "Bermuda"
+msgstr "Bermudes"
+
+#: countries.php:43
+msgid "Bhutan"
+msgstr "Bhoutan"
+
+#: countries.php:44
+msgid "Bolivia"
+msgstr "Bolivie"
+
+#: countries.php:45
+msgid "Bosnia and Herzegowina"
+msgstr "Bosnie- Herzégovine"
+
+#: countries.php:46
+msgid "Botswana"
+msgstr "Botswana"
+
+#: countries.php:47
+msgid "Bouvet Island"
+msgstr "Île Bouvet"
+
+#: countries.php:48
+msgid "Brazil"
+msgstr "Brésil"
+
+#: countries.php:49
+msgid "British Indian Ocean Territory"
+msgstr "British Indian Ocean Territory"
+
+#: countries.php:50
+msgid "Brunei Darussalam"
+msgstr "Brunei Darussalam"
+
+#: countries.php:51
+msgid "Bulgaria"
+msgstr "Bulgarie"
+
+#: countries.php:52
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+#: countries.php:53
+msgid "Burundi"
+msgstr "Burundi"
+
+#: countries.php:54
+msgid "Cambodia"
+msgstr "Cambodge"
+
+#: countries.php:55
+msgid "Cameroon"
+msgstr "Cameroun"
+
+#: countries.php:56
+msgid "Canada"
+msgstr "Canada"
+
+#: countries.php:57
+msgid "Cape Verde"
+msgstr "Cap-Vert"
+
+#: countries.php:58
+msgid "Catalonia"
+msgstr "Catalogne"
+
+#: countries.php:59
+msgid "Cayman Islands"
+msgstr "Îles Caïmans"
+
+#: countries.php:60
+msgid "Central African Republic"
+msgstr "République centrafricaine"
+
+#: countries.php:61
+msgid "Chad"
+msgstr "Tchad"
+
+#: countries.php:62
+msgid "Chile"
+msgstr "Chili"
+
+#: countries.php:63
+msgid "China"
+msgstr "La Chine"
+
+#: countries.php:64
+msgid "Christmas Island"
+msgstr "Île Christmas"
+
+#: countries.php:65
+msgid "Cocos (Keeling) Islands"
+msgstr "Cocos (Keeling) Islands"
+
+#: countries.php:66
+msgid "Colombia"
+msgstr "Colombie"
+
+#: countries.php:67
+msgid "Comoros"
+msgstr "Comores"
+
+#: countries.php:68
+msgid "Congo"
+msgstr "Congo"
+
+#: countries.php:69
+msgid "Congo, the DRC"
+msgstr "Congo, République démocratique du Congo"
+
+#: countries.php:70
+msgid "Cook Islands"
+msgstr "Îles Cook"
+
+#: countries.php:71
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#: countries.php:72
+msgid "Cote D'Ivoire"
+msgstr "Côte d'Ivoire"
+
+#: countries.php:73
+msgid "Croatia"
+msgstr "Croatie (Hrvatska)"
+
+#: countries.php:74
+msgid "Cuba"
+msgstr "Cuba"
+
+#: countries.php:75
+msgid "Cyprus"
+msgstr "Chypre"
+
+#: countries.php:76
+msgid "Czech Republic"
+msgstr "République tchèque"
+
+#: countries.php:77
+msgid "Denmark"
+msgstr "Danemark"
+
+#: countries.php:78
+msgid "Djibouti"
+msgstr "Djibouti"
+
+#: countries.php:79
+msgid "Dominica"
+msgstr "Dominique"
+
+#: countries.php:80
+msgid "Dominican Republic"
+msgstr "République dominicaine"
+
+#: countries.php:81
+msgid "Ecuador"
+msgstr "Équateur"
+
+#: countries.php:82
+msgid "Egypt"
+msgstr "Égypte"
+
+#: countries.php:83
+msgid "El Salvador"
+msgstr "Salvador"
+
+#: countries.php:84
+msgid "England"
+msgstr "L'Angleterre"
+
+#: countries.php:85
+msgid "Equatorial Guinea"
+msgstr "La Guinée équatoriale"
+
+#: countries.php:86
+msgid "Eritrea"
+msgstr "L'Érythrée"
+
+#: countries.php:87
+msgid "Estonia"
+msgstr "Estonie"
+
+#: countries.php:88
+msgid "Ethiopia"
+msgstr "Éthiopie"
+
+#: countries.php:89
+msgid "European Union"
+msgstr "Union européenne"
+
+#: countries.php:90
+msgid "Falkland Islands (Malvinas)"
+msgstr "Îles Falkland (Malvinas)"
+
+#: countries.php:91
+msgid "Faroe Islands"
+msgstr "Féroé (îles)"
+
+#: countries.php:92
+msgid "Fiji"
+msgstr "Fidji"
+
+#: countries.php:93
+msgid "Finland"
+msgstr "Finlande"
+
+#: countries.php:94
+msgid "France"
+msgstr "France"
+
+#: countries.php:95
+msgid "French Guiana"
+msgstr "Français de Français"
+
+#: countries.php:96
+msgid "French Polynesia"
+msgstr "Polynésie Français"
+
+#: countries.php:97
+msgid "French Southern Territories"
+msgstr "Territoires méridionaux Français"
+
+#: countries.php:98
+msgid "Gabon"
+msgstr "Gabon"
+
+#: countries.php:99
+msgid "Gambia"
+msgstr "Gambie"
+
+#: countries.php:100
+msgid "Georgia"
+msgstr "Géorgie"
+
+#: countries.php:101
+msgid "Germany"
+msgstr "Allemagne"
+
+#: countries.php:102
+msgid "Ghana"
+msgstr "Ghana"
+
+#: countries.php:103
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#: countries.php:104
+msgid "Greece"
+msgstr "Grèce"
+
+#: countries.php:105
+msgid "Greenland"
+msgstr "Groenland"
+
+#: countries.php:106
+msgid "Grenada"
+msgstr "La Grenade"
+
+#: countries.php:107
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#: countries.php:108
+msgid "Guam"
+msgstr "Guam"
+
+#: countries.php:109
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: countries.php:110
+msgid "Guinea"
+msgstr "La Guinée"
+
+#: countries.php:111
+msgid "Guinea-Bissau"
+msgstr "Guinée-Bissau"
+
+#: countries.php:112
+msgid "Guyana"
+msgstr "Guyane"
+
+#: countries.php:113
+msgid "Haiti"
+msgstr "Haïti"
+
+#: countries.php:114
+msgid "Heard Island and McDonald Islands"
+msgstr "Île Heard et îles McDonald"
+
+#: countries.php:115
+msgid "Holy See (Vatican City State)"
+msgstr "Holy See (Vatican City State)"
+
+#: countries.php:116
+msgid "Honduras"
+msgstr "Honduras"
+
+#: countries.php:117
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#: countries.php:118
+msgid "Hungary"
+msgstr "Hongrie"
+
+#: countries.php:119
+msgid "Iceland"
+msgstr "Islande"
+
+#: countries.php:120
+msgid "India"
+msgstr "Inde"
+
+#: countries.php:121
+msgid "Indonesia"
+msgstr "Indonésie"
+
+#: countries.php:122
+msgid "Iran, Islamic Republic of"
+msgstr "Iran, République islamique d'"
+
+#: countries.php:123
+msgid "Iraq"
+msgstr "Irak"
+
+#: countries.php:124
+msgid "Ireland"
+msgstr "Irlande"
+
+#: countries.php:125
+msgid "Israel"
+msgstr "Israël"
+
+#: countries.php:126
+msgid "Italy"
+msgstr "Italie"
+
+#: countries.php:127
+msgid "Jamaica"
+msgstr "Jamaïque"
+
+#: countries.php:128
+msgid "Japan"
+msgstr "Japon"
+
+#: countries.php:129
+msgid "Jordan"
+msgstr "Jordanie"
+
+#: countries.php:130
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
+
+#: countries.php:131
+msgid "Kenya"
+msgstr "Kenya"
+
+#: countries.php:132
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#: countries.php:133
+msgid "Korea, Democratic People's Republic of"
+msgstr "Corée, République populaire démocratique de"
+
+#: countries.php:134
+msgid "Korea, Republic of"
+msgstr "Corée, République de"
+
+#: countries.php:135
+msgid "Kuwait"
+msgstr "Koweït"
+
+#: countries.php:136
+msgid "Kyrgyzstan"
+msgstr "Kirghizistan"
+
+#: countries.php:137
+msgid "Lao People's Democratic Republic"
+msgstr "République démocratique populaire lao"
+
+#: countries.php:138
+msgid "Latvia"
+msgstr "Lettonie"
+
+#: countries.php:139
+msgid "Lebanon"
+msgstr "Liban"
+
+#: countries.php:140
+msgid "Lesotho"
+msgstr "Lesotho"
+
+#: countries.php:141
+msgid "Liberia"
+msgstr "Libéria"
+
+#: countries.php:142
+msgid "Libyan Arab Jamahiriya"
+msgstr "Jamahiriya arabe libyenne"
+
+#: countries.php:143
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#: countries.php:144
+msgid "Lithuania"
+msgstr "Lituanie"
+
+#: countries.php:145
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#: countries.php:146
+msgid "Macao"
+msgstr "Macao"
+
+#: countries.php:147
+msgid "Macedonia, the former Yugoslav Republic of"
+msgstr "Macédoine, l'ex-République yougoslave de"
+
+#: countries.php:148
+msgid "Madagascar"
+msgstr "Madagascar"
+
+#: countries.php:149
+msgid "Malawi"
+msgstr "Malawi"
+
+#: countries.php:150
+msgid "Malaysia"
+msgstr "Malaisie"
+
+#: countries.php:151
+msgid "Maldives"
+msgstr "Maldives"
+
+#: countries.php:152
+msgid "Mali"
+msgstr "Mali"
+
+#: countries.php:153
+msgid "Malta"
+msgstr "Malte"
+
+#: countries.php:154
+msgid "Marshall Islands"
+msgstr "Îles Marshall"
+
+#: countries.php:155
+msgid "Martinique"
+msgstr "Martinique"
+
+#: countries.php:156
+msgid "Mauritania"
+msgstr "Mauritanie"
+
+#: countries.php:157
+msgid "Mauritius"
+msgstr "Ile Maurice"
+
+#: countries.php:158
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#: countries.php:159
+msgid "Mexico"
+msgstr "Mexique"
+
+#: countries.php:160
+msgid "Micronesia, Federated States of"
+msgstr "Micronésie, États fédérés de"
+
+#: countries.php:161
+msgid "Moldova, Republic of"
+msgstr "Moldova, République de"
+
+#: countries.php:162
+msgid "Monaco"
+msgstr "Monaco"
+
+#: countries.php:163
+msgid "Mongolia"
+msgstr "Mongolie"
+
+#: countries.php:164
+msgid "Montenegro"
+msgstr "Monténégro"
+
+#: countries.php:165
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#: countries.php:166
+msgid "Morocco"
+msgstr "Maroc"
+
+#: countries.php:167
+msgid "Mozambique"
+msgstr "Mozambique"
+
+#: countries.php:168
+msgid "Myanmar"
+msgstr "Myanmar"
+
+#: countries.php:169
+msgid "Namibia"
+msgstr "Namibie"
+
+#: countries.php:170
+msgid "Nauru"
+msgstr "Nauru"
+
+#: countries.php:171
+msgid "Nepal"
+msgstr "Népal"
+
+#: countries.php:172
+msgid "Netherlands"
+msgstr "Pays-Bas"
+
+#: countries.php:173
+msgid "Netherlands Antilles"
+msgstr "Antilles néerlandaises"
+
+#: countries.php:174
+msgid "New Caledonia"
+msgstr "Nouvelle Calédonie"
+
+#: countries.php:175
+msgid "New Zealand"
+msgstr "Nouvelle-Zélande"
+
+#: countries.php:176
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#: countries.php:177
+msgid "Niger"
+msgstr "Niger"
+
+#: countries.php:178
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#: countries.php:179
+msgid "Niue"
+msgstr "Niue"
+
+#: countries.php:180
+msgid "Norfolk Island"
+msgstr "Île Norfolk"
+
+#: countries.php:181
+msgid "Northern Mariana Islands"
+msgstr "Îles Mariannes du Nord"
+
+#: countries.php:182
+msgid "Norway"
+msgstr "Norvège"
+
+#: countries.php:183
+msgid "Oman"
+msgstr "Oman"
+
+#: countries.php:184
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#: countries.php:185
+msgid "Palau"
+msgstr "Palau"
+
+#: countries.php:186
+msgid "Palestinian Territory, Occupied"
+msgstr "Territoire palestinien, occupé"
+
+#: countries.php:187
+msgid "Panama"
+msgstr "Panama"
+
+#: countries.php:188
+msgid "Papua New Guinea"
+msgstr "Papouasie-Nouvelle Guinée"
+
+#: countries.php:189
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: countries.php:190
+msgid "Peru"
+msgstr "Pérou"
+
+#: countries.php:191
+msgid "Philippines"
+msgstr "Philippines"
+
+#: countries.php:192
+msgid "Pitcairn"
+msgstr "Pitcairn"
+
+#: countries.php:193
+msgid "Poland"
+msgstr "Pologne"
+
+#: countries.php:194
+msgid "Portugal"
+msgstr "Portugal"
+
+#: countries.php:195
+msgid "Puerto Rico"
+msgstr "Porto Rico"
+
+#: countries.php:196
+msgid "Qatar"
+msgstr "Qatar"
+
+#: countries.php:197
+msgid "Romania"
+msgstr "Roumanie"
+
+#: countries.php:198
+msgid "Russia"
+msgstr "Russie"
+
+#: countries.php:199
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#: countries.php:200
+msgid "Réunion"
+msgstr "Réunion"
+
+#: countries.php:201
+msgid "Saint Helena, Ascension and Tristan da Cunha"
+msgstr "Sainte-Hélène, Ascension et Tristan da Cunha"
+
+#: countries.php:202
+msgid "Saint Kitts and Nevis"
+msgstr "Saint-Kitts-et-Nevis"
+
+#: countries.php:203
+msgid "Saint Lucia"
+msgstr "Sainte-Lucie"
+
+#: countries.php:204
+msgid "Saint Pierre and Miquelon"
+msgstr "Saint Pierre et Miquelon"
+
+#: countries.php:205
+msgid "Saint Vincent and the Grenadines"
+msgstr "Saint Vincent et les Grenadines"
+
+#: countries.php:206
+msgid "Samoa"
+msgstr "Samoa"
+
+#: countries.php:207
+msgid "San Marino"
+msgstr "Saint-Marin"
+
+#: countries.php:208
+msgid "Sao Tome and Principe"
+msgstr "Sao Tomé et Principe"
+
+#: countries.php:209
+msgid "Saudi Arabia"
+msgstr "Arabie Saoudite"
+
+#: countries.php:210
+msgid "Scotland"
+msgstr "Ecosse"
+
+#: countries.php:211
+msgid "Senegal"
+msgstr "Sénégal"
+
+#: countries.php:212
+msgid "Serbia"
+msgstr "Serbie"
+
+#: countries.php:213
+msgid "Serbia and Montenegro"
+msgstr "Serbie et Monténégro"
+
+#: countries.php:214
+msgid "Seychelles"
+msgstr "Seychelles"
+
+#: countries.php:215
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#: countries.php:216
+msgid "Singapore"
+msgstr "Singapour"
+
+#: countries.php:217
+msgid "Slovakia"
+msgstr "Slovaquie"
+
+#: countries.php:218
+msgid "Slovenia"
+msgstr "Slovénie"
+
+#: countries.php:219
+msgid "Solomon Islands"
+msgstr "Îles Salomon"
+
+#: countries.php:220
+msgid "Somalia"
+msgstr "La Somalie"
+
+#: countries.php:221
+msgid "South Africa"
+msgstr "Afrique du Sud"
+
+#: countries.php:222
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Géorgie du Sud et îles Sandwich du Sud"
+
+#: countries.php:223
+msgid "Spain"
+msgstr "Espagne"
+
+#: countries.php:224
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#: countries.php:225
+msgid "Sudan"
+msgstr "Soudan"
+
+#: countries.php:226
+msgid "Suriname"
+msgstr "Suriname"
+
+#: countries.php:227
+msgid "Svalbard and Jan Mayen"
+msgstr "Svalbard et Jan Mayen"
+
+#: countries.php:228
+msgid "Swaziland"
+msgstr "Swaziland"
+
+#: countries.php:229
+msgid "Sweden"
+msgstr "Suède"
+
+#: countries.php:230
+msgid "Switzerland"
+msgstr "Suisse"
+
+#: countries.php:231
+msgid "Syrian Arab Republic"
+msgstr "République arabe syrienne"
+
+#: countries.php:232
+msgid "Taiwan, Province of China"
+msgstr "Taiwan, Province de Chine"
+
+#: countries.php:233
+msgid "Tajikistan"
+msgstr "Tadjikistan"
+
+#: countries.php:234
+msgid "Tanzania, United Republic of"
+msgstr "Tanzanie, République-Unie de"
+
+#: countries.php:235
+msgid "Thailand"
+msgstr "Thaïlande"
+
+#: countries.php:236
+msgid "Timor-Leste"
+msgstr "Timor-Leste"
+
+#: countries.php:237
+msgid "Togo"
+msgstr "Togo"
+
+#: countries.php:238
+msgid "Tokelau"
+msgstr "Tokélaou"
+
+#: countries.php:239
+msgid "Tonga"
+msgstr "Tonga"
+
+#: countries.php:240
+msgid "Trinidad and Tobago"
+msgstr "Trinité-et-Tobago"
+
+#: countries.php:241
+msgid "Tunisia"
+msgstr "Tunisie"
+
+#: countries.php:242
+msgid "Turkey"
+msgstr "Turquie"
+
+#: countries.php:243
+msgid "Turkmenistan"
+msgstr "Turkménistan"
+
+#: countries.php:244
+msgid "Turks and Caicos Islands"
+msgstr "Îles Turques et Caïques"
+
+#: countries.php:245
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+#: countries.php:246
+msgid "Uganda"
+msgstr "L'Ouganda"
+
+#: countries.php:247
+msgid "Ukraine"
+msgstr "Ukraine"
+
+#: countries.php:248
+msgid "United Arab Emirates"
+msgstr "Émirats Arabes Unis"
+
+#: countries.php:249
+msgid "United Kingdom"
+msgstr "Royaume-Uni"
+
+#: countries.php:250
+msgid "United States"
+msgstr "États-Unis"
+
+#: countries.php:251
+msgid "United States Minor Outlying Islands"
+msgstr "Îles mineures éloignées des États-Unis"
+
+#: countries.php:252
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#: countries.php:253
+msgid "Uzbekistan"
+msgstr "Ouzbékistan"
+
+#: countries.php:254
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#: countries.php:255
+msgid "Venezuela, Bolivarian Republic of"
+msgstr "Venezuela, République bolivarienne du"
+
+#: countries.php:256
+msgid "Viet Nam"
+msgstr "Vietnam"
+
+#: countries.php:257
+msgid "Virgin Islands, British"
+msgstr "Iles Vierges britanniques"
+
+#: countries.php:258
+msgid "Virgin Islands, U.S."
+msgstr "Virgin Islands, U.S."
+
+#: countries.php:259
+msgid "Wales"
+msgstr "Au pays de Galles"
+
+#: countries.php:260
+msgid "Wallis and Futuna"
+msgstr "Wallis et Futuna"
+
+#: countries.php:261
+msgid "Western Sahara"
+msgstr "Sahara occidental"
+
+#: countries.php:262
+msgid "Yemen"
+msgstr "Yémen"
+
+#: countries.php:263
+msgid "Zambia"
+msgstr "Zambie"
+
+#: countries.php:264
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+#: countries.php:265
+msgid "Åland"
+msgstr "Åland"
