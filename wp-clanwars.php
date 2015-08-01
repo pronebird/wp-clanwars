@@ -1051,7 +1051,7 @@ EOT;
 					$result = \WP_Clanwars\Games::delete_game($items);
 
 					if( is_wp_error( $result ) ) {
-						Flash::error( sprintf( __( 'Failed ot delete games. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+						Flash::error( sprintf( __( 'Failed to delete games. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
 					}
 					else {
 						Flash::success( sprintf( _n( 'Deleted %d game.', 'Deleted %d games.', $result, WP_CLANWARS_TEXTDOMAIN ), $result ) );
