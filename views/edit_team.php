@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="wrap wp-clanwars-team-editor">
 	<h2><?php echo $page_title; ?></h2>
 
 	<form name="team-editor" id="team-editor" method="post" action="<?php esc_attr_e($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
@@ -21,6 +21,20 @@
 			<th scope="row" valign="top"><label for="title"><?php _e('Country', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
 			<td>
 				<?php echo $country_select; ?>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row" valign="top"><label for="logo_file"><?php _e('Logo', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
+			<td>
+				<input type="file" name="logo_file" id="logo_file" />
+
+				<?php if(!empty($attach)) : ?>
+				<div class="screenshot"><?php echo $attach; ?></div>
+				<div>
+				<label for="delete-image"><input type="checkbox" name="delete_image" id="delete-image" /> <?php _e('Delete Logo', WP_CLANWARS_TEXTDOMAIN); ?></label>
+				</div>
+				<?php endif; ?>
 			</td>
 		</tr>
 
