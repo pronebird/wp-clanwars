@@ -9,6 +9,7 @@ Thanks everyone for participation!
 ## TODO
 
 * Set post date to match date to hide future posts
+* Import or export teams
 * Add tournament logo
 * ~~Add team logo~~
 * Add twitch / stream URL to the match (display it in sidebar)
