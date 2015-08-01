@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
-"POT-Creation-Date: 2015-08-01 13:18:21+00:00\n"
-"PO-Revision-Date: 2015-08-01 13:41+0000\n"
+"POT-Creation-Date: 2015-08-01 14:11:13+00:00\n"
+"PO-Revision-Date: 2015-08-01 14:11+0000\n"
 "Last-Translator: Andrej Mihajlov <and@codeispoetry.ru>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/wp-clanwars/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -796,7 +796,7 @@ msgid "Displaying %s&#8211;%s of %s"
 msgstr "Mostrando %s&#8211;%s de %s"
 
 #: wp-clanwars.php:1054
-msgid "Failed ot delete games. Error: %s"
+msgid "Failed to delete games. Error: %s"
 msgstr ""
 
 #: wp-clanwars.php:1057

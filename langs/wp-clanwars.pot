@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars 1.7.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
-"POT-Creation-Date: 2015-08-01 13:18:21+00:00\n"
+"POT-Creation-Date: 2015-08-01 14:11:13+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,9 @@ msgid "%d:%d"
 msgstr ""
 
 #: classes/utils.class.php:97
-msgid "%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input"
+msgid ""
+"%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: "
+"minute input, 5: year input"
 msgstr ""
 
 #: views/edit_game.php:15 views/edit_map.php:15 views/edit_match.php:59
@@ -271,7 +273,8 @@ msgid "You can share created games with others."
 msgstr ""
 
 #: views/import_publish.php:7
-msgid "Upload may take some time. Please do not refresh browser when in progress."
+msgid ""
+"Upload may take some time. Please do not refresh browser when in progress."
 msgstr ""
 
 #: views/import_publish.php:18
@@ -279,7 +282,11 @@ msgid "ZIP file"
 msgstr ""
 
 #: views/import_publish.php:26
-msgid "I confirm that I am the creator of the graphic assets submitted and/or legally own the rights to use and distribute them under <a rel=\"license\" target=\"_blank\" href=\"http://creativecommons.org/licenses/by-sa/4.0/\">Creative Commons Attribution-ShareAlike 4.0 International License</a>."
+msgid ""
+"I confirm that I am the creator of the graphic assets submitted and/or "
+"legally own the rights to use and distribute them under <a rel=\"license\" "
+"target=\"_blank\" href=\"http://creativecommons.org/licenses/by-sa/4.0/"
+"\">Creative Commons Attribution-ShareAlike 4.0 International License</a>."
 msgstr ""
 
 #: views/import_publish.php:31
@@ -303,11 +310,14 @@ msgid "Browse"
 msgstr ""
 
 #: views/import_upload.php:3
-msgid "If you have a game pack in a .zip format, you may install it by uploading it here."
+msgid ""
+"If you have a game pack in a .zip format, you may install it by uploading it "
+"here."
 msgstr ""
 
 #: views/import_upload.php:4
-msgid "Import may take some time. Please do not refresh browser when in progress."
+msgid ""
+"Import may take some time. Please do not refresh browser when in progress."
 msgstr ""
 
 #: views/import_upload.php:12
@@ -441,7 +451,9 @@ msgid "Allow user manage specified games only:"
 msgstr ""
 
 #: views/settings.php:152
-msgid "User can create new games <strong>only if &ldquo;All&rdquo; option is checked.</strong>"
+msgid ""
+"User can create new games <strong>only if &ldquo;All&rdquo; option is "
+"checked.</strong>"
 msgstr ""
 
 #: views/settings.php:156
@@ -473,7 +485,9 @@ msgid "Create a new game"
 msgstr ""
 
 #: views/setup_games.php:24
-msgid "<i>Not finding your game?</i> You can create your own!<br/>We'll take you to map editing right away."
+msgid ""
+"<i>Not finding your game?</i> You can create your own!<br/>We'll take you to "
+"map editing right away."
 msgstr ""
 
 #: views/setup_games.php:25
@@ -675,11 +689,15 @@ msgid "Please fill in the game name."
 msgstr ""
 
 #: wp-clanwars.php:737
-msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in <code>php.ini</code>."
+msgid ""
+"The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
+"<code>php.ini</code>."
 msgstr ""
 
 #: wp-clanwars.php:738
-msgid "The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was specified in the HTML form."
+msgid ""
+"The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was "
+"specified in the HTML form."
 msgstr ""
 
 #: wp-clanwars.php:739
@@ -772,7 +790,7 @@ msgid "Displaying %s&#8211;%s of %s"
 msgstr ""
 
 #: wp-clanwars.php:1054
-msgid "Failed ot delete games. Error: %s"
+msgid "Failed to delete games. Error: %s"
 msgstr ""
 
 #: wp-clanwars.php:1057
@@ -954,7 +972,9 @@ msgid "Settings saved."
 msgstr ""
 
 #: wp-clanwars.php:2454
-msgid "The game has been published and will be publicly available after moderation. You will be notified via e-mail."
+msgid ""
+"The game has been published and will be publicly available after moderation. "
+"You will be notified via e-mail."
 msgstr ""
 
 #: wp-clanwars.php:2458
@@ -968,6 +988,7 @@ msgstr ""
 #: wp-clanwars.php:2474
 msgid "Permissions"
 msgstr ""
+
 #. Plugin Name of the plugin/theme
 msgid "WP-ClanWars"
 msgstr ""
