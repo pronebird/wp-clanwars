@@ -8,17 +8,17 @@ Thanks everyone for participation!
 
 ## TODO
 
-- Set post date to match date to hide future posts
-- Add tournament logo
-- Add team logo
-- Add twitch / stream URL to the match (display it in sidebar)
-+ Add screenshots to match editor.
-- Add line up.
-- Limit game icon dimensions
-- Option to disable upcoming matches
-- Add sort options in widget
-- Match search
-- Pagination in widget or load more
+* Set post date to match date to hide future posts
+* Add tournament logo
+* ~~Add team logo~~
+* Add twitch / stream URL to the match (display it in sidebar)
+* ~~Add screenshots to match editor.~~
+* Add line up.
+* Limit game icon dimensions
+* Option to disable upcoming matches
+* Add sort options in widget
+* Match search
+* Pagination in widget or load more
 
 I work on this plugin in free time and I don't have much, so contributions are welcome.
 
