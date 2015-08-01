@@ -1,13 +1,13 @@
 === WP-ClanWars ===
 Contributors: andddd
-Tags: cybersport, clanwar, team, clan, cyber, sport, match
+Tags: cybersport, clanwar, team, clan, cyber, sport, match, gaming, game, community
 Requires at least: 4.1
 Tested up to: 4.2.2
 Stable tag: 1.7.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WP-ClanWars is a match organizer plugin for cyber sport teams.
+WP-ClanWars is a match organizer plugin for gaming communities and teams.
 
 == Help out to translate this plugin ==
 
@@ -17,7 +17,7 @@ https://www.transifex.com/projects/p/wp-clanwars/
 
 == Description ==
 
-WP-ClanWars is a match organizer plugin for cyber sport teams. It supports multiple games, sidebar widget, match browser, and allows multigamings to delegate match scheduling between multiple war arrangers using simple access control system.
+WP-ClanWars is a match organizer plugin for gaming communities and teams. It supports multiple games, sidebar widget, match browser, and allows multigamings to delegate match scheduling between multiple war arrangers using simple access control system.
 
 Plugin creates a post for every match, all posts are published under category set in plugin settings. I suggest to create a separate category for all matches so you don't mix it with any other blog posts. Since every match is a regular post, it means that they will show up all around your website, if it's not desired behavior you will have to restrict matches category from being shown on specific pages of your website (e.g. on front page). I guess there are plenty of plugins for that or you can always do it manually by fixing your theme files. I would also suggest to avoid any changes to the content of created posts because plugin overwrites post content on match update.
 
