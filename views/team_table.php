@@ -1,4 +1,4 @@
-<div class="wrap wp-cw-teams">
+<div class="wrap wp-clanwars-teams">
 	<h2><?php _e('Teams', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-teams&act=add'); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
 
 	<form id="wp-clanwars-manageform" action="admin-post.php" method="post">
@@ -54,6 +54,9 @@
 
 			<tr class="iedit<?php if($i % 2 == 0) echo ' alternate'; ?>">
 				<th scope="row" class="check-column"><input type="checkbox" name="delete[]" value="<?php echo $item->id; ?>" /></th>
+				<td class="column-icon media-icon">
+					<?php if(!empty($item->attach)) echo $item->attach; ?>
+				</td>
 				<td class="title column-title">
 					<a class="row-title" href="<?php echo admin_url('admin.php?page=wp-clanwars-teams&amp;act=edit&amp;id=' . $item->id); ?>" title="<?php echo sprintf(__('Edit &#8220;%s&#8221; Team', WP_CLANWARS_TEXTDOMAIN), esc_attr($item->title)); ?>"> <?php echo esc_html($item->title); ?> <?php if($item->home_team) _e('(Home Team)', WP_CLANWARS_TEXTDOMAIN); ?></a><br />
 					<div class="row-actions">

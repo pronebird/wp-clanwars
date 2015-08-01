@@ -40,6 +40,10 @@ html[xmlns] .clearfix {
 	margin: 2px;
 }
 
+.wp-clanwars-teams .column-logo {
+    width: 80px;
+}
+
 .wp-cw-matcheditor h2 {
 	position: relative;
 }

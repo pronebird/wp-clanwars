@@ -998,9 +998,16 @@ EOT;
 				$page_links
 		);
 
-		$table_columns = array('cb' => '<input type="checkbox" />',
-					'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
-					'country' => __('Country', WP_CLANWARS_TEXTDOMAIN));
+		$table_columns = array(
+			'cb' => '<input type="checkbox" />',
+			'logo' => '',
+			'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
+			'country' => __('Country', WP_CLANWARS_TEXTDOMAIN)
+		);
+
+		foreach($teams as $team) {
+			$team->attach = wp_get_attachment_image($team->logo, 'thumbnail');
+		}
 
 		$view = new View( 'team_table' );
 
