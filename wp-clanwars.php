@@ -71,13 +71,13 @@ class WP_ClanWars {
 
 	const ErrorOK = 0;
 	const ErrorDatabase = -199;
-	const ErrorUploadMaxFileSize = -208;
-	const ErrorUploadHTMLMaxFileSize = -209;
-	const ErrorUploadPartially = -210;
-	const ErrorUploadNoFile = -211;
-	const ErrorUploadMissingTemp = -212;
-	const ErrorUploadDiskWrite = -213;
-	const ErrorUploadStoppedByExt = -214;
+	const ErrorUploadMaxFileSize = 1; // UPLOAD_ERR_INI_SIZE
+	const ErrorUploadHTMLMaxFileSize = 2; // UPLOAD_ERR_FORM_SIZE
+	const ErrorUploadPartially = 3; // UPLOAD_ERR_PARTIAL
+	const ErrorUploadNoFile = 4; // UPLOAD_ERR_NO_FILE
+	const ErrorUploadMissingTemp = 6; // UPLOAD_ERR_NO_TMP_DIR
+	const ErrorUploadDiskWrite = 7; // UPLOAD_ERR_CANT_WRITE
+	const ErrorUploadStoppedByExt = 8; // UPLOAD_ERR_EXTENSION
 	const ErrorUploadFileTypeNotAllowed = -215;
 
 	function __construct() {
@@ -721,80 +721,90 @@ EOT;
 	 *
 	 * @param string $name $_FILES array key for a file which should be uploaded
 	 *
-	 * @return void
+	 * @return int|WP_Error attachment_id or WP_Error
 	 */
 
 	function handle_upload($name)
 	{
-		$mimes = apply_filters('upload_mimes',
-				array('jpg|jpeg|jpe' => 'image/jpeg',
-					  'gif' => 'image/gif',
-					  'png' => 'image/png'));
+		$mimes = apply_filters('upload_mimes', array(
+			'jpg|jpeg|jpe' => 'image/jpeg',
+			'gif' => 'image/gif',
+			'png' => 'image/png')
+		);
 
 		$upload = isset($_FILES[$name]) ? $_FILES[$name] : false;
-		$upload_errors = array(self::ErrorOK,
-							   self::ErrorUploadMaxFileSize,
-							   self::ErrorUploadHTMLMaxFileSize,
-							   self::ErrorUploadPartially,
-							   self::ErrorUploadNoFile,
-							   self::ErrorOK,
-							   self::ErrorUploadMissingTemp,
-							   self::ErrorUploadDiskWrite,
-							   self::ErrorUploadStoppedByExt);
+		$upload_errors = array(
+			self::ErrorUploadMaxFileSize => __('The uploaded file exceeds the <code>upload_max_filesize</code> directive in <code>php.ini</code>.', WP_CLANWARS_TEXTDOMAIN),
+			self::ErrorUploadHTMLMaxFileSize => __('The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was specified in the HTML form.', WP_CLANWARS_TEXTDOMAIN),
+			self::ErrorUploadPartially => __('The uploaded file was only partially uploaded.', WP_CLANWARS_TEXTDOMAIN),
+			self::ErrorUploadNoFile => __('No file was uploaded.', WP_CLANWARS_TEXTDOMAIN),
+			self::ErrorUploadMissingTemp => __('Missing a temporary folder.', WP_CLANWARS_TEXTDOMAIN),
+			self::ErrorUploadDiskWrite => __('Failed to write file to disk.', WP_CLANWARS_TEXTDOMAIN),
+			self::ErrorUploadStoppedByExt => __('File upload stopped by extension.', WP_CLANWARS_TEXTDOMAIN),
+			self::ErrorUploadFileTypeNotAllowed => __('File type does not meet security guidelines. Try another.', WP_CLANWARS_TEXTDOMAIN)
+		);
 
-		if(!empty($upload))
-		{
-			if($upload['error'] > 0)
-				return $upload_errors[$upload['error']];
-
-			extract(wp_check_filetype($upload['name'], $mimes));
-
-			if(!$type || !$ext)
-			{
-				return self::ErrorUploadFileTypeNotAllowed;
-			}
-			else
-			{
-				$file_data = wp_handle_upload($upload,
-					array('test_type' => false,
-						  'test_form' => false,
-						  'upload_error_handler' =>
-						   create_function('&$file, $message',
-										   '$code = $file["error"];
-										   $errors = array(' . implode(', ', $upload_errors) . ');
-										   if(isset($errors[$code]))
-											  return $errors[$code];
-										   return $errors[0];')));
-
-				if(!empty($file_data) && is_array($file_data))
-				{
-					$file_data['type'] = $type;
-					if(!isset($file_data['error']))
-					{
-						$fileinfo = pathinfo($file_data['file']);
-						$attach_title = basename($fileinfo['basename'], '.' . $fileinfo['extension']);
-						$attach_id = wp_insert_attachment(array('guid' => $file_data['url'],
-																'post_title' => $attach_title,
-																'post_content' => '',
-																'post_status' => 'publish',
-																'post_mime_type' => $file_data['type']),
-															$file_data['file']);
-
-						$metadata = wp_generate_attachment_metadata($attach_id, $file_data['file']);
-
-						if(!empty($metadata))
-							wp_update_attachment_metadata($attach_id, $metadata);
-
-						if(!empty($attach_id) && is_int($attach_id))
-							return $attach_id;
-					} else {
-						return $upload_errors[$file_data['error']];
-					}
-				}
-			}
+		if( empty($upload) ) {
+			return new WP_Error( self::ErrorUploadNoFile, $upload_errors[self::ErrorUploadNoFile] );
 		}
 
-		return self::ErrorOK;
+		if($upload['error'] > 0) {
+			$code = $upload['error'];
+
+			if(isset($upload_errors[$code])) {
+				return new WP_Error( $code, $upload_errors[$code] );
+			}
+
+			return new WP_Error( $code, sprintf(__( 'Unknown upload error: %d', WP_CLANWARS_TEXTDOMAIN ), $code ) );
+		}
+
+		extract( wp_check_filetype($upload['name'], $mimes) );
+
+		if(!$type || !$ext) {
+			return new WP_Error( self::ErrorUploadFileTypeNotAllowed, $upload_errors[self::ErrorUploadFileTypeNotAllowed] );
+		}
+
+		$options = array(
+			'test_type' => false,
+			'test_form' => false,
+			'upload_error_handler' => function ( $file, $message ) use ($upload_errors) {
+				$code = $file['error'];
+				return new WP_Error( $code, $upload_errors[$code] );
+			}
+		);
+
+		$file_data = wp_handle_upload($upload, $options);
+
+		if( empty($file_data) || !is_array($file_data) ) {
+			return false;
+		}
+
+		$file_data['type'] = $type;
+		if( isset($file_data['error']) ) {
+			$code = $file_data['error'];
+			return new WP_Error( $code, $upload_errors[$code] );
+		}
+
+		$fileinfo = pathinfo($file_data['file']);
+		$attach_title = basename($fileinfo['basename'], '.' . $fileinfo['extension']);
+		$attach_options = array('guid' => $file_data['url'],
+			'post_title' => $attach_title,
+			'post_content' => '',
+			'post_status' => 'publish',
+			'post_mime_type' => $file_data['type']
+		);
+		$attach_id = wp_insert_attachment($attach_options, $file_data['file']);
+
+		if( empty($attach_id) || !is_int($attach_id) ) {
+			return new WP_Error( self::ErrorDatabase, __( 'Failed to save attachment in database.', WP_CLANWARS_TEXTDOMAIN ) );
+		}
+
+		$metadata = wp_generate_attachment_metadata($attach_id, $file_data['file']);
+		if( !empty($metadata) ) {
+			wp_update_attachment_metadata($attach_id, $metadata);
+		}
+
+		return $attach_id;
 	}
 
 	function on_admin_post_deleteteams()
@@ -860,16 +870,16 @@ EOT;
 	function team_editor($page_title, $page_action, $page_submit, $team_id = 0)
 	{
 		$defaults = array('title' => '', 'logo' => 0, 'country' => '', 'home_team' => 0, 'action' => '');
-		$data = array();
+		$team = new stdClass();
 
 		if($team_id > 0) {
-			$t = \WP_Clanwars\Teams::get_team(array('id' => $team_id));
-			if(!empty($t)) {
-				$data = (array)$t[0];
+			$teams = \WP_Clanwars\Teams::get_team( array('id' => $team_id) );
+			if(!empty($teams)) {
+				$team = reset($teams);
 			}
 		}
 
-		extract(Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($data, $defaults)));
+		extract(Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($team, $defaults)));
 
 		$country_select = Utils::html_country_select_helper('name=country&id=country&show_popular=1&class=select2&select=' . $country, false);
 
@@ -877,6 +887,7 @@ EOT;
 		$context = compact('page_title', 'page_action', 'page_submit',
 					'team_id', 'title', 'logo', 'country', 'home_team', 'action',
 					'country_select');
+		$context['attach'] = isset($team->logo) ? wp_get_attachment_image($team->logo, 'thumbnail') : '';
 		$view->render( $context );
 	}
 
@@ -904,15 +915,34 @@ EOT;
 			return;
 		}
 
-		// validate title
-		if( empty( $_POST['title'] ) ) {
+		$defaults = array( 'title' => '', 'country' => '', 'delete_image' => false );
+		$data = Utils::extract_args( stripslashes_deep( $_POST ), $defaults );
+		extract($data);
+
+		unset($data['delete_image']);
+
+		if( empty( $title ) ) {
 			Flash::error( __( 'Team title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
 			return;
 		}
 
+		if( !empty($delete_image) ) {
+			$data['logo'] = 0;
+		}
+
+		$upload_id = $this->handle_upload( 'logo_file' );
+
+		if( is_wp_error($upload_id) && $upload_id->get_error_code() !== self::ErrorUploadNoFile ) {
+			Flash::error( $upload_id->get_error_message() );
+			return;
+		}
+		else if( is_int($upload_id) ) {
+			$data['logo'] = $upload_id;
+		}
+
 		// add team?
 		if( $act == 'add' ) {
-			if(\WP_Clanwars\Teams::add_team( stripslashes_deep( $_POST ) )) {
+			if( \WP_Clanwars\Teams::add_team( $data ) ) {
 				Flash::success( __( 'Added a new team.', WP_CLANWARS_TEXTDOMAIN ) );
 				wp_redirect( $redirect_url );
 				exit();
@@ -922,8 +952,9 @@ EOT;
 			}
 		}
 		else if( $act == 'edit' ) { // update team?
-			if(\WP_Clanwars\Teams::update_team( $id, stripslashes_deep( $_POST ) ) !== false) {
+			if(\WP_Clanwars\Teams::update_team( $id, $data ) !== false) {
 				Flash::success( __( 'Updated a team.', WP_CLANWARS_TEXTDOMAIN ) );
+				$redirect_url = add_query_arg( compact( 'act', 'id' ), $redirect_url );
 				wp_redirect( $redirect_url );
 				exit();
 			} 
@@ -1335,192 +1366,163 @@ EOT;
 		$die = false;
 
 		// Check game or map is really exists
-		if($act == 'add' && !$this->acl_user_can('manage_game', 'all')) {
+		if( $act === 'add' && !$this->acl_user_can('manage_game', 'all') ) {
 			$die = true;
 		}
-		else if($act == 'edit' || $act == 'maps' || $act == 'addmap') {
+		else if( $act === 'edit' || $act === 'maps' || $act === 'addmap' ) {
 
-			$g = \WP_Clanwars\Games::get_game(array('id' =>
-					($act == 'maps' || $act == 'addmap' ? $game_id : $id)
-				));
+			$g = \WP_Clanwars\Games::get_game(array(
+				'id' => ($act === 'maps' || $act === 'addmap' ? $game_id : $id)
+			));
 
 			$die = empty($g) || !$this->acl_user_can('manage_game', $g[0]->id);
 
-		} else if($act == 'editmap') {
-
-			$m = \WP_Clanwars\Maps::get_map(array('id' => $id));
-			$die = empty($m);
+		}
+		else if( $act === 'editmap' ) {
+			$m = \WP_Clanwars\Maps::get_map( compact('id') );
+			$die = empty($m) || !$this->acl_user_can('manage_game', $m[0]->game_id);
 		}
 
-		if($die)
+		if($die) {
 			wp_die( __('Cheatin&#8217; uh?') );
+		}
 
-		if( Utils::is_post() ) {
+		if( !Utils::is_post() ) {
+			return;
+		}
 
-			$edit_maps_errors = array(
-				self::ErrorDatabase => __('Database error.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorOK => __('The game is updated.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadMaxFileSize => __('The uploaded file exceeds the <code>upload_max_filesize</code> directive in <code>php.ini</code>.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadHTMLMaxFileSize => __('The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was specified in the HTML form.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadPartially => __('The uploaded file was only partially uploaded.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadNoFile => __('No file was uploaded.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadMissingTemp => __('Missing a temporary folder.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadDiskWrite => __('Failed to write file to disk.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadStoppedByExt => __('File upload stopped by extension.', WP_CLANWARS_TEXTDOMAIN),
-				self::ErrorUploadFileTypeNotAllowed => __('File type does not meet security guidelines. Try another.', WP_CLANWARS_TEXTDOMAIN)
-			);
+		if( $act === 'add' ) {
+			$defaults = array( 'title' => '', 'abbr' => '' );
+			$data = Utils::extract_args( stripslashes_deep( $_POST ), $defaults );
+			extract( $data );
 
-			switch($act) {
-				case 'add':
-					$defaults = array( 'title' => '', 'abbr' => '', 'icon' => 0 );
-					$data = Utils::extract_args( stripslashes_deep( $_POST ), $defaults );
-					extract( $data );
-
-					if( !empty($title) ) {
-						$data['icon'] = $this->handle_upload( 'icon_file' );
-
-						if($data['icon'] == self::ErrorUploadNoFile) {
-							$data['icon'] = 0;
-						}
-
-						if($data['icon'] >= 0) {
-							if(\WP_Clanwars\Games::add_game($data)) {
-								Flash::success( __( 'Added a new game.', WP_CLANWARS_TEXTDOMAIN ) );
-								wp_redirect( admin_url( 'admin.php?page=wp-clanwars-games' ) );
-								exit();
-							} 
-							else {
-								Flash::error( __( 'Failed to add a game.', WP_CLANWARS_TEXTDOMAIN ) );
-							}
-						} 
-						else {
-							Flash::error( $edit_maps_errors[ $attach_id ] );
-						}
-
-					} 
-					else {
-						Flash::error( __( 'Game title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
-					}
-				break;
-
-				case 'edit':
-					$defaults = array('title' => '', 'abbr' => '', 'delete_image' => false);
-					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
-					extract($data);
-
-					unset($data['delete_image']);
-
-					if( !empty($title) ) {
-
-						if( !empty($delete_image) ) {
-							$data['icon'] = 0;
-						}
-
-						$attach_id = $this->handle_upload( 'icon_file' );
-
-						if($attach_id == self::ErrorUploadNoFile) {
-							$attach_id = 0;
-						}
-						else if($attach_id > 0) {
-							$data['icon'] = $attach_id;
-						}
-
-						if($attach_id >= 0) {
-							if(\WP_Clanwars\Games::update_game($id, $data) !== false) {
-								Flash::success( __( 'Updated a game.', WP_CLANWARS_TEXTDOMAIN ) );
-								wp_redirect( admin_url( 'admin.php?page=wp-clanwars-games' ) );
-								exit();
-							} 
-							else {
-								Flash::error( __( 'Failed to update a game.', WP_CLANWARS_TEXTDOMAIN ) );
-							}
-						} else {
-							Flash::error( $edit_maps_errors[ $attach_id ] );
-						}
-
-					} else {
-						Flash::error( __( 'Game title is required field.', WP_CLANWARS_TEXTDOMAIN ) );
-					}
-
-					break;
-
-				case 'addmap':
-					$defaults = array('title' => '', 'game_id' => 0, 'id' => 0);
-					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
-					extract($data);
-
-					if( !empty($title) ) {
-
-						$attach_id = $this->handle_upload('screenshot_file');
-
-						if($attach_id == self::ErrorUploadNoFile) {
-							$attach_id = 0;
-						}
-
-						if($attach_id >= 0) {
-
-							if(\WP_Clanwars\Maps::add_map(array('title' => $title, 'screenshot' => $attach_id, 'game_id' => $game_id)) !== false) {
-								Flash::success( __( 'Added a map.', WP_CLANWARS_TEXTDOMAIN ) );
-								wp_redirect( admin_url( sprintf( 'admin.php?page=wp-clanwars-games&act=maps&game_id=%d', $game_id ) ) );
-								exit();
-							} else {
-								Flash::error( __( 'Failed to add a map.', WP_CLANWARS_TEXTDOMAIN ) );
-							}
-
-						} else {
-							Flash::error( $edit_maps_errors[ $attach_id ] );
-						}
-
-					} else {
-						Flash::error( __( 'Map title is required field.', WP_CLANWARS_TEXTDOMAIN ) );
-					}
-
-					break;
-
-				case 'editmap':
-					$defaults = array('title' => '', 'game_id' => 'all', 'id' => 0, 'delete_image' => false);
-					$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
-					extract($data);
-
-					$update_data = array('title' => $title);
-
-					if( !empty($title) ) {
-
-						if(!empty($delete_image)) {
-							$update_data['screenshot'] = 0;
-						}
-
-						$attach_id = $this->handle_upload('screenshot_file');
-
-						if($attach_id == self::ErrorUploadNoFile) {
-							$attach_id = 0;
-						}
-						else if($attach_id > 0) {
-							$update_data['screenshot'] = $attach_id;
-						}
-
-						if($attach_id >= 0) {
-
-							if(\WP_Clanwars\Maps::update_map($id, $update_data) !== false) {
-								Flash::success( __( 'Updated a map.', WP_CLANWARS_TEXTDOMAIN ) );
-								wp_redirect( admin_url( sprintf( 'admin.php?page=wp-clanwars-games&act=maps&game_id=%d', $game_id ) ) );
-								exit();
-							} else {
-								Flash::error( __( 'Failed to update a map.', WP_CLANWARS_TEXTDOMAIN ) );
-							}
-
-						} 
-						else {
-							Flash::error( $edit_maps_errors[ $attach_id ] );
-						}
-
-					} else {
-						Flash::error( __( 'Map title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
-					}
-
-					break;
+			if( empty($title) ) {
+				Flash::error( __( 'Game title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+				return;
 			}
 
+			$upload_id = $this->handle_upload( 'icon_file' );
+
+			if( is_wp_error($upload_id) && $upload_id->get_error_code() !== self::ErrorUploadNoFile ) {
+				Flash::error( $upload_id->get_error_message() );
+				return;
+			}
+			else if( is_int($upload_id) ) {
+				$data['icon'] = $upload_id;
+			}
+
+			if( \WP_Clanwars\Games::add_game( $data ) ) {
+				Flash::success( __( 'Added a new game.', WP_CLANWARS_TEXTDOMAIN ) );
+				wp_redirect( admin_url( 'admin.php?page=wp-clanwars-games' ) );
+				exit();
+			} 
+			else {
+				Flash::error( __( 'Failed to add a game.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
+
+		}
+		else if( $act === 'edit' ) {
+
+			$defaults = array('title' => '', 'abbr' => '', 'delete_image' => false);
+			$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
+			extract($data);
+
+			$update_data = compact('title', 'abbr');
+
+			if( empty($title) ) {
+				Flash::error( __( 'Game title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+				return;
+			}
+
+			if( !empty($delete_image) ) {
+				$update_data['icon'] = 0;
+			}
+
+			$upload_id = $this->handle_upload( 'icon_file' );
+
+			if( is_wp_error($upload_id) && $upload_id->get_error_code() !== self::ErrorUploadNoFile ) {
+				Flash::error( $upload_id->get_error_message() );
+				return;
+			}
+			else if( is_int($upload_id) ) {
+				$update_data['icon'] = $upload_id;
+			}
+
+			if( \WP_Clanwars\Games::update_game($id, $update_data) !== false ) {
+				Flash::success( __( 'Updated a game.', WP_CLANWARS_TEXTDOMAIN ) );
+				wp_redirect( admin_url( sprintf('admin.php?page=wp-clanwars-games&act=edit&id=%d', $id) ) );
+				exit();
+			} 
+			else {
+				Flash::error( __( 'Failed to update a game.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
+
+		}
+		else if($act === 'addmap') {
+
+			$defaults = array('title' => '', 'game_id' => 0, 'id' => 0);
+			$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
+			extract($data);
+
+			if( empty($title) ) {
+				Flash::error( __( 'Map title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+				return;
+			}
+
+			$upload_id = $this->handle_upload( 'screenshot_file' );
+
+			if( is_wp_error($upload_id) && $upload_id->get_error_code() !== self::ErrorUploadNoFile ) {
+				Flash::error( $upload_id->get_error_message() );
+				return;
+			}
+			else if( is_int($upload_id) ) {
+				$data['screenshot'] = $upload_id;
+			}
+
+			if( \WP_Clanwars\Maps::add_map($data) !== false ) {
+				Flash::success( __( 'Added a map.', WP_CLANWARS_TEXTDOMAIN ) );
+				wp_redirect( admin_url( sprintf( 'admin.php?page=wp-clanwars-games&act=maps&game_id=%d', $game_id ) ) );
+				exit();
+			} 
+			else {
+				Flash::error( __( 'Failed to add a map.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
+
+		}
+		else if( $act === 'editmap' ) {
+
+			$defaults = array('title' => '', 'game_id' => 0, 'id' => 0, 'delete_image' => false);
+			$data = Utils::extract_args(stripslashes_deep($_POST), $defaults);
+			extract($data);
+
+			$update_data = compact('title');
+
+			if( empty($title) ) {
+				Flash::error( __( 'Map title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+				return;
+			}
+
+			if( !empty($delete_image) ) {
+				$update_data['screenshot'] = 0;
+			}
+
+			$upload_id = $this->handle_upload( 'screenshot_file' );
+
+			if( is_wp_error($upload_id) && $upload_id->get_error_code() !== self::ErrorUploadNoFile ) {
+				Flash::error( $upload_id->get_error_message() );
+				return;
+			}
+			else if( is_int($upload_id) ) {
+				$update_data['screenshot'] = $upload_id;
+			}
+
+			if( \WP_Clanwars\Maps::update_map($id, $update_data) !== false ) {
+				Flash::success( __( 'Updated a map.', WP_CLANWARS_TEXTDOMAIN ) );
+				wp_redirect( admin_url( sprintf( 'admin.php?page=wp-clanwars-games&act=%s&id=%d', $act, $id ) ) );
+				exit();
+			} else {
+				Flash::error( __( 'Failed to update a map.', WP_CLANWARS_TEXTDOMAIN ) );
+			}
 		}
 	}
 
@@ -1600,7 +1602,7 @@ EOT;
 		if($game_id > 0) {
 			$result = \WP_Clanwars\Games::get_game(array('id' => $game_id));
 			if(!empty($result)) {
-				$game = $result[0];
+				$game = reset($result);
 			}
 		}
 

@@ -49,6 +49,7 @@ html[xmlns] .clearfix {
 }
 
 .wp-cw-mapeditor .screenshot img,
+.wp-clanwars-team-editor .screenshot img,
 .wp-cw-gameeditor .screenshot img {
     margin: 20px 0;
     border: 1px solid #dfdfdf;
