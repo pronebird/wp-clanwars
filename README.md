@@ -53,25 +53,25 @@ __This plugin requires at least PHP 5.3__
 ### Screenshots
 
 #### Match Browser
-![Match browser](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-1.jpg)
+![Match browser](screenshot-1.jpg)
 
 #### Games management
-![Games management](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-2.jpg)
+![Games management](screenshot-2.jpg)
 
 #### Match management
-![Match management](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-3.jpg)
+![Match management](screenshot-3.jpg)
 
 #### Match editor
-![Match editor](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-4.jpg)
+![Match editor](screenshot-4.jpg)
 
 #### Import menu
-![Import menu](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-5.jpg)
+![Import menu](screenshot-5.jpg)
 
 #### Settings
-![Settings](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-6.jpg)
+![Settings](screenshot-6.jpg)
 
 #### Sidebar widget settings
-![Sidebar widget settings](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-7.jpg)
+![Sidebar widget settings](screenshot-7.jpg)
 
 #### Sidebar widget
-![Sidebar widget](https://bitbucket.org/and/wp-clanwars/raw/default/screenshot-8.jpg)
+![Sidebar widget](screenshot-8.jpg)
