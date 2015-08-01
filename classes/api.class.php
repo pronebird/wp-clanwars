@@ -8,14 +8,14 @@ namespace WP_Clanwars;
 class API {
 
     protected static $api_url = 'http://localhost:3000/v1/';
-    protected static $access_token_usermeta_key = 'wp-clanwars-accesstoken';
+    protected static $access_token_usermeta_key = 'wp-clanwars-server-accesstoken';
 
     static function is_logged_in() {
         return !empty( self::get_access_token() );
     }
 
-    static function get_login_url($service) {
-        return self::$api_url . 'auth/' . $service;
+    static function get_login_url($service, $callbackUrl) {
+        return self::$api_url . 'auth/' . $service . '?returnTo=' . urlencode($callbackUrl);
     }
 
     static function get_access_token() {
@@ -26,6 +26,22 @@ class API {
     static function set_access_token($access_token) {
         global $current_user;
         update_user_meta( $current_user->ID, self::$access_token_usermeta_key, $access_token );
+    }
+
+    static function get_auth_status( $access_token = '' ) {
+        $args = array();
+
+        if(!empty($access_token)) {
+            $args = array(
+                'headers' => array(
+                    'Authorization' => 'Bearer ' . $access_token
+                )
+            );
+        }
+
+        $response = self::remote_get( self::$api_url . 'auth/status', $args );
+
+        return self::get_response_payload($response);
     }
 
     static function get_download_url($id) {
@@ -116,11 +132,20 @@ class API {
     }
 
     protected static function remote_get($url, $args = array()) {
+        $headers = array();
+
+        if(self::is_logged_in()) {
+            $headers = array(
+                'Authorization' => 'Bearer ' . self::get_access_token()
+            );
+        }
+
         $_args = array(
-            'user-agent' => self::get_user_agent()
+            'user-agent' => self::get_user_agent(),
+            'headers' => $headers
         );
 
-        return wp_remote_get( $url, (array)$args + $_args);
+        return wp_remote_get( $url, array_merge_recursive($_args, (array)$args));
     }
 
     protected static function get_response_payload($response) {

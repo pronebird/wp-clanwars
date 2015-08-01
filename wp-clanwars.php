@@ -202,6 +202,7 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-deleteacl', array($this, 'on_admin_post_deleteacl'));
 		add_action('admin_post_wp-clanwars-import', array($this, 'on_admin_post_import'));
 		add_action('admin_post_wp-clanwars-publish', array($this, 'on_admin_post_publish'));
+		add_action('admin_post_wp-clanwars-login', array($this, 'on_admin_post_login'));
 
 		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setup_team'));
 		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setup_games'));
@@ -375,8 +376,9 @@ EOT;
 		wp_register_style('wp-cw-sitecss', WP_CLANWARS_URL . '/css/site.css', array(), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-widgetcss', WP_CLANWARS_URL . '/css/widget.css', array(), WP_CLANWARS_VERSION);
 
-		$facebook_login_url = CloudAPI::get_login_url('facebook');
-		$steam_login_url = CloudAPI::get_login_url('steam');
+		$callbackURL = admin_url( 'admin-post.php?action=wp-clanwars-login' );
+		$facebook_login_url = CloudAPI::get_login_url('facebook', $callbackURL);
+		$steam_login_url = CloudAPI::get_login_url('steam', $callbackURL);
 		wp_localize_script('wp-cw-login',
 			'wpClanwarsLoginSettings',
 			compact('facebook_login_url', 'steam_login_url')
@@ -2464,6 +2466,30 @@ EOT;
 		}
 
 		wp_redirect( $_POST['_wp_http_referer'] );
+	}
+
+	function on_admin_post_login() {
+		if(!isset($_POST['token'])) {
+			$view = new View( 'login_redirect' );
+			$view->render();
+			die();
+		}
+
+		$token = $_POST['token'];
+		$status = CloudAPI::get_auth_status($token);
+
+		if(!is_wp_error($status) && is_object($status) && isset($status->socialId)) {
+			Flash::success( sprintf( __( 'Logged in as %s via %s.', WP_CLANWARS_TEXTDOMAIN ), $status->name, $status->provider ) );
+			CloudAPI::set_access_token($token);
+		}
+		else {
+			Flash::error( __( 'Failed to log in.', WP_CLANWARS_TEXTDOMAIN ) );
+			CloudAPI::set_access_token('');
+		}
+
+		$view = new View( 'login_complete' );
+		$view->render();
+		die();
 	}
 
 	// Settings page hook
