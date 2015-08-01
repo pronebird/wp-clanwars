@@ -1,6 +1,6 @@
 #!/bin/sh
 
-$(cd -P -- "$(dirname -- "$0")" && pwd -P)
+cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd
 
 cp -R tools ../../tools
 cp pot.sh ../../
