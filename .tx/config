@@ -1,6 +1,6 @@
 [main]
 host = https://www.transifex.com
-lang_map = es: es_ES, de: de_DE, ru: ru_RU, it: it_IT, sk: sk_SK, sl: sl_SL, nl: nl_NL, tr: tr_TR
+lang_map = es: es_ES, de: de_DE, ru: ru_RU, it: it_IT, sk: sk_SK, sl: sl_SL, pl: pl_PL, cs: cs_CZ, nl: nl_NL, tr: tr_TR
 
 [wp-clanwars.wp-clanwars-countries]
 source_file = langs/wp-clanwars-countries.pot
@@ -14,4 +14,4 @@ source_file = langs/wp-clanwars.pot
 source_lang = en
 type = PO
 file_filter = langs/wp-clanwars-<lang>.po
-minimum_perc = 10
+minimum_perc = 60
