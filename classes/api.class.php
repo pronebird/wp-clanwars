@@ -34,7 +34,7 @@ class API {
         update_user_meta( $current_user->ID, self::$user_info_usermeta_key, $userInfo );
     }
 
-    static function get_user_info($userInfo) {
+    static function get_user_info() {
         global $current_user;
         return get_user_meta( $current_user->ID, self::$user_info_usermeta_key, true );
     }
