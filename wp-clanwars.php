@@ -203,6 +203,7 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-import', array($this, 'on_admin_post_import'));
 		add_action('admin_post_wp-clanwars-publish', array($this, 'on_admin_post_publish'));
 		add_action('admin_post_wp-clanwars-login', array($this, 'on_admin_post_login'));
+		add_action('admin_post_wp-clanwars-logout', array($this, 'on_admin_post_logout'));
 
 		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setup_team'));
 		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setup_games'));
@@ -2486,13 +2487,23 @@ EOT;
 		}
 		else {
 			CloudAPI::set_access_token('');
-			CloudAPI::set_user_info(new stdClass());
+			CloudAPI::set_user_info('');
 
 			Flash::error( __( 'Failed to log in.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
 		$view = new View( 'login_complete' );
 		$view->render();
+		die();
+	}
+
+	function on_admin_post_logout() {
+		check_admin_referer('wp-clanwars-logout');
+
+		CloudAPI::set_access_token('');
+		CloudAPI::set_user_info('');
+
+		wp_redirect( $_REQUEST['_wp_http_referer'] );
 		die();
 	}
 
