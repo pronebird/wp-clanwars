@@ -55,6 +55,8 @@ require_once (dirname(__FILE__) . '/classes/matches.class.php');
 require_once (dirname(__FILE__) . '/classes/api.class.php');
 require_once (dirname(__FILE__) . '/classes/acl.class.php');
 
+require_once(dirname(__FILE__) . '/classes/match_table.class.php');
+
 require_once (dirname(__FILE__) . '/wp-clanwars-widget.php');
 require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
 
@@ -86,6 +88,8 @@ class WP_ClanWars {
 
 		add_action('widgets_init', array($this, 'on_widgets_init'));
 		add_action('init', array($this, 'on_init'));
+		
+		\WP_Clanwars\MatchTable::add_screen_filter();
 	}
 
 	/**
@@ -1787,6 +1791,9 @@ EOT;
 
 	function on_load_manage_matches()
 	{
+		$this->match_table = new \WP_Clanwars\MatchTable();
+		$this->match_table->prepare_items();
+
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
 		$media_options = array();
@@ -2192,28 +2199,14 @@ EOT;
 				'current' => $current_page
 		));
 
-		$page_links_text = sprintf( '<span class="displaying-num">' . __( 'Displaying %s&#8211;%s of %s' ) . '</span>%s',
-				number_format_i18n( (($current_page - 1) * $limit) + 1 ),
-				number_format_i18n( min( $current_page * $limit, $stat['total_items'] ) ),
-				'<span class="total-type-count">' . number_format_i18n( $stat['total_items'] ) . '</span>',
-				$page_links
-		);
-
-		$table_columns = array('cb' => '<input type="checkbox" />',
-				'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
-				'game_title' => __('Game', WP_CLANWARS_TEXTDOMAIN),
-				'date' => __('Date', WP_CLANWARS_TEXTDOMAIN),
-				'match_status' => __('Match status', WP_CLANWARS_TEXTDOMAIN),
-				'team1' => __('Team 1', WP_CLANWARS_TEXTDOMAIN),
-				'team2' => __('Team 2', WP_CLANWARS_TEXTDOMAIN),
-				'tickets' => __('Tickets', WP_CLANWARS_TEXTDOMAIN));
+		$wp_list_table = $this->match_table;
 
 		$view = new View( 'match_table' );
 
 		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 		$view->add_helper( 'get_country_flag', array('\WP_Clanwars\Utils', 'get_country_flag') );
 
-		$context = compact('table_columns', 'page_links_text', 'matches', 'match_statuses');
+		$context = compact('table_columns', 'page_links_text', 'matches', 'match_statuses', 'wp_list_table');
 		$view->render($context);
 	}
 
