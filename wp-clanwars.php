@@ -37,7 +37,7 @@ define('WP_CLANWARS_COUNTRIES_TEXTDOMAIN', 'wp-clanwars-countries');
 
 define('WP_CLANWARS_CATEGORY', '_wp_clanwars_category');
 define('WP_CLANWARS_DEFAULTCSS', '_wp_clanwars_defaultcss');
-define('WP_CLANWARS_ACL', '_wp_clanwars_acl');
+
 define('WP_CLANWARS_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
 
 // this folder is created in wp-content/
@@ -53,6 +53,7 @@ require_once (dirname(__FILE__) . '/classes/maps.class.php');
 require_once (dirname(__FILE__) . '/classes/rounds.class.php');
 require_once (dirname(__FILE__) . '/classes/matches.class.php');
 require_once (dirname(__FILE__) . '/classes/api.class.php');
+require_once (dirname(__FILE__) . '/classes/acl.class.php');
 
 require_once (dirname(__FILE__) . '/wp-clanwars-widget.php');
 require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
@@ -66,7 +67,6 @@ use \WP_Clanwars\API as CloudAPI;
 class WP_ClanWars {
 
 	var $match_status = array();
-	var $acl_keys = array();
 	var $page_hooks = array();
 
 	const ErrorOK = 0;
@@ -124,7 +124,6 @@ class WP_ClanWars {
 
 		add_option(WP_CLANWARS_CATEGORY, -1);
 		add_option(WP_CLANWARS_DEFAULTCSS, true);
-		add_option(WP_CLANWARS_ACL, array());
 
 		$dbstruct = implode("\n", $dbstruct);
 
@@ -148,7 +147,7 @@ class WP_ClanWars {
 
 		delete_option(WP_CLANWARS_CATEGORY);
 		delete_option(WP_CLANWARS_DEFAULTCSS);
-		delete_option(WP_CLANWARS_ACL);
+		\WP_Clanwars\ACL::destroy();
 
 		$tables = array();
 
@@ -174,12 +173,6 @@ class WP_ClanWars {
 
 	function on_init()
 	{
-		$this->acl_keys = array(
-			'manage_matches' => __('Manage matches', WP_CLANWARS_TEXTDOMAIN),
-			'manage_games' => __('Manage games', WP_CLANWARS_TEXTDOMAIN),
-			'manage_teams' => __('Manage teams', WP_CLANWARS_TEXTDOMAIN)
-		);
-
 		$this->match_status = array(
 			__('PCW', WP_CLANWARS_TEXTDOMAIN),
 			__('Official', WP_CLANWARS_TEXTDOMAIN)
@@ -251,18 +244,20 @@ EOT;
 			'manage_games' => 'wp-clanwars-games'
 		);
 
-		$keys = array_keys($acl_table);
 		$user_role = $current_user->roles[0];
 		$top_level_slug = '';
 
-		for($i = 0; $i < sizeof($keys); $i++) {
-			if($this->acl_user_can($keys[$i])) {
-				$acl_table[$keys[$i]] = $user_role;
+		foreach( $acl_table as $custom_cap => $wordpress_cap ) {
+			$has_permissions = \WP_Clanwars\ACL::user_can( $custom_cap );
+			if(!$has_permissions) {
+				continue;
+			}
 
-				// point top level slug to first menu user has access to
-				if($top_level_slug === '') {
-					$top_level_slug = $routes[$keys[$i]];
-				}
+			$acl_table[$custom_cap] = $user_role;
+
+			// point top level slug to first menu user has access to
+			if($top_level_slug === '') {
+				$top_level_slug = $routes[$custom_cap];
 			}
 		}
 
@@ -564,110 +559,6 @@ EOT;
 		wp_redirect( $redirect_url );
 	}
 
-	function acl_user_can($action, $value = false, $user_id = false)
-	{
-		global $user_ID;
-
-		$acl = $this->acl_get();
-		$is_super = false;
-		$caps = array(
-			'games' => array(),
-			'permissions' => array_fill_keys(array_keys($this->acl_keys), false)
-		);
-
-		if(empty($user_id))
-			$user_id = $user_ID;
-
-		if(!empty($acl) && isset($acl[$user_id]))
-			$caps = $acl[$user_id];
-
-		$user = new WP_User($user_id);
-		if(!empty($user))
-			$is_super = $user->has_cap('manage_options');
-
-		if($is_super) {
-			$caps['games'] = array('all');
-			array_walk($caps['permissions'], create_function('&$v, &$k', '$v = true;'));
-		}
-
-		switch($action)
-		{
-			case 'which_games':
-
-				$where = array_search(0, $caps['games']);
-
-				if($where === false)
-					return $caps['games'];
-
-				return 'all';
-
-			break;
-
-			case 'manage_game':
-
-				if($value == 'all')
-					$value = 0;
-
-				$ret = array_search($value, $caps['games']) !== false;
-
-				if(!$ret) {
-					$ret = array_search(0, $caps['games']) !== false;
-				}
-
-				return $ret;
-
-			break;
-		}
-
-		return isset($caps['permissions'][$action]) && $caps['permissions'][$action];
-	}
-
-	function acl_get() {
-		$acl = get_option(WP_CLANWARS_ACL);
-
-		if(!is_array($acl))
-			$acl = array();
-
-		return $acl;
-	}
-
-	function acl_update($user_id, $data) {
-
-		$acl = $this->acl_get();
-
-		$acl[$user_id] =  array(
-			'games' => array(0),
-			'permissions' => array('manage_matches')
-		);
-
-		$default_perms = array(
-			'manage_matches' => false,
-			'manage_teams' => false,
-			'manage_games' => false
-		);
-
-		$acl[$user_id]['games'] = isset($data['games']) ? array_unique(array_values($data['games'])) : array(0);
-		$acl[$user_id]['permissions'] = isset($data['permissions']) ? Utils::extract_args($data['permissions'], $default_perms) : $default_perms;
-
-		update_option(WP_CLANWARS_ACL, $acl);
-
-		return true;
-	}
-
-	function acl_delete($user_id) {
-
-		$acl = $this->acl_get();
-
-		if(isset($acl[$user_id])) {
-			unset($acl[$user_id]);
-			update_option(WP_CLANWARS_ACL, $acl);
-
-			return true;
-		}
-
-		return false;
-	}
-
 	function on_template_redirect() {
 		wp_enqueue_script('wp-cw-public');
 		wp_enqueue_style('jquery-tipsy');
@@ -812,7 +703,7 @@ EOT;
 
 	function on_admin_post_deleteteams()
 	{
-		if( !$this->acl_user_can('manage_teams') ) {
+		if( !\WP_Clanwars\ACL::user_can('manage_teams') ) {
 			wp_die( __('Cheatin&#8217; uh?') );
 		}
 
@@ -844,8 +735,9 @@ EOT;
 
 	function on_admin_post_sethometeam()
 	{
-		if(!$this->acl_user_can('manage_teams'))
+		if(!\WP_Clanwars\ACL::user_can('manage_teams')) {
 			wp_die( __('Cheatin&#8217; uh?') );
+		}
 
 		check_admin_referer('wp-clanwars-sethometeam');
 
@@ -1029,7 +921,7 @@ EOT;
 
 	function on_admin_post_gamesop()
 	{
-		if(!$this->acl_user_can('manage_games')) {
+		if(!\WP_Clanwars\ACL::user_can('manage_games')) {
 			wp_die( __('Cheatin&#8217; uh?') );
 		}
 
@@ -1376,7 +1268,7 @@ EOT;
 		$die = false;
 
 		// Check game or map is really exists
-		if( $act === 'add' && !$this->acl_user_can('manage_game', 'all') ) {
+		if( $act === 'add' && !\WP_Clanwars\ACL::user_can('manage_game', 'all') ) {
 			$die = true;
 		}
 		else if( $act === 'edit' || $act === 'maps' || $act === 'addmap' ) {
@@ -1385,12 +1277,12 @@ EOT;
 				'id' => ($act === 'maps' || $act === 'addmap' ? $game_id : $id)
 			));
 
-			$die = empty($g) || !$this->acl_user_can('manage_game', $g[0]->id);
+			$die = empty($g) || !\WP_Clanwars\ACL::user_can('manage_game', $g[0]->id);
 
 		}
 		else if( $act === 'editmap' ) {
 			$m = \WP_Clanwars\Maps::get_map( compact('id') );
-			$die = empty($m) || !$this->acl_user_can('manage_game', $m[0]->game_id);
+			$die = empty($m) || !\WP_Clanwars\ACL::user_can('manage_game', $m[0]->game_id);
 		}
 
 		if($die) {
@@ -1540,7 +1432,7 @@ EOT;
 	{
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
 		$current_page = isset($_GET['paged']) ? $_GET['paged'] : 1;
-		$filter_games = $this->acl_user_can('which_games');
+		$filter_games = \WP_Clanwars\ACL::user_can('which_games');
 		$limit = 10;
 
 		switch($act) {
@@ -1568,7 +1460,7 @@ EOT;
 		));
 		$stat = \WP_Clanwars\Games::get_game(array('id' => $filter_games, 'limit' => $limit), true);
 
-		$show_add_button = $this->acl_user_can('manage_game', 'all');
+		$show_add_button = \WP_Clanwars\ACL::user_can('manage_game', 'all');
 
 		// pre-populate games with icons
 		foreach ($games as $game) {
@@ -1631,8 +1523,9 @@ EOT;
 
 	function on_admin_post_deletemaps()
 	{
-		if(!$this->acl_user_can('manage_games'))
+		if(!\WP_Clanwars\ACL::user_can('manage_games')) {
 			wp_die( __('Cheatin&#8217; uh?') );
+		}
 
 		check_admin_referer('wp-clanwars-deletemaps');
 
@@ -1750,8 +1643,9 @@ EOT;
 
 	function on_admin_post_deletematches()
 	{
-		if(!$this->acl_user_can('manage_matches'))
+		if(!\WP_Clanwars\ACL::user_can('manage_matches')) {
 			wp_die( __('Cheatin&#8217; uh?') );
+		}
 
 		check_admin_referer('wp-clanwars-deletematches');
 
@@ -1790,7 +1684,7 @@ EOT;
 
 	function on_ajax_get_maps()
 	{
-		if(!$this->acl_user_can('manage_games') && !$this->acl_user_can('manage_matches')) {
+		if(!\WP_Clanwars\ACL::user_can('manage_games') && !\WP_Clanwars\ACL::user_can('manage_matches')) {
 			wp_die( __('Cheatin&#8217; uh?') );
 		}
 
@@ -1860,7 +1754,7 @@ EOT;
 		$num_comments = isset($match->post_id) ? get_comments_number($match->post_id) : 0;
 		$match_statuses = $this->match_status;
 
-		$games = \WP_Clanwars\Games::get_game(array('id' => $this->acl_user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
+		$games = \WP_Clanwars\Games::get_game(array('id' => \WP_Clanwars\ACL::user_can('which_games'), 'orderby' => 'title', 'order' => 'asc'));
 		$teams = \WP_Clanwars\Teams::get_team('id=all&orderby=title&order=asc');
 
 		$merged_data = Utils::extract_args(stripslashes_deep($_POST), Utils::extract_args($match, $defaults));
@@ -1901,11 +1795,13 @@ EOT;
 		if($act == 'edit') {
 			$m = \WP_Clanwars\Matches::get_match(array('id' => $id));
 
-			if($id != 0 && empty($m))
+			if($id != 0 && empty($m)) {
 				wp_die( __('Cheatin&#8217; uh?') );
+			}
 
-			if(!$this->acl_user_can('manage_game', $m[0]->game_id))
+			if(!\WP_Clanwars\ACL::user_can('manage_game', $m[0]->game_id)) {
 				wp_die( __('Cheatin&#8217; uh?') );
+			}
 
 			$media_options['post'] = $m[0]->post_id;
 		}
@@ -1927,7 +1823,7 @@ EOT;
 
 		if( Utils::is_post() )
 		{
-			if( isset( $_POST['game_id'] ) && !$this->acl_user_can( 'manage_game', $_POST['game_id'] ) ) {
+			if( isset( $_POST['game_id'] ) && !\WP_Clanwars\ACL::user_can( 'manage_game', $_POST['game_id'] ) ) {
 				wp_die( __('Cheatin&#8217; uh?') );
 			}
 
@@ -2255,7 +2151,7 @@ EOT;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
 		$current_page = isset($_GET['paged']) ? $_GET['paged'] : 1;
 		$limit = 10;
-		$game_filter = $this->acl_user_can('which_games');
+		$game_filter = \WP_Clanwars\ACL::user_can('which_games');
 
 		switch($act) {
 			case 'add':
@@ -2361,7 +2257,7 @@ EOT;
 				$data['games'] = $_POST['games'];
 			}
 
-			$this->acl_update( $user_id, $data );
+			\WP_Clanwars\ACL::update( $user_id, $data );
 		}
 
 		Flash::success( __( 'Settings saved.', WP_CLANWARS_TEXTDOMAIN ) );
@@ -2387,7 +2283,7 @@ EOT;
 			$users = array_unique( array_values( $users ) );
 
 			foreach( $users as $key => $user_id ) {
-				$this->acl_delete( $user_id );
+				\WP_Clanwars\ACL::delete( $user_id );
 			}
 		}
 
@@ -2531,8 +2427,8 @@ EOT;
 		$hide_default_styles = $this->is_jumpstarter();
 
 		$games = \WP_Clanwars\Games::get_game('id=all');
-		$acl = $this->acl_get();
-		$acl_keys = $this->acl_keys;
+		$acl = \WP_Clanwars\ACL::get();
+		$acl_keys = \WP_Clanwars\ACL::all_caps();
 
 		$obj = new stdClass();
 		$obj->id = 0;
@@ -2546,7 +2442,7 @@ EOT;
 
 		foreach($acl as $user_id => $user_acl) {
 			$user = get_userdata($user_id);
-			$allowed_games = $this->acl_user_can('which_games', false, $user_id);
+			$allowed_games = \WP_Clanwars\ACL::user_can('which_games', false, $user_id);
 			$user_games = \WP_Clanwars\Games::get_game(array('id' => $allowed_games, 'orderby' => 'title', 'order' => 'asc'));
 
 			// populate games with urls for icons
