@@ -118,7 +118,7 @@ class ACL {
 
         if($is_super) {
             $caps['games'] = array('all');
-            $caps['permissions'] = array_fill_keys(array_keys($caps['permissions']), true)
+            $caps['permissions'] = array_fill_keys(array_keys($caps['permissions']), true);
         }
 
         if($action === 'which_games') {
