@@ -875,21 +875,21 @@ EOT;
 		}
 
 		$teams = \WP_Clanwars\Teams::get_team('id=all&order=asc&orderby=title&limit=' . $limit . '&offset=' . ($limit * ($current_page-1)));
-		$stat = \WP_Clanwars\Teams::get_team('id=all&limit=' . $limit, true);
+		$pagination = $teams->get_pagination();
 
 		$page_links = paginate_links( array(
 				'base' => add_query_arg('paged', '%#%'),
 				'format' => '',
 				'prev_text' => __('&laquo;'),
 				'next_text' => __('&raquo;'),
-				'total' => $stat['total_pages'],
+				'total' => $pagination->get_num_pages(),
 				'current' => $current_page
 		));
 
 		$page_links_text = sprintf( '<span class="displaying-num">' . __( 'Displaying %s&#8211;%s of %s' ) . '</span>%s',
 				number_format_i18n( (($current_page - 1) * $limit) + 1 ),
-				number_format_i18n( min( $current_page * $limit, $stat['total_items'] ) ),
-				'<span class="total-type-count">' . number_format_i18n( $stat['total_items'] ) . '</span>',
+				number_format_i18n( min( $current_page * $limit, $pagination->get_num_rows() ) ),
+				'<span class="total-type-count">' . number_format_i18n( $pagination->get_num_rows() ) . '</span>',
 				$page_links
 		);
 
