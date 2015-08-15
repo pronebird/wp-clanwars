@@ -57,6 +57,6 @@
     </div>
     <div class="wp-clanwars-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), $game->downloads ); ?></div>
     <div class="wp-clanwars-column-author">
-        <?php esc_html_e($game->owner->name); ?>
+        <?php esc_html_e($game->owner->fullname); ?>
     </div>
 </div>
