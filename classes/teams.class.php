@@ -97,7 +97,19 @@ CREATE TABLE $table (
 			$where_query = 'WHERE ' . implode(' AND ', $where_query);
 		}
 
-		return \WP_Clanwars\DB::get_results('SELECT SQL_CALC_FOUND_ROWS * FROM `' . self::table() . '` ' . implode(' ', array($where_query, $order_query, $limit_query)));
+		$teams_table = static::table();
+
+$query = <<<SQL
+
+	SELECT SQL_CALC_FOUND_ROWS *
+	FROM `$teams_table` 
+	$where_query
+	$order_query
+	$limit_query
+
+SQL;
+
+		return \WP_Clanwars\DB::get_results( $query );
 	}
 
 	static function add_team( $args )
