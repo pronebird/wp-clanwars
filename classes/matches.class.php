@@ -2,6 +2,8 @@
 
 namespace WP_Clanwars;
 
+require_once( dirname(__FILE__) . '/db.class.php' );
+
 class Matches {
 
 	/**
@@ -57,11 +59,11 @@ CREATE TABLE $table (
 		return trim($schema);
 	}
 
-	static function get_match($p, $count = false)
+	static function get_match( $args )
 	{
 		global $wpdb;
 
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
+		$defaults = array(
 			'from_date' => 0,
 			'id' => false,
 			'game_id' => false,
@@ -69,34 +71,39 @@ CREATE TABLE $table (
 			'limit' => 0,
 			'offset' => 0,
 			'orderby' => 'id',
-			'order' => 'ASC')));
+			'order' => 'asc'
+		);
+		$args = \WP_Clanwars\Utils::extract_args($args, $defaults);
+
+		extract($args);
 
 		$where_query = '';
 		$limit_query = '';
 		$order_query = '';
 
 		$order = strtolower($order);
-		if($order != 'asc' && $order != 'desc')
+		if($order != 'asc' && $order != 'desc') {
 			$order = 'asc';
+		}
 
 		$order_query = 'ORDER BY t1.`' . $orderby . '` ' . $order;
 
 		if($id != 'all' && $id !== false) {
-
-			if(!is_array($id))
+			if(!is_array($id)) {
 				$id = array($id);
+			}
 
 			$id = array_map('intval', $id);
-			$where_query[] = 't1.id IN (' . implode(', ', $id) . ')';
+			$where_query[] = 't1.id IN (' . join(', ', $id) . ')';
 		}
 
 		if($game_id != 'all' && $game_id !== false) {
-
-			if(!is_array($game_id))
+			if(!is_array($game_id)) {
 				$game_id = array($game_id);
+			}
 
 			$game_id = array_map('intval', $game_id);
-			$where_query[] = 't1.game_id IN (' . implode(', ', $game_id) . ')';
+			$where_query[] = 't1.game_id IN (' . join(', ', $game_id) . ')';
 		}
 
 		if($from_date > 0) {
@@ -108,48 +115,64 @@ CREATE TABLE $table (
 		}
 
 		if(!empty($where_query)) {
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
+			$where_query = 'WHERE ' . join(' AND ', $where_query);
 		}
 
-		if($count) {
-			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . self::table() . '` AS t1 ' . $where_query);
-			$ret = array('total_items' => 0, 'total_pages' => 1);
-			$ret['total_items'] = (int) $rslt->m_count;
+		$rounds_table = \WP_Clanwars\Rounds::table();
+		$games_table = \WP_Clanwars\Games::table();
+		$teams_table = \WP_Clanwars\Teams::table();
+		$matches_table = static::table();
 
-			if($limit > 0) {
-				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
-			}
+		if( $sum_tickets ) {
+			$subquery = 
+<<<SQL
+	
+			(
+				SELECT SUM(sumt1.tickets1) 
+				FROM `$rounds_table` AS sumt1 
+				WHERE sumt1.match_id = t1.id
+			) AS team1_tickets,
 
-			return $ret;
+			(
+				SELECT SUM(sumt2.tickets2) 
+				FROM `$rounds_table` AS sumt2 
+				WHERE sumt2.match_id = t1.id
+			) AS team2_tickets
+
+SQL;
+
+			$subquery = trim($subquery);
+		}
+		else {
+			$subquery = 'NULL';
 		}
 
-		if($sum_tickets) {
-			$rslt = $wpdb->get_results(
-					'SELECT t1.*, t2.title AS game_title, t2.abbr AS game_abbr, t2.icon AS game_icon,
-							tt1.title AS team1_title, tt2.title AS team2_title,
-							tt1.country AS team1_country, tt2.country AS team2_country,
-							(SELECT SUM(sumt1.tickets1) FROM `' . \WP_Clanwars\Rounds::table() . '` AS sumt1 WHERE sumt1.match_id = t1.id) AS team1_tickets,
-							(SELECT SUM(sumt2.tickets2) FROM `' . \WP_Clanwars\Rounds::table() . '` AS sumt2 WHERE sumt2.match_id = t1.id) AS team2_tickets
+		$query = 
+<<<SQL
 
-					 FROM `' . self::table() . '` AS t1
-					 LEFT JOIN `' . \WP_Clanwars\Games::table() . '` AS t2 ON t1.game_id=t2.id
-					 LEFT JOIN `' . \WP_Clanwars\Teams::table() . '` AS tt1 ON t1.team1=tt1.id
-					 LEFT JOIN `' . \WP_Clanwars\Teams::table() . '` AS tt2 ON t1.team2=tt2.id ' .
-					 implode(' ', array($where_query, $order_query, $limit_query)));
+		SELECT SQL_CALC_FOUND_ROWS
+			t1.*, 
+			t2.title AS game_title, 
+			t2.abbr AS game_abbr, 
+			t2.icon AS game_icon,
+			tt1.title AS team1_title, 
+			tt2.title AS team2_title,
+			tt1.country AS team1_country, 
+			tt2.country AS team2_country,
+			$subquery
 
-		} else {
-			$rslt = $wpdb->get_results(
-					'SELECT t1.*, t2.title AS game_title, t2.abbr AS game_abbr, t2.icon AS game_icon,
-							tt1.title AS team1_title, tt2.title AS team2_title,
-							tt1.country AS team1_country, tt2.country AS team2_country
-					 FROM `' . self::table() . '` AS t1
-					 LEFT JOIN `' . \WP_Clanwars\Games::table() . '` AS t2 ON t1.game_id=t2.id
-					 LEFT JOIN `' . \WP_Clanwars\Teams::table() . '` AS tt1 ON t1.team1=tt1.id
-					 LEFT JOIN `' . \WP_Clanwars\Teams::table() . '` AS tt2 ON t1.team2=tt2.id ' .
-					 implode(' ', array($where_query, $order_query, $limit_query)));
-		}
+		FROM `$matches_table` AS t1
+			LEFT JOIN `$games_table` AS t2 ON t1.game_id = t2.id
+			LEFT JOIN `$teams_table` AS tt1 ON t1.team1 = tt1.id
+			LEFT JOIN `$teams_table` AS tt2 ON t1.team2 = tt2.id
 
-		return $rslt;
+		$where_query
+		$order_query
+		$limit_query
+
+SQL;
+
+		return \WP_Clanwars\DB::get_results( $query );
 	}
 
 	static function update_match_post($match_id, $gallery = array()) {
