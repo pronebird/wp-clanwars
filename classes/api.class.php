@@ -32,15 +32,20 @@ class API {
         return !empty( static::get_access_token() );
     }
 
+    static function logout() {
+        static::set_access_token('');
+        static::set_user_info('');
+    }
+
     static function get_login_url($service, $callbackUrl) {
         return static::$api_url . 'auth/' . $service . '?returnTo=' . urlencode($callbackUrl);
     }
 
     static function update_access_token($access_token) {
-        $status = static::get_auth_status($token);
+        $status = static::get_auth_status($access_token);
 
         if(!is_wp_error($status) && is_object($status) && isset($status->socialId)) {
-            static::set_access_token($token);
+            static::set_access_token($access_token);
             static::set_user_info($status);
 
             return true;

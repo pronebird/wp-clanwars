@@ -2373,8 +2373,8 @@ EOT;
 		}
 
 		if(CloudAPI::update_access_token($_POST['token'])) {
-			$cloudUser == CloudAPI::get_user_info();
-			Flash::success( sprintf( __( 'Logged in as %s via %s.', WP_CLANWARS_TEXTDOMAIN ), $cloudUser->name, ucfirst($cloudUser->provider) ) );
+			$cloudUser = CloudAPI::get_user_info();
+			Flash::success( sprintf( __( 'Logged in as %s.', WP_CLANWARS_TEXTDOMAIN ), $cloudUser->fullname ) );
 		}
 		else {
 			Flash::error( __( 'Failed to log in.', WP_CLANWARS_TEXTDOMAIN ) );
@@ -2388,8 +2388,7 @@ EOT;
 	function on_admin_post_logout() {
 		check_admin_referer('wp-clanwars-logout');
 
-		CloudAPI::set_access_token('');
-		CloudAPI::set_user_info('');
+		CloudAPI::logout();
 
 		wp_redirect( $_REQUEST['_wp_http_referer'] );
 		die();
