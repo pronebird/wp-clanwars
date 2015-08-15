@@ -42,7 +42,7 @@ class MatchTable extends \WP_List_Table {
 
         // register screen options for match_table
         $args = array(
-            'label' => __('Matches per page', MW_BILLING_TEXTDOMAIN),
+            'label' => __('Matches per page', WP_CLANWARS_TEXTDOMAIN),
             'default' => static::PER_PAGE_DEFAULT,
             'option' => static::PER_PAGE_OPTION
         );
@@ -81,7 +81,7 @@ class MatchTable extends \WP_List_Table {
     }
 
     function no_items() {
-        _e('No matches found.', MW_BILLING_TEXTDOMAIN);
+        _e('No matches found.', WP_CLANWARS_TEXTDOMAIN);
     }
 
     function column_cb($item) {
