@@ -365,16 +365,16 @@ EOT;
 		);
 
 		wp_register_script('wp-cw-game-browser', WP_CLANWARS_URL . '/js/game-browser.js', array('jquery'), WP_CLANWARS_VERSION);
-		wp_register_script('wp-cw-login', WP_CLANWARS_URL . '/js/login.js', array('jquery'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-cw-login', WP_CLANWARS_URL . '/js/login.js', array('jquery', 'jquery-tipsy'), WP_CLANWARS_VERSION);
 
-		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array( 'select2', 'wp-admin' ), WP_CLANWARS_VERSION);
+		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array( 'select2', 'jquery-tipsy', 'wp-admin' ), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
 
-		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/jquery.tipsy.js', array('jquery'), '0.1.7');
-		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/js/tipsy/tipsy.css', array(), '0.1.7');
+		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/components/tipsy/src/javascripts/jquery.tipsy.js', array('jquery'));
+		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/components/tipsy/src/stylesheets/tipsy.css', array());
 
-		wp_register_script('select2', WP_CLANWARS_URL . '/js/select2/select2.full.min.js', array('jquery'), '4.0.0');
-		wp_register_style('select2', WP_CLANWARS_URL . '/js/select2/select2.min.css', array(), '4.0.0');
+		wp_register_script('select2', WP_CLANWARS_URL . '/components/select2/dist/js/select2.full.min.js', array('jquery'));
+		wp_register_style('select2', WP_CLANWARS_URL . '/components/select2/dist/css/select2.min.css', array());
 
 		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_VERSION);
 
