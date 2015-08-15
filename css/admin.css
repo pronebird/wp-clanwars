@@ -19,18 +19,6 @@ html[xmlns] .clearfix {
     height: 1%;
 }
 
-.column-tickets {
-	width: 80px;
-}
-
-.column-match_status {
-	width: 60px;
-}
-
-.column-team1, .column-team2 {
-	width: 140px;
-}
-
 .column-game_title {
 	width: 140px;
 }
