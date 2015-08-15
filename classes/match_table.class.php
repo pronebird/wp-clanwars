@@ -160,24 +160,21 @@ class MatchTable extends \WP_List_Table {
         $limit = $per_page;
 
         $game_filter = \WP_Clanwars\ACL::user_can('which_games');
-
-        $stat_condition = array(
-            'id' => 'all',
-            'game_id' => $game_filter,
-            'limit' => $limit
-        );
-
         $condition = array(
-            'id' => 'all', 'game_id' => $game_filter, 'sum_tickets' => true,
-            'orderby' => 'date', 'order' => 'desc',
-            'limit' => $limit, 'offset' => ($limit * ($current_page-1))
+            'id' => 'all', 
+            'game_id' => $game_filter, 
+            'sum_tickets' => true,
+            'orderby' => 'date', 
+            'order' => 'desc',
+            'limit' => $limit, 
+            'offset' => ($limit * ($current_page-1))
         );
 
         $matches = \WP_Clanwars\Matches::get_match($condition);
-        $stat = \WP_Clanwars\Matches::get_match($stat_condition, true);
+        $pagination = $matches->get_pagination();
 
         $this->set_pagination_args(array(
-            'total_items' => $stat['total_items'],
+            'total_items' => $pagination->get_num_pages(),
             'per_page' => $per_page
         ));
 

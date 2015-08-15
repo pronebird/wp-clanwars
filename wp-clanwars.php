@@ -2037,19 +2037,20 @@ EOT;
 			'offset' => ($current_page-1) * $per_page
 		);
 
-		$matches = \WP_Clanwars\Matches::get_match($p, false);
-		$stat = \WP_Clanwars\Matches::get_match($p, true);
+		$matches = \WP_Clanwars\Matches::get_match($p);
+		$pagination = $matches->get_pagination();
+
 		$page_links = paginate_links(array(
 			'prev_text' => __('&larr;'),
 			'next_text' => __('&rarr;'),
-			'total' => $stat['total_pages'],
+			'total' => $pagination->get_num_pages(),
 			'current' => $current_page
 		));
 
 		$page_links_text = sprintf( '<span class="displaying-num">' . __( 'Displaying %s&#8211;%s of %s' ) . '</span>%s',
 				number_format_i18n( (($current_page - 1) * $per_page) + 1 ),
-				number_format_i18n( min( $current_page * $per_page, $stat['total_items'] ) ),
-				'<span class="total-type-count">' . number_format_i18n( $stat['total_items'] ) . '</span>',
+				number_format_i18n( min( $current_page * $per_page, $pagination->get_num_rows() ) ),
+				'<span class="total-type-count">' . number_format_i18n( $pagination->get_num_rows() ) . '</span>',
 				$page_links
 		);
 
@@ -2169,12 +2170,6 @@ EOT;
 				break;
 		}
 
-		$stat_condition = array(
-			'id' => 'all',
-			'game_id' => $game_filter,
-			'limit' => $limit
-		);
-
 		$condition = array(
 			'id' => 'all', 'game_id' => $game_filter, 'sum_tickets' => true,
 			'orderby' => 'date', 'order' => 'desc',
@@ -2182,8 +2177,8 @@ EOT;
 		);
 
 		$matches = \WP_Clanwars\Matches::get_match($condition);
+		$pagination = $matches->get_pagination();
 		$match_statuses = $this->match_status;
-		$stat = \WP_Clanwars\Matches::get_match($stat_condition, true);
 
 		// populate games with urls for icons
 		foreach ($matches as $match) {
@@ -2195,7 +2190,7 @@ EOT;
 				'format' => '',
 				'prev_text' => __('&laquo;'),
 				'next_text' => __('&raquo;'),
-				'total' => $stat['total_pages'],
+				'total' => $pagination->get_num_pages(),
 				'current' => $current_page
 		));
 
