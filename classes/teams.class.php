@@ -2,6 +2,8 @@
 
 namespace WP_Clanwars;
 
+require_once( dirname(__FILE__) . '/db.class.php' );
+
 class Teams {
 
 	/**
@@ -48,32 +50,36 @@ CREATE TABLE $table (
 		return trim($schema);
 	}
 
-	static function get_team($p, $count = false)
+	static function get_team( $args )
 	{
 		global $wpdb;
 
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
-					'id' => false,
-					'title' => false,
-					'limit' => 0,
-					'offset' => 0,
-					'orderby' => 'id',
-					'order' => 'ASC')));
+		$defaults = array(
+			'id' => false,
+			'title' => false,
+			'limit' => 0,
+			'offset' => 0,
+			'orderby' => 'id',
+			'order' => 'ASC'
+		);
+		$args = \WP_Clanwars\Utils::extract_args($args, $defaults);
+		extract($args);
 
 		$where_query = '';
 		$limit_query = '';
 		$order_query = '';
 
 		$order = strtolower($order);
-		if($order != 'asc' && $order != 'desc')
+		if($order != 'asc' && $order != 'desc') {
 			$order = 'asc';
+		}
 
 		$order_query = 'ORDER BY `' . $orderby . '` ' . $order;
 
-		if($id != 'all' && $id !== false) {
-
-			if(!is_array($id))
+		if($id !== 'all' && $id !== false) {
+			if(!is_array($id)) {
 				$id = array($id);
+			}
 
 			$id = array_map('intval', $id);
 			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
@@ -87,39 +93,25 @@ CREATE TABLE $table (
 			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
 		}
 
-
-		if(!empty($where_query))
+		if(!empty($where_query)) {
 			$where_query = 'WHERE ' . implode(' AND ', $where_query);
-
-		if($count) {
-
-			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . self::table(). '` ' . $where_query);
-
-			$ret = array('total_items' => 0, 'total_pages' => 1);
-
-			$ret['total_items'] = (int) $rslt->m_count;
-			
-			if($limit > 0) {
-				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
-			}
-
-			return $ret;
 		}
 
-		$rslt = $wpdb->get_results('SELECT * FROM `' . self::table() . '` ' . implode(' ', array($where_query, $order_query, $limit_query)));
-
-		return $rslt;
+		return \WP_Clanwars\DB::get_results('SELECT SQL_CALC_FOUND_ROWS * FROM `' . self::table() . '` ' . implode(' ', array($where_query, $order_query, $limit_query)));
 	}
 
-	static function add_team($p)
+	static function add_team( $args )
 	{
 		global $wpdb;
 
-		$data = \WP_Clanwars\Utils::extract_args($p, array(
-					'title' => '',
-					'logo' => 0,
-					'country' => '',
-					'home_team' => 0));
+		$defaults = array(
+			'title' => '',
+			'logo' => 0,
+			'country' => '',
+			'home_team' => 0
+		);
+
+		$data = \WP_Clanwars\Utils::extract_args($args, $defaults);
 
 		if($wpdb->insert(self::table(), $data, array('%s', '%d', '%s', '%d')))
 		{
@@ -147,13 +139,13 @@ CREATE TABLE $table (
 		return $wpdb->get_row("SELECT * FROM `" . self::table() . "` WHERE home_team = 1");
 	}
 
-	static function update_team($id, $p)
+	static function update_team($id, $args)
 	{
 		global $wpdb;
 
 		$fields = array('title' => '%s', 'country' => '%s', 'home_team' => '%d', 'logo' => '%d');
 
-		$data = wp_parse_args($p, array());
+		$data = wp_parse_args($args, array());
 
 		$update_data = array();
 		$update_mask = array();
@@ -197,24 +189,30 @@ CREATE TABLE $table (
 
 		$limit = 10;
 
-		if($cache === false) {
-			$cache = $wpdb->get_results(
-				$wpdb->prepare("(SELECT t1.country, COUNT(t2.id) AS cnt
-								FROM " . \WP_Clanwars\Teams::table() . " AS t1, ". \WP_Clanwars\Matches::table() . " AS t2
-								WHERE t1.id = t2.team1
-								GROUP BY t1.country
-								LIMIT %d)
-								UNION
-								(SELECT t1.country, COUNT(t2.id) AS cnt
-								FROM " . \WP_Clanwars\Teams::table()  . " AS t1, " . \WP_Clanwars\Matches::table() . " AS t2
-								WHERE t1.id = t2.team2
-								GROUP BY t1.country
-								LIMIT %d)
-								ORDER BY cnt DESC
-								LIMIT %d", $limit, $limit, $limit),
-							ARRAY_A);
-
+		if($cache !== false) {
+			return $cache;
 		}
+
+		$teams_table = \WP_Clanwars\Teams::table();
+		$matches_table = \WP_Clanwars\Matches::table();
+
+		$query = $wpdb->prepare(
+			"(SELECT t1.country, COUNT(t2.id) AS cnt
+			FROM $teams_table AS t1, $matches_table AS t2
+			WHERE t1.id = t2.team1
+			GROUP BY t1.country
+			LIMIT %d)
+			UNION
+			(SELECT t1.country, COUNT(t2.id) AS cnt
+			FROM $teams_table AS t1, $matches_table AS t2
+			WHERE t1.id = t2.team2
+			GROUP BY t1.country
+			LIMIT %d)
+			ORDER BY cnt DESC
+			LIMIT %d", $limit, $limit, $limit
+		);
+
+		$cache = $wpdb->get_results( $query, ARRAY_A );
 
 		return $cache;
 	}
