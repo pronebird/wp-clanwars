@@ -1,0 +1,14 @@
+{
+  "name": "tipsy",
+  "homepage": "https://github.com/jaz303/tipsy",
+  "_release": "3545aa6ae2",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3545aa6ae2cfdf10f3636d2754b792524ee2bc7a"
+  },
+  "_source": "git://github.com/jaz303/tipsy.git",
+  "_target": "master",
+  "_originalSource": "tipsy",
+  "_direct": true
+}
