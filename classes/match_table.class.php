@@ -1,4 +1,23 @@
 <?php
+/*
+    WP-Clanwars
+    (c) 2011 Andrej Mihajlov
+
+    This file is part of WP-Clanwars.
+
+    WP-Clanwars is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    WP-Clanwars is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with WP-Clanwars.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 namespace WP_Clanwars;
 
@@ -13,8 +32,6 @@ class MatchTable extends \WP_List_Table {
 
     const PER_PAGE_OPTION = 'wp_clanwars_matches_per_page';
     const PER_PAGE_DEFAULT = 10;
-    const DATE_FORMAT = 'd.m.Y';
-    const DATETIME_FORMAT = 'd.m.Y @ H:i';
 
     //
     // Screen options validation handler
@@ -98,10 +115,6 @@ class MatchTable extends \WP_List_Table {
     }
 
     function column_default($item, $column_name) {
-        if($column_name == '_action_column') {
-            return '<a href="' . admin_url('admin.php?page=mw_reservations&id=' . (int)$item->reservation_id) . '">View Reservation<span class="dashicons dashicons-arrow-right-alt2"></span></a>';
-        }
-
         if(isset($item->$column_name)) {
             return esc_html($item->$column_name);
         }
