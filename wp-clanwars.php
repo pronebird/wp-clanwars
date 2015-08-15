@@ -367,14 +367,15 @@ EOT;
 		wp_register_script('wp-cw-game-browser', WP_CLANWARS_URL . '/js/game-browser.js', array('jquery'), WP_CLANWARS_VERSION);
 		wp_register_script('wp-cw-login', WP_CLANWARS_URL . '/js/login.js', array('jquery', 'jquery-tipsy'), WP_CLANWARS_VERSION);
 
-		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array( 'select2', 'jquery-tipsy', 'wp-admin' ), WP_CLANWARS_VERSION);
+		wp_register_style('wp-cw-admin', WP_CLANWARS_URL . '/css/admin.css', array( 'select2', 'jquery-tipsy', 'font-awesome', 'wp-admin' ), WP_CLANWARS_VERSION);
 		wp_register_style('wp-cw-flags', WP_CLANWARS_URL . '/css/flags.css', array(), '1.01');
 
 		wp_register_script('jquery-tipsy', WP_CLANWARS_URL . '/components/tipsy/src/javascripts/jquery.tipsy.js', array('jquery'));
 		wp_register_style('jquery-tipsy', WP_CLANWARS_URL . '/components/tipsy/src/stylesheets/tipsy.css', array());
 
 		wp_register_script('select2', WP_CLANWARS_URL . '/components/select2/dist/js/select2.full.min.js', array('jquery'));
-		wp_register_style('select2', WP_CLANWARS_URL . '/components/select2/dist/css/select2.min.css', array());
+		wp_register_style('select2', WP_CLANWARS_URL . '/components/select2/dist/css/select2.min.css');
+		wp_register_style('font-awesome', WP_CLANWARS_URL . '/components/font-awesome/css/font-awesome.min.css');
 
 		wp_register_script('wp-cw-public', WP_CLANWARS_URL . '/js/public.js', array('jquery-tipsy'), WP_CLANWARS_VERSION);
 
@@ -585,6 +586,12 @@ EOT;
 		wp_enqueue_style('wp-cw-admin');
 		wp_enqueue_style('wp-cw-flags');
 		wp_enqueue_script('wp-cw-admin');
+
+		add_filter( 'admin_body_class', array($this, 'on_admin_body_class') );
+	}
+
+	function on_admin_body_class($classes) {
+		return trim("$classes wp-clanwars");
 	}
 
 	function on_widgets_init()
@@ -2365,19 +2372,11 @@ EOT;
 			die();
 		}
 
-		$token = $_POST['token'];
-		$status = CloudAPI::get_auth_status($token);
-
-		if(!is_wp_error($status) && is_object($status) && isset($status->socialId)) {
-			CloudAPI::set_access_token($token);
-			CloudAPI::set_user_info($status);
-
-			Flash::success( sprintf( __( 'Logged in as %s via %s.', WP_CLANWARS_TEXTDOMAIN ), $status->name, ucfirst($status->provider) ) );
+		if(CloudAPI::update_access_token($_POST['token'])) {
+			$cloudUser == CloudAPI::get_user_info();
+			Flash::success( sprintf( __( 'Logged in as %s via %s.', WP_CLANWARS_TEXTDOMAIN ), $cloudUser->name, ucfirst($cloudUser->provider) ) );
 		}
 		else {
-			CloudAPI::set_access_token('');
-			CloudAPI::set_user_info('');
-
 			Flash::error( __( 'Failed to log in.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
 
@@ -2463,6 +2462,8 @@ EOT;
 
 	// Import page hook
 	function on_import() {
+		add_thickbox();
+
 		$tab = isset($_GET['tab']) ? $_GET['tab'] : 'browse';
 
 		if($tab === 'upload') {
@@ -2540,6 +2541,7 @@ EOT;
 		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action', 'logged_into_cloud', 'cloud_account' );
 		
 		wp_enqueue_script( 'wp-cw-game-browser' );
+		wp_enqueue_script( 'wp-cw-login' );
 
 		$view->render( $context );
 	}

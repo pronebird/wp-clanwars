@@ -24,35 +24,52 @@ namespace WP_Clanwars;
 class API {
 
     protected static $api_url = 'http://localhost:3000/v1/';
+    protected static $client_key_option_key = 'wp-clanwars-server-clientkey';
     protected static $access_token_usermeta_key = 'wp-clanwars-server-accesstoken';
     protected static $user_info_usermeta_key = 'wp-clanwars-server-userinfo';
 
     static function is_logged_in() {
-        return !empty( self::get_access_token() );
+        return !empty( static::get_access_token() );
     }
 
     static function get_login_url($service, $callbackUrl) {
-        return self::$api_url . 'auth/' . $service . '?returnTo=' . urlencode($callbackUrl);
+        return static::$api_url . 'auth/' . $service . '?returnTo=' . urlencode($callbackUrl);
     }
 
-    static function get_access_token() {
-        global $current_user;
-        return get_user_meta( $current_user->ID, self::$access_token_usermeta_key, true );
+    static function update_access_token($access_token) {
+        $status = static::get_auth_status($token);
+
+        if(!is_wp_error($status) && is_object($status) && isset($status->socialId)) {
+            static::set_access_token($token);
+            static::set_user_info($status);
+
+            return true;
+        }
+
+        static::set_access_token('');
+        static::set_user_info('');
+
+        return false;
     }
 
-    static function set_access_token($access_token) {
+    protected static function get_access_token() {
         global $current_user;
-        update_user_meta( $current_user->ID, self::$access_token_usermeta_key, $access_token );
+        return get_user_meta( $current_user->ID, static::$access_token_usermeta_key, true );
     }
 
-    static function set_user_info($userInfo) {
+    protected static function set_access_token($access_token) {
         global $current_user;
-        update_user_meta( $current_user->ID, self::$user_info_usermeta_key, $userInfo );
+        update_user_meta( $current_user->ID, static::$access_token_usermeta_key, $access_token );
+    }
+
+    protected static function set_user_info($userInfo) {
+        global $current_user;
+        update_user_meta( $current_user->ID, static::$user_info_usermeta_key, $userInfo );
     }
 
     static function get_user_info() {
         global $current_user;
-        return get_user_meta( $current_user->ID, self::$user_info_usermeta_key, true );
+        return get_user_meta( $current_user->ID, static::$user_info_usermeta_key, true );
     }
 
     static function get_auth_status( $access_token = '' ) {
@@ -66,31 +83,31 @@ class API {
             );
         }
 
-        $response = self::remote_get( self::$api_url . 'auth/status', $args );
+        $response = static::remote_get( static::$api_url . 'auth/status', $args );
 
-        return self::get_response_payload($response);
+        return static::get_response_payload($response);
     }
 
     static function get_download_url($id) {
-        return self::$api_url . 'games/download/' . $id;
+        return static::$api_url . 'games/download/' . $id;
     }
 
     static function get_game($id) {
-        $response = self::remote_get( self::$api_url . 'games/' . $id );
+        $response = static::remote_get( static::$api_url . 'games/' . $id );
 
-        return self::get_response_payload($response);
+        return static::get_response_payload($response);
     }
 
     static function get_popular() {
-        $response = self::remote_get( self::$api_url . 'games/popular' );
+        $response = static::remote_get( static::$api_url . 'games/popular' );
 
-        return self::get_response_payload($response);
+        return static::get_response_payload($response);
     }
 
     static function search($term) {
-        $response = self::remote_get( self::$api_url . 'games/search?q=' . urlencode($term) );
+        $response = static::remote_get( static::$api_url . 'games/search?q=' . urlencode($term) );
 
-        return self::get_response_payload($response);
+        return static::get_response_payload($response);
     }
 
     static function publish($zip_file) {
@@ -103,17 +120,17 @@ class API {
 
         $headers = array( 
             'Content-Type: multipart/form-data',
-            'Authorization: Bearer ' . self::get_access_token()
+            'Authorization: Bearer ' . static::get_access_token()
         );
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, self::$api_url . 'games');
+        curl_setopt($ch, CURLOPT_URL, static::$api_url . 'games');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_USERAGENT, self::get_user_agent());
+        curl_setopt($ch, CURLOPT_USERAGENT, static::get_user_agent());
 
         // use safe cURL uploads when possible
         if( function_exists( 'curl_file_create' ) ) { // php 5.5+
@@ -149,7 +166,7 @@ class API {
             return new \WP_Error( 'api-error-authorization', __( 'Authorization required.', WP_CLANWARS_TEXTDOMAIN ) );
         }
 
-        return self::get_response_payload($response);
+        return static::get_response_payload($response);
     }
 
     protected static function get_user_agent() {
@@ -161,14 +178,14 @@ class API {
     protected static function remote_get($url, $args = array()) {
         $headers = array();
 
-        if(self::is_logged_in()) {
+        if(static::is_logged_in()) {
             $headers = array(
-                'Authorization' => 'Bearer ' . self::get_access_token()
+                'Authorization' => 'Bearer ' . static::get_access_token()
             );
         }
 
         $_args = array(
-            'user-agent' => self::get_user_agent(),
+            'user-agent' => static::get_user_agent(),
             'headers' => $headers
         );
 

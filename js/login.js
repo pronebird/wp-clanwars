@@ -30,4 +30,6 @@ jQuery(document).ready(function ($) {
         window.open(settings.facebook_login_url, 'wp-clanwars-auth', 'width=520,height=320');
     });
 
+    $('#wp-clanwars-why-login').tipsy();
+
 });
