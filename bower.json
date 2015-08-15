@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "select2": "~4.0.0",
-    "tipsy": "master"
+    "tipsy": "master",
+    "font-awesome": "~4.4.0"
   }
 }
