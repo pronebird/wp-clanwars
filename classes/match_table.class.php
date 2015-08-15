@@ -64,7 +64,12 @@ class MatchTable extends \WP_List_Table {
     }
 
     function get_sortable_columns() {
-        $sortable_columns = array();
+        $sortable_columns = array(
+            'title' => 'title', 
+            'game' => 'game_id', 
+            'date' => 'date',
+            'match_status' => 'match_status'
+        );
         return $sortable_columns;
     }
 
@@ -156,21 +161,24 @@ class MatchTable extends \WP_List_Table {
         $per_page = $this->get_items_per_page(static::PER_PAGE_OPTION, static::PER_PAGE_DEFAULT);
         $current_page = $this->get_pagenum();
 
+        $orderby = ( isset( $_REQUEST['orderby'] ) ) ? $_REQUEST['orderby'] : 'date';
+        $order = ( isset( $_REQUEST['order'] ) ) ? $_REQUEST['order'] : 'desc';
+
         $offset = ($current_page - 1) * $per_page;
         $limit = $per_page;
 
         $game_filter = \WP_Clanwars\ACL::user_can('which_games');
-        $condition = array(
+        $args = array(
             'id' => 'all', 
             'game_id' => $game_filter, 
             'sum_tickets' => true,
-            'orderby' => 'date', 
-            'order' => 'desc',
+            'orderby' => $orderby, 
+            'order' => $order,
             'limit' => $limit, 
             'offset' => ($limit * ($current_page-1))
         );
 
-        $matches = \WP_Clanwars\Matches::get_match($condition);
+        $matches = \WP_Clanwars\Matches::get_match( $args );
         $pagination = $matches->get_pagination();
 
         $this->set_pagination_args(array(
@@ -178,7 +186,7 @@ class MatchTable extends \WP_List_Table {
             'per_page' => $per_page
         ));
 
-        $this->items = (array)$matches;
+        $this->items = $matches;
     }
 
 }
