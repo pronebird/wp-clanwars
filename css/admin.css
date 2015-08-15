@@ -20,11 +20,11 @@ html[xmlns] .clearfix {
 }
 
 .column-tickets {
-	width: 70px;
+	width: 80px;
 }
 
 .column-match_status {
-	width: 100px;
+	width: 60px;
 }
 
 .column-team1, .column-team2 {
