@@ -1,12 +1,12 @@
 <div class="wp-clanwars-cloud-item-top">
     <div class="wp-clanwars-cloud-item-header wp-clanwars-clearfix">
-        <div class="wp-clanwars-column-title">
+        <div class="wp-clanwars-cloud-item-column-title">
             <h4>
                 <img src="<?php esc_attr_e($game->iconUrl); ?>" alt="<?php esc_attr_e($game->title); ?>" class="wp-clanwars-cloud-item-icon" />
                 <span class="game-title"><?php esc_html_e($game->title); ?></span>
             </h4>
         </div>
-        <div class="wp-clanwars-column-install">
+        <div class="wp-clanwars-cloud-item-column-install">
         <?php if($game->is_installed) : ?>
             <button type="button" class="button wp-clanwars-install-button" disabled="disabled"><?php _e( 'INSTALLED', WP_CLANWARS_TEXTDOMAIN ); ?></button>
         <?php else : ?>
@@ -33,7 +33,7 @@
     </ul>
 </div>
 <div class="wp-clanwars-cloud-item-bottom">
-    <div class="wp-clanwars-column-rating">
+    <div class="wp-clanwars-cloud-item-column-rating">
         <div class="star-rating">
             <?php
             for($i = 1; $i <= 5; $i++) :
@@ -51,12 +51,12 @@
         </div>
         <span class="num-ratings"><?php echo sprintf( _x('(%d)', 'Number of ratings', WP_CLANWARS_TEXTDOMAIN), $game->votes ); ?></span>
     </div>
-    <div class="wp-clanwars-column-published">
+    <div class="wp-clanwars-cloud-item-column-published">
         <strong><?php _e('Published:', WP_CLANWARS_TEXTDOMAIN); ?></strong>
         <span><?php esc_html_e( mysql2date(get_option('date_format'), $game->updatedAt, true) ); ?></span>
     </div>
-    <div class="wp-clanwars-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), $game->downloads ); ?></div>
-    <div class="wp-clanwars-column-author">
+    <div class="wp-clanwars-cloud-item-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), $game->downloads ); ?></div>
+    <div class="wp-clanwars-cloud-item-column-author">
         <?php esc_html_e($game->owner->fullname); ?>
     </div>
 </div>

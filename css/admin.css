@@ -359,7 +359,7 @@ html[xmlns] .wp-clanwars-clearfix {
     overflow: hidden;
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-title h4 {
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-title h4 {
     margin: 0;
     padding: 0;
     font-size: 18px;
@@ -426,49 +426,42 @@ html[xmlns] .wp-clanwars-clearfix {
     padding: 6px 0;
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-author .gravatar {
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    border-radius: 3px;
-}
-
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-rating,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-published,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-downloaded,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-author
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-rating,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-published,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-downloaded,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-author
 {
     line-height: 1.5em;
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-published,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-author,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-install
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-published,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-author,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-install
 {
     float: right;
     clear: right;
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-title,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-rating,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-downloaded {
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-title,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-rating,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-downloaded {
     float: left;
     clear: left;
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-rating {
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-rating {
     margin: 0;
     padding: 0;
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-published,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-rating
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-published,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-rating
 {
     margin-bottom: 4px;    
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-title,
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-column-install {
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-title,
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-install {
     margin-bottom: 10px;
 }
 
@@ -476,35 +469,6 @@ html[xmlns] .wp-clanwars-clearfix {
     display: inline-block;
     vertical-align: top;
     font-size: 0;
-}
-
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .star-rating .star {
-    font-family: dashicons;
-    font-size: 20px;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 1;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-    color: #ffb900;
-    margin: 0;
-    padding: 0;
-}
-
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .star-rating .star-full {
-    content:'\f155'
-}
-
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .star-rating .star-empty {
-    content:'\f155'
-}
-
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item .star-rating .star-half {
-    content:'\f459'
 }
 
 @media screen and ( max-width: 782px ) {
@@ -628,7 +592,7 @@ html[xmlns] .wp-clanwars-clearfix {
     box-shadow: none;
 }
 
-.wp-clanwars-login-form {
+.wp-clanwars-cloud-login {
     margin: 0 auto;
     padding: 0;
     text-align: center;
@@ -643,41 +607,41 @@ html[xmlns] .wp-clanwars-clearfix {
     -webkit-justify-content: center;
 }
 
-.wp-clanwars-login-form .header {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-header {
     text-align: center;
 }
 
-.wp-clanwars-login-form .header span.dashicons {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-header span.dashicons {
     font-size: 100px;
     width: auto;
     height: auto;
     margin-bottom: 10px;
 }
 
-.wp-clanwars-login-form .header img {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-header img {
     width: 80px;
     margin: 0 0 10px;
 }
 
-.wp-clanwars-login-form .header h3 {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-header h3 {
     margin: 0 0 40px;
 }
 
-.wp-clanwars-login-form .content ul.buttons {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers {
     text-align: center;
     margin: 0;
 }
 
-.wp-clanwars-login-form .content ul.buttons li {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers li {
     display: block;
     margin: 0 0 5px;
 }
 
-.wp-clanwars-login-form .content ul.buttons li:last-child {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers li:last-child {
     margin-bottom: 0;
 }
 
-.wp-clanwars-login-form .content ul.buttons .button {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button {
     font-size: 16px;
     line-height: 36px;
     display: block;
@@ -691,27 +655,27 @@ html[xmlns] .wp-clanwars-clearfix {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.wp-clanwars-login-form .content ul.buttons .button:hover {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button:hover {
     color: #fff;
     background-color: #3b5998;
     background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
     background-image: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
 }
-.wp-clanwars-login-form .content ul.buttons .button.steam:hover {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button.steam:hover {
     background-color: #377695;
 }
 
-.wp-clanwars-login-form .content ul.buttons .button span.dashicons { line-height: inherit; }
-.wp-clanwars-login-form .content ul.buttons .button i.fa { font-size: 20px; width: 20px; height: 20px; }
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button span.dashicons { line-height: inherit; }
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button i.fa { font-size: 20px; width: 20px; height: 20px; }
 
 /* I think WP has some transitions set on .dashicons. Reset them. */
-.wp-clanwars-login-form .content ul.buttons .button span.dashicons,
-.wp-clanwars-login-form .content ul.buttons .button i.fa {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button span.dashicons,
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button i.fa {
     -webkit-transition: none;
     transition: none;
 }
 
-.wp-clanwars-login-form .content ul.buttons .button {
+.wp-clanwars-cloud-login .wp-clanwars-cloud-login-content ul.wp-clanwars-cloud-login-providers .button {
     -webkit-transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
     transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 }
@@ -735,7 +699,7 @@ html[xmlns] .wp-clanwars-clearfix {
  * Cloud
  */
 
-.wp-clanwars-cloud-account-wrap {
+.wp-clanwars-cloud-account-holder {
     float: right;
     margin-top: 9px;
 }
@@ -753,20 +717,20 @@ html[xmlns] .wp-clanwars-clearfix {
     padding: 6px 0 6px 6px;
 }
 
-.wp-clanwars-cloud-account, .wp-clanwars-cloud-account .username img {
+.wp-clanwars-cloud-account, .wp-clanwars-cloud-account .wp-clanwars-cloud-account-username img {
     border-radius: 3px;
 }
 
-.wp-clanwars-cloud-account .username,
-.wp-clanwars-cloud-account .logout {
+.wp-clanwars-cloud-account .wp-clanwars-cloud-account-username,
+.wp-clanwars-cloud-account .wp-clanwars-cloud-account-logout {
     display: inline-block;
 }
 
-.wp-clanwars-cloud-account .logout span {
+.wp-clanwars-cloud-account .wp-clanwars-cloud-account-logout span {
     color: #555;
 }
 
-.wp-clanwars-cloud-account .username img {
+.wp-clanwars-cloud-account .wp-clanwars-cloud-account-username img {
     vertical-align: middle;
     height: 24px;
 }
