@@ -1795,12 +1795,15 @@ EOT;
 
 	function on_load_manage_matches()
 	{
-		$this->match_table = new \WP_Clanwars\MatchTable();
-		$this->match_table->prepare_items();
-
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
 		$media_options = array();
+
+		// setup match table only when displaying all matches
+		if($act !== 'add' && $act !== 'edit') {
+			$this->match_table = new \WP_Clanwars\MatchTable();
+			$this->match_table->prepare_items();
+		}
 
 		// Check if match really exists
 		if($act === 'edit') {
@@ -2207,13 +2210,11 @@ EOT;
 		$limit = 10;
 		$game_filter = \WP_Clanwars\ACL::user_can('which_games');
 
-		switch($act) {
-			case 'add':
-				return $this->on_add_match();
-				break;
-			case 'edit':
-				return $this->on_edit_match();
-				break;
+		if( $act === 'add' ) {
+			return $this->on_add_match();
+		}
+		else if( $act === 'edit' ) {
+			return $this->on_edit_match();
 		}
 
 		$condition = array(
