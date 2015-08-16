@@ -1739,7 +1739,7 @@ EOT;
 		if($id > 0) {
 			$matchResult = \WP_Clanwars\Matches::get_match( array('id' => $id) );
 
-			if( !$matchResult->count() ) {
+			if( $matchResult->count() > 0 ) {
 				$match = $matchResult[0];
 				$match->date = mysql2date('U', $match->date);
 				$match->scores = array();
