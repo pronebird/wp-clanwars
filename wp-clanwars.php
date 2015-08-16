@@ -197,7 +197,7 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-sethometeam', array($this, 'on_admin_post_sethometeam'));
 		add_action('admin_post_wp-clanwars-gamesop', array($this, 'on_admin_post_gamesop'));
 		add_action('admin_post_wp-clanwars-deletemaps', array($this, 'on_admin_post_deletemaps'));
-		add_action('admin_post_wp-clanwars-deletematches', array($this, 'on_admin_post_deletematches'));
+		add_action('admin_post_wp-clanwars-delete-match', array($this, 'on_admin_post_delete_match'));
 
 		add_action('admin_post_wp-clanwars-settings', array($this, 'on_admin_post_settings'));
 		add_action('admin_post_wp-clanwars-acl', array($this, 'on_admin_post_acl'));
@@ -1657,23 +1657,16 @@ EOT;
 	 * Matches managment
 	 */
 
-	function on_admin_post_deletematches()
-	{
-		if(!\WP_Clanwars\ACL::user_can('manage_matches')) {
+	function on_admin_post_delete_match() {
+		if( ! \WP_Clanwars\ACL::user_can('manage_matches') ) {
 			wp_die( __('Cheatin&#8217; uh?') );
 		}
 
-		check_admin_referer('wp-clanwars-deletematches');
+		check_admin_referer('wp-clanwars-delete-match');
 
-		$args = Utils::extract_args( $_REQUEST, array(
-				'do_action' => '',
-				'do_action2' => '',
-				'delete' => array()
-			) );
-		extract( $args );
-
-		if($do_action == 'delete' || $do_action2 == 'delete') {
-			$result = \WP_Clanwars\Matches::delete_match($delete);
+		if( isset($_REQUEST['id'] ) ) {
+			$id = (int) $_REQUEST['id'];
+			$result = \WP_Clanwars\Matches::delete_match( $id );
 
 			if( is_wp_error( $result ) ) {
 				Flash::error( sprintf( __( 'Failed to delete matches. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
@@ -1744,9 +1737,10 @@ EOT;
 		);
 
 		if($id > 0) {
-			$result = \WP_Clanwars\Matches::get_match(array('id' => $id));
-			if(!empty($result)) {
-				$match = $result[0];
+			$matchResult = \WP_Clanwars\Matches::get_match( array('id' => $id) );
+
+			if( !$matchResult->count() ) {
+				$match = $matchResult[0];
 				$match->date = mysql2date('U', $match->date);
 				$match->scores = array();
 
@@ -1810,19 +1804,19 @@ EOT;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
 		$media_options = array();
 
-		// Check match is really exists
-		if($act == 'edit') {
-			$m = \WP_Clanwars\Matches::get_match(array('id' => $id));
+		// Check if match really exists
+		if($act === 'edit') {
+			$matchResult = \WP_Clanwars\Matches::get_match(array( 'id' => $id ));
 
-			if($id != 0 && empty($m)) {
+			if( !$matchResult->count() ) {
 				wp_die( __('Cheatin&#8217; uh?') );
 			}
 
-			if(!\WP_Clanwars\ACL::user_can('manage_game', $m[0]->game_id)) {
+			if( !\WP_Clanwars\ACL::user_can('manage_game', $matchResult[0]->game_id) ) {
 				wp_die( __('Cheatin&#8217; uh?') );
 			}
 
-			$media_options['post'] = $m[0]->post_id;
+			$media_options['post'] = $matchResult[0]->post_id;
 		}
 
 		wp_enqueue_media($media_options);
@@ -1840,150 +1834,192 @@ EOT;
 				)
 			);
 
-		if( Utils::is_post() )
-		{
-			if( isset( $_POST['game_id'] ) && !\WP_Clanwars\ACL::user_can( 'manage_game', $_POST['game_id'] ) ) {
-				wp_die( __('Cheatin&#8217; uh?') );
+		if( !Utils::is_post() ) {
+			return;
+		}
+
+		if( isset( $_POST['game_id'] ) && !\WP_Clanwars\ACL::user_can( 'manage_game', $_POST['game_id'] ) ) {
+			wp_die( __('Cheatin&#8217; uh?') );
+		}
+
+		if($act === 'add') {
+			$this->handle_add_match();
+		}
+		else if($act === 'edit') {
+			$this->handle_edit_match();
+		}
+		else {
+			$this->handle_matches_bulk_actions();
+		}
+	}
+
+	function handle_add_match() {
+		$defaults = array(
+			'game_id' => 0,
+			'title' => '',
+			'description' => '',
+			'external_url' => '',
+			'date' => Utils::current_time_fixed('timestamp', 0),
+			'team1' => 0,
+			'team2' => 0,
+			'scores' => array(),
+			'new_team_title' => '',
+			'new_team_country' => '',
+			'match_status' => 0,
+			'gallery' => array()
+		);
+
+		extract( Utils::extract_args( stripslashes_deep($_POST), $defaults ) );
+
+		$date = Utils::date_array2time_helper($date);
+
+		if(!empty($new_team_title) && !empty($new_team_country)) {
+			$pickteam = $this->quick_pick_team($new_team_title, $new_team_country);
+
+			if($pickteam > 0) {
+				$team2 = $pickteam;
+			}
+		}
+
+		$model = array(
+			'title' => $title,
+			'description' => $description,
+			'external_url' => $external_url,
+			'date' => date('Y-m-d H:i:s', $date),
+			'post_id' => 0,
+			'team1' => $team1,
+			'team2' => $team2,
+			'game_id' => $game_id,
+			'match_status' => $match_status,
+			'description' => $description
+		);
+
+		$match_id = \WP_Clanwars\Matches::add_match( $model );
+
+		if(!$match_id) {
+			Flash::error( __( 'Failed to add a match.', WP_CLANWARS_TEXTDOMAIN ) );
+			return;
+		}
+
+		foreach($scores as $round_group => $r) {
+			$num_rounds = sizeof($r['team1']);
+
+			for($i = 0; $i < $num_rounds; $i++) {
+				$model = array(
+					'match_id' => $match_id,
+					'group_n' => abs($round_group),
+					'map_id' => $r['map_id'],
+					'tickets1' => $r['team1'][$i],
+					'tickets2' => $r['team2'][$i]
+				);
+
+				\WP_Clanwars\Rounds::add_round( $model );
+			}
+		}
+
+		\WP_Clanwars\Matches::update_match_post( $match_id, $gallery );
+
+		Flash::success( __( 'Added a match.', WP_CLANWARS_TEXTDOMAIN ) );
+
+		wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches' ) );
+		exit();
+	}
+
+	function handle_edit_match() {
+		$defaults = array(
+			'id' => 0,
+			'game_id' => 0,
+			'title' => '',
+			'description' => '',
+			'external_url' => '',
+			'date' => Utils::current_time_fixed('timestamp', 0),
+			'team1' => 0,
+			'team2' => 0,
+			'new_team_title' => '',
+			'new_team_country' => '',
+			'match_status' => 0,
+			'scores' => array(),
+			'gallery' => array()
+		);
+
+		extract( Utils::extract_args( stripslashes_deep($_POST), $defaults ) );
+
+		$date = Utils::date_array2time_helper($date);
+
+		if(!empty($new_team_title) && !empty($new_team_country)) {
+			$pickteam = $this->quick_pick_team($new_team_title, $new_team_country);
+
+			if($pickteam > 0) {
+				$team2 = $pickteam;
+			}
+		}
+
+		$model = array(
+			'title' => $title,
+			'date' => date('Y-m-d H:i:s', $date),
+			'team1' => $team1,
+			'team2' => $team2,
+			'game_id' => $game_id,
+			'match_status' => $match_status,
+			'description' => $description,
+			'external_url' => $external_url
+		);
+
+		\WP_Clanwars\Matches::update_match( $id, $model );
+
+		$rounds_not_in = array();
+
+		foreach($scores as $round_group => $r) {
+			$num_rounds = sizeof($r['team1']);
+
+			for($i = 0; $i < $num_rounds; $i++) {
+				$round_id = $r['round_id'][$i];
+				$model = array(
+					'match_id' => $id,
+					'group_n' => abs($round_group),
+					'map_id' => $r['map_id'],
+					'tickets1' => $r['team1'][$i],
+					'tickets2' => $r['team2'][$i]
+				);
+
+				if($round_id > 0) {
+					\WP_Clanwars\Rounds::update_round($round_id, $model);
+
+					$rounds_not_in[] = $round_id;
+				} 
+				else {
+					$new_round = \WP_Clanwars\Rounds::add_round($model);
+
+					if($new_round !== false) {
+						$rounds_not_in[] = $new_round;
+					}
+				}
+			}
+		}
+
+		\WP_Clanwars\Rounds::delete_rounds_not_in($id, $rounds_not_in);
+
+		\WP_Clanwars\Matches::update_match_post($id, $gallery);
+
+		Flash::success( __('Updated a match.', WP_CLANWARS_TEXTDOMAIN) );
+
+		wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches&act=edit&id=' . $id ) );
+		exit();
+	}
+
+	function handle_matches_bulk_actions() {
+		check_admin_referer( 'bulk-matches' );
+
+		$table_action = Utils::get_list_table_action();
+
+		if($table_action === 'delete') {
+			if(isset($_POST['id'])) {
+				\WP_Clanwars\Matches::delete_match( $_POST['id'] );
 			}
 
-			switch($act) {
+			Flash::success( __('Updated a match.', WP_CLANWARS_TEXTDOMAIN) );
 
-				case 'add':
-
-					extract(Utils::extract_args(stripslashes_deep($_POST), array(
-						'game_id' => 0,
-						'title' => '',
-						'description' => '',
-						'external_url' => '',
-						'date' => Utils::current_time_fixed('timestamp', 0),
-						'team1' => 0,
-						'team2' => 0,
-						'scores' => array(),
-						'new_team_title' => '',
-						'new_team_country' => '',
-						'match_status' => 0,
-						'gallery' => array()
-						)));
-
-					$date = Utils::date_array2time_helper($date);
-
-					if(!empty($new_team_title) && !empty($new_team_country)) {
-						$pickteam = $this->quick_pick_team($new_team_title, $new_team_country);
-
-						if($pickteam > 0)
-							$team2 = $pickteam;
-					}
-
-					$match_id = \WP_Clanwars\Matches::add_match(array(
-							'title' => $title,
-							'description' => $description,
-							'external_url' => $external_url,
-							'date' => date('Y-m-d H:i:s', $date),
-							'post_id' => 0,
-							'team1' => $team1,
-							'team2' => $team2,
-							'game_id' => $game_id,
-							'match_status' => $match_status,
-							'description' => $description
-					));
-
-					if($match_id) {
-						foreach($scores as $round_group => $r) {
-							for($i = 0; $i < sizeof($r['team1']); $i++) {
-								\WP_Clanwars\Rounds::add_round(array('match_id' => $match_id,
-									'group_n' => abs($round_group),
-									'map_id' => $r['map_id'],
-									'tickets1' => $r['team1'][$i],
-									'tickets2' => $r['team2'][$i]
-									));
-							}
-						}
-
-						\WP_Clanwars\Matches::update_match_post($match_id, $gallery);
-
-						Flash::success( __( 'Added a match.', WP_CLANWARS_TEXTDOMAIN ) );
-
-						wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches' ) );
-						exit();
-					} 
-					else {
-						Flash::error( __( 'Failed to add a match.', WP_CLANWARS_TEXTDOMAIN ) );
-					}
-
-				break;
-
-			case 'edit':
-
-					extract(Utils::extract_args(stripslashes_deep($_POST), array(
-						'id' => 0,
-						'game_id' => 0,
-						'title' => '',
-						'description' => '',
-						'external_url' => '',
-						'date' => Utils::current_time_fixed('timestamp', 0),
-						'team1' => 0,
-						'team2' => 0,
-						'new_team_title' => '',
-						'new_team_country' => '',
-						'match_status' => 0,
-						'scores' => array(),
-						'gallery' => array()
-						)));
-
-					$date = Utils::date_array2time_helper($date);
-
-					if(!empty($new_team_title) && !empty($new_team_country)) {
-						$pickteam = $this->quick_pick_team($new_team_title, $new_team_country);
-
-						if($pickteam > 0)
-							$team2 = $pickteam;
-					}
-
-					\WP_Clanwars\Matches::update_match($id, array(
-							'title' => $title,
-							'date' => date('Y-m-d H:i:s', $date),
-							'team1' => $team1,
-							'team2' => $team2,
-							'game_id' => $game_id,
-							'match_status' => $match_status,
-							'description' => $description,
-							'external_url' => $external_url
-						));
-
-					$rounds_not_in = array();
-
-					foreach($scores as $round_group => $r) {
-						for($i = 0; $i < sizeof($r['team1']); $i++) {
-							$round_id = $r['round_id'][$i];
-							$round_data = array('match_id' => $id,
-									'group_n' => abs($round_group),
-									'map_id' => $r['map_id'],
-									'tickets1' => $r['team1'][$i],
-									'tickets2' => $r['team2'][$i]
-									);
-
-							if($round_id > 0) {
-								\WP_Clanwars\Rounds::update_round($round_id, $round_data);
-								$rounds_not_in[] = $round_id;
-							} else {
-								$new_round = \WP_Clanwars\Rounds::add_round($round_data);
-								if($new_round !== false)
-									$rounds_not_in[] = $new_round;
-							}
-						}
-					}
-
-					\WP_Clanwars\Rounds::delete_rounds_not_in($id, $rounds_not_in);
-
-					\WP_Clanwars\Matches::update_match_post($id, $gallery);
-
-					Flash::success( __('Updated a match.', WP_CLANWARS_TEXTDOMAIN) );
-
-					wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches&act=edit&id=' . $id ) );
-					exit();
-
-				break;
-			}
+			wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches' ) );
 		}
 	}
 
@@ -1999,13 +2035,13 @@ EOT;
 	}
 
 	function on_match_shortcode($match_id) {
-		$matches = \WP_Clanwars\Matches::get_match(array('id' => $match_id, 'sum_tickets' => true));
+		$matchResult = \WP_Clanwars\Matches::get_match(array('id' => $match_id, 'sum_tickets' => true));
 
-		if(empty($matches)) {
+		if( !$matchResult->count() ) {
 			return __("<p>Match with id = $match_id has been removed.</p>", WP_CLANWARS_TEXTDOMAIN);
 		}
 
-		$match = $matches[0];
+		$match = $matchResult[0];
 		$r = \WP_Clanwars\Rounds::get_rounds($match->id);
 		$rounds = array();
 
@@ -2183,9 +2219,13 @@ EOT;
 		}
 
 		$condition = array(
-			'id' => 'all', 'game_id' => $game_filter, 'sum_tickets' => true,
-			'orderby' => 'date', 'order' => 'desc',
-			'limit' => $limit, 'offset' => ($limit * ($current_page-1))
+			'id' => 'all', 
+			'game_id' => $game_filter, 
+			'sum_tickets' => true,
+			'orderby' => 'date', 
+			'order' => 'desc',
+			'limit' => $limit, 
+			'offset' => ($limit * ($current_page-1))
 		);
 
 		$matches = \WP_Clanwars\Matches::get_match($condition);

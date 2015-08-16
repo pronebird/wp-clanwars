@@ -23,6 +23,18 @@ namespace WP_Clanwars;
 
 class Utils {
 
+	static function get_list_table_action() {
+	    if(isset($_REQUEST['action']) && (int)$_REQUEST['action'] !== -1) {
+	        return $_REQUEST['action'];
+	    }
+	    
+	    if(isset($_REQUEST['action2']) && (int)$_REQUEST['action2'] !== -1) {
+	        return $_REQUEST['action2'];
+	    }
+
+	    return false;
+	}
+
 	/**
 	 * Parse arguments and restrict a list of values to keys defined in defaults
 	 *
@@ -196,16 +208,6 @@ class Utils {
 			return mktime((int)$date['hh'], (int)$date['mn'], 0, (int)$date['mm'], (int)$date['jj'], (int)$date['yy']);
 		}
 		return $date;
-	}
-
-	static function gravatar_image_url( $email, $size = false ) {
-		$url = 'http://www.gravatar.com/avatar/' . md5( strtolower($email) ) . '.jpg';
-
-		if($size !== false) {
-			$url .= '?s=' . (int)$size;
-		}
-
-		return $url;
 	}
 
 };

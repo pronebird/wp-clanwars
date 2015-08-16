@@ -55,15 +55,20 @@ class MatchTable extends \WP_List_Table {
     }
 
     function __construct($args = array()) {
-        parent::__construct($args);
+        $base_args = array(
+            'singular' => 'match',
+            'plural' => 'matches'
+        );
+
+        parent::__construct( array_merge($base_args, $args) );
 
         // register screen options for match_table
-        $args = array(
+        $screen_options = array(
             'label' => __('Matches per page', WP_CLANWARS_TEXTDOMAIN),
             'default' => static::PER_PAGE_DEFAULT,
             'option' => static::PER_PAGE_OPTION
         );
-        add_screen_option('per_page', $args);
+        add_screen_option('per_page', $screen_options);
     }
 
     function get_columns() {
@@ -107,7 +112,7 @@ class MatchTable extends \WP_List_Table {
     }
 
     function column_cb($item) {
-        return '<input type="checkbox" name="delete[]" value="' . esc_attr($item->id) . '" />';
+        return '<input type="checkbox" name="id[]" value="' . esc_attr($item->id) . '" />';
     }
 
     function column_date($item) {
@@ -162,7 +167,7 @@ class MatchTable extends \WP_List_Table {
         $actions = array();
 
         $edit_link = admin_url('admin.php?page=wp-clanwars-matches&act=edit&id=' . $item->id);
-        $delete_link = wp_nonce_url('admin-post.php?action=wp-clanwars-deletematches&do_action=delete&delete[]=' . $item->id . '&_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-deletematches');
+        $delete_link = wp_nonce_url('admin-post.php?action=wp-clanwars-delete-match&id=' . $item->id . '&_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-delete-match');
 
         $actions['edit'] = '<a href="' . esc_attr($edit_link) . '">' . __('Edit', WP_CLANWARS_TEXTDOMAIN) . '</a>';
         $actions['delete'] = '<a href="' . esc_attr($delete_link) . '">' . __('Delete', WP_CLANWARS_TEXTDOMAIN) . '</a>';
@@ -199,7 +204,7 @@ class MatchTable extends \WP_List_Table {
             'per_page' => $per_page
         ));
 
-        $this->items = $matches;
+        $this->items = $matches->getArrayCopy();
     }
 
 }

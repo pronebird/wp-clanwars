@@ -198,12 +198,12 @@ SQL;
 		global $wpdb;
 
 		// Get match by ID
-		$matches = self::get_match(array(
+		$matches = static::get_match(array(
 			'id' => $match_id,
 			'sum_tickets' => true
 		));
 
-		if(empty($matches)) {
+		if( !$matches->count() ) {
 			return false;
 		}
 

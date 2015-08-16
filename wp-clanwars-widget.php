@@ -130,11 +130,12 @@ class WP_ClanWars_Widget extends WP_Widget {
 				'orderby' => 'date', 
 				'sum_tickets' => true
 			);
-			$_matches = \WP_Clanwars\Matches::get_match($options);
+
+			$matchResult = \WP_Clanwars\Matches::get_match( $options );
 			
-			if(count($_matches) > 0) {
+			if( $matchResult->count() ) {
 				$games[] = $game;
-				$matches = array_merge($matches, $_matches);
+				$matches = array_merge( $matches, $matchResult->getArrayCopy() );
 			}
 		}
 
