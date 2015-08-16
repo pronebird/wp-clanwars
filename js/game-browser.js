@@ -21,7 +21,7 @@
 jQuery(function ( $ ) {
 
 var timer;
-var $gps = $('#wp-clanwars-gamepacks');
+var $gps = $('#wp-clanwars-cloud-items');
 
 function toggle($button, active) {
     var newTitle = $button.attr('data-text-toggle');

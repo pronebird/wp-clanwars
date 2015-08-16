@@ -46,10 +46,10 @@
         <?php $partial( 'partials/browse_games_error', compact( 'api_error_message' ) ) ?>
         <?php endif; ?>
 
-        <ul class="wp-clanwars-gamepacks clearfix" id="wp-clanwars-gamepacks">
+        <ul class="wp-clanwars-cloud-items wp-clanwars-clearfix" id="wp-clanwars-cloud-items">
 
         <?php foreach ( $api_games as $game ) : ?>
-        <li class="wp-clanwars-item">
+        <li class="wp-clanwars-cloud-item">
             <?php $partial('partials/browse_game_item', compact('game', 'install_action')); ?>
         </li>
         <?php endforeach; ?>

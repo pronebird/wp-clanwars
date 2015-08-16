@@ -1,8 +1,8 @@
-<div class="wp-clanwars-item-top">
-    <div class="wp-clanwars-item-header clearfix">
+<div class="wp-clanwars-cloud-item-top">
+    <div class="wp-clanwars-cloud-item-header wp-clanwars-clearfix">
         <div class="wp-clanwars-column-title">
             <h4>
-                <img src="<?php esc_attr_e($game->iconUrl); ?>" alt="<?php esc_attr_e($game->title); ?>" class="wp-clanwars-item-icon" />
+                <img src="<?php esc_attr_e($game->iconUrl); ?>" alt="<?php esc_attr_e($game->title); ?>" class="wp-clanwars-cloud-item-icon" />
                 <span class="game-title"><?php esc_html_e($game->title); ?></span>
             </h4>
         </div>
@@ -32,7 +32,7 @@
     <?php endforeach; ?>
     </ul>
 </div>
-<div class="wp-clanwars-item-bottom">
+<div class="wp-clanwars-cloud-item-bottom">
     <div class="wp-clanwars-column-rating">
         <div class="star-rating">
             <?php

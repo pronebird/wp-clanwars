@@ -117,7 +117,7 @@ jQuery(document).ready(function ($) {
 
 					<div class="team2-inline">
 						<p><label for="new_team_title"><?php _e('or quickly add new opponent:', WP_CLANWARS_TEXTDOMAIN); ?></label></p>
-						<p class="clearfix">
+						<p class="wp-clanwars-clearfix">
 						<input name="new_team_title" id="new_team_title" type="text" value="" placeholder="<?php _e('New Team', WP_CLANWARS_TEXTDOMAIN); ?>" maxlength="200" autocomplete="off" aria-required="true" />
 						<?php $html_country_select_helper('name=new_team_country&show_popular=1&id=country&class=select2'); ?>
 						</p>
