@@ -1188,7 +1188,7 @@ EOT;
 			'index.php' => "<?php\n// Silence is golden.\n"
 		);
 		foreach($stub_files as $file => $content) {
-			$path = $export_dir . '/' . $file;
+			$path = $unzip_dir . '/' . $file;
 			if( !file_exists($path) ) {
 				@file_put_contents($path, $content);
 			}
