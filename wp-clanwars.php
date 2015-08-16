@@ -319,10 +319,10 @@ EOT;
 
 		$this->page_hooks['import'] = add_submenu_page(
 			$top_level_slug,
-			__('Import', WP_CLANWARS_TEXTDOMAIN),
-			__('Import', WP_CLANWARS_TEXTDOMAIN),
+			__('Clanwars Cloud', WP_CLANWARS_TEXTDOMAIN),
+			__('Clanwars Cloud', WP_CLANWARS_TEXTDOMAIN),
 			'manage_options',
-			'wp-clanwars-import',
+			'wp-clanwars-cloud',
 			$this->onboarding_or_page( 'on_import' )
 		);
 

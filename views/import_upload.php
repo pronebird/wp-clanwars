@@ -1,5 +1,5 @@
-<div class="wrap wp-clanwars-import-page">
-    <h2><?php _e('Import games', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-import' ); ?>" class="upload add-new-h2"><?php _e('Browse', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+<div class="wrap wp-clanwars-cloud-page">
+    <h2><?php _e('Install from ZIP', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-cloud' ); ?>" class="upload add-new-h2"><?php _e('Back to Cloud', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
     <p class="wp-clanwars-install-help"><?php _e('If you have a game pack in a .zip format, you may install it by uploading it here.', WP_CLANWARS_TEXTDOMAIN); ?></p>
     <p class="wp-clanwars-install-help small"><?php _e('Import may take some time. Please do not refresh browser when in progress.', WP_CLANWARS_TEXTDOMAIN); ?></p>
 

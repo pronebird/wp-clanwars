@@ -521,14 +521,14 @@ html[xmlns] .clearfix {
 }
 
 /* Override .wp-filter media queries to avoid search form breaking on two lines.  */
-.wp-clanwars-import-page .wp-filter .search-form {
+.wp-clanwars-cloud-page .wp-filter .search-form {
     float: right;
     max-width: none;
     position: static;
 }
 
-.wp-clanwars-import-page .wp-clanwars-upload-form,
-.wp-clanwars-import-page .wp-clanwars-publish-form {
+.wp-clanwars-cloud-page .wp-clanwars-upload-form,
+.wp-clanwars-cloud-page .wp-clanwars-publish-form {
     background: #fafafa;
     border: 1px solid #e5e5e5;
     padding: 30px;
@@ -537,12 +537,12 @@ html[xmlns] .clearfix {
     overflow: hidden;
 }
 
-.wp-clanwars-import-page .wp-clanwars-publish-form .form-table .regular-text {
+.wp-clanwars-cloud-page .wp-clanwars-publish-form .form-table .regular-text {
     width: 100%;
     display: block;
 }
 
-.wp-clanwars-import-page .wp-clanwars-publish-form .submit {
+.wp-clanwars-cloud-page .wp-clanwars-publish-form .submit {
     text-align: center;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -550,8 +550,8 @@ html[xmlns] .clearfix {
 
 .wp-clanwars-onboarding-page .wp-clanwars-api-error,
 .wp-clanwars-onboarding-page .wp-clanwars-install-help,
-.wp-clanwars-import-page .wp-clanwars-api-error,
-.wp-clanwars-import-page .wp-clanwars-install-help {
+.wp-clanwars-cloud-page .wp-clanwars-api-error,
+.wp-clanwars-cloud-page .wp-clanwars-install-help {
     color: #999;
     font-size: 1.4em;
     font-style: normal;
@@ -562,37 +562,37 @@ html[xmlns] .clearfix {
 
 .wp-clanwars-onboarding-page .wp-clanwars-api-error.small,
 .wp-clanwars-onboarding-page .wp-clanwars-install-help.small,
-.wp-clanwars-import-page .wp-clanwars-api-error.small,
-.wp-clanwars-import-page .wp-clanwars-install-help.small {
+.wp-clanwars-cloud-page .wp-clanwars-api-error.small,
+.wp-clanwars-cloud-page .wp-clanwars-install-help.small {
     padding: 10px 0 0;
     font-size: 1em;
 }
 
-.wp-clanwars-import-page .wp-clanwars-upload-form input {
+.wp-clanwars-cloud-page .wp-clanwars-upload-form input {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     margin: 0;
 }
 
-.wp-clanwars-import-page .wp-clanwars-upload-form input[type=file] {
+.wp-clanwars-cloud-page .wp-clanwars-upload-form input[type=file] {
     width: 70%;
 }
 
-.wp-clanwars-import-page .wp-clanwars-upload-form .wp-clanwars-install-button {
+.wp-clanwars-cloud-page .wp-clanwars-upload-form .wp-clanwars-install-button {
     float: right;
     max-width: 30%;
 }
 
 .wp-clanwars-onboarding-page .wp-clanwars-gamepacks .wp-clanwars-install-button,
-.wp-clanwars-import-page .wp-clanwars-gamepacks .wp-clanwars-install-button {
+.wp-clanwars-cloud-page .wp-clanwars-gamepacks .wp-clanwars-install-button {
     transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     -moz-transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     -webkit-transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 }
 
 .wp-clanwars-onboarding-page .wp-clanwars-gamepacks .wp-clanwars-install-button,
-.wp-clanwars-import-page .wp-clanwars-gamepacks .wp-clanwars-install-button {
+.wp-clanwars-cloud-page .wp-clanwars-gamepacks .wp-clanwars-install-button {
     color: #3498db;
     border-color: #3498db;
     background-color: transparent;
@@ -601,27 +601,27 @@ html[xmlns] .clearfix {
  
 .wp-clanwars-onboarding-page .wp-clanwars-gamepacks .wp-clanwars-install-button:disabled,
 .wp-clanwars-onboarding-page .wp-clanwars-gamepacks .wp-clanwars-install-button[disabled],
-.wp-clanwars-import-page .wp-clanwars-gamepacks .wp-clanwars-install-button:disabled,
-.wp-clanwars-import-page .wp-clanwars-gamepacks .wp-clanwars-install-button[disabled] {
+.wp-clanwars-cloud-page .wp-clanwars-gamepacks .wp-clanwars-install-button:disabled,
+.wp-clanwars-cloud-page .wp-clanwars-gamepacks .wp-clanwars-install-button[disabled] {
     background-color: transparent !important;
     color: #aaa !important;
     border-color: #aaa !important;
 }
 
 .wp-clanwars-onboarding-page .wp-clanwars-gamepacks .wp-clanwars-install-button:hover,
-.wp-clanwars-import-page .wp-clanwars-gamepacks .wp-clanwars-install-button:hover {
+.wp-clanwars-cloud-page .wp-clanwars-gamepacks .wp-clanwars-install-button:hover {
     background-color: #3498db;
     color: #fff;
 }
 
 .wp-clanwars-onboarding-page .wp-clanwars-gamepacks .wp-clanwars-install-button.active,
-.wp-clanwars-import-page .wp-clanwars-gamepacks .wp-clanwars-install-button.active {
+.wp-clanwars-cloud-page .wp-clanwars-gamepacks .wp-clanwars-install-button.active {
     color: #2ecc71;
     border-color: #2ecc71;
 }
 
 .wp-clanwars-onboarding-page .wp-clanwars-gamepacks .wp-clanwars-install-button.active:hover,
-.wp-clanwars-import-page .wp-clanwars-gamepacks .wp-clanwars-install-button.active:hover {
+.wp-clanwars-cloud-page .wp-clanwars-gamepacks .wp-clanwars-install-button.active:hover {
     color: #fff;
     border-color: #2ecc71;
     background-color: #2ecc71;
