@@ -636,8 +636,11 @@ html[xmlns] .clearfix {
     height: 100%;
 
     display: flex;
+    display: -webkit-flex;
     flex-flow: column;
+    -webkit-flex-flow: column;
     justify-content: center;
+    -webkit-justify-content: center;
 }
 
 .wp-clanwars-login-form .header {
@@ -683,17 +686,30 @@ html[xmlns] .clearfix {
     text-align: left;
     box-shadow: none;
     border-radius: 0;
-    border-left-width: 0;
-    border-right-width: 0;
     border:0;
     padding-left: 50px;
+    background: #f7f7f7;
 }
 .wp-clanwars-login-form .content ul.buttons .button:hover {
-    background-color: #0073aa;
     color: #fff;
+    background-color: #0073aa;
+    background: #0073aa -webkit-linear-gradient(left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
+    background: #0073aa linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
 }
 .wp-clanwars-login-form .content ul.buttons .button span.dashicons { line-height: inherit; }
 .wp-clanwars-login-form .content ul.buttons .button i.fa { font-size: 20px; width: 20px; height: 20px; }
+
+/* I think WP has some transitions set on .dashicons. Reset them. */
+.wp-clanwars-login-form .content ul.buttons .button span.dashicons,
+.wp-clanwars-login-form .content ul.buttons .button i.fa {
+    -webkit-transition: none;
+    transition: none;
+}
+
+.wp-clanwars-login-form .content ul.buttons .button {
+    -webkit-transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+    transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+}
 
 /**
  * Select2 compatibility with WordPress admin
