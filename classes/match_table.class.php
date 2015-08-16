@@ -28,18 +28,13 @@ if(!class_exists('WP_List_Table')) {
     require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 }
 
+add_filter('set-screen-option', array('\WP_Clanwars\MatchTable', 'handle_screen_option'), 10, 3);
+
 class MatchTable extends \WP_List_Table {
 
     const PER_PAGE_OPTION = 'wp_clanwars_matches_per_page';
     const PER_PAGE_DEFAULT = 10;
 
-    //
-    // Screen options validation handler
-    // You have to setup a filter externally as it must be executed before load-$page. Use plugin constructor for that.
-    //
-    // Example:
-    // add_filter('set-screen-option', array('\WP_Clanwars\MatchTable', 'handle_screen_option'), 10, 3);
-    //
     static function handle_screen_option($status, $option, $value) {
         if($option === static::PER_PAGE_OPTION) {
             $value = (int)$value;
@@ -48,10 +43,6 @@ class MatchTable extends \WP_List_Table {
             }
         }
         return $value;
-    }
-
-    static function add_screen_filter() {
-        add_filter('set-screen-option', array('\WP_Clanwars\MatchTable', 'handle_screen_option'), 10, 3);
     }
 
     function __construct($args = array()) {

@@ -93,8 +93,6 @@ class WP_ClanWars {
 
 		add_action('widgets_init', array($this, 'on_widgets_init'));
 		add_action('init', array($this, 'on_init'));
-		
-		\WP_Clanwars\MatchTable::add_screen_filter();
 	}
 
 	/**
