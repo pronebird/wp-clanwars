@@ -1814,14 +1814,13 @@ EOT;
 		$act = isset($_GET['act']) ? $_GET['act'] : '';
 		$media_options = array();
 
-		// setup match table only when displaying all matches
-		if($act !== 'add' && $act !== 'edit') {
-			$this->match_table = new \WP_Clanwars\MatchTable();
-			$this->match_table->prepare_items();
+		if($act === 'add') {
+			$this->set_page_title( __( 'Add match', WP_CLANWARS_TEXTDOMAIN ) );
 		}
+		else if($act === 'edit') {
+			$this->set_page_title( __( 'Edit match', WP_CLANWARS_TEXTDOMAIN ) );
 
-		// Check if match really exists
-		if($act === 'edit') {
+			// Check if match really exists
 			$matchResult = \WP_Clanwars\Matches::get_match(array( 'id' => $id ));
 
 			if( !$matchResult->count() ) {
@@ -1833,6 +1832,11 @@ EOT;
 			}
 
 			$media_options['post'] = $matchResult[0]->post_id;
+		}
+		else {
+			// setup match table only when displaying all matches
+			$this->match_table = new \WP_Clanwars\MatchTable();
+			$this->match_table->prepare_items();
 		}
 
 		wp_enqueue_media($media_options);
@@ -1853,7 +1857,7 @@ EOT;
 		if( !Utils::is_post() ) {
 			return;
 		}
-
+		
 		if( isset( $_POST['game_id'] ) && !\WP_Clanwars\ACL::user_can( 'manage_game', $_POST['game_id'] ) ) {
 			wp_die( __('Cheatin&#8217; uh?') );
 		}
