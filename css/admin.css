@@ -671,7 +671,7 @@ html[xmlns] .clearfix {
 
 .wp-clanwars-login-form .content ul.buttons li {
     display: block;
-    margin: 0 0 10px;
+    margin: 0 0 5px;
 }
 
 .wp-clanwars-login-form .content ul.buttons li:last-child {
@@ -689,6 +689,8 @@ html[xmlns] .clearfix {
     border:0;
     padding-left: 50px;
     background: #f7f7f7;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .wp-clanwars-login-form .content ul.buttons .button:hover {
     color: #fff;
