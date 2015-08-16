@@ -644,8 +644,7 @@ html[xmlns] .clearfix {
 }
 
 .wp-clanwars-login-form .header {
-    text-align: center; 
-    /*margin: auto;*/
+    text-align: center;
 }
 
 .wp-clanwars-login-form .header span.dashicons {
@@ -694,10 +693,14 @@ html[xmlns] .clearfix {
 }
 .wp-clanwars-login-form .content ul.buttons .button:hover {
     color: #fff;
-    background-color: #0073aa;
-    background: #0073aa -webkit-linear-gradient(left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
-    background: #0073aa linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
+    background-color: #3b5998;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
+    background-image: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 50%);
 }
+.wp-clanwars-login-form .content ul.buttons .button.steam:hover {
+    background-color: #377695;
+}
+
 .wp-clanwars-login-form .content ul.buttons .button span.dashicons { line-height: inherit; }
 .wp-clanwars-login-form .content ul.buttons .button i.fa { font-size: 20px; width: 20px; height: 20px; }
 
