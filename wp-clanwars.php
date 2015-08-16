@@ -586,6 +586,21 @@ EOT;
 		wp_enqueue_script('wp-cw-admin');
 
 		add_filter( 'admin_body_class', array($this, 'on_admin_body_class') );
+
+		// override page title during onboarding
+		if($this->should_onboard_user()) {
+			$this->set_page_title( __( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ) );
+		}
+	}
+
+	/**
+	 * It's like 'admin_title' hook but less trashy.
+	 * Use wisely and on time.
+	 * @param string $page_title
+	 */
+	function set_page_title( $page_title ) {
+		global $title;
+		$title = $page_title;
 	}
 
 	function on_admin_body_class($classes) {
