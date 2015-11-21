@@ -162,7 +162,8 @@ class GamesTable extends \WP_List_Table {
         $pagination = $games->get_pagination();
 
         $this->set_pagination_args(array(
-            'total_items' => $pagination->get_num_pages(),
+            'total_pages' => $pagination->get_num_pages(),
+            'total_items' => $pagination->get_num_rows(),
             'per_page' => $per_page
         ));
 

@@ -160,10 +160,9 @@ class MapsTable extends \WP_List_Table {
         $maps = \WP_Clanwars\Maps::get_map( $args );
         $pagination = $maps->get_pagination();
 
-        var_dump($pagination);
-
         $this->set_pagination_args(array(
-            'total_items' => $pagination->get_num_pages(),
+            'total_pages' => $pagination->get_num_pages(),
+            'total_items' => $pagination->get_num_rows(),
             'per_page' => $per_page
         ));
 
