@@ -201,12 +201,13 @@ SQL;
 	{
 		global $wpdb;
 		
-		if(!is_array($id))
+		if(!is_array($id)) {
 			$id = array($id);
+		}
 		
 		$id = array_map('intval', $id);
 
-		// delete matches belongs to this team
+		// delete matches belonging to this team
 		\WP_Clanwars\Matches::delete_match_by_team($id);
 		
 		return $wpdb->query('DELETE FROM `' . self::table() . '` WHERE id IN(' . implode(',', $id) . ')');

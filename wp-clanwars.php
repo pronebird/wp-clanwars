@@ -61,6 +61,7 @@ require_once (dirname(__FILE__) . '/classes/api.class.php');
 require_once (dirname(__FILE__) . '/classes/acl.class.php');
 
 require_once(dirname(__FILE__) . '/classes/match_table.class.php');
+require_once(dirname(__FILE__) . '/classes/teams_table.class.php');
 
 require_once (dirname(__FILE__) . '/wp-clanwars-widget.php');
 require_once (ABSPATH . 'wp-admin/includes/class-pclzip.php');
@@ -823,8 +824,6 @@ EOT;
 			) );		
 		extract($args);
 
-		$redirect_url = admin_url( 'admin.php?page=wp-clanwars-teams' );
-
 		// ACL checks on edit
 		if($act == 'edit') {
 			$team = \WP_Clanwars\Teams::get_team( compact('id') );
@@ -833,12 +832,31 @@ EOT;
 				wp_die( __('Cheatin&#8217; uh?') );
 			}
 		}
+		else {
+			// setup teams table only when displaying all teams
+			$this->teams_table = new \WP_Clanwars\TeamsTable();
+			$this->teams_table->prepare_items();
+		}
 
 		// check if POST
 		if( !Utils::is_post() ) {
 			return;
 		}
 
+		// add team?
+		if( $act == 'add' ) {
+			$this->handle_add_team();
+		}
+		else if( $act == 'edit' ) { // update team?
+			$this->handle_edit_team();
+		}
+		else {
+			$this->handle_teams_bulk_actions();
+		}
+	}
+
+	function handle_add_team() {
+		$redirect_url = admin_url( 'admin.php?page=wp-clanwars-teams' );
 		$defaults = array( 'title' => '', 'country' => '', 'delete_image' => false );
 		$data = Utils::extract_args( stripslashes_deep( $_POST ), $defaults );
 		extract($data);
@@ -864,28 +882,74 @@ EOT;
 			$data['logo'] = $upload_id;
 		}
 
-		// add team?
-		if( $act == 'add' ) {
-			if( \WP_Clanwars\Teams::add_team( $data ) ) {
-				Flash::success( __( 'Added a new team.', WP_CLANWARS_TEXTDOMAIN ) );
-				wp_redirect( $redirect_url );
-				exit();
-			} 
-			else {
-				Flash::error( __( 'Failed to add a team.', WP_CLANWARS_TEXTDOMAIN ) );
+		if( \WP_Clanwars\Teams::add_team( $data ) ) {
+			Flash::success( __( 'Added a new team.', WP_CLANWARS_TEXTDOMAIN ) );
+			wp_redirect( $redirect_url );
+			exit();
+		} 
+		else {
+			Flash::error( __( 'Failed to add a team.', WP_CLANWARS_TEXTDOMAIN ) );
+		}
+	}
+
+	function handle_edit_team() {
+		$redirect_url = admin_url( 'admin.php?page=wp-clanwars-teams' );
+		$defaults = array( 'title' => '', 'country' => '', 'delete_image' => false );
+		$data = Utils::extract_args( stripslashes_deep( $_POST ), $defaults );
+		extract($data);
+
+		unset($data['delete_image']);
+
+		if( empty( $title ) ) {
+			Flash::error( __( 'Team title is a required field.', WP_CLANWARS_TEXTDOMAIN ) );
+			return;
+		}
+
+		if( !empty($delete_image) ) {
+			$data['logo'] = 0;
+		}
+
+		$upload_id = $this->handle_upload( 'logo_file' );
+
+		if( is_wp_error($upload_id) && $upload_id->get_error_code() !== self::ErrorUploadNoFile ) {
+			Flash::error( $upload_id->get_error_message() );
+			return;
+		}
+		else if( is_int($upload_id) ) {
+			$data['logo'] = $upload_id;
+		}
+
+		if(\WP_Clanwars\Teams::update_team( $id, $data ) !== false) {
+			Flash::success( __( 'Updated a team.', WP_CLANWARS_TEXTDOMAIN ) );
+			$redirect_url = add_query_arg( compact( 'act', 'id' ), $redirect_url );
+			wp_redirect( $redirect_url );
+			exit();
+		} 
+		else {
+			Flash::error( __('Failed to update a team.', WP_CLANWARS_TEXTDOMAIN) );
+		}
+	}
+
+	function handle_teams_bulk_actions() {
+		check_admin_referer( 'bulk-teams' );
+
+		$table_action = Utils::get_list_table_action();
+
+		if($table_action === 'delete') {
+			if(isset($_POST['id'])) {
+				$result = \WP_Clanwars\Teams::delete_team( $_POST['id'] );
+
+				if( is_wp_error( $result ) ) {
+					Flash::error( sprintf( __( 'Failed to delete a team. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+				}
+				else {
+					Flash::success( sprintf( _n( 'Deleted %d team.', 'Deleted %d teams.', $result, WP_CLANWARS_TEXTDOMAIN), $result ) );
+				}
 			}
 		}
-		else if( $act == 'edit' ) { // update team?
-			if(\WP_Clanwars\Teams::update_team( $id, $data ) !== false) {
-				Flash::success( __( 'Updated a team.', WP_CLANWARS_TEXTDOMAIN ) );
-				$redirect_url = add_query_arg( compact( 'act', 'id' ), $redirect_url );
-				wp_redirect( $redirect_url );
-				exit();
-			} 
-			else {
-				Flash::error( __('Failed to update a team.', WP_CLANWARS_TEXTDOMAIN) );
-			}
-		}
+
+		wp_redirect( admin_url( 'admin.php?page=wp-clanwars-teams' ) );
+		die();
 	}
 
 	function on_manage_teams()
@@ -924,7 +988,7 @@ EOT;
 
 		$table_columns = array(
 			'cb' => '<input type="checkbox" />',
-			'logo' => '',
+			'logo' => __('Logo', WP_CLANWARS_TEXTDOMAIN),
 			'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
 			'country' => __('Country', WP_CLANWARS_TEXTDOMAIN)
 		);
@@ -935,11 +999,8 @@ EOT;
 
 		$view = new View( 'team_table' );
 
-		$view->add_helper( 'print_table_header', array($this, 'print_table_header') );
-		$view->add_helper( 'get_country_flag', array('\WP_Clanwars\Utils', 'get_country_flag') );
-		$view->add_helper( 'get_country_title', array('\WP_Clanwars\Utils', 'get_country_title') );
-
-		$context = compact('teams', 'page_links_text', 'table_columns');
+		$wp_list_table = $this->teams_table;
+		$context = compact('teams', 'page_links_text', 'table_columns', 'wp_list_table');
 
 		$view->render( $context );
 	}
@@ -2034,13 +2095,19 @@ EOT;
 
 		if($table_action === 'delete') {
 			if(isset($_POST['id'])) {
-				\WP_Clanwars\Matches::delete_match( $_POST['id'] );
+				$result = \WP_Clanwars\Matches::delete_match( $_POST['id'] );
+
+				if( is_wp_error( $result ) ) {
+					Flash::error( sprintf( __( 'Failed to delete matches. Error: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+				}
+				else {
+					Flash::success( sprintf( _n( 'Deleted %d match.', 'Deleted %d matches.', $result, WP_CLANWARS_TEXTDOMAIN ), $result ) );
+				}
 			}
-
-			Flash::success( __('Updated a match.', WP_CLANWARS_TEXTDOMAIN) );
-
-			wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches' ) );
 		}
+
+		wp_redirect( admin_url( 'admin.php?page=wp-clanwars-matches' ) );
+		exit();
 	}
 
 	function on_shortcode($atts) {
@@ -2449,7 +2516,7 @@ EOT;
 		CloudAPI::logout();
 
 		wp_redirect( $_REQUEST['_wp_http_referer'] );
-		die();
+		exit();
 	}
 
 	// Settings page hook
