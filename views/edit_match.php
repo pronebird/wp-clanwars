@@ -21,7 +21,7 @@ jQuery(document).ready(function ($) {
 });
 </script>
 
-<div class="wrap wp-cw-matcheditor">
+<div class="wrap wp-clanwars-matcheditor">
 
 	<h2><?php echo $page_title; ?>
 
@@ -123,7 +123,7 @@ jQuery(document).ready(function ($) {
 						</p>
 					</div>
 					<div id="mapsite"></div>
-					<div class="add-map" id="wp-cw-addmap">
+					<div class="add-map" id="wp-clanwars-addmap">
 						<button class="button button-secondary"><span class="dashicons dashicons-plus"></span> <?php _e('Add map', WP_CLANWARS_TEXTDOMAIN); ?></button>
 					</div>
 
@@ -189,7 +189,7 @@ jQuery(document).ready(function ($) {
 
 		</table>
 
-		<p class="submit"><input type="submit" class="button button-primary" id="wp-cw-submit" name="submit" value="<?php esc_attr_e($page_submit); ?>" /></p>
+		<p class="submit"><input type="submit" class="button button-primary" id="wp-clanwars-submit" name="submit" value="<?php esc_attr_e($page_submit); ?>" /></p>
 
 	</form>
 

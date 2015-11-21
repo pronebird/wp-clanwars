@@ -64,7 +64,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 		);
 
 		wp_register_script('jquery-cookie', WP_CLANWARS_URL . '/js/jquery.cookie.pack.js', array('jquery'), WP_CLANWARS_VERSION);
-		wp_register_script('wp-cw-tabs', WP_CLANWARS_URL . '/js/tabs.js', array('jquery', 'jquery-cookie'), WP_CLANWARS_VERSION);
+		wp_register_script('wp-clanwars-tabs', WP_CLANWARS_URL . '/js/tabs.js', array('jquery', 'jquery-cookie'), WP_CLANWARS_VERSION);
 		wp_register_script('wp-clanwars-widget-admin', WP_CLANWARS_URL . '/js/widget-admin.js', array('jquery'), WP_CLANWARS_VERSION);
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -86,7 +86,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
-		wp_enqueue_script('wp-cw-tabs');
+		wp_enqueue_script('wp-clanwars-tabs');
 
 		extract($args);
 

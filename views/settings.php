@@ -1,4 +1,4 @@
-<div class="wrap wp-cw-settings">
+<div class="wrap wp-clanwars-settings">
 
 	<h2><?php _e('Settings', WP_CLANWARS_TEXTDOMAIN); ?></h2>
 

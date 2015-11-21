@@ -1,4 +1,4 @@
-<div class="wrap wp-cw-mapeditor">
+<div class="wrap wp-clanwars-mapeditor">
 	<h2><?php echo $page_title; ?></h2>
 
 	<form name="map-editor" id="map-editor" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">

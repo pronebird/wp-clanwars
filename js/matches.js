@@ -221,7 +221,7 @@
                     self.removeAll();
                 });
 
-                $('#wp-cw-addmap button').click(function (evt) {
+                $('#wp-clanwars-addmap button').click(function (evt) {
                     var map = self.addMap();
 
                     // add two rounds by default

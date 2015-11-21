@@ -1,5 +1,5 @@
 
-<div class="wrap wp-cw-gameeditor">
+<div class="wrap wp-clanwars-gameeditor">
 	<h2><?php echo $page_title; ?></h2>
 
 	<form name="team-editor" id="team-editor" method="post" action="<?php esc_attr_e($_SERVER['REQUEST_URI']); ?>" enctype="multipart/form-data">
