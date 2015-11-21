@@ -16,7 +16,6 @@
     <?php else : ?>
 
     <div class="wp-clanwars-cloud-account-why-login">
-        <?php _e( 'You are not logged in.', WP_CLANWARS_TEXTDOMAIN ); ?>
         <a href="/#TB_inline?width=320&amp;height=400&amp;inlineId=wp-clanwars-cloud-login-holder" class="thickbox"><?php _e( 'Log in', WP_CLANWARS_TEXTDOMAIN ); ?></a> | 
         <a href="javascript:void(0);" id="wp-clanwars-why-login" title="<?php _e( 'Log in to vote for games, leave comments, favorite games, publish your own games! More awesome stuff is coming soon!', WP_CLANWARS_TEXTDOMAIN ); ?>"><?php _e( 'Why should I?', WP_CLANWARS_TEXTDOMAIN ); ?></a>
     </div>
