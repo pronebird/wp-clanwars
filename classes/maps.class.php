@@ -125,9 +125,19 @@ CREATE TABLE $table (
 			return $ret;
 		}
 
-		$rslt = $wpdb->get_results('SELECT * FROM `' . self::table() . '` ' . implode(' ', array($where_query, $order_query, $limit_query)));
+		$maps_table = static::table();
 
-		return $rslt;
+$query = <<<SQL
+
+	SELECT SQL_CALC_FOUND_ROWS *
+	FROM `$maps_table` 
+	$where_query
+	$order_query
+	$limit_query
+
+SQL;
+
+		return \WP_Clanwars\DB::get_results( $query );
 	}
 
 	static function add_map($options)

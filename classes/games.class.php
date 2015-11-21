@@ -104,7 +104,6 @@ CREATE TABLE $table (
 			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
 		}
 
-
 		if(!empty($where_query)) {
 			$where_query = 'WHERE ' . implode(' AND ', $where_query);
 		}
@@ -121,9 +120,19 @@ CREATE TABLE $table (
 			return $ret;
 		}
 
-		$rslt = $wpdb->get_results( "SELECT * FROM `" . self::table() . "` $where_query $order_query $limit_query" );
+		$games_table = static::table();
 
-		return $rslt;
+$query = <<<SQL
+
+	SELECT SQL_CALC_FOUND_ROWS *
+	FROM `$games_table` 
+	$where_query
+	$order_query
+	$limit_query
+
+SQL;
+
+		return \WP_Clanwars\DB::get_results( $query );
 	}
 
 	static function add_game($options) {
