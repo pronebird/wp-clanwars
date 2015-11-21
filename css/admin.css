@@ -714,10 +714,8 @@ html[xmlns] .wp-clanwars-clearfix {
 }
 
 .wp-clanwars-cloud-account {
-    background: #333;
     overflow: hidden;
     vertical-align: middle;
-    color: #fff;
     line-height: 1em;
     padding: 6px;
 }
