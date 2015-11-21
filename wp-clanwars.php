@@ -895,6 +895,7 @@ EOT;
 	}
 
 	function handle_edit_team() {
+		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 		$redirect_url = admin_url( 'admin.php?page=wp-clanwars-teams' );
 		$defaults = array( 'title' => '', 'country' => '', 'delete_image' => false );
 		$data = Utils::extract_args( stripslashes_deep( $_POST ), $defaults );
