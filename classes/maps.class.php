@@ -64,7 +64,7 @@ CREATE TABLE $table (
 		return trim($schema);
 	}
 
-	static function get_map($options, $count = false)
+	static function get_map($options)
 	{
 		global $wpdb;
 
@@ -109,21 +109,6 @@ CREATE TABLE $table (
 
 		if(!empty($where_query))
 			$where_query = 'WHERE ' . implode(' AND ', $where_query);
-
-		if($count) {
-
-			$rslt = $wpdb->get_row('SELECT COUNT(id) AS m_count FROM `' . self::table() . '` ' . $where_query);
-
-			$ret = array('total_items' => 0, 'total_pages' => 1);
-
-			$ret['total_items'] = (int) $rslt->m_count;
-
-			if($limit > 0) {
-				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
-			}
-
-			return $ret;
-		}
 
 		$maps_table = static::table();
 
