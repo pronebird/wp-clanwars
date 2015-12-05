@@ -165,8 +165,11 @@
 .widget_clanwars .opponent-team {
 	line-height: 1.2em;
 	margin-bottom: 5px;
-	padding-left: 20px;
 	display: block;
+}
+
+.widget_clanwars ul.clanwar-list.shows-game-icon .opponent-team {
+	padding-left: 20px;
 }
 
 .widget_clanwars .scores.win
