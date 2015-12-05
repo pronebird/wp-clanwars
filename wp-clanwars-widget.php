@@ -40,6 +40,7 @@ class WP_ClanWars_Widget extends WP_Widget {
 
 		$this->default_settings = array(
 			'title' => __('ClanWars', WP_CLANWARS_TEXTDOMAIN),
+			'display_both_teams' => false,
 			'show_limit' => 10,
 			'hide_title' => false,
 			'hide_older_than' => '1m',
@@ -186,12 +187,6 @@ class WP_ClanWars_Widget extends WP_Widget {
 	?>
 	<li class="clanwar-item<?php if($i % 2 != 0) echo ' alt'; ?> game-<?php echo $match->game_id; ?>">
 
-		<div class="wrap">
-
-			<?php if($game_icon !== false) : ?>
-			<img src="<?php echo $game_icon; ?>" alt="<?php echo esc_attr($match->game_title); ?>" class="icon" />
-			<?php endif; ?>
-
 			<?php if($is_upcoming) : ?>
 			<div class="upcoming"><?php _e('Upcoming', WP_CLANWARS_TEXTDOMAIN); ?></div>
 			<?php elseif($is_playing) : ?>
@@ -200,19 +195,34 @@ class WP_ClanWars_Widget extends WP_Widget {
 			<div class="scores <?php echo $wld_class; ?>"><?php echo sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2); ?></div>
 			<?php endif; ?>
 
-			<div class="opponent-team"><?php echo \WP_Clanwars\Utils::get_country_flag($match->team2_country); ?>
-			<?php 
-				$team2_title = esc_html($match->team2_title);
+			<div class="opponent-team">
+			<?php if($game_icon !== false) : ?>
+			<img src="<?php echo $game_icon; ?>" alt="<?php echo esc_attr($match->game_title); ?>" class="icon" />
+			<?php endif; ?>
 
-				if($match->post_id != 0)
-					$team2_title = '<a href="' . get_permalink($match->post_id) . '" title="' . esc_attr($match->title) . '">' . $team2_title . '</a>';
+			<?php
+				$team1_flag = \WP_Clanwars\Utils::get_country_flag($match->team1_country);
+				$team2_flag = \WP_Clanwars\Utils::get_country_flag($match->team2_country);
 
-				echo $team2_title;
+				if($instance['display_both_teams']) {
+					$team_title = sprintf('%s %s vs. %s %s', 
+						$team1_flag, esc_html($match->team1_title), 
+						$team2_flag, esc_html($match->team2_title)
+					);
+				}
+				else {
+					$team_title = sprintf('%s %s', $team2_flag, esc_html($match->team2_title));
+				}
+
+				if($match->post_id != 0) {
+					echo sprintf('<a href="%s" title="%s">%s</a>', get_permalink($match->post_id), esc_attr($match->title), $team_title);
+				}
+				else {
+					echo $team_title;
+				}
 			?>
 			</div>
-			<div class="home-team"><?php echo esc_html($match->team1_title); ?></div>
 			<div class="date"><?php echo $date; ?></div>
-		</div>
 
 	</li>
 		<?php endforeach; ?>
@@ -249,7 +259,10 @@ class WP_ClanWars_Widget extends WP_Widget {
 				<input class="checkbox" name="<?php echo $this->get_field_name('hide_title'); ?>" id="<?php echo $this->get_field_id('hide_title'); ?>" value="1" type="checkbox" <?php checked($instance['hide_title'], true)?>/> <label for="<?php echo $this->get_field_id('hide_title'); ?>"><?php _e('Hide title', WP_CLANWARS_TEXTDOMAIN); ?></label>
 			</p>
 
-	        
+			<p>
+				<input class="checkbox" name="<?php echo $this->get_field_name('display_both_teams'); ?>" id="<?php echo $this->get_field_id('display_both_teams'); ?>" value="1" type="checkbox" <?php checked($instance['display_both_teams'], true)?>/> <label for="<?php echo $this->get_field_id('display_both_teams'); ?>"><?php _e('Display both teams', WP_CLANWARS_TEXTDOMAIN); ?></label>
+			</p>
+
 	        <p><?php _e('Show games:', WP_CLANWARS_TEXTDOMAIN); ?></p>
 	        <p>
 	            <?php foreach($games as $item) : ?>

@@ -22,11 +22,6 @@
 	position: relative;
 }
 
-.widget_clanwars .home-team {
-	color: #777;
-	display: none;
-}
-
 .widget_clanwars ul.clanwar-list  {
 	list-style: none;
 	margin: 0;
@@ -83,17 +78,11 @@
 	outline: 0;
 }
 
-.widget_clanwars ul.clanwar-list li.clanwar-item .wrap {
+.widget_clanwars ul.clanwar-list li.clanwar-item .icon {
 	margin: 0;
 	padding: 0;
-	clear: both;
-}
-
-.widget_clanwars ul.clanwar-list li.clanwar-item .icon {
-	float: left;
-	margin: 2px 0 0 -25px;
-	padding: 0;
-
+	display: inline-block;
+	margin-left: -20px;
 }
 
 .widget_clanwars ul.clanwar-list li.clanwar-item.alt {}
@@ -176,6 +165,8 @@
 .widget_clanwars .opponent-team {
 	line-height: 1.2em;
 	margin-bottom: 5px;
+	padding-left: 20px;
+	display: block;
 }
 
 .widget_clanwars .scores.win
