@@ -21,12 +21,72 @@
 
 namespace WP_Clanwars;
 
-class API {
+final class API {
 
-    protected static $api_url = 'http://localhost:3000/v1/';
-    protected static $client_key_option_key = 'wp-clanwars-server-clientkey';
-    protected static $access_token_usermeta_key = 'wp-clanwars-server-accesstoken';
-    protected static $user_info_usermeta_key = 'wp-clanwars-server-userinfo';
+    private static $api_url = 'http://localhost:3000/api/v1/';
+    
+    private static $client_key_option_key = 'wp-clanwars-server-clientkey';
+    private static $exchange_key_option_key = 'wp-clanwars-server-exchangekey';
+
+    private static $access_token_usermeta_key = 'wp-clanwars-server-accesstoken';
+    private static $user_info_usermeta_key = 'wp-clanwars-server-userinfo';
+
+    static function check_client_key() {
+        $client_key = static::get_client_key();
+
+        if(!empty($client_key)) {
+            return true;
+        }
+
+        $exchange_url = WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)) . '/verify.php';
+
+        $args = array(
+            'body' => array(
+                'exchangeUrl' => $exchange_url
+            )
+        );
+
+        $response = wp_remote_post( static::$api_url . 'installation/register', $args );
+        $payload = static::get_response_payload( $response );
+
+        var_dump($payload);
+
+        if(is_wp_error($payload)) {
+            return false;
+        }
+
+        $client_key = $payload->clientKey;
+        $exchange_key = $payload->exchangeKey;
+
+        $args = array(
+            'body' => array(
+                'exchangeKey' => $exchange_key
+            )
+        );
+
+        update_option( static::exchange_key_option_key, $exchange_key );
+
+        $response = wp_remote_post( static::$api_url . 'installation/verify', $args );
+        $payload = static::get_response_payload( $response );
+
+        var_dump($payload);
+
+        if(is_wp_error($payload)) {
+            return false;
+        }
+
+        if(!$payload->isActive) {
+            return false;
+        }
+
+        update_option( static::$client_key_option_key, $client_key );
+
+        return true;
+    }
+
+    static function get_exchange_key() {
+        return get_option( static::exchange_key_option_key );
+    }
 
     static function is_logged_in() {
         return !empty( static::get_access_token() );
@@ -57,17 +117,17 @@ class API {
         return false;
     }
 
-    protected static function get_access_token() {
+    private static function get_access_token() {
         global $current_user;
         return get_user_meta( $current_user->ID, static::$access_token_usermeta_key, true );
     }
 
-    protected static function set_access_token($access_token) {
+    private static function set_access_token($access_token) {
         global $current_user;
         update_user_meta( $current_user->ID, static::$access_token_usermeta_key, $access_token );
     }
 
-    protected static function set_user_info($userInfo) {
+    private static function set_user_info($userInfo) {
         global $current_user;
         update_user_meta( $current_user->ID, static::$user_info_usermeta_key, $userInfo );
     }
@@ -174,17 +234,22 @@ class API {
         return static::get_response_payload($response);
     }
 
-    protected static function get_user_agent() {
+    private static function get_client_key() {
+        return get_option( static::$client_key_option_key );
+    }
+
+    private static function get_user_agent() {
         global $wp_version;
 
         return 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) . '; WP-Clanwars/' . WP_CLANWARS_VERSION;
     }
 
-    protected static function remote_get($url, $args = array()) {
+    private static function remote_get($url, $args = array()) {
         $headers = array();
 
         if(static::is_logged_in()) {
             $headers = array(
+                'X-Client-Key' => (string) static::get_client_key(),
                 'Authorization' => 'Bearer ' . static::get_access_token()
             );
         }
@@ -197,7 +262,7 @@ class API {
         return wp_remote_get( $url, array_merge_recursive($_args, (array)$args));
     }
 
-    protected static function get_response_payload($response) {
+    private static function get_response_payload($response) {
         if(is_wp_error($response)) {
             return $response;
         }
