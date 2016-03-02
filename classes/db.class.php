@@ -36,11 +36,32 @@ class DB {
     static function get_results( $query, $output_type = OBJECT ) {
         global $wpdb;
 
+        $query = static::_inject_found_rows( $query );
         $results = $wpdb->get_results( $query, $output_type );
         $pagination = static::_get_pagination();
         $dbresult = new DBResult( $results, $pagination );
 
         return $dbresult;
+    }
+
+    /**
+     * Inject SQL_CALC_FOUND_ROWS into SELECT query if needed.
+     * @param  string $query
+     * @return string updated query string.  
+     */
+    private static function _inject_found_rows( $query ) {
+        // already has SQL_CALC_FOUND_ROWS?
+        if(static::_has_found_rows($query)) {
+            return $query;
+        }
+
+        // modify SELECT query only.
+        $match = array();
+        if( preg_match("#\bSELECT\b\s+#i", $query, $match) ) {
+            return preg_replace("#\bSELECT\b#i", 'SELECT SQL_CALC_FOUND_ROWS ', $query, 1);
+        }
+
+        return $query;
     }
 
     /**
