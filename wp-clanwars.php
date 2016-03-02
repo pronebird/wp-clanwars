@@ -404,19 +404,19 @@ EOT;
 
 		if($flag === null) {
 			$has_hometeam = is_object( \WP_Clanwars\Teams::get_hometeam() );
-			$games_result = \WP_Clanwars\Games::get_game(array(), true);
+			$games = \WP_Clanwars\Games::get_game(array(), true);
 
-			$flag = ($games_result['total_items'] === 0 || !$has_hometeam) && current_user_can('manage_options');
+			$flag = ($games->count() === 0 || !$has_hometeam) && current_user_can('manage_options');
 		}
 
 		return $flag;
 	}
 
 	function onboarding_page() {
-		$games_result = \WP_Clanwars\Games::get_game(array(), true);
+		$games = \WP_Clanwars\Games::get_game(array(), true);
 
 		$has_hometeam = is_object( \WP_Clanwars\Teams::get_hometeam() );
-		$has_games = ($games_result['total_items'] > 0);
+		$has_games = ($games->count() > 0);
 
 		if(!$has_hometeam && !$has_games) {
 			$page_submit = __( 'Continue', WP_CLANWARS_TEXTDOMAIN );
