@@ -169,7 +169,7 @@ SQL;
 		$query = 
 <<<SQL
 
-		SELECT SQL_CALC_FOUND_ROWS
+		SELECT
 			t1.*, 
 			t2.title AS game_title, 
 			t2.abbr AS game_abbr, 

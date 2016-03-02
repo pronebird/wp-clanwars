@@ -114,7 +114,7 @@ CREATE TABLE $table (
 
 $query = <<<SQL
 
-	SELECT SQL_CALC_FOUND_ROWS *
+	SELECT *
 	FROM `$maps_table` 
 	$where_query
 	$order_query
