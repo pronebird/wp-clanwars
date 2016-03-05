@@ -1,33 +1,33 @@
 # Copyright (C) 2015 WP-ClanWars
 # This file is distributed under the same license as the WP-ClanWars package.
 # Translators:
-# ChiefMcClane <karl-kornwachs@t-online.de>, 2015,2017
+# Marcin Michalak <marvin1994pl@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
 "POT-Creation-Date: 2015-08-01 14:11:13+00:00\n"
-"PO-Revision-Date: 2017-01-07 17:25+0000\n"
-"Last-Translator: ChiefMcClane <karl-kornwachs@t-online.de>\n"
-"Language-Team: German (http://www.transifex.com/code-is-poetry/wp-clanwars/language/de/)\n"
+"PO-Revision-Date: 2016-06-08 23:22+0000\n"
+"Last-Translator: Marcin Michalak <marvin1994pl@gmail.com>\n"
+"Language-Team: Polish (http://www.transifex.com/code-is-poetry/wp-clanwars/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>=14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: classes/api.class.php:106
 msgid "Authorization required."
-msgstr ""
+msgstr "Wymagana Autoryzacja."
 
 #: classes/matches.class.php:192
 msgid "%s vs. %s"
-msgstr ""
+msgstr "%s vs. %s"
 
 #: classes/matches.class.php:195
 msgctxt "match_excerpt"
 msgid "%s vs. %s"
-msgstr ""
+msgstr "%s vs. %s"
 
 #: classes/matches.class.php:196 views/match_view.php:33
 #: views/match_view.php:50 wp-clanwars-widget.php:171 wp-clanwars.php:2193
@@ -38,67 +38,69 @@ msgstr "%d:%d"
 msgid ""
 "%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: "
 "minute input, 5: year input"
-msgstr "%1$s%5$s %2$s @ %3$s : %4$s|1: Monat, 2: Tag, 3: Stunde, 4: Minute, 5: Jahr"
+msgstr ""
 
 #: views/edit_game.php:15 views/edit_map.php:15 views/edit_match.php:59
 #: views/edit_team.php:14 wp-clanwars.php:1004 wp-clanwars.php:1592
 #: wp-clanwars.php:1692 wp-clanwars.php:2304
 msgid "Title"
-msgstr "Titel"
+msgstr "Tytuł"
 
 #: views/edit_game.php:15 views/edit_map.php:15 views/edit_team.php:14
 msgid "required"
-msgstr "erforderlich"
+msgstr "wymagane"
 
 #: views/edit_game.php:22 wp-clanwars.php:1593
 msgid "Game tag"
-msgstr "Spiel-Tag"
+msgstr "Tag gry"
 
 #: views/edit_game.php:25
 msgid "For example: for Left 4 Dead 2 it can be L4D2."
-msgstr "Zum Beispiel: L4D2 für Left 4 Dead 2."
+msgstr "Na przykład: dla Left 4 Dead 2 może być L4D2."
 
 #: views/edit_game.php:30
 msgid "Icon"
-msgstr "Icon"
+msgstr "Ikona"
 
 #: views/edit_game.php:37
 msgid "Delete Icon"
-msgstr "Icon löschen"
+msgstr "Usuń Ikone"
 
 #: views/edit_map.php:22
 msgid "Screenshot"
-msgstr "Screenshot"
+msgstr "Zrzut ekranu"
 
 #: views/edit_map.php:29
 msgid "Delete Screenshot"
-msgstr "Screenshot löschen"
+msgstr "Usuń Zrzut ekranu"
 
 #: views/edit_match.php:30
 msgid "Edit post"
-msgstr ""
+msgstr "Edytuj post"
 
 #: views/edit_match.php:31
 msgid "View post"
-msgstr ""
+msgstr "Zobacz post"
 
 #: views/edit_match.php:32
 msgid "%d Comment"
 msgid_plural "%d Comments"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Komentarz"
+msgstr[1] "%d Komentarze"
+msgstr[2] "%d Komentarzy"
+msgstr[3] "%d Komentarzy"
 
 #: views/edit_match.php:48 wp-clanwars.php:2305
 msgid "Game"
-msgstr "Spiel"
+msgstr "Gra"
 
 #: views/edit_match.php:61
 msgid "For example: ESL Winter League"
-msgstr "Zum Beispiel: ESL Winter League"
+msgstr "Na przykład: ESL Winter League"
 
 #: views/edit_match.php:66
 msgid "Description"
-msgstr "Beschreibung"
+msgstr "Opis"
 
 #: views/edit_match.php:68
 msgid "Optional: Drop a line or two about match."
@@ -106,19 +108,19 @@ msgstr ""
 
 #: views/edit_match.php:73
 msgid "External URL"
-msgstr "Externe URL"
+msgstr ""
 
 #: views/edit_match.php:77
 msgid "Enter league or external match URL."
-msgstr "Liga oder externe Match URL."
+msgstr ""
 
 #: views/edit_match.php:82 wp-clanwars.php:2307
 msgid "Match status"
-msgstr "Match Status"
+msgstr ""
 
 #: views/edit_match.php:95 wp-clanwars.php:2306
 msgid "Date"
-msgstr "Datum"
+msgstr "Data"
 
 #: views/edit_match.php:111
 msgid "vs"
@@ -130,19 +132,19 @@ msgstr ""
 
 #: views/edit_match.php:121 wp-clanwars.php:860
 msgid "New Team"
-msgstr "Neues Team"
+msgstr "Nowy Team"
 
 #: views/edit_match.php:127
 msgid "Add map"
-msgstr "Karte hinzufügen"
+msgstr "Dodaj mape"
 
 #: views/edit_match.php:135
 msgid "Gallery"
-msgstr "Bilder"
+msgstr ""
 
 #: views/edit_match.php:139 wp-clanwars.php:1920
 msgid "Add images"
-msgstr "Bilder hinzufügen"
+msgstr "Dodaj obrazek"
 
 #: views/edit_match.php:144
 msgid "Gallery size:"
@@ -150,23 +152,23 @@ msgstr ""
 
 #: views/edit_match.php:148
 msgid "Thumbnail"
-msgstr "Vorschaubild"
+msgstr ""
 
 #: views/edit_match.php:149
 msgid "Medium"
-msgstr ""
+msgstr "Sredni"
 
 #: views/edit_match.php:150
 msgid "Large"
-msgstr ""
+msgstr "Duży"
 
 #: views/edit_match.php:151
 msgid "Full Size"
-msgstr ""
+msgstr "Pełny rozmiar"
 
 #: views/edit_match.php:161
 msgid "Columns:"
-msgstr ""
+msgstr "Kolumny:"
 
 #: views/edit_match.php:172
 msgid "Link to: "
@@ -182,11 +184,11 @@ msgstr ""
 
 #: views/edit_match.php:178 wp-clanwars.php:2480
 msgid "None"
-msgstr "Nichts"
+msgstr "Nic"
 
 #: views/edit_team.php:21 wp-clanwars.php:1005
 msgid "Country"
-msgstr "Land"
+msgstr "Kraj"
 
 #: views/edit_team.php:28
 msgid "Logo"
@@ -194,22 +196,22 @@ msgstr "Logo"
 
 #: views/edit_team.php:35
 msgid "Delete Logo"
-msgstr "Logo löschen"
+msgstr "Usuń logo"
 
 #: views/game_table.php:2 wp-clanwars.php:309 wp-clanwars.php:310
 msgid "Games"
-msgstr "Spiele"
+msgstr "Gry"
 
 #: views/game_table.php:3 views/map_table.php:2 views/match_table.php:2
 #: views/team_table.php:2
 msgid "Add New"
-msgstr "Neu hinzufügen"
+msgstr "Dodaj Nowy"
 
 #: views/game_table.php:15 views/game_table.php:89 views/map_table.php:14
 #: views/map_table.php:83 views/match_table.php:13 views/match_table.php:109
 #: views/team_table.php:13 views/team_table.php:87
 msgid "Bulk Actions"
-msgstr "Bulk Aktionen"
+msgstr ""
 
 #: views/game_table.php:16 views/game_table.php:69 views/game_table.php:90
 #: views/map_table.php:15 views/map_table.php:66 views/map_table.php:84
@@ -217,48 +219,48 @@ msgstr "Bulk Aktionen"
 #: views/settings.php:47 views/settings.php:117 views/team_table.php:14
 #: views/team_table.php:64 views/team_table.php:88
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Usuń"
 
 #: views/game_table.php:18 views/game_table.php:92 views/map_table.php:17
 #: views/map_table.php:86 views/match_table.php:16 views/match_table.php:112
 #: views/settings.php:49 views/settings.php:119 views/team_table.php:16
 #: views/team_table.php:90
 msgid "Apply"
-msgstr "Bewerben"
+msgstr ""
 
 #: views/game_table.php:22 views/match_table.php:20 views/team_table.php:20
 msgid "Search Teams:"
-msgstr "Suche Teams:"
+msgstr ""
 
 #: views/game_table.php:25 views/match_table.php:23
 msgid "Search Games"
-msgstr "Suche Spiele"
+msgstr "Szukaj Gry"
 
 #: views/game_table.php:51 views/map_table.php:50 views/match_table.php:51
 #: views/settings.php:73 views/team_table.php:48
 msgid "No items found."
-msgstr ""
+msgstr "Nic nie znaleziono"
 
 #: views/game_table.php:64 views/team_table.php:61
 msgid "Edit &#8220;%s&#8221; Team"
-msgstr "Bearbeite &#8220;%s&#8221; Team"
+msgstr "Edycja &#8220;%s&#8221; Teamu"
 
 #: views/game_table.php:66 views/map_table.php:65 views/match_table.php:63
 #: views/team_table.php:63
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Edycja"
 
 #: views/game_table.php:67
 msgid "Maps"
-msgstr "Karten"
+msgstr "Mapy"
 
 #: views/game_table.php:68
 msgid "Export"
-msgstr "Exportieren"
+msgstr "Export"
 
 #: views/import_browse.php:2 views/import_upload.php:2
 msgid "Import games"
-msgstr "Spiele importieren"
+msgstr "Import gier"
 
 #: views/import_browse.php:2 views/import_publish.php:2
 msgid "Upload Game"
@@ -266,7 +268,7 @@ msgstr ""
 
 #: views/import_browse.php:11
 msgid "No games found."
-msgstr ""
+msgstr "Gry nie odnalezione."
 
 #: views/import_publish.php:2
 msgid "Publish game"
@@ -283,7 +285,7 @@ msgstr ""
 
 #: views/import_publish.php:18
 msgid "ZIP file"
-msgstr ""
+msgstr "Plik ZIP "
 
 #: views/import_publish.php:26
 msgid ""
@@ -296,7 +298,7 @@ msgstr ""
 
 #: views/import_publish.php:31
 msgid "Publish Now"
-msgstr ""
+msgstr "Opublikuj Teraz"
 
 #: views/import_publish.php:39
 msgid "You have to log in first. Choose one of available log in methods:"
@@ -304,11 +306,11 @@ msgstr ""
 
 #: views/import_publish.php:41
 msgid "Log in with Steam"
-msgstr ""
+msgstr "Zaloguj się przez Steam"
 
 #: views/import_publish.php:42
 msgid "Log in with Facebook"
-msgstr ""
+msgstr "Zaloguj się przez Facebook"
 
 #: views/import_upload.php:2
 msgid "Browse"
@@ -323,75 +325,77 @@ msgstr ""
 #: views/import_upload.php:4
 msgid ""
 "Import may take some time. Please do not refresh browser when in progress."
-msgstr "Das Importieren dauert einen Augenblick. Bitte aktualisiere während des Vorgangs nicht dienen Browser!"
+msgstr "Import może trochę potrwać. Proszę nie odświeżać przeglądarki."
 
 #: views/import_upload.php:12
 msgid "Install Now"
-msgstr ""
+msgstr "Instaluj teraz"
 
 #: views/map_table.php:2
 msgid "Maps / %s"
-msgstr ""
+msgstr "Mapy / %s"
 
 #: views/map_table.php:21
 msgid "Search Maps:"
-msgstr "Suche Karten:"
+msgstr "Szukaj Map:"
 
 #: views/map_table.php:24
 msgid "Search Maps"
-msgstr "Suche Karten"
+msgstr "Szukaj Map"
 
 #: views/map_table.php:63
 msgid "Edit &#8220;%s&#8221; Map"
-msgstr "Bearbeite &#8220;%s&#8221; Karte"
+msgstr "Edycja &#8220;%s&#8221; Mapy"
 
 #: views/match_table.php:2 wp-clanwars.php:291 wp-clanwars.php:292
 msgid "Matches"
-msgstr "Matches"
+msgstr "Mecze"
 
 #: views/match_table.php:61
 msgid "Edit &#8220;%s&#8221; Match"
-msgstr "Bearbeite &#8220;%s&#8221; Match"
+msgstr ""
 
 #: views/match_table.php:93
 msgid "%s:%s"
-msgstr ""
+msgstr "%s:%s"
 
 #: views/match_view.php:4
 msgid "vs."
-msgstr ""
+msgstr "vs."
 
 #: views/partials/browse_game_item.php:11
 msgid "INSTALLED"
-msgstr ""
+msgstr "ZAINSTALOWANE"
 
 #: views/partials/browse_game_item.php:20
 msgid "GET"
-msgstr ""
+msgstr "Weź"
 
 #: views/partials/browse_game_item.php:52
 msgctxt "Number of ratings"
 msgid "(%d)"
-msgstr ""
+msgstr "(%d)"
 
 #: views/partials/browse_game_item.php:55
 msgid "Published:"
-msgstr ""
+msgstr "Opublikowano"
 
 #: views/partials/browse_game_item.php:58
 msgctxt "Number of downloads"
 msgid "%d install"
 msgid_plural "%d installs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d zainstalowano"
+msgstr[1] "%d zainstalowane"
+msgstr[2] "%d zainstalowanych"
+msgstr[3] "%d zainstalowanych"
 
 #: views/partials/browse_games_error.php:1
 msgid "Cannot connect to API."
-msgstr ""
+msgstr "Nie można połączyć się z API."
 
 #: views/partials/browse_games_error.php:2
 msgid "Error: %s."
-msgstr ""
+msgstr "Error: %s."
 
 #: views/partials/import_nav.php:5
 msgid "Search Results"
@@ -399,95 +403,95 @@ msgstr ""
 
 #: views/partials/import_nav.php:8
 msgid "Popular"
-msgstr ""
+msgstr "Popularne"
 
 #: views/partials/import_nav.php:9
 msgid "Publish"
-msgstr ""
+msgstr "Opublikuj"
 
 #: views/settings.php:3 wp-clanwars.php:327 wp-clanwars.php:328
 msgid "Settings"
-msgstr "Einstellungen "
+msgstr "Ustawienia"
 
 #: views/settings.php:12
 msgid "Matches Category"
-msgstr "Match Kategorie"
+msgstr ""
 
 #: views/settings.php:18
 msgid "Enable default styles"
-msgstr "Aktiviere standart Styles"
+msgstr "Włącz domyślne style"
 
 #: views/settings.php:26
 msgid "Save Changes"
-msgstr "Änderungen speichern"
+msgstr "Zapisz Zmiany"
 
 #: views/settings.php:32
 msgid "User Access"
-msgstr "Benutzerzugriff"
+msgstr ""
 
 #: views/settings.php:46 views/settings.php:116
 msgid "Actions"
-msgstr "Aktionen"
+msgstr "Akcje"
 
 #: views/settings.php:87
 msgid "Yes"
-msgstr "Ja"
+msgstr "Tak"
 
 #: views/settings.php:87
 msgid "No"
-msgstr "Nein"
+msgstr "Nie"
 
 #: views/settings.php:93 wp-clanwars-widget.php:129 wp-clanwars-widget.php:130
 #: wp-clanwars.php:2154 wp-clanwars.php:2155 wp-clanwars.php:2498
 #: wp-clanwars.php:2499
 msgid "All"
-msgstr "Alle"
+msgstr "Wrzystko"
 
 #: views/settings.php:134
 msgid "Add New User"
-msgstr "Neuen Benutzer hinzufügen"
+msgstr "Dodaj Nowego Urzytkownika"
 
 #: views/settings.php:141
 msgid "User"
-msgstr "Benutzer"
+msgstr "Urzytkownik"
 
 #: views/settings.php:146
 msgid "Allow user manage specified games only:"
-msgstr "Erlaube es Benutzern nur spezielle Spiele zu bearbeiten:"
+msgstr ""
 
 #: views/settings.php:152
 msgid ""
 "User can create new games <strong>only if &ldquo;All&rdquo; option is "
 "checked.</strong>"
-msgstr "Benutzer kann nur neue Spiele hinzfügen<strong>wenn&ldquo;All&rdquo; Option aktiviert ist.</strong>"
+msgstr ""
 
 #: views/settings.php:156
 msgid "Allow user:"
-msgstr "Benutzer erlauben:"
+msgstr ""
 
 #: views/settings.php:168
 msgid "Add User"
-msgstr "Benutzer hinzufügen"
+msgstr "Dodaj Urzytkownika"
 
 #: views/setup_games.php:3 views/setup_team.php:3
 msgid "Get started with WP-Clanwars"
-msgstr ""
+msgstr "Zacznij z WP-Clanwars"
 
 #: views/setup_games.php:7
 msgid "Install games"
-msgstr ""
+msgstr "Instaluj gry"
 
 #: views/setup_games.php:15
 msgid "Choose one of the options:"
-msgstr ""
+msgstr "Wybierz jedną z możliwości"
 
 #: views/setup_games.php:18
 msgid "Upload previously saved game (ZIP file)"
-msgstr ""
+msgstr "Prześlij wcześniej zapisane gry (plik ZIP)"
 
 #: views/setup_games.php:23
 msgid "Create a new game"
-msgstr ""
+msgstr "Dodaj nową gre"
 
 #: views/setup_games.php:24
 msgid ""
@@ -513,31 +517,31 @@ msgstr ""
 
 #: views/setup_team.php:16
 msgid "Type in your team's name"
-msgstr ""
+msgstr "Wpisz nazwę swojego teamu"
 
 #: views/setup_team.php:19
 msgid "Where is it from?"
-msgstr ""
+msgstr "Skąd to jest?"
 
 #: views/team_table.php:2 wp-clanwars.php:300 wp-clanwars.php:301
 msgid "Teams"
-msgstr "Teams"
+msgstr "Drużyny"
 
 #: views/team_table.php:23
 msgid "Search Teams"
-msgstr "Suche Teams"
+msgstr "Szukaj Drużyny"
 
 #: views/team_table.php:61
 msgid "(Home Team)"
-msgstr "(Heim Team)"
+msgstr "(Gospodarze)"
 
 #: views/team_table.php:65
 msgid "Set As Home Team"
-msgstr "Als Heim Team setzen"
+msgstr "Ustaw jako Gospodarz"
 
 #: wp-clanwars-widget.php:33
 msgid "ClanWars widget"
-msgstr "ClanWars Widget"
+msgstr "ClanWars widget"
 
 #: wp-clanwars-widget.php:34 wp-clanwars-widget.php:36
 #: wp-clanwars-widget.php:79 wp-clanwars.php:280 wp-clanwars.php:281
@@ -546,83 +550,83 @@ msgstr "ClanWars"
 
 #: wp-clanwars-widget.php:43
 msgid "Show all"
-msgstr "Zeige alle"
+msgstr "Pokarz wszystko"
 
 #: wp-clanwars-widget.php:44
 msgid "1 week"
-msgstr "1 Woche"
+msgstr "1 tydzień"
 
 #: wp-clanwars-widget.php:45
 msgid "2 weeks"
-msgstr "2 Wochen"
+msgstr "2 tygodnie"
 
 #: wp-clanwars-widget.php:46
 msgid "3 weeks"
-msgstr "3 Wochen"
+msgstr "3 tygodnie"
 
 #: wp-clanwars-widget.php:47
 msgid "1 month"
-msgstr "1 Monat"
+msgstr "1 miesiąc"
 
 #: wp-clanwars-widget.php:48
 msgid "2 months"
-msgstr "2 Monate"
+msgstr "2 miesiące"
 
 #: wp-clanwars-widget.php:49
 msgid "3 months"
-msgstr "3 Monate"
+msgstr "3 miecięcy"
 
 #: wp-clanwars-widget.php:50
 msgid "6 months"
-msgstr "6 Monate"
+msgstr "6 miecięcy"
 
 #: wp-clanwars-widget.php:51
 msgid "1 year"
-msgstr "1 Jahr"
+msgstr "1 rok"
 
 #: wp-clanwars-widget.php:167 wp-clanwars.php:2189
 msgid "Upcoming"
-msgstr "Bevorstehend"
+msgstr "Nadchodzące"
 
 #: wp-clanwars-widget.php:169 wp-clanwars.php:2191
 msgid "Playing"
-msgstr "Laufendes Spiel"
+msgstr ""
 
 #: wp-clanwars-widget.php:210
 msgid "Title:"
-msgstr "Titel:"
+msgstr "Tytuł:"
 
 #: wp-clanwars-widget.php:213
 msgid "Hide title"
-msgstr "Titel ausblenden"
+msgstr "Uktuj tytuł"
 
 #: wp-clanwars-widget.php:217
 msgid "Show games:"
-msgstr "Spiele zeigen:"
+msgstr "Pokaż gry:"
 
 #: wp-clanwars-widget.php:223
 msgid "Do not check any game if you want to show all games."
-msgstr "Markiere kein Spiel, wenn Sie alle Spiele sehen wollen."
+msgstr "Nie sprawdzaj każdą grę, jeśli chcesz pokazać wszystkie gry."
 
 #: wp-clanwars-widget.php:225
 msgid "Show matches:"
-msgstr "Zeuge Matches:"
+msgstr ""
 
 #: wp-clanwars-widget.php:226
 msgid "Hide older than"
-msgstr "Älter als ausblenden"
+msgstr ""
 
 #: wp-clanwars.php:178
 msgid "Manage matches"
-msgstr "Matches verwalten"
+msgstr ""
 
 #: wp-clanwars.php:179
 msgid "Manage games"
-msgstr "Spiele verwalten"
+msgstr ""
 
 #: wp-clanwars.php:180
 msgid "Manage teams"
-msgstr "Teams verwalten"
+msgstr ""
 
 #: wp-clanwars.php:184
 msgid "PCW"
@@ -630,7 +634,7 @@ msgstr "PCW"
 
 #: wp-clanwars.php:185
 msgid "Official"
-msgstr "Offiziell"
+msgstr "Official"
 
 #: wp-clanwars.php:318 wp-clanwars.php:319
 msgid "Import"
@@ -638,27 +642,27 @@ msgstr "Import"
 
 #: wp-clanwars.php:354
 msgid "Are you sure you want to delete this map?"
-msgstr "Sind Sie sicher, dass Sie diese Map löschen wollen?"
+msgstr ""
 
 #: wp-clanwars.php:355
 msgid "Are you sure you want to delete this game?"
-msgstr "Sind Sie sicher, dass Sie dieses Spiel löschen wollen?"
+msgstr ""
 
 #: wp-clanwars.php:356
 msgid "Are you sure you want to delete this team?"
-msgstr "Sind Sie sicher, dass Sie dieses Team löschen wollen?"
+msgstr ""
 
 #: wp-clanwars.php:357
 msgid "Are you sure you want to delete this match?"
-msgstr "Sind Sie sicher, dass Sie dieses Match löschen wollen?"
+msgstr ""
 
 #: wp-clanwars.php:413
 msgid "Continue"
-msgstr "Weiter"
+msgstr "Kontynuuj"
 
 #: wp-clanwars.php:416
 msgid "Get started"
-msgstr ""
+msgstr "Zaczynajmy"
 
 #: wp-clanwars.php:481 wp-clanwars.php:505 wp-clanwars.php:813
 #: wp-clanwars.php:845 wp-clanwars.php:909 wp-clanwars.php:1030
@@ -667,67 +671,67 @@ msgstr ""
 #: wp-clanwars.php:1928 wp-clanwars.php:2323 wp-clanwars.php:2344
 #: wp-clanwars.php:2371 wp-clanwars.php:2398 wp-clanwars.php:2437
 msgid "Cheatin&#8217; uh?"
-msgstr "Cheatin&#8217; uh?"
+msgstr ""
 
 #: wp-clanwars.php:497
 msgid "Please fill in all required fields."
-msgstr ""
+msgstr "Proszę wypełnij wymagane pola."
 
 #: wp-clanwars.php:529 wp-clanwars.php:2413 wp-clanwars.php:2428
 msgid "Imported game."
-msgstr ""
+msgstr "Zaimportowane gry."
 
 #: wp-clanwars.php:533 wp-clanwars.php:2417 wp-clanwars.php:2462
 msgid "Failed to upload file."
-msgstr ""
+msgstr "Problem podczas wysyłania pliku."
 
 #: wp-clanwars.php:548
 msgid "Failed to create a game."
-msgstr ""
+msgstr "Problem podczas dodawania gry."
 
 #: wp-clanwars.php:550
 msgid "Created a game."
-msgstr ""
+msgstr "Gra została dodana."
 
 #: wp-clanwars.php:557
 msgid "Please fill in the game name."
-msgstr ""
+msgstr "Proszę podaj nazwe gry."
 
 #: wp-clanwars.php:737
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "<code>php.ini</code>."
-msgstr "Die hochgeladene Datei überschreitet die Maximalgröße von <code> upload_max_filesize </ code>, die in <code> php.ini </ code> angegeben wurde."
+msgstr ""
 
 #: wp-clanwars.php:738
 msgid ""
 "The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was "
 "specified in the HTML form."
-msgstr "Die hochgeladene Datei überschreitet die Maximalgröße von <em> MAX_FILE_SIZE </ em>, die im HTML-Formular angegeben wurde."
+msgstr ""
 
 #: wp-clanwars.php:739
 msgid "The uploaded file was only partially uploaded."
-msgstr "Die Datei wurde nur teilweise hochgeladen."
+msgstr ""
 
 #: wp-clanwars.php:740
 msgid "No file was uploaded."
-msgstr "Es wurde keine Datei hochgeladen."
+msgstr "Żaden plik nie został wysłany."
 
 #: wp-clanwars.php:741
 msgid "Missing a temporary folder."
-msgstr "Fehlender temporärer Ordner."
+msgstr ""
 
 #: wp-clanwars.php:742
 msgid "Failed to write file to disk."
-msgstr "Fehler beim schreiben auf Festplatte."
+msgstr "Problem podczas zapisywania na dysku."
 
 #: wp-clanwars.php:743
 msgid "File upload stopped by extension."
-msgstr "Datei-Upload durch Erweiterung gestoppt."
+msgstr ""
 
 #: wp-clanwars.php:744
 msgid "File type does not meet security guidelines. Try another."
-msgstr "Dateityp erfüllt nicht die Sicherheitsrichtlinien. Versuch eine andere."
+msgstr ""
 
 #: wp-clanwars.php:758
 msgid "Unknown upload error: %d"
@@ -735,49 +739,51 @@ msgstr ""
 
 #: wp-clanwars.php:799
 msgid "Failed to save attachment in database."
-msgstr ""
+msgstr "Nie udało się zapisać załącznik w bazie danych."
 
 #: wp-clanwars.php:832
 msgid "Failed to delete a team. Error: %s"
-msgstr ""
+msgstr "Problem podczas usuwania teamu. Błąd: %s"
 
 #: wp-clanwars.php:835
 msgid "Deleted %d team."
 msgid_plural "Deleted %d teams."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: wp-clanwars.php:860
 msgid "Add Team"
-msgstr "Team hinzufügen"
+msgstr "Dodaj Team"
 
 #: wp-clanwars.php:867
 msgid "Edit Team"
-msgstr "Bearbeite Team"
+msgstr "Edytuj Team"
 
 #: wp-clanwars.php:867
 msgid "Update Team"
-msgstr "Team aktualisieren"
+msgstr "Aktualizuj Team"
 
 #: wp-clanwars.php:925
 msgid "Team title is a required field."
-msgstr "Team Titel ist ein Pflichtfeld."
+msgstr ""
 
 #: wp-clanwars.php:946
 msgid "Added a new team."
-msgstr "Neues Team hinzugefügt."
+msgstr "Dodano nowy team."
 
 #: wp-clanwars.php:951
 msgid "Failed to add a team."
-msgstr "Fehler beim Hinzufügen ein Teams."
+msgstr "Problem podczas dodawania nowego teamu."
 
 #: wp-clanwars.php:956
 msgid "Updated a team."
-msgstr "Team aktualisiert."
+msgstr "Team zaktualizowany."
 
 #: wp-clanwars.php:962
 msgid "Failed to update a team."
-msgstr ""
+msgstr "Problem podczas aktualizacji teamu."
 
 #: wp-clanwars.php:988 wp-clanwars.php:1578 wp-clanwars.php:1676
 #: wp-clanwars.php:2290
@@ -792,17 +798,19 @@ msgstr "&raquo;"
 #: wp-clanwars.php:994 wp-clanwars.php:1584 wp-clanwars.php:1682
 #: wp-clanwars.php:2143 wp-clanwars.php:2296
 msgid "Displaying %s&#8211;%s of %s"
-msgstr "Anzeige %s&#8211;%s von %s"
+msgstr ""
 
 #: wp-clanwars.php:1054
 msgid "Failed to delete games. Error: %s"
-msgstr ""
+msgstr "Problem podczas dodawanie gier. Błąd: %s"
 
 #: wp-clanwars.php:1057
 msgid "Deleted %d game."
 msgid_plural "Deleted %d games."
-msgstr[0] "%d Spiel gelöscht."
-msgstr[1] "%d Spiele gelöscht."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: wp-clanwars.php:1251
 msgid "File is not found on server."
@@ -810,55 +818,55 @@ msgstr ""
 
 #: wp-clanwars.php:1293
 msgid "Unable to unzip file: %s"
-msgstr "Nicht in der Lage, die Datei zu entpacken: %s"
+msgstr "Nie można rozpakować pliku: %s"
 
 #: wp-clanwars.php:1300
 msgid "Index file is not found in ZIP."
-msgstr ""
+msgstr "Index nie odnaleziony w ZIP"
 
 #: wp-clanwars.php:1307 wp-clanwars.php:1318
 msgid "Corrupted or missing contents from ZIP file."
-msgstr ""
+msgstr "Uszkodzonych lub brakujących elementów z pliku ZIP."
 
 #: wp-clanwars.php:1338
 msgid "Failed to add game."
-msgstr ""
+msgstr "Problem podczas dodawania gry."
 
 #: wp-clanwars.php:1358
 msgid "New Game"
-msgstr "Neues Spiel"
+msgstr "Nowa Gra"
 
 #: wp-clanwars.php:1358
 msgid "Add Game"
-msgstr "Spiel hinzufügen"
+msgstr "Dodaj Gre"
 
 #: wp-clanwars.php:1365
 msgid "Edit Game"
-msgstr "Spiel bearbeiten"
+msgstr "Edytuj gre"
 
 #: wp-clanwars.php:1365
 msgid "Update Game"
-msgstr "Spiel aktualisieren"
+msgstr ""
 
 #: wp-clanwars.php:1407 wp-clanwars.php:1440
 msgid "Game title is a required field."
-msgstr ""
+msgstr "Nazwa gry jest wymagana."
 
 #: wp-clanwars.php:1422
 msgid "Added a new game."
-msgstr ""
+msgstr "Dodano gre."
 
 #: wp-clanwars.php:1427
 msgid "Failed to add a game."
-msgstr ""
+msgstr "Problem podczas dodawania gry."
 
 #: wp-clanwars.php:1459
 msgid "Updated a game."
-msgstr ""
+msgstr "Zaktualizowano gre."
 
 #: wp-clanwars.php:1464
 msgid "Failed to update a game."
-msgstr ""
+msgstr "Problem podczas aktualizacji gry"
 
 #: wp-clanwars.php:1475 wp-clanwars.php:1508
 msgid "Map title is a required field."
@@ -866,7 +874,7 @@ msgstr ""
 
 #: wp-clanwars.php:1490
 msgid "Added a map."
-msgstr ""
+msgstr "Dodano mape."
 
 #: wp-clanwars.php:1495
 msgid "Failed to add a map."
@@ -874,91 +882,95 @@ msgstr ""
 
 #: wp-clanwars.php:1527
 msgid "Updated a map."
-msgstr ""
+msgstr "Zaktualizowano mape."
 
 #: wp-clanwars.php:1531
 msgid "Failed to update a map."
-msgstr ""
+msgstr "Błąd podczas aktualizacji mapy."
 
 #: wp-clanwars.php:1649
 msgid "Failed to delete maps. Error: %s"
-msgstr ""
+msgstr "Problem podczas usuwania map. Błąd: %s"
 
 #: wp-clanwars.php:1652
 msgid "Deleted %d map."
 msgid_plural "Deleted %d maps."
-msgstr[0] "%d Karte gelöscht."
-msgstr[1] "%d Karten gelöscht."
+msgstr[0] "Usunięto %d mape."
+msgstr[1] "Usunięto %d mapy."
+msgstr[2] "Usunięto %d mapy."
+msgstr[3] "Usunięto %d mapy."
 
 #: wp-clanwars.php:1708
 msgid "Add Map"
-msgstr "Karte hinzufügen"
+msgstr "Dodaj Mape"
 
 #: wp-clanwars.php:1715
 msgid "Edit Map"
-msgstr "Karte bearbeiten"
+msgstr "Edytuj Mape"
 
 #: wp-clanwars.php:1715
 msgid "Update Map"
-msgstr "Karte updaten"
+msgstr "Aktualizuj Mape"
 
 #: wp-clanwars.php:1766
 msgid "Failed to delete matches. Error: %s"
-msgstr "Fehler beim Löschen der matches. Fehler: %s"
+msgstr "Problem podczas usuwania meczy. Błąd: %s"
 
 #: wp-clanwars.php:1769
 msgid "Deleted %d match."
 msgid_plural "Deleted %d matches."
-msgstr[0] "%d Match gelöscht."
-msgstr[1] "%d Matches gelöscht."
+msgstr[0] "Usinięto %d mecz."
+msgstr[1] "Usinięto %d mecze."
+msgstr[2] "Usinięto %d meczy."
+msgstr[3] "Usinięto %d meczy."
 
 #: wp-clanwars.php:1778
 msgid "Add Match"
-msgstr "Match hinzufügen"
+msgstr "Dodaj Mecz"
 
 #: wp-clanwars.php:1785
 msgid "Edit Match"
-msgstr "Match bearbeiten"
+msgstr "Edytuj Mecz"
 
 #: wp-clanwars.php:1785
 msgid "Update Match"
-msgstr "Match aktualisieren"
+msgstr "Aktualizacje Meczu"
 
 #: wp-clanwars.php:1917
 msgid "Add Round"
-msgstr "Runde hinzufügen"
+msgstr "Dodaj runde"
 
 #: wp-clanwars.php:1918
 msgid "Exclude map from match"
-msgstr "Karte vom Spiel ausschließen"
+msgstr "Wykluczenie mapy z meczu"
 
 #: wp-clanwars.php:1919
 msgid "Remove round"
-msgstr "Runde entfernen"
+msgstr "Usunięto runde"
 
 #: wp-clanwars.php:1921
 msgid "Are you sure you want to delete this screenshot?"
-msgstr ""
+msgstr "Czy na pewno chcesz usunąć ten zrzut ekranu?"
 
 #: wp-clanwars.php:1986
 msgid "Added a match."
-msgstr ""
+msgstr "Mecz został dodany"
 
 #: wp-clanwars.php:1992
 msgid "Failed to add a match."
-msgstr ""
+msgstr "Błąd podczas dodawaniu meczu"
 
 #: wp-clanwars.php:2062
 msgid "Updated a match."
-msgstr ""
+msgstr "Zaktualizowano mecz."
 
 #: wp-clanwars.php:2137
 msgid "&larr;"
-msgstr ""
+msgstr "&larr;"
 
 #: wp-clanwars.php:2138
 msgid "&rarr;"
-msgstr ""
+msgstr "&rarr;"
 
 #: wp-clanwars.php:2308
 msgid "Team 1"
@@ -970,11 +982,11 @@ msgstr "Team 2"
 
 #: wp-clanwars.php:2310
 msgid "Tickets"
-msgstr "Tickets"
+msgstr "Bilet"
 
 #: wp-clanwars.php:2337 wp-clanwars.php:2364 wp-clanwars.php:2391
 msgid "Settings saved."
-msgstr "Einstellungen gespeichert."
+msgstr "Ustawienia zapisane"
 
 #: wp-clanwars.php:2454
 msgid ""
@@ -984,15 +996,15 @@ msgstr ""
 
 #: wp-clanwars.php:2458
 msgid "You must agree to the licensing terms."
-msgstr ""
+msgstr "Musisz zgodzić się z warunkami licencji."
 
 #: wp-clanwars.php:2473
 msgid "User Login"
-msgstr "Benutzer Login"
+msgstr ""
 
 #: wp-clanwars.php:2474
 msgid "Permissions"
-msgstr "Berechtigungen"
+msgstr "Uprawnienia"
 
 #. Plugin Name of the plugin/theme
 msgid "WP-ClanWars"
@@ -1004,7 +1016,7 @@ msgstr "https://bitbucket.org/and/wp-clanwars"
 
 #. Description of the plugin/theme
 msgid "ClanWars plugin for a cyber-sport team website"
-msgstr "ClanWars Plugin für eine Clan Homepage"
+msgstr ""
 
 #. Author of the plugin/theme
 msgid "Andrej Mihajlov"
@@ -1016,4 +1028,4 @@ msgstr "http://www.codeispoetry.ru/"
 
 #. Tags of the plugin/theme
 msgid "cybersport, clanwar, team, clan, cyber, sport, match"
-msgstr "cybersport, clanwar, team, clan, cyber, sport, match, war"
+msgstr "cybersport, clanwar, team, clan, cyber, sport, match"
