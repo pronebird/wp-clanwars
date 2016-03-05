@@ -151,12 +151,30 @@ final class API {
                 )
             );
         }
-
         return static::api_get( static::$api_url . 'auth/status', $args );
     }
 
-    static function get_download_url($id) {
-        return static::$api_url . 'games/download/' . $id;
+    static function download_game($id, $filename) {
+        $zip_url = static::$api_url . 'games/download/' . $id;
+
+        $response = wp_remote_get( $zip_url, array(
+            'timeout' => 15, 
+            'stream' => true,
+            'filename' => $filename,
+            'headers' => array( 
+                    'X-Client-Key' => static::get_client_key() 
+                )
+        ) );
+
+        if( is_wp_error( $response ) ) {
+            return $response;
+        }
+
+        if( wp_remote_retrieve_response_code($response) !== 200 ) {
+            return new WP_Error( 'download-error', __('File is not found on server.', WP_CLANWARS_TEXTDOMAIN) );
+        }
+
+        return true;
     }
 
     static function get_game($id) {
