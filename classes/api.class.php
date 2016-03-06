@@ -272,7 +272,28 @@ final class API {
         return $ok;
     }
 
+    private static function api_post($url, $args = array()) {
+        $ok = static::check_client_key();
+
+        if($ok === true)
+        {
+            $response = static::remote_post( $url, $args );
+
+            return static::get_response_payload( $response );
+        }
+
+        return $ok;
+    }
+
     private static function remote_get($url, $args = array()) {
+        return wp_remote_get( $url, static::setup_args( $args ) );
+    }
+
+    private static function remote_post($url, $args = array()) {
+        return wp_remote_post( $url, static::setup_args( $args ) );
+    }
+
+    private static function setup_args($args) {
         $headers = array();
 
         if(static::is_logged_in()) {
@@ -286,7 +307,7 @@ final class API {
             'headers' => $headers
         );
 
-        return wp_remote_get( $url, array_merge_recursive($_args, (array)$args));
+        return array_merge_recursive($_args, $args);
     }
 
     private static function get_response_payload($response) {
