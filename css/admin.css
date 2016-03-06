@@ -480,6 +480,10 @@ html[xmlns] .wp-clanwars-clearfix {
     font-size: 0;
 }
 
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item.wp-clanwars-cloud-item-voting-allowed .star-rating:hover .star-full {
+    -webkit-text-stroke: 1px #cd9500;
+}
+
 @media screen and ( max-width: 782px ) {
     .wp-clanwars-cloud-items {
         margin-left: 0;

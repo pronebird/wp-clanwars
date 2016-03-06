@@ -67,4 +67,85 @@ $gps.on('click', '.wp-clanwars-install-button:not(:disabled)',
         }
     });
 
+/*
+Voting
+ */
+
+function StarRatingWidget($ratingDiv) {
+    this.$ratingDiv = $ratingDiv;
+
+    this._addEventHandlers();
+}
+
+StarRatingWidget.destroy = function () {
+    this.$ratingDiv.off('.star-rating-widget');
+}
+
+StarRatingWidget.prototype._addEventHandlers = function () {
+    this.$ratingDiv
+        .on('mouseenter.star-rating-widget', this._mouseenter.bind(this))
+        .on('mousemove.star-rating-widget', this._mousemove.bind(this))
+        .on('mouseleave.star-rating-widget', this._mouseleave.bind(this))
+        .on('click.star-rating-widget', this._mouseclick.bind(this));
+};
+
+StarRatingWidget.prototype._save = function () {
+    var children = this.$ratingDiv.children();
+
+    $.each(children, function (i, item) {
+        var $item = $(item);
+
+        $item.attr('data-original-class', $item.attr('class'));
+    });
+};
+
+StarRatingWidget.prototype._restore = function () {
+    var children = this.$ratingDiv.children();
+    
+    $.each(children, function (i, item) {
+        var $item = $(item);
+        
+        $item.attr('class', $item.attr('data-original-class'));
+        $item.removeAttr('data-original-class');
+    });
+};
+
+StarRatingWidget.prototype._vote = function (rating) {
+    console.log('vote %d', rating);
+};
+
+StarRatingWidget.prototype._mouseenter = function() {
+    this._save();
+};
+
+StarRatingWidget.prototype._mouseleave = function () {
+    this._restore();
+};
+
+StarRatingWidget.prototype._mousemove = function (e) {
+    var $star = $(e.target);
+    var index = $star.index();
+    var children = this.$ratingDiv.children();
+
+    $.each(children, function (i, item) {
+        var full = 'star-full';
+        var empty = 'star-empty';
+        var cl = i <= index ? full : empty;
+
+        $(item).attr('class', 'star ' + cl);
+    });
+};
+
+StarRatingWidget.prototype._mouseclick = function (e) {
+    var $star = $(e.target);
+    var index = $star.index();
+
+
+};
+
+$gps.find('.wp-clanwars-cloud-item.wp-clanwars-cloud-item-voting-allowed .wp-clanwars-cloud-item-column-rating .star-rating').each(function (i, el) {
+    new StarRatingWidget( $(el) );
+});
+
+
 });

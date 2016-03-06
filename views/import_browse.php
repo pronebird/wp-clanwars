@@ -13,8 +13,8 @@
 	<ul class="wp-clanwars-cloud-items wp-clanwars-clearfix" id="wp-clanwars-cloud-items">
 
 	<?php foreach ( $api_games as $game ) : ?>
-	<li class="wp-clanwars-cloud-item">
-		<?php $partial('partials/browse_game_item', compact('game', 'install_action')); ?>
+	<li class="wp-clanwars-cloud-item<?php if($logged_into_cloud) echo ' wp-clanwars-cloud-item-voting-allowed'; ?>">
+		<?php $partial('partials/browse_game_item', compact('game', 'install_action', 'logged_into_cloud')); ?>
 	</li>
 	<?php endforeach; ?>
 
