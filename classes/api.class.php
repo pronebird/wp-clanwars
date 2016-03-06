@@ -181,6 +181,14 @@ final class API {
         return static::api_get( static::$api_url . 'games/' . $id );
     }
 
+    static function game_vote($id, $rating) {
+        return static::api_post( static::$api_url . 'games/' . $id . '/vote', 
+                array( 
+                    'body' => array( 'rating' => $rating ) 
+                ) 
+            );
+    }
+
     static function get_popular() {
         return static::api_get( static::$api_url . 'games/popular' );
     }

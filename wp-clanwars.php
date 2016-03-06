@@ -207,6 +207,7 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-publish', array($this, 'on_admin_post_publish'));
 		add_action('admin_post_wp-clanwars-login', array($this, 'on_admin_post_login'));
 		add_action('admin_post_wp-clanwars-logout', array($this, 'on_admin_post_logout'));
+		add_action('admin_post_wp-clanwars-game-vote', array($this, 'on_admin_post_game_vote'));
 
 		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setup_team'));
 		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setup_games'));
@@ -2500,6 +2501,21 @@ EOT;
 		check_admin_referer('wp-clanwars-logout');
 
 		CloudAPI::logout();
+
+		wp_redirect( $_REQUEST['_wp_http_referer'] );
+		exit();
+	}
+
+	function on_admin_post_game_vote() {
+		check_admin_referer('wp-clanwars-game-vote');
+
+		if(isset($_POST['remote_id'], $_POST['rating'])) 
+		{
+			$remote_id = $_POST['remote_id'];
+			$rating = (int) $_POST['rating'];
+
+			CloudAPI::game_vote($remote_id, $rating);
+		}	
 
 		wp_redirect( $_REQUEST['_wp_http_referer'] );
 		exit();
