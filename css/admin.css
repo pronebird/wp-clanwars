@@ -474,14 +474,26 @@ html[xmlns] .wp-clanwars-clearfix {
     margin-bottom: 10px;
 }
 
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .num-ratings {
+    line-height: 20px; /* match with dash-icons */
+}
+
 .wp-clanwars-cloud-items .wp-clanwars-cloud-item .star-rating {
     display: inline-block;
     vertical-align: top;
     font-size: 0;
 }
 
-.wp-clanwars-cloud-items .wp-clanwars-cloud-item.wp-clanwars-cloud-item-voting-allowed .star-rating:hover .star-full {
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item:not(.wp-clanwars-cloud-item-voted) .star-rating:hover .star-full {
     -webkit-text-stroke: 1px #cd9500;
+}
+
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-rating .spinner {
+    margin-top: 0;
+}
+
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item.wp-clanwars-cloud-item-updating-vote .wp-clanwars-cloud-item-column-rating .spinner {
+    visibility: visible;
 }
 
 @media screen and ( max-width: 782px ) {

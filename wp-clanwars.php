@@ -207,7 +207,7 @@ class WP_ClanWars {
 		add_action('admin_post_wp-clanwars-publish', array($this, 'on_admin_post_publish'));
 		add_action('admin_post_wp-clanwars-login', array($this, 'on_admin_post_login'));
 		add_action('admin_post_wp-clanwars-logout', array($this, 'on_admin_post_logout'));
-		add_action('admin_post_wp-clanwars-game-vote', array($this, 'on_admin_post_game_vote'));
+		add_action('wp_ajax_wp-clanwars-game-vote', array($this, 'on_ajax_game_vote'));
 
 		add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setup_team'));
 		add_action('admin_post_wp-clanwars-setupgames', array($this, 'on_admin_post_setup_games'));
@@ -393,6 +393,17 @@ EOT;
 		);
 	}
 
+	function add_game_browser_script() {
+		wp_enqueue_script('wp-clanwars-game-browser');
+			wp_localize_script('wp-clanwars-game-browser',
+			'wpClanwarsGameBrowserSettings',
+			array(
+				'vote_action' => 'wp-clanwars-game-vote',
+				'vote_nonce' => wp_create_nonce('wp-clanwars-game-vote')
+			)
+		);
+	}
+
 	function onboarding_or_page($page_method) {
 		if($this->should_onboard_user()) {
 			return array( $this, 'onboarding_page');
@@ -481,7 +492,7 @@ EOT;
 		$view = new View( 'setup_games' );
 		$context = compact( 'page_submit', 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action' );
 		
-		wp_enqueue_script( 'wp-clanwars-game-browser' );
+		$this->add_game_browser_script();
 
 		$view->render( $context );
 	}
@@ -2506,19 +2517,23 @@ EOT;
 		exit();
 	}
 
-	function on_admin_post_game_vote() {
-		check_admin_referer('wp-clanwars-game-vote');
+	function on_ajax_game_vote() {
+		check_ajax_referer('wp-clanwars-game-vote');
 
 		if(isset($_POST['remote_id'], $_POST['rating'])) 
 		{
 			$remote_id = $_POST['remote_id'];
 			$rating = (int) $_POST['rating'];
 
-			CloudAPI::game_vote($remote_id, $rating);
-		}	
+			$response = CloudAPI::game_vote($remote_id, $rating);
 
-		wp_redirect( $_REQUEST['_wp_http_referer'] );
-		exit();
+			if(is_wp_error($response)) {
+				die(1);
+			}
+
+			echo json_encode($response);
+			die();
+		}
 	}
 
 	// Settings page hook
@@ -2668,7 +2683,7 @@ EOT;
 		$view = new View( 'import_browse' );
 		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action', 'logged_into_cloud', 'cloud_account' );
 		
-		wp_enqueue_script( 'wp-clanwars-game-browser' );
+		$this->add_game_browser_script();
 		wp_enqueue_script( 'wp-clanwars-login' );
 
 		$view->render( $context );

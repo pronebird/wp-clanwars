@@ -50,6 +50,7 @@
             <?php endfor; ?>
         </div>
         <span class="num-ratings"><?php echo sprintf( _x('(%d)', 'Number of ratings', WP_CLANWARS_TEXTDOMAIN), $game->votes ); ?></span>
+        <div class="spinner"></div>
     </div>
     <div class="wp-clanwars-cloud-item-column-published">
         <strong><?php _e('Published:', WP_CLANWARS_TEXTDOMAIN); ?></strong>

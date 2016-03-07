@@ -12,8 +12,21 @@
 
 	<ul class="wp-clanwars-cloud-items wp-clanwars-clearfix" id="wp-clanwars-cloud-items">
 
-	<?php foreach ( $api_games as $game ) : ?>
-	<li class="wp-clanwars-cloud-item<?php if($logged_into_cloud) echo ' wp-clanwars-cloud-item-voting-allowed'; ?>">
+	<?php 
+
+	foreach ( $api_games as $game ) : 
+
+	$item_classes = array( 'wp-clanwars-cloud-item' );
+
+	if( $logged_into_cloud ) {
+		$item_classes[] = 'wp-clanwars-cloud-item-voting-allowed';
+	}
+
+	if( $logged_into_cloud && property_exists($game, 'vote') ) {
+		$item_classes[] = 'wp-clanwars-cloud-item-voted';
+	}
+	?>
+	<li class="<?php esc_attr_e(join(' ', $item_classes)) ?>" data-remote-id="<?php esc_attr_e($game->_id); ?>">
 		<?php $partial('partials/browse_game_item', compact('game', 'install_action', 'logged_into_cloud')); ?>
 	</li>
 	<?php endforeach; ?>
