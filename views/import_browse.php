@@ -16,15 +16,16 @@
 
 	foreach ( $api_games as $game ) : 
 
-	$item_classes = array( 'wp-clanwars-cloud-item' );
+		$item_classes = array( 'wp-clanwars-cloud-item' );
 
-	if( $logged_into_cloud ) {
-		$item_classes[] = 'wp-clanwars-cloud-item-voting-allowed';
-	}
+		if( $logged_into_cloud && !property_exists($game, 'vote') ) {
+			$item_classes[] = 'wp-clanwars-cloud-item-votes-enabled';
+		}
 
-	if( $logged_into_cloud && property_exists($game, 'vote') ) {
-		$item_classes[] = 'wp-clanwars-cloud-item-voted';
-	}
+		if( $logged_into_cloud && property_exists($game, 'vote') ) {
+			$item_classes[] = 'wp-clanwars-cloud-item-voted';
+		}
+
 	?>
 	<li class="<?php esc_attr_e(join(' ', $item_classes)) ?>" data-remote-id="<?php esc_attr_e($game->_id); ?>">
 		<?php $partial('partials/browse_game_item', compact('game', 'install_action', 'logged_into_cloud')); ?>

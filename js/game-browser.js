@@ -190,7 +190,7 @@ StarRatingWidget.prototype._mouseclick = function (e) {
     this._vote(rating);
 };
 
-$gps.find('.wp-clanwars-cloud-item:not(.wp-clanwars-cloud-item-voted)').each(function (i, el) {
+$gps.find('.wp-clanwars-cloud-item.wp-clanwars-cloud-item-votes-enabled').each(function (i, el) {
     new StarRatingWidget($(el));
 });
 
