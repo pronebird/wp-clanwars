@@ -249,7 +249,7 @@ SQL;
 			$post_excerpt .= $description . "\n";
 		}
 
-		$postarr['post_title'] = $post_title;
+		$postarr['post_title'] = esc_html($post_title);
 		$postarr['post_excerpt'] = wp_trim_excerpt($post_excerpt);
 
 		$postarr['post_content'] = '[wp-clanwars match_id="' . $match->id . '"]';
