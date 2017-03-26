@@ -170,16 +170,12 @@ class WP_ClanWars {
 	}
 
 	/**
-	 * Plugin deactivation hook
+	 * Uninstall plugin for single site
 	 *
+	 * Destroy all tables and settings
 	 * @return void
 	 */
-
-	public function on_deactivate()
-	{
-	}
-
-	public function on_uninstall()
+	function uninstall_single_site()
 	{
 		global $wpdb;
 
@@ -198,6 +194,39 @@ class WP_ClanWars {
 		foreach($tables as $table) {
 			$wpdb->query( "DROP TABLE `$table`" );
 		}
+	}
+
+	/**
+	 * Plugin deactivation hook
+	 *
+	 * @return void
+	 */
+
+	public function on_deactivate()
+	{
+	}
+
+	/**
+	 * Plugin uninstallation hook
+	 */
+	public function on_uninstall() {
+		global $wpdb;
+
+		if (function_exists('is_multisite') && is_multisite()) {
+			$old_blog = $wpdb->blogid;
+
+			// Get all blog ids
+			$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			foreach ($blogids as $blog_id) {
+				switch_to_blog($blog_id);
+				$this->uninstall_single_site();
+			}
+
+			switch_to_blog($old_blog);
+			return;
+		}
+
+		$this->uninstall_single_site();
 	}
 
 	/**
@@ -2744,4 +2773,3 @@ function wp_clanwars_uninstall()
 }
 
 register_uninstall_hook(__FILE__, 'wp_clanwars_uninstall');
-?>
