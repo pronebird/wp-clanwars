@@ -607,6 +607,7 @@ html[xmlns] .wp-clanwars-clearfix {
 .wp-clanwars-cloud-page .wp-clanwars-cloud-items .wp-clanwars-install-button.active {
     color: #2ecc71;
     border-color: #2ecc71;
+    box-shadow: none;
 }
 
 .wp-clanwars-onboarding-page .wp-clanwars-cloud-items .wp-clanwars-install-button.active:hover,
@@ -615,6 +616,17 @@ html[xmlns] .wp-clanwars-clearfix {
     border-color: #2ecc71;
     background-color: #2ecc71;
     box-shadow: none;
+}
+
+.wp-clanwars-onboarding-page .wp-clanwars-cloud-items .wp-clanwars-install-button,
+.wp-clanwars-cloud-page .wp-clanwars-cloud-items .wp-clanwars-install-button,
+.wp-clanwars-onboarding-page .wp-clanwars-cloud-items .wp-clanwars-install-button:active,
+.wp-clanwars-cloud-page .wp-clanwars-cloud-items .wp-clanwars-install-button:active,
+.wp-clanwars-onboarding-page .wp-clanwars-cloud-items .wp-clanwars-install-button.active,
+.wp-clanwars-cloud-page .wp-clanwars-cloud-items .wp-clanwars-install-button.active {
+    transform: translateY(0);
+    -moz-transform: translateY(0);
+    -webkit-transform: translateY(0);
 }
 
 .wp-clanwars-cloud-login {
