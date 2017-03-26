@@ -183,13 +183,13 @@ class WP_ClanWars {
 		delete_option(WP_CLANWARS_DEFAULTCSS);
 		\WP_Clanwars\ACL::destroy();
 
-		$tables = array();
-
-		array_push( \WP_Clanwars\Games::table() );
-		array_push( \WP_Clanwars\Maps::table() );
-		array_push( \WP_Clanwars\Rounds::table() );
-		array_push( \WP_Clanwars\Matches::table() );
-		array_push( \WP_Clanwars\Teams::table() );
+		$tables = array(
+			\WP_Clanwars\Games::table(),
+			\WP_Clanwars\Maps::table(),
+			\WP_Clanwars\Rounds::table(),
+			\WP_Clanwars\Matches::table(),
+			\WP_Clanwars\Teams::table()
+		);
 
 		foreach($tables as $table) {
 			$wpdb->query( "DROP TABLE `$table`" );
