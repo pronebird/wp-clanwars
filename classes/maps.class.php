@@ -28,14 +28,8 @@ class Maps {
 	 * @return String
 	 */
 	static function table() {
-		static $table = null;
 		global $wpdb;
-
-		if($table === null) {
-			$table = $wpdb->prefix . 'cw_maps';
-		}
-
-		return $table;
+		return $wpdb->prefix . 'cw_maps';
 	}
 
 	/**
