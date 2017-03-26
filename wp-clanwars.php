@@ -122,21 +122,20 @@ class WP_ClanWars {
 		global $wpdb;
 
 		// check if it is a network activation - if so, run the activation function for each blog id
-		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
+		if(is_multisite() && $networkwide) {
 			$old_blog = $wpdb->blogid;
 
-			// Get all blog ids
-			$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
-			foreach ($blogids as $blog_id) {
-				switch_to_blog($blog_id);
+			// Get all blogs
+			$sites = Utils::get_wpmu_sites();
+			foreach($sites as $site) {
+				switch_to_blog($site->blog_id);
 				$this->activate_single_site();
 			}
 
 			switch_to_blog($old_blog);
-			return;
+		} else {
+			$this->activate_single_site();
 		}
-
-		$this->activate_single_site();
 	}
 
 	/**
@@ -191,7 +190,7 @@ class WP_ClanWars {
 			\WP_Clanwars\Teams::table()
 		);
 
-		foreach($tables as $table) {
+		foreach( $tables as $table ) {
 			$wpdb->query( "DROP TABLE `$table`" );
 		}
 	}
@@ -212,21 +211,20 @@ class WP_ClanWars {
 	public function on_uninstall() {
 		global $wpdb;
 
-		if (function_exists('is_multisite') && is_multisite()) {
+		if(is_multisite()) {
 			$old_blog = $wpdb->blogid;
 
-			// Get all blog ids
-			$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
-			foreach ($blogids as $blog_id) {
-				switch_to_blog($blog_id);
+			// Get all blogs
+			$sites = Utils::get_wpmu_sites();
+			foreach($sites as $site) {
+				switch_to_blog($site->blog_id);
 				$this->uninstall_single_site();
 			}
 
 			switch_to_blog($old_blog);
-			return;
+		} else {
+			$this->uninstall_single_site();
 		}
-
-		$this->uninstall_single_site();
 	}
 
 	/**
@@ -244,6 +242,11 @@ class WP_ClanWars {
 			__('PCW', WP_CLANWARS_TEXTDOMAIN),
 			__('Official', WP_CLANWARS_TEXTDOMAIN)
 		);
+
+		// add multisite hooks
+		if(is_multisite()) {
+			add_action('wpmu_new_blog', array($this, 'on_wpmu_add_newblog'), 10, 6);
+		}
 
 		add_action('admin_print_styles', array($this, 'on_admin_print_styles'));
 		add_action('admin_init', array($this, 'on_admin_init'));
@@ -273,6 +276,24 @@ class WP_ClanWars {
 		add_shortcode('wp-clanwars', array($this, 'on_shortcode'));
 
 		$this->register_cssjs();
+	}
+
+	/**
+	 * WP hook called when new multisite blog is being added.
+	 *
+	 * This method starts activation if the plugin is active for network
+	 *
+	 * @return void
+	 */
+	function on_wpmu_add_newblog($blog_id, $user_id, $domain, $path, $site_id, $meta) {
+		global $wpdb;
+
+		if(is_plugin_active_for_network(plugin_basename(__FILE__))) {
+			$old_blog = $wpdb->blogid;
+			switch_to_blog($blog_id);
+			$this->activate_single_site();
+			switch_to_blog($old_blog);
+		}
 	}
 
 	function on_admin_print_styles() {

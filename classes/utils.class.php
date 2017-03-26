@@ -23,11 +23,20 @@ namespace WP_Clanwars;
 
 class Utils {
 
+	static function get_wpmu_sites() {
+		global $wpdb;
+		if(function_exists('get_sites')) { // WP 4.6+
+			return get_sites();
+		} else {
+			return $wpdb->get_results("SELECT * FROM $wpdb->blogs");
+		}
+	}
+
 	static function get_list_table_action() {
 	    if(isset($_REQUEST['action']) && (int)$_REQUEST['action'] !== -1) {
 	        return $_REQUEST['action'];
 	    }
-	    
+
 	    if(isset($_REQUEST['action2']) && (int)$_REQUEST['action2'] !== -1) {
 	        return $_REQUEST['action2'];
 	    }
