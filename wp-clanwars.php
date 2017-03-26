@@ -113,11 +113,39 @@ class WP_ClanWars {
 	 * Plugin activation hook
 	 *
 	 * Creates tables if needed
-	 *
+	 * @param bool $networkwide - network wide activation on wp multisite
 	 * @return void
 	 */
 
-	public function on_activate()
+	public function on_activate($networkwide = false)
+	{
+		global $wpdb;
+
+		// check if it is a network activation - if so, run the activation function for each blog id
+		if (function_exists('is_multisite') && is_multisite() && $networkwide) {
+			$old_blog = $wpdb->blogid;
+
+			// Get all blog ids
+			$blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+			foreach ($blogids as $blog_id) {
+				switch_to_blog($blog_id);
+				$this->activate_single_site();
+			}
+
+			switch_to_blog($old_blog);
+			return;
+		}
+
+		$this->activate_single_site();
+	}
+
+	/**
+	 * Activate plugin for single site
+	 *
+	 * Creates tables if needed
+	 * @return void
+	 */
+	function activate_single_site()
 	{
 		global $wpdb;
 
@@ -354,7 +382,7 @@ EOT;
 	{
 		wp_register_script('wp-clanwars-matches', WP_CLANWARS_URL . '/js/matches.js', array( 'jquery', 'select2' ), WP_CLANWARS_VERSION);
 		wp_register_script('wp-clanwars-gallery', WP_CLANWARS_URL . '/js/gallery.js', array('jquery', 'jquery-ui-sortable', 'media-upload'), WP_CLANWARS_VERSION);
-		
+
 		wp_register_script('wp-clanwars-admin', WP_CLANWARS_URL . '/js/admin.js', array('jquery', 'select2'), WP_CLANWARS_VERSION);
 		wp_localize_script('wp-clanwars-admin',
 			'wpCWAdminL10n',
@@ -432,14 +460,14 @@ EOT;
 
 		if(!$has_hometeam && !$has_games) {
 			$page_submit = __( 'Continue', WP_CLANWARS_TEXTDOMAIN );
-		} 
+		}
 		else {
 			$page_submit = __( 'Get started', WP_CLANWARS_TEXTDOMAIN );
 		}
 
 		if(!$has_hometeam) {
 			$this->onboarding_setup_team_page($page_submit);
-		} 
+		}
 		else if(!$has_games) {
 			$this->onboarding_setup_games_page($page_submit);
 		}
@@ -491,7 +519,7 @@ EOT;
 
 		$view = new View( 'setup_games' );
 		$context = compact( 'page_submit', 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action' );
-		
+
 		$this->add_game_browser_script();
 
 		$view->render( $context );
@@ -549,7 +577,7 @@ EOT;
 					else {
 						Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
 					}
-				} 
+				}
 				else {
 					Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
 				}
@@ -759,7 +787,7 @@ EOT;
 				'do_action' => '',
 				'do_action2' => '',
 				'delete' => array()
-			) 
+			)
 		);
 		extract( $args );
 
@@ -834,8 +862,8 @@ EOT;
 	{
 		$args = Utils::extract_args( $_GET, array(
 				'act' => '',
-				'id' => 0 
-			) );		
+				'id' => 0
+			) );
 		extract($args);
 
 		// ACL checks on edit
@@ -900,7 +928,7 @@ EOT;
 			Flash::success( __( 'Added a new team.', WP_CLANWARS_TEXTDOMAIN ) );
 			wp_redirect( $redirect_url );
 			exit();
-		} 
+		}
 		else {
 			Flash::error( __( 'Failed to add a team.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
@@ -939,7 +967,7 @@ EOT;
 			$redirect_url = add_query_arg( compact( 'act', 'id' ), $redirect_url );
 			wp_redirect( $redirect_url );
 			exit();
-		} 
+		}
 		else {
 			Flash::error( __('Failed to update a team.', WP_CLANWARS_TEXTDOMAIN) );
 		}
@@ -1037,8 +1065,8 @@ EOT;
 		$referer = remove_query_arg(array('add', 'update', 'export'), $_REQUEST['_wp_http_referer']);
 
 		$args = Utils::extract_args( $_REQUEST, array(
-				'do_action' => '', 
-				'do_action2' => '', 
+				'do_action' => '',
+				'do_action2' => '',
 				'items' => array()
 			)
 		);
@@ -1445,7 +1473,7 @@ EOT;
 			Flash::success( __( 'Added a new game.', WP_CLANWARS_TEXTDOMAIN ) );
 			wp_redirect( admin_url( 'admin.php?page=wp-clanwars-games' ) );
 			exit();
-		} 
+		}
 		else {
 			Flash::error( __( 'Failed to add a game.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
@@ -1482,7 +1510,7 @@ EOT;
 			Flash::success( __( 'Updated a game.', WP_CLANWARS_TEXTDOMAIN ) );
 			wp_redirect( admin_url( sprintf('admin.php?page=wp-clanwars-games&act=edit&id=%d', $id) ) );
 			exit();
-		} 
+		}
 		else {
 			Flash::error( __( 'Failed to update a game.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
@@ -1512,7 +1540,7 @@ EOT;
 			Flash::success( __( 'Added a map.', WP_CLANWARS_TEXTDOMAIN ) );
 			wp_redirect( admin_url( sprintf( 'admin.php?page=wp-clanwars-games&act=maps&game_id=%d', $game_id ) ) );
 			exit();
-		} 
+		}
 		else {
 			Flash::error( __( 'Failed to add a map.', WP_CLANWARS_TEXTDOMAIN ) );
 		}
@@ -1914,7 +1942,7 @@ EOT;
 		if( !Utils::is_post() ) {
 			return;
 		}
-		
+
 		if( isset( $_POST['game_id'] ) && !\WP_Clanwars\ACL::user_can( 'manage_game', $_POST['game_id'] ) ) {
 			wp_die( __('Cheatin&#8217; uh?') );
 		}
@@ -2063,7 +2091,7 @@ EOT;
 					\WP_Clanwars\Rounds::update_round($round_id, $model);
 
 					$rounds_not_in[] = $round_id;
-				} 
+				}
 				else {
 					$new_round = \WP_Clanwars\Rounds::add_round($model);
 
@@ -2302,12 +2330,12 @@ EOT;
 		}
 
 		$condition = array(
-			'id' => 'all', 
-			'game_id' => $game_filter, 
+			'id' => 'all',
+			'game_id' => $game_filter,
 			'sum_tickets' => true,
-			'orderby' => 'date', 
+			'orderby' => 'date',
 			'order' => 'desc',
-			'limit' => $limit, 
+			'limit' => $limit,
 			'offset' => ($limit * ($current_page-1))
 		);
 
@@ -2396,7 +2424,7 @@ EOT;
 		check_admin_referer('wp-clanwars-deleteacl');
 
 		$args = Utils::extract_args( $_POST, array(
-			'do_action' => '', 
+			'do_action' => '',
 			'do_action2' => '',
 			'users' => array()
 		) );
@@ -2434,7 +2462,7 @@ EOT;
 				else {
 					Flash::success( __( 'Imported game.', WP_CLANWARS_TEXTDOMAIN ) );
 				}
-			} 
+			}
 			else {
 				Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
@@ -2479,7 +2507,7 @@ EOT;
 				else {
 					Flash::error( __( 'You must agree to the licensing terms.', WP_CLANWARS_TEXTDOMAIN ) );
 				}
-			} 
+			}
 			else {
 				Flash::error( __( 'Failed to upload file.', WP_CLANWARS_TEXTDOMAIN ) );
 			}
@@ -2520,7 +2548,7 @@ EOT;
 	function on_ajax_game_vote() {
 		check_ajax_referer('wp-clanwars-game-vote');
 
-		if(isset($_POST['remote_id'], $_POST['rating'])) 
+		if(isset($_POST['remote_id'], $_POST['rating']))
 		{
 			$remote_id = $_POST['remote_id'];
 			$rating = (int) $_POST['rating'];
@@ -2682,7 +2710,7 @@ EOT;
 
 		$view = new View( 'import_browse' );
 		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action', 'logged_into_cloud', 'cloud_account' );
-		
+
 		$this->add_game_browser_script();
 		wp_enqueue_script( 'wp-clanwars-login' );
 
