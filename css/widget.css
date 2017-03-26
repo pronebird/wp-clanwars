@@ -83,6 +83,8 @@
 	padding: 0;
 	display: inline-block;
 	margin-left: -20px;
+	width: 16px;
+	height: 16px;
 }
 
 .widget_clanwars ul.clanwar-list li.clanwar-item.alt {}

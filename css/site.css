@@ -91,6 +91,8 @@
 	position: absolute;
 	left: -30px;
 	top: 0.5em;
+	width: 16px;
+	height: 16px;
 }
 
 .wp-clanwars-list .maplist {

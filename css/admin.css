@@ -48,6 +48,12 @@ html[xmlns] .wp-clanwars-clearfix {
 	margin: 2px;
 }
 
+.wp-clanwars-match-table .column-game .icon,
+.wp-clanwars-games-table .column-title .icon {
+    width: 16px;
+    height: 16px;
+}
+
 .wp-clanwars-teams-table .column-logo,
 .wp-clanwars-teams-table .column-logo .icon,
 .wp-clanwars-maps-table .column-screenshot,
