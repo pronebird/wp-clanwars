@@ -2,6 +2,7 @@
     <?php $partial('partials/account_header', compact('cloud_account', 'logged_into_cloud')); ?>
     <h1 class="wp-heading-inline"><?php _e('Clanwars Cloud', WP_CLANWARS_TEXTDOMAIN); ?></h1>
     <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-cloud&tab=upload' ); ?>" class="page-title-action"><?php _e('Install from ZIP', WP_CLANWARS_TEXTDOMAIN); ?></a>
+    <hr class="wp-header-end" />
 </div>
 
 <div class="wp-filter">

@@ -3,6 +3,7 @@
 	<?php if($show_add_button) : ?>
 	<a href="<?php echo admin_url('admin.php?page=wp-clanwars-games&act=add'); ?>" class="page-title-action"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a>
 	<?php endif; ?>
+	<hr class="wp-header-end" />
 
 	<form method="post">
 
