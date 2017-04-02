@@ -50,24 +50,47 @@ html[xmlns] .wp-clanwars-clearfix {
 
 .wp-clanwars-match-table .column-game .icon,
 .wp-clanwars-games-table .column-title .icon,
-.wp-clanwars-settings .column-permissions .icon {
+.wp-clanwars-acl-table .column-permissions .icon {
     width: 16px;
     height: 16px;
 }
 
+.wp-clanwars-acl-table .check-column {
+    padding: 8px 0 0 3px;
+}
+
 .wp-clanwars-settings .column-permissions ul {
-    margin-top: 0;
+    margin: 0;
 }
-.wp-clanwars-settings .permitted-games span,
-.wp-clanwars-settings .permitted-games img {
+
+.wp-clanwars-settings .permitted-games {
+    margin-top: -4px;
+}
+
+.wp-clanwars-settings .permitted-games .game {
+    display: inline-block;
     vertical-align: middle;
+    margin-top: 4px;
 }
-.wp-clanwars-settings .permitted-games span.all {
+
+.wp-clanwars-settings .permitted-games .game + .game {
+    margin-left: 4px;
+}
+
+.wp-clanwars-settings .permitted-games .all {
     padding: 0 5px;
     border-radius: 3px;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: black;
+    color: #fff;
     text-transform: uppercase;
+}
+
+.wp-clanwars-settings .column-user_login .display-name {
+    font-weight: bold;
+}
+
+.wp-clanwars-settings .column-user_login .login {
+    color: #aaa;
 }
 
 .wp-clanwars-teams-table .column-logo,

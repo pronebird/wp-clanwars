@@ -51,7 +51,7 @@
 					<br class="clear" />
 				</div>
 
-				<table class="widefat fixed" cellspacing="0">
+				<table class="wp-clanwars-acl-table widefat striped" cellspacing="0">
 					<thead>
 						<tr>
 							<?php $print_table_header($table_columns); ?>
@@ -80,7 +80,10 @@
 
 						<tr<?php if($index % 2 == 0) : ?> class="alternate"<?php endif; ?>>
 							<th class="check-column"><input type="checkbox" class="check" name="users[]" value="<?php echo $item->user->ID; ?>" /></th>
-							<td><?php esc_html_e($item->user->user_login); ?></td>
+							<td class="column-user_login">
+								<div class="display-name"><?php esc_html_e($item->user->display_name); ?></div>
+								<div class="login"><?php esc_html_e($item->user->user_login); ?></div>
+							</td>
 							<td class="column-permissions">
 								<ul>
 								<?php foreach($item->user_acl['permissions'] as $name => $is_allowed) : ?>
@@ -90,15 +93,15 @@
 
 								<div class="permitted-games">
 								<?php if($item->allowed_games === 'all') : ?>
-									<span class="all"><?php _e('All', WP_CLANWARS_TEXTDOMAIN) . '</span>'; ?></span>
+									<span class="game all"><?php _e('All', WP_CLANWARS_TEXTDOMAIN) . '</span>'; ?></span>
 								<?php endif; ?>
 
 								<?php foreach($item->user_games as $game) : ?>
 
 								<?php if($game->icon_url !== false) : ?>
-									<img src="<?php esc_attr_e($game->icon_url); ?>" alt="<?php esc_attr_e($game->title); ?>" class="icon" />
+									<img src="<?php esc_attr_e($game->icon_url); ?>" alt="<?php esc_attr_e($game->title); ?>" class="game icon" />
 								<?php else : ?>
-									<span><?php esc_html_e(empty($game->abbr) ? $game->title : $game->abbr); ?></span>
+									<span class="game"><?php esc_html_e(empty($game->abbr) ? $game->title : $game->abbr); ?></span>
 								<?php endif; ?>
 
 								<?php endforeach; ?>
@@ -149,7 +152,7 @@
 						<li><label for="game_<?php esc_attr_e($game->id); ?>"><input type="checkbox" name="games[]" id="game_<?php esc_attr_e($game->id); ?>" value="<?php esc_attr_e($game->id); ?>" /> <?php esc_html_e($game->title); ?></label></li>
 						<?php endforeach; ?>
 					</ul>
-					<p class="description"><?php _e('User can create new games <strong>only if &ldquo;All&rdquo; option is checked.</strong>', WP_CLANWARS_TEXTDOMAIN); ?></p>
+					<p class="description"><?php _e('Users that can manage all games, can also create the new ones.</strong>', WP_CLANWARS_TEXTDOMAIN); ?></p>
 				</div>
 
 				<div class="form-field">
