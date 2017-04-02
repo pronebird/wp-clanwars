@@ -2693,7 +2693,7 @@ EOT;
 		else if($tab === 'publish') {
 			$this->on_import_publish();
 		}
-		else if($tab === 'published') {
+		else if($tab === 'published' && CloudAPI::is_logged_in()) {
 			$this->on_import_published();
 		}
 		else {
