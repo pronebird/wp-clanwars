@@ -127,7 +127,9 @@ StarRatingWidget.prototype._vote = function (rating) {
 };
 
 StarRatingWidget.prototype._handleVote = function (response) {
-    if(typeof(response) !== 'object') {
+    this.$itemElement.removeClass('wp-clanwars-cloud-item-updating-vote');
+
+    if(typeof(response) !== 'object' || response === null) {
         return;
     }
 
@@ -156,8 +158,6 @@ StarRatingWidget.prototype._handleVote = function (response) {
 
         $item.attr(updateAttribute, star_class);
     });
-
-    this.$itemElement.removeClass('wp-clanwars-cloud-item-updating-vote');
 };
 
 StarRatingWidget.prototype._mouseenter = function() {
