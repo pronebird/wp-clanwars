@@ -2693,9 +2693,50 @@ EOT;
 		else if($tab === 'publish') {
 			$this->on_import_publish();
 		}
+		else if($tab === 'published') {
+			$this->on_import_published();
+		}
 		else {
 			$this->on_import_browse();
 		}
+	}
+
+	function on_import_published() {
+		$logged_into_cloud = CloudAPI::is_logged_in();
+		$cloud_account = CloudAPI::get_user_info();
+
+		$installed_games = \WP_Clanwars\Games::get_game('')->getArrayCopy();
+
+		$store_ids = array_filter(
+				array_map( function ($game) {
+					return $game->store_id;
+				}, $installed_games)
+			);
+
+		$search_query = '';
+		$active_tab = 'published';
+		$install_action = 'wp-clanwars-import';
+		$api_response = CloudAPI::get_published_games();
+
+		$api_games = array();
+
+		if( !is_wp_error( $api_response ) ) {
+			array_walk($api_response, function (&$game) use ($store_ids) {
+				$game->is_installed = in_array($game->_id, $store_ids);
+			});
+			$api_games = $api_response;
+		}
+		else {
+			$api_error_message = $api_response->get_error_message();
+		}
+
+		$view = new View( 'cloud_published_games' );
+		$context = compact( 'api_games', 'api_error_message', 'search_query', 'active_tab', 'install_action', 'logged_into_cloud', 'cloud_account' );
+
+		$this->add_game_browser_script();
+		wp_enqueue_script( 'wp-clanwars-login' );
+
+		$view->render( $context );
 	}
 
 	function on_import_publish() {
