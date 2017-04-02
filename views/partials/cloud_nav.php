@@ -14,6 +14,9 @@
 
             <a href="<?php echo admin_url('admin.php?page=wp-clanwars-cloud'); ?>"<?php if($active_tab == 'popular') : ?> class="current"<?php endif; ?>><?php _e( 'Popular', WP_CLANWARS_TEXTDOMAIN ); ?></a>
             <a href="<?php echo admin_url('admin.php?page=wp-clanwars-cloud&tab=publish'); ?>"<?php if($active_tab == 'publish') : ?> class="current"<?php endif; ?>><?php _e( 'Publish', WP_CLANWARS_TEXTDOMAIN ); ?></a>
+            <?php if($logged_into_cloud) : ?>
+            <a href="<?php echo admin_url('admin.php?page=wp-clanwars-cloud&tab=published'); ?>"<?php if($active_tab == 'published') : ?> class="current"<?php endif; ?>><?php _e( 'Published', WP_CLANWARS_TEXTDOMAIN ); ?></a>
+            <?php endif; ?>
         </li>
     </ul>
     <form class="search-form" method="get" action="<?php echo admin_url( 'admin.php' ); ?>">
