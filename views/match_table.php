@@ -1,5 +1,6 @@
 <div class="wrap wp-clanwars-matches">
-	<h2><?php _e('Matches', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&act=add'); ?>" class="add-new-h2"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+	<h1 class="wp-heading-inline"><?php _e('Matches', WP_CLANWARS_TEXTDOMAIN); ?></h1>
+	<a href="<?php echo admin_url('admin.php?page=wp-clanwars-matches&act=add'); ?>" class="page-title-action"><?php _e('Add New', WP_CLANWARS_TEXTDOMAIN); ?></a>
 
 	<form method="post">
     
