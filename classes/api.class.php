@@ -24,9 +24,8 @@ namespace WP_Clanwars;
 final class API {
 
     private static $api_url = 'http://localhost:3000/api/v1/';
-    
+
     private static $client_key_option_key = 'wp-clanwars-server-clientkey';
-    private static $exchange_key_option_key = 'wp-clanwars-server-exchangekey';
 
     private static $access_token_usermeta_key = 'wp-clanwars-server-accesstoken';
     private static $user_info_usermeta_key = 'wp-clanwars-server-userinfo';
@@ -46,50 +45,25 @@ final class API {
 
         $checked = true;
 
-        $exchange_url = WP_PLUGIN_URL . '/' . dirname(dirname(plugin_basename(__FILE__))) . '/verify.php';
-
         $args = array(
             'body' => array(
-                'exchangeUrl' => $exchange_url
+                'siteUrl' => site_url()
             )
         );
 
         $response = wp_remote_post( static::$api_url . 'installation/register', $args );
         $payload = static::get_response_payload( $response );
-
         if(is_wp_error($payload)) {
             return $payload;
         }
 
-        $client_key = $payload->clientKey;
-        $exchange_key = $payload->exchangeKey;
-
-        $args = array(
-            'headers' => array(
-                'X-Client-Key' => $client_key
-            )
-        );
-
-        update_option( static::$exchange_key_option_key, $exchange_key );
-
-        $response = wp_remote_get( static::$api_url . 'installation/verify', $args );
-        $payload = static::get_response_payload( $response );
-
-        if(is_wp_error($payload)) {
-            return $payload;
+        if(!isset($payload->clientKey)) {
+            return new WP_Error( 'api-error', 0, 'Invalid client key.' );
         }
 
-        if(!$payload->isActive || $payload->isBanned) {
-            return false;
-        }
-
-        update_option( static::$client_key_option_key, $client_key );
+        update_option( static::$client_key_option_key, $payload->clientKey );
 
         return true;
-    }
-
-    static function get_exchange_key() {
-        return get_option( static::$exchange_key_option_key );
     }
 
     static function is_logged_in() {
@@ -158,12 +132,12 @@ final class API {
         $zip_url = static::$api_url . 'games/download/' . $id;
 
         $response = wp_remote_get( $zip_url, array(
-            'timeout' => 15, 
+            'timeout' => 15,
             'stream' => true,
             'filename' => $filename,
-            'headers' => array( 
-                    'X-Client-Key' => static::get_client_key() 
-                )
+            'headers' => array(
+                'X-Client-Key' => static::get_client_key()
+            )
         ) );
 
         if( is_wp_error( $response ) ) {
@@ -182,10 +156,10 @@ final class API {
     }
 
     static function game_vote($id, $rating) {
-        return static::api_post( static::$api_url . 'games/' . $id . '/vote', 
-                array( 
-                    'body' => array( 'rating' => $rating ) 
-                ) 
+        return static::api_post( static::$api_url . 'games/' . $id . '/vote',
+                array(
+                    'body' => array( 'rating' => $rating )
+                )
             );
     }
 
@@ -205,7 +179,7 @@ final class API {
         $zip_file = realpath($zip_file);
         $data = array();
 
-        $headers = array( 
+        $headers = array(
             'Content-Type: multipart/form-data',
             'X-Client-Key: ' . static::get_client_key(),
             'Authorization: Bearer ' . static::get_access_token()
