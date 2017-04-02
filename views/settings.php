@@ -82,7 +82,9 @@
 							<th class="check-column"><input type="checkbox" class="check" name="users[]" value="<?php echo $item->user->ID; ?>" /></th>
 							<td class="column-user_login">
 								<div class="display-name"><?php esc_html_e($item->user->display_name); ?></div>
+								<?php if($item->user->display_name !== $item->user->user_login) : ?>
 								<div class="login"><?php esc_html_e($item->user->user_login); ?></div>
+								<?php endif; ?>
 							</td>
 							<td class="column-permissions">
 								<ul>
