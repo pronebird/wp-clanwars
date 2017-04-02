@@ -171,6 +171,10 @@ final class API {
         return static::api_get( static::$api_url . 'games/search?q=' . urlencode($term) );
     }
 
+    static function get_published_games($user_id = 'me') {
+        return static::api_get( static::$api_url . 'user/' . $user_id . '/games' );
+    }
+
     static function publish($zip_file) {
         if(!function_exists('curl_init')) {
             return new WP_Error( 'api-error', 0, 'Unable to locate cURL extension.' );
