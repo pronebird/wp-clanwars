@@ -2237,7 +2237,7 @@ EOT;
 		$now = Utils::current_time_fixed('timestamp');
 		$current_game = isset($_GET['game']) ? $_GET['game'] : false;
 
-		$games = \WP_Clanwars\Games::get_game('id=all&orderby=title&order=asc');
+		$gamesResult = \WP_Clanwars\Games::get_game('id=all&orderby=title&order=asc');
 
 		$p = array(
 			'limit' => $per_page,
@@ -2273,6 +2273,7 @@ EOT;
 		$obj->abbr = __('All');
 		$obj->icon = 0;
 
+		$games = $gamesResult->getArrayCopy();
 		array_unshift($games, $obj);
 
 		$this_url = remove_query_arg(array('paged', 'game'));
@@ -2637,7 +2638,7 @@ EOT;
 		// hide default styles checkbox on jumpstarter
 		$hide_default_styles = $this->is_jumpstarter();
 
-		$games = \WP_Clanwars\Games::get_game('id=all');
+		$gamesResult = \WP_Clanwars\Games::get_game('id=all');
 		$acl = \WP_Clanwars\ACL::get();
 		$acl_keys = \WP_Clanwars\ACL::all_caps();
 
@@ -2647,6 +2648,7 @@ EOT;
 		$obj->abbr = __('All');
 		$obj->icon = 0;
 
+		$games = $gamesResult->getArrayCopy();
 		array_unshift($games, $obj);
 
 		$user_acl_info = array();
