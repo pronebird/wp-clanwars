@@ -81,28 +81,28 @@
 						<tr<?php if($index % 2 == 0) : ?> class="alternate"<?php endif; ?>>
 							<th class="check-column"><input type="checkbox" class="check" name="users[]" value="<?php echo $item->user->ID; ?>" /></th>
 							<td><?php esc_html_e($item->user->user_login); ?></td>
-							<td>
-								<?php foreach($item->user_acl['permissions'] as $name => $is_allowed) : ?>
+							<td class="column-permissions">
 								<ul>
+								<?php foreach($item->user_acl['permissions'] as $name => $is_allowed) : ?>
 									<li><?php echo $acl_keys[$name]; ?>: <?php echo ($is_allowed) ? __('Yes', WP_CLANWARS_TEXTDOMAIN) : __('No', WP_CLANWARS_TEXTDOMAIN); ?></li>
-								</ul>
 								<?php endforeach; ?>
+								</ul>
 
-								<?php
-									if($item->allowed_games == 'all') {
-										_e('All', WP_CLANWARS_TEXTDOMAIN);
-									}
-								?>
+								<div class="permitted-games">
+								<?php if($item->allowed_games === 'all') : ?>
+									<span class="all"><?php _e('All', WP_CLANWARS_TEXTDOMAIN) . '</span>'; ?></span>
+								<?php endif; ?>
 
 								<?php foreach($item->user_games as $game) : ?>
 
 								<?php if($game->icon_url !== false) : ?>
 									<img src="<?php esc_attr_e($game->icon_url); ?>" alt="<?php esc_attr_e($game->title); ?>" class="icon" />
 								<?php else : ?>
-									<?php esc_html_e(empty($game->abbr) ? $game->title : $game->abbr); ?>
+									<span><?php esc_html_e(empty($game->abbr) ? $game->title : $game->abbr); ?></span>
 								<?php endif; ?>
 
 								<?php endforeach; ?>
+								</div>
 							</td>
 						</tr>
 

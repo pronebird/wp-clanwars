@@ -49,9 +49,25 @@ html[xmlns] .wp-clanwars-clearfix {
 }
 
 .wp-clanwars-match-table .column-game .icon,
-.wp-clanwars-games-table .column-title .icon {
+.wp-clanwars-games-table .column-title .icon,
+.wp-clanwars-settings .column-permissions .icon {
     width: 16px;
     height: 16px;
+}
+
+.wp-clanwars-settings .column-permissions ul {
+    margin-top: 0;
+}
+.wp-clanwars-settings .permitted-games span,
+.wp-clanwars-settings .permitted-games img {
+    vertical-align: middle;
+}
+.wp-clanwars-settings .permitted-games span.all {
+    padding: 0 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    text-transform: uppercase;
 }
 
 .wp-clanwars-teams-table .column-logo,
@@ -472,7 +488,7 @@ html[xmlns] .wp-clanwars-clearfix {
 .wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-published,
 .wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-rating
 {
-    margin-bottom: 4px;    
+    margin-bottom: 4px;
 }
 
 .wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-column-title,
@@ -593,7 +609,7 @@ html[xmlns] .wp-clanwars-clearfix {
     background-color: transparent;
     box-shadow: none;
 }
- 
+
 .wp-clanwars-onboarding-page .wp-clanwars-cloud-items .wp-clanwars-install-button:disabled,
 .wp-clanwars-onboarding-page .wp-clanwars-cloud-items .wp-clanwars-install-button[disabled],
 .wp-clanwars-cloud-page .wp-clanwars-cloud-items .wp-clanwars-install-button:disabled,
@@ -732,7 +748,7 @@ html[xmlns] .wp-clanwars-clearfix {
 }
 
 .select2-results__option {
-    margin: 0;   
+    margin: 0;
 }
 
 
