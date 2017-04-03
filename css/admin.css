@@ -408,8 +408,33 @@ html[xmlns] .wp-clanwars-clearfix {
     min-height: 276px;
     margin-left: 10px;
     margin-bottom: 10px;
+    position: relative;
 }
 
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item-approved {
+    border-color: green;
+}
+
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item-pending {
+    border-color: orange;
+}
+
+.wp-clanwars-cloud-items .wp-clanwars-review-status {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0 2px;
+    background: orange;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+.wp-clanwars-cloud-items .wp-clanwars-cloud-item-approved .wp-clanwars-review-status{
+    background: green;
+    color: #fff;
+}
 
 .wp-clanwars-cloud-items .wp-clanwars-cloud-item .wp-clanwars-cloud-item-top {
     padding: 20px 20px 10px;

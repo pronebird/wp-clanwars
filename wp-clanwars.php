@@ -2566,7 +2566,7 @@ EOT;
 						Flash::error( $err->get_error_message() );
 					}
 					else {
-						Flash::success( __( 'The game has been published and will be publicly available after moderation. You can check the current status in published games section.', WP_CLANWARS_TEXTDOMAIN ) );
+						Flash::success( __( 'The game has been published and will be publicly available shortly after review.', WP_CLANWARS_TEXTDOMAIN ) );
 					}
 				}
 				else {
