@@ -30,12 +30,12 @@
 
 	?>
 	<li class="<?php esc_attr_e(join(' ', $item_classes)) ?>" data-remote-id="<?php esc_attr_e($game->_id); ?>">
-		<h2 class="wp-clanwars-review-status"><?php
+		<div class="wp-clanwars-review-status"><?php
 			if($game->approved) :
 				_e('Approved', WP_CLANWARS_TEXTDOMAIN);
 			else :
 				_e('Pending review', WP_CLANWARS_TEXTDOMAIN);
-			endif; ?></h2>
+			endif; ?></div>
 		<?php $partial('partials/browse_game_item', compact('game', 'install_action', 'logged_into_cloud')); ?>
 	</li>
 	<?php endforeach; ?>
