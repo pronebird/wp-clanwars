@@ -588,6 +588,20 @@ html[xmlns] .wp-clanwars-clearfix {
     }
 }
 
+/* onboarding page is split into two columns so break items faster */
+@media screen and ( max-width: 1200px ) {
+    .wp-clanwars-onboarding-page .wp-clanwars-cloud-items {
+        margin-left: 0;
+    }
+
+    .wp-clanwars-onboarding-page .wp-clanwars-cloud-items .wp-clanwars-cloud-item {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+        float: none;
+    }
+}
+
 /* Override .wp-filter media queries to avoid search form breaking on two lines.  */
 .wp-clanwars-cloud-page .wp-filter .search-form {
     float: right;
