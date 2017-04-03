@@ -200,6 +200,15 @@ html[xmlns] .wp-clanwars-clearfix {
     margin-bottom: 0.5em;
 }
 
+/* see http://stackoverflow.com/a/39885072/351305 */
+.wp-clanwars-matcheditor .match-results input:focus::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+}
+
 .wp-clanwars-matcheditor .match-results .round,
 .wp-clanwars-matcheditor .match-results .add-round
 {

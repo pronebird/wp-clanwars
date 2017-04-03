@@ -174,11 +174,11 @@
 
             var x = ++this._roundID;
             var n = $('<div class="round">\n\
-                            <input type="text" name="scores[' + this._id + '][team1][]" class="small-text" value="0" />\n\
-                            <input type="text" name="scores[' + this._id + '][team2][]" class="small-text" value="0" />\n\
-                            <input type="hidden" name="scores[' + this._id + '][round_id][]" value="' + round_id + '" />\n\
-                            <a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><span class="dashicons dashicons-trash"></span></a>\n\
-                        </div>');
+                        <input type="text" name="scores[' + this._id + '][team1][]" class="small-text" value="0" autocomplete="off" />\n\
+                        <input type="text" name="scores[' + this._id + '][team2][]" class="small-text" value="0" autocomplete="off" />\n\
+                        <input type="hidden" name="scores[' + this._id + '][round_id][]" value="' + round_id + '" />\n\
+                        <a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><span class="dashicons dashicons-trash"></span></a>\n\
+                    </div>');
             var i = n.find('input');
 
             i.eq(0).val(score1);
