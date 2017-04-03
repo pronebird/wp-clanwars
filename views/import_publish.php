@@ -22,8 +22,8 @@
 
         <p>
             <label for="terms_confirm">
-            <input type="checkbox" name="terms_confirm" id="terms_confirm" value="yes" /> 
-            <?php _e( 'I confirm that I am the creator of the graphic assets submitted and/or legally own the rights to use and distribute them under <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.' ); ?><br/><img alt="Creative Commons License" vspace="5" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" />
+            <input type="checkbox" name="terms_confirm" id="terms_confirm" value="yes" />
+            <?php _e('I agree that the contents I share will be available to other users free of charge.' ); ?>
             </label>
         </p>
 
