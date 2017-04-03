@@ -1,10 +1,10 @@
 <div class="wrap wp-clanwars-onboarding-page setup-games">
 
-    <h2><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
+    <h1><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h1>
 
     <div class="left-column">
-        
-        <h3><?php _e( 'Install games', WP_CLANWARS_TEXTDOMAIN ); ?></h3>
+
+        <h2><?php _e( 'Install games', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
 
         <form action="<?php echo admin_url('admin-post.php'); ?>" method="post" enctype="multipart/form-data">
 
@@ -34,7 +34,7 @@
     </div><!-- .left-column -->
 
     <div class="right-column">
-        
+
         <div class="wp-filter">
             <form class="search-form" method="get" action="<?php echo admin_url( 'admin.php' ); ?>">
                 <input type="hidden" name="page" value="wp-clanwars-cloud" />

@@ -1,7 +1,7 @@
 <div class="wrap wp-clanwars-onboarding-page setup-team">
 
-	<h2><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
-	<h3><?php _e( 'Setup your team', WP_CLANWARS_TEXTDOMAIN ); ?></h3>
+	<h1><?php _e( 'Get started with WP-Clanwars', WP_CLANWARS_TEXTDOMAIN ); ?></h1>
+	<h2><?php _e( 'Setup your team', WP_CLANWARS_TEXTDOMAIN ); ?></h2>
 
 	<form action="<?php echo admin_url('admin-post.php'); ?>" method="post">
 
