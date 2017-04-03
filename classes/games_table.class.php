@@ -64,7 +64,6 @@ class GamesTable extends \WP_List_Table {
 
     function get_columns() {
         $columns = array(
-            'cb' => '<input type="checkbox" />',
             'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
             'abbr' => __('Game tag', WP_CLANWARS_TEXTDOMAIN)
         );
