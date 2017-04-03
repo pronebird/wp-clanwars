@@ -1171,13 +1171,24 @@ EOT;
 			return new WP_Error('plugin-error', 'Unable to find game.');
 		}
 
+		// paths
 		$upload_dir = wp_upload_dir();
 		$export_dir = trailingslashit($upload_dir['basedir']) . WP_CLANWARS_EXPORTDIR;
+		$zip_path = sprintf('%s/gamepack-%s.zip', $export_dir, $game->id);
+		$source_dir = sprintf('%s/zip-' . md5(microtime(true)), $export_dir);
+		$index_file_json = trailingslashit($source_dir) . WP_CLANWARS_ZIPINDEX;
+
+		// create folders for zip file
+		$wp_filesystem->mkdir($export_dir);
+
+		// create folder for output
+		$wp_filesystem->mkdir($source_dir);
 
 		$game_data = Utils::extract_args($game, array(
 			'title' => '', 'abbr' => '',
 			'icon' => '', 'maplist' => array()
 		));
+
 		$zip_files = array();
 
 		$maplist = \WP_Clanwars\Maps::get_map(array('game_id' => $game->id));
@@ -1187,11 +1198,20 @@ EOT;
 			$mimetype = get_post_mime_type($game->icon);
 
 			if(!empty($attach)) {
+				$info = pathinfo($attach);
+				$copy_name = Utils::create_uuid() . '.' . $info['extension'];
+				$copy_path = trailingslashit($source_dir) . $copy_name;
+
 				$game_data['icon'] = array(
-					'filename' => trim(str_replace($upload_dir['basedir'], '', $attach), '/\\'),
+					'filename' => $copy_name,
 					'mimetype' => $mimetype
 				);
-				$zip_files[] = $attach;
+
+				if(!$wp_filesystem->copy($attach, $copy_path)) {
+					return new WP_Error('plugin-error', 'Unable to copy file.');
+				}
+
+				$zip_files[] = $copy_path;
 			}
 		}
 
@@ -1203,28 +1223,30 @@ EOT;
 				$mimetype = get_post_mime_type($map->screenshot);
 
 				if(!empty($attach)) {
+					$info = pathinfo($attach);
+					$copy_name = Utils::create_uuid() . '.' . $info['extension'];
+					$copy_path = trailingslashit($source_dir) . $copy_name;
+
 					$map_data['screenshot'] = array(
-						'filename' => trim(str_replace($upload_dir['basedir'], '', $attach), '/\\'),
+						'filename' => $copy_name,
 						'mimetype' => $mimetype
 					);
-					$zip_files[] = $attach;
+
+					if(!$wp_filesystem->copy($attach, $copy_path)) {
+						return new WP_Error('plugin-error', 'Unable to copy file.');
+					}
+
+					$zip_files[] = $copy_path;
 				}
 			}
 
 			$game_data['maplist'][] = $map_data;
 		}
 
-		// define a folder for temporary index.json that we need to add into zip archive
-		$index_file_dir = sprintf('%s/zip-' . md5(microtime(true)), $export_dir);
-
-		// create folders for zip file
-		$wp_filesystem->mkdir($export_dir);
-
-		// create zip file
-		$zip_path = sprintf('%s/gamepack-%s.zip', $export_dir, (strlen($game->abbr) ? $game->abbr : $game->id));
-
-		// encode game data as JSON
+		// create index.json file
 		$index_json = json_encode($game_data);
+		$wp_filesystem->put_contents($index_file_json, $index_json);
+		$zip_files[] = $index_file_json;
 
 		// clean up existing file first
 		$wp_filesystem->delete($zip_path);
@@ -1242,34 +1264,26 @@ EOT;
 				return new WP_Error('plugin-error', 'Failed to open ZIP file. Reason: ' . $zip_acrhive->getStatusString());
 			}
 
-			// zip index.json first
-			$zip_acrhive->addFromString(WP_CLANWARS_ZIPINDEX, $index_json);
-
-			// zip all images
+			// zip everything
 			foreach($zip_files as $file) {
-				$localname = trim(str_replace($upload_dir['basedir'], '', $file), '/\\');
+				$localname = trim(str_replace($source_dir, '', $file), '/\\');
 				$zip_acrhive->addFile($file, $localname);
 			}
 
 			// close archive
 			$zip_acrhive->close();
+
+			// remove temp folder
+			$wp_filesystem->rmdir($source_dir, true);
 		} else {
 			// fallback to PclZip
 			$zip_acrhive = new PclZip($zip_path);
 
-			// PclZip does not support adding files from memory
-			$index_file_json = trailingslashit($index_file_dir) . WP_CLANWARS_ZIPINDEX;
-			$wp_filesystem->mkdir($index_file_dir);
-			$wp_filesystem->put_contents($index_file_json, $index_json);
-
-			// zip index.json first
-			$zip_status = $zip_acrhive->create($index_file_json, PCLZIP_OPT_REMOVE_PATH, $index_file_dir);
-
-			// zip all images
-			$zip_status = $zip_acrhive->add($zip_files, PCLZIP_OPT_REMOVE_PATH, $upload_dir['basedir']);
+			// zip everything
+			$zip_status = $zip_acrhive->create($zip_files, PCLZIP_OPT_REMOVE_PATH, $source_dir);
 
 			// remove temp folder
-			$wp_filesystem->rmdir($index_file_dir, true);
+			$wp_filesystem->rmdir($source_dir, true);
 
 			if($zip_status === 0) {
 				return new WP_Error('zip-error', 'Failed to ZIP files. Reason: ' . $zip_acrhive->errorInfo(true));
