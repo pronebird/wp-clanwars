@@ -539,7 +539,7 @@ EOT;
 		$store_ids = array_filter(
 			array_map( function ($game) {
 				return $game->store_id;
-			}, $installed_games)
+			}, $installed_games->getArrayCopy())
 		);
 		$active_tab = '';
 		$install_action = 'wp-clanwars-import';
