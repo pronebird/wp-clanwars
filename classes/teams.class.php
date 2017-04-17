@@ -61,6 +61,8 @@ KEY `title` (`title`)
 					'order' => 'ASC')));
 
 		$where_query = '';
+		$where_conditions = array();
+
 		$limit_query = '';
 		$order_query = '';
 
@@ -76,11 +78,11 @@ KEY `title` (`title`)
 				$id = array($id);
 
 			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
+			$where_conditions[] = 'id IN (' . implode(', ', $id) . ')';
 		}
 
 		if($title !== false) {
-			$where_query[] = $wpdb->prepare('title=%s', $title);
+			$where_conditions[] = $wpdb->prepare('title=%s', $title);
 		}
 
 		if($limit > 0) {
@@ -88,8 +90,9 @@ KEY `title` (`title`)
 		}
 
 
-		if(!empty($where_query))
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
+		if(!empty($where_conditions)) {
+			$where_query = 'WHERE ' . implode(' AND ', $where_conditions);
+		}
 
 		if($count) {
 
@@ -98,7 +101,7 @@ KEY `title` (`title`)
 			$ret = array('total_items' => 0, 'total_pages' => 1);
 
 			$ret['total_items'] = (int) $rslt->m_count;
-			
+
 			if($limit > 0) {
 				$ret['total_pages'] = ceil($ret['total_items'] / $limit);
 			}
@@ -174,18 +177,18 @@ KEY `title` (`title`)
 		return $result;
 	}
 
-	static function delete_team($id) 
+	static function delete_team($id)
 	{
 		global $wpdb;
-		
+
 		if(!is_array($id))
 			$id = array($id);
-		
+
 		$id = array_map('intval', $id);
 
 		// delete matches belongs to this team
 		\WP_Clanwars\Matches::delete_match_by_team($id);
-		
+
 		return $wpdb->query('DELETE FROM `' . self::table() . '` WHERE id IN(' . implode(',', $id) . ')');
 	}
 

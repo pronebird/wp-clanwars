@@ -56,7 +56,10 @@ KEY `game_id` (`game_id`,`screenshot`)
 			'offset' => 0,
 			'orderby' => 'id',
 			'order' => 'ASC')));
+
 		$where_query = '';
+		$where_conditions = array();
+
 		$limit_query = '';
 		$order_query = '';
 
@@ -72,7 +75,7 @@ KEY `game_id` (`game_id`,`screenshot`)
 				$id = array($id);
 
 			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
+			$where_conditions[] = 'id IN (' . implode(', ', $id) . ')';
 		}
 
 		if($game_id != 'all' && $game_id !== false) {
@@ -81,15 +84,16 @@ KEY `game_id` (`game_id`,`screenshot`)
 				$game_id = array($game_id);
 
 			$game_id = array_map('intval', $game_id);
-			$where_query[] = 'game_id IN (' . implode(', ', $game_id) . ')';
+			$where_conditions[] = 'game_id IN (' . implode(', ', $game_id) . ')';
 		}
 
 		if($limit > 0) {
 			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
 		}
 
-		if(!empty($where_query))
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
+		if(!empty($where_conditions)) {
+			$where_query = 'WHERE ' . implode(' AND ', $where_conditions);
+		}
 
 		if($count) {
 

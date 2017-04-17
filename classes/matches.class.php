@@ -72,6 +72,8 @@ KEY `date` (`date`)
 			'order' => 'ASC')));
 
 		$where_query = '';
+		$where_conditions = array();
+
 		$limit_query = '';
 		$order_query = '';
 
@@ -87,7 +89,7 @@ KEY `date` (`date`)
 				$id = array($id);
 
 			$id = array_map('intval', $id);
-			$where_query[] = 't1.id IN (' . implode(', ', $id) . ')';
+			$where_conditions[] = 't1.id IN (' . implode(', ', $id) . ')';
 		}
 
 		if($game_id != 'all' && $game_id !== false) {
@@ -96,19 +98,19 @@ KEY `date` (`date`)
 				$game_id = array($game_id);
 
 			$game_id = array_map('intval', $game_id);
-			$where_query[] = 't1.game_id IN (' . implode(', ', $game_id) . ')';
+			$where_conditions[] = 't1.game_id IN (' . implode(', ', $game_id) . ')';
 		}
 
 		if($from_date > 0) {
-			$where_query[] = 't1.date >= FROM_UNIXTIME(' . intval($from_date) . ')';
+			$where_conditions[] = 't1.date >= FROM_UNIXTIME(' . intval($from_date) . ')';
 		}
 
 		if($limit > 0) {
 			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
 		}
 
-		if(!empty($where_query)) {
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
+		if(!empty($where_conditions)) {
+			$where_query = 'WHERE ' . implode(' AND ', $where_conditions);
 		}
 
 		if($count) {
@@ -343,7 +345,7 @@ KEY `date` (`date`)
 		$id = array_map('intval', $id);
 
 		return $wpdb->query('DELETE FROM `' . self::table() . '` WHERE game_id IN(' . implode(',', $id) . ')');
-	
+
 	}
 
 }

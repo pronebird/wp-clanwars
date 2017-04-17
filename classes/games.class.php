@@ -76,16 +76,11 @@ KEY `abbr` (`abbr`)
 				$id = array($id);
 			}
 			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
+			$where_query = 'WHERE id IN (' . implode(', ', $id) . ')';
 		}
 
 		if($limit > 0) {
 			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
-		}
-
-
-		if(!empty($where_query)) {
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
 		}
 
 		if($count) {
@@ -139,7 +134,7 @@ KEY `abbr` (`abbr`)
 
 	static function delete_game($id) {
 		global $wpdb;
-		
+
 		$table = self::table();
 
 		if(!is_array($id)) {
