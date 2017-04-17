@@ -91,6 +91,8 @@ CREATE TABLE $table (
 		extract($args);
 
 		$where_query = '';
+		$where_conditions = array();
+
 		$limit_query = '';
 		$order_query = '';
 
@@ -107,7 +109,7 @@ CREATE TABLE $table (
 			}
 
 			$id = array_map('intval', $id);
-			$where_query[] = 't1.id IN (' . join(', ', $id) . ')';
+			$where_conditions[] = 't1.id IN (' . join(', ', $id) . ')';
 		}
 
 		if($game_id != 'all' && $game_id !== false) {
@@ -116,19 +118,19 @@ CREATE TABLE $table (
 			}
 
 			$game_id = array_map('intval', $game_id);
-			$where_query[] = 't1.game_id IN (' . join(', ', $game_id) . ')';
+			$where_conditions[] = 't1.game_id IN (' . join(', ', $game_id) . ')';
 		}
 
 		if($from_date > 0) {
-			$where_query[] = 't1.date >= FROM_UNIXTIME(' . intval($from_date) . ')';
+			$where_conditions[] = 't1.date >= FROM_UNIXTIME(' . intval($from_date) . ')';
 		}
 
 		if($limit > 0) {
 			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
 		}
 
-		if(!empty($where_query)) {
-			$where_query = 'WHERE ' . join(' AND ', $where_query);
+		if(!empty($where_conditions)) {
+			$where_query = 'WHERE ' . implode(' AND ', $where_conditions);
 		}
 
 		$rounds_table = \WP_Clanwars\Rounds::table();
@@ -137,18 +139,18 @@ CREATE TABLE $table (
 		$matches_table = static::table();
 
 		if( $sum_tickets ) {
-			$subquery = 
+			$subquery =
 <<<SQL
-	
+
 			(
-				SELECT SUM(sumt1.tickets1) 
-				FROM `$rounds_table` AS sumt1 
+				SELECT SUM(sumt1.tickets1)
+				FROM `$rounds_table` AS sumt1
 				WHERE sumt1.match_id = t1.id
 			) AS team1_tickets,
 
 			(
-				SELECT SUM(sumt2.tickets2) 
-				FROM `$rounds_table` AS sumt2 
+				SELECT SUM(sumt2.tickets2)
+				FROM `$rounds_table` AS sumt2
 				WHERE sumt2.match_id = t1.id
 			) AS team2_tickets
 
@@ -160,17 +162,17 @@ SQL;
 			$subquery = 'NULL';
 		}
 
-		$query = 
+		$query =
 <<<SQL
 
 		SELECT
-			t1.*, 
-			t2.title AS game_title, 
-			t2.abbr AS game_abbr, 
+			t1.*,
+			t2.title AS game_title,
+			t2.abbr AS game_abbr,
 			t2.icon AS game_icon,
-			tt1.title AS team1_title, 
+			tt1.title AS team1_title,
 			tt2.title AS team2_title,
-			tt1.country AS team1_country, 
+			tt1.country AS team1_country,
 			tt2.country AS team2_country,
 			$subquery
 
@@ -379,7 +381,7 @@ SQL;
 		$id = array_map('intval', $id);
 
 		return $wpdb->query('DELETE FROM `' . self::table() . '` WHERE game_id IN(' . implode(',', $id) . ')');
-	
+
 	}
 
 }

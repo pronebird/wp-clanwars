@@ -79,6 +79,8 @@ CREATE TABLE $table (
 		extract($args);
 
 		$where_query = '';
+		$where_conditions = array();
+
 		$limit_query = '';
 		$order_query = '';
 
@@ -95,19 +97,19 @@ CREATE TABLE $table (
 			}
 
 			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
+			$where_conditions[] = 'id IN (' . implode(', ', $id) . ')';
 		}
 
 		if($title !== false) {
-			$where_query[] = $wpdb->prepare('title=%s', $title);
+			$where_conditions[] = $wpdb->prepare('title=%s', $title);
 		}
 
 		if($limit > 0) {
 			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
 		}
 
-		if(!empty($where_query)) {
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
+		if(!empty($where_conditions)) {
+			$where_query = 'WHERE ' . implode(' AND ', $where_conditions);
 		}
 
 		$teams_table = static::table();
@@ -115,7 +117,7 @@ CREATE TABLE $table (
 $query = <<<SQL
 
 	SELECT *
-	FROM `$teams_table` 
+	FROM `$teams_table`
 	$where_query
 	$order_query
 	$limit_query
@@ -191,19 +193,19 @@ SQL;
 		return $result;
 	}
 
-	static function delete_team($id) 
+	static function delete_team($id)
 	{
 		global $wpdb;
-		
+
 		if(!is_array($id)) {
 			$id = array($id);
 		}
-		
+
 		$id = array_map('intval', $id);
 
 		// delete matches belonging to this team
 		\WP_Clanwars\Matches::delete_match_by_team($id);
-		
+
 		return $wpdb->query('DELETE FROM `' . self::table() . '` WHERE id IN(' . implode(',', $id) . ')');
 	}
 
