@@ -1,14 +1,14 @@
-# Copyright (C) 2015 {name}
+# Copyright (C) 2018 {name}
 # This file is distributed under the same license as the {name} package.
 msgid ""
 msgstr ""
 "Project-Id-Version: {name} {version}\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/{slug}\n"
-"POT-Creation-Date: 2015-11-21 11:49:05+00:00\n"
+"POT-Creation-Date: 2018-06-18 15:38:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 

@@ -91,7 +91,7 @@ class MapsTable extends \WP_List_Table {
     }
 
     function no_items() {
-        _e('No games found.', WP_CLANWARS_TEXTDOMAIN);
+        _e('No maps found.', WP_CLANWARS_TEXTDOMAIN);
     }
 
     function column_cb($item) {
