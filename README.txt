@@ -27,7 +27,8 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 
 == Installation ==
 
-Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
+- PHP 5.3 or newer
+- MySQL 5.0 or newer
 
 == Features ==
 
@@ -50,6 +51,10 @@ Make sure your MySQL server supports InnoDB, otherwise this plugin won't work.
 8. Sidebar widget
 
 == Changelog ==
+
+= 1.7.2 =
+
+* Fix error in database handling routine ([issue #3](https://github.com/pronebird/wp-clanwars/issues/3))
 
 = 1.7.1 =
 

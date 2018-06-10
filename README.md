@@ -35,7 +35,7 @@ I work on this plugin in free time and I don't have much, so contributions are w
 
 ### Installation
 
-I published plugin on WordPress.org, so you can install it thru admin now.
+The plugin is available on WordPress.org:
 
 https://wordpress.org/plugins/wp-clanwars/
 
