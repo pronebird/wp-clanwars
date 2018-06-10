@@ -203,7 +203,7 @@ final class API {
             // disable unsafe uploads (true is default in php 5.6+)
             curl_setopt($ch, CURLOPT_SAFE_UPLOAD, true);
 
-            $data['file'] = curl_file_create($zip_file, 'application/zip', 'file');
+            $data['file'] = curl_file_create($zip_file, 'application/zip', 'payload.zip');
         }
         else { // php 5.2+
             // filter out attempts to upload files from server
