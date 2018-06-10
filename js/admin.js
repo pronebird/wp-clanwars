@@ -19,32 +19,32 @@
 */
 
 jQuery(document).ready(function ($) {
-	var arr = {
-		'wp-clanwars-maps': wpCWAdminL10n.confirmDeleteMap,
-		'wp-clanwars-games': wpCWAdminL10n.confirmDeleteGame,
-		'wp-clanwars-teams': wpCWAdminL10n.confirmDeleteTeam,
-		'wp-clanwars-matches': wpCWAdminL10n.confirmDeleteMatch
-	};
+    var arr = {
+        'wp-clanwars-maps': wpCWAdminL10n.confirmDeleteMap,
+        'wp-clanwars-games': wpCWAdminL10n.confirmDeleteGame,
+        'wp-clanwars-teams': wpCWAdminL10n.confirmDeleteTeam,
+        'wp-clanwars-matches': wpCWAdminL10n.confirmDeleteMatch
+    };
 
-	for(var i in arr) {
-		$('.' + i + ' span.delete a').each(function () {
-			var data = {
-				link : $(this).attr('href'),
-				message : arr[i]
-			};
+    for(var i in arr) {
+        $('.' + i + ' span.delete a').each(function () {
+            var data = {
+                link : $(this).attr('href'),
+                message : arr[i]
+            };
 
-			$(this).bind('click', data,
-				function (evt) {
-					if(confirm(evt.data.message)) {
-						location.href = evt.data.link;
+            $(this).bind('click', data,
+                function (evt) {
+                    if(confirm(evt.data.message)) {
+                        location.href = evt.data.link;
                     }
-					return false;
-				});
-				
-		});
-	}
+                    return false;
+                });
+                
+        });
+    }
 
-	$('select.select2').select2();
+    $('select.select2').select2();
 
 });
 
