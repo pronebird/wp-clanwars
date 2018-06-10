@@ -2,12 +2,12 @@
 /**
  * Plugin Name: WP-ClanWars
  * Author URI: http://www.codeispoetry.ru/
- * Plugin URI: https://bitbucket.org/and/wp-clanwars
- * Description: ClanWars plugin for a cyber-sport team website
+ * Plugin URI: https://github.com/pronebird/wp-clanwars
+ * Description: Content manager for e-sports teams and communities
  * Author: Andrej Mihajlov
- * Version: 1.7.1
+ * Version: 2.0.0
  *
- * Tags: cybersport, clanwar, team, clan, cyber, sport, match
+ * Tags: esport, clanwar, team, clan, game, gaming, sport, match
  **/
 
 /*
@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $wpClanWars;
 
-define('WP_CLANWARS_VERSION', '1.7.1');
+define('WP_CLANWARS_VERSION', '2.0.0');
 
 define('WP_CLANWARS_TEXTDOMAIN', 'wp-clanwars');
 define('WP_CLANWARS_COUNTRIES_TEXTDOMAIN', 'wp-clanwars-countries');

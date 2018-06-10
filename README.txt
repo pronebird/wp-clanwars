@@ -2,8 +2,8 @@
 Contributors: andddd
 Tags: cybersport, clanwar, team, clan, cyber, sport, match, gaming, game, community
 Requires at least: 4.3
-Tested up to: 4.3
-Stable tag: 1.7.1
+Tested up to: 4.9.6
+Stable tag: 2.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,7 +21,7 @@ WP-ClanWars is a match organizer plugin for gaming communities and teams. It sup
 
 Plugin creates a post for every match, all posts are published under category set in plugin settings. I suggest to create a separate category for all matches so you don't mix it with any other blog posts. Since every match is a regular post, it means that they will show up all around your website, if it's not desired behavior you will have to restrict matches category from being shown on specific pages of your website (e.g. on front page). I guess there are plenty of plugins for that or you can always do it manually by fixing your theme files. I would also suggest to avoid any changes to the content of created posts because plugin overwrites post content on match update.
 
-By default plugin uses it's own stylesheet which can be disabled in plugin settings. If you decide to make a custom CSS for your website, as example, take a look at default styles: [site.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/site.css) and [widget.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/widget.css).
+By default plugin uses it's own stylesheet which can be disabled in plugin settings. If you decide to make a custom CSS for your website, as example, take a look at default styles: [site.css](https://github.com/pronebird/wp-clanwars/blob/master/css/site.css) and [widget.css](https://github.com/pronebird/wp-clanwars/blob/master/css/widget.css).
 
 Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode, I suggest to create a separate page for it.
 
@@ -41,16 +41,22 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 
 == Screenshots ==
 
-1. Match Browser
-2. Games management
-3. Match management
-4. Match editor
-5. Import menu
-6. Plugin Settings
-7. Sidebar widget settings
-8. Sidebar widget
+1. Score card and widget
+2. Install & share games
+3. View matches
+4. Edit match
 
 == Changelog ==
+
+= 2.0.0 =
+
+* Add team logos
+* Reworked match score cards
+* Add game sharing via cloud server
+* Add popular countries in country dropdown
+* Add search to long dropdowns
+* Improved detection for installed games
+* Multisite fixes
 
 = 1.7.2 =
 

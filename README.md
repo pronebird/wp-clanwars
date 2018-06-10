@@ -1,12 +1,12 @@
 ## WP-ClanWars plugin for WordPress
 
-WP-ClanWars is a match organizer plugin for gaming communities and teams. It supports multiple games, sidebar widget, match browser, and allows multigamings to delegate match scheduling between multiple war arrangers using simple access control system.
+WP-ClanWars is a content management plugin for e-sports teams and gaming communities. It supports multiple games, sidebar widget, match browser, and allows multigamings to delegate match scheduling between multiple war arrangers using simple access control system.
 
-Plugin creates a post for every match, all posts are published under category set in plugin settings. I suggest to create a separate category for all matches so you don't mix it with any other blog posts. Since every match is a regular post, it means that they will show up all around your website, if it's not desired behavior you will have to restrict matches category from being shown on specific pages of your website (e.g. on front page). I guess there are plenty of plugins for that or you can always do it manually by fixing your theme files. I would also suggest to avoid any changes to the content of created posts because plugin overwrites post content on match update.
+Plugin creates a post for every match, all posts are published under category set in plugin settings. I suggest to create a separate category for all matches so you don't mix it with any other blog posts. Since every match is a regular post, it means that they will show up all over your website. If it's not desired, you will have to restrict matches category from being shown on specific pages of your website (e.g. on front page). I guess there are plenty of plugins for that or you can always do it manually by fixing your theme files. I would also suggest to avoid any changes to the content of created posts because plugin overwrites post content on match update.
 
-By default plugin uses it's own stylesheet which can be disabled in plugin settings. If you decide to make a custom CSS for your website, as example, take a look at default styles: [site.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/site.css) and [widget.css](https://bitbucket.org/and/wp-clanwars/raw/default/css/widget.css).
+By default plugin uses it's own stylesheet which can be disabled in plugin settings. If you decide to make a custom CSS for your website, as example, take a look at default styles: [site.css](https://github.com/pronebird/wp-clanwars/blob/master/css/site.css) and [widget.css](https://github.com/pronebird/wp-clanwars/blob/master/css/widget.css).
 
-Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode, I suggest to create a separate page for it.
+Plugin supports a match browser, which can be displayed for visitors using `[wp-clanwars]` shortcode. I suggest to create a separate page for it.
 
 ## Help out to translate this plugin
 
@@ -31,7 +31,7 @@ Thanks everyone for participation!
 * Match search
 * Pagination in widget or load more
 
-I work on this plugin in free time and I don't have much, so contributions are welcome.
+I work on this plugin in free time and I don't have much of it, so all contributions are welcome.
 
 ### Installation
 
@@ -52,26 +52,14 @@ __This plugin requires at least PHP 5.3__
 
 ### Screenshots
 
-#### Match Browser
-![Match browser](screenshot-1.jpg)
+#### Score card and widget
+![Score card and widget](screenshot-1.png)
 
-#### Games management
-![Games management](screenshot-2.jpg)
+#### Install & share games
+![Install & share games](screenshot-2.png)
 
-#### Match management
-![Match management](screenshot-3.jpg)
+#### View matches
+![View matches](screenshot-3.png)
 
-#### Match editor
-![Match editor](screenshot-4.jpg)
-
-#### Import menu
-![Import menu](screenshot-5.jpg)
-
-#### Settings
-![Settings](screenshot-6.jpg)
-
-#### Sidebar widget settings
-![Sidebar widget settings](screenshot-7.jpg)
-
-#### Sidebar widget
-![Sidebar widget](screenshot-8.jpg)
+#### Edit match
+![Edit match](screenshot-4.png)
