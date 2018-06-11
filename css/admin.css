@@ -93,14 +93,34 @@ html[xmlns] .wp-clanwars-clearfix {
     color: #aaa;
 }
 
-.wp-clanwars-teams-table .column-logo,
-.wp-clanwars-teams-table .column-logo .icon,
+.wp-clanwars-teams-table .column-title .icon {
+    float: left;
+    display: block;
+    width: 80px;
+    margin-right: 10px;
+    margin-top: 1px;
+}
+
+.wp-clanwars-teams-table .column-title {
+    overflow: hidden;
+}
+
+.wp-clanwars-teams-table .column-title .home-team {
+    display: inline;
+    padding: 1px 8px;
+    border-radius: 9px;
+    margin-left: 5px;
+    background-color: #aaa;
+    color: #fff;
+    text-transform: lowercase;
+}
+
 .wp-clanwars-maps-table .column-screenshot,
 .wp-clanwars-maps-table .column-screenshot .icon {
     width: 80px;
 }
 
-.wp-clanwars-teams-table .column-logo .icon.placeholder,
+.wp-clanwars-teams-table .column-title .icon.placeholder,
 .wp-clanwars-maps-table .column-screenshot .icon.placeholder {
     height: 80px;
     background: #eee;
