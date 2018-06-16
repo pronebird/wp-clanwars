@@ -273,6 +273,7 @@ class WP_ClanWars {
         add_action('admin_post_wp-clanwars-publish', array($this, 'on_admin_post_publish'));
         add_action('admin_post_wp-clanwars-login', array($this, 'on_admin_post_login'));
         add_action('admin_post_wp-clanwars-logout', array($this, 'on_admin_post_logout'));
+        add_action('admin_post_wp-clanwars-update-cloud-account', array($this, 'on_admin_post_update_cloud_account'));
         add_action('wp_ajax_wp-clanwars-game-vote', array($this, 'on_ajax_game_vote'));
 
         add_action('admin_post_wp-clanwars-setupteam', array($this, 'on_admin_post_setup_team'));
@@ -2645,6 +2646,25 @@ EOT;
         check_admin_referer('wp-clanwars-logout');
 
         CloudAPI::logout();
+
+        wp_redirect( $_REQUEST['_wp_http_referer'] );
+        exit();
+    }
+
+    function on_admin_post_update_cloud_account() {
+        check_admin_referer('wp-clanwars-update-cloud-account');
+
+        $account_info = Utils::extract_args($_POST, array(
+            'fullname' => ''
+            )
+        );
+
+        $result = CloudAPI::update_account( $account_info ) ;
+        if ( is_wp_error($result) ) {
+            Flash::error( sprintf(__( 'Failed to update the account info: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message()) );
+        } else {
+            Flash::success( __( 'Updated account.', WP_CLANWARS_TEXTDOMAIN ) );
+        }
 
         wp_redirect( $_REQUEST['_wp_http_referer'] );
         exit();

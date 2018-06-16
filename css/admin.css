@@ -830,6 +830,55 @@ html[xmlns] .wp-clanwars-clearfix {
     transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 }
 
+/*
+ * Update account thickbox
+ */
+
+.wp-clanwars-cloud-update-account {
+    padding: 0;
+    background: #fff;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.wp-clanwars-cloud-update-account-header {
+    text-align: center;
+}
+
+.wp-clanwars-cloud-update-account-wrap {
+    display: flex;
+    flex-flow: column;
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.wp-clanwars-cloud-update-account-form {
+    display: flex;
+    flex-flow: row;
+    align-items: stretch;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 0 40px;
+}
+
+.wp-clanwars-cloud-update-account-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.wp-clanwars-cloud-update-account-picture {
+    padding: 1px;
+}
+
+.wp-clanwars-cloud-update-account-fullname {
+    flex: 1 1 auto;
+    font-size: 1.5em;
+    min-width: 0;
+}
+
+
 /**
  * Select2 compatibility with WordPress admin
  */
