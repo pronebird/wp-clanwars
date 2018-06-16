@@ -2627,12 +2627,13 @@ EOT;
             die();
         }
 
-        if(CloudAPI::update_access_token($_POST['token'])) {
+        $result = CloudAPI::update_access_token($_POST['token']);
+
+        if ( is_wp_error( $result ) ) {
+            Flash::error( sprintf(__( 'Failed to log in: %s', WP_CLANWARS_TEXTDOMAIN ), $result->get_error_message() ) );
+        } else {
             $cloudUser = CloudAPI::get_user_info();
             Flash::success( sprintf( __( 'Logged in as %s.', WP_CLANWARS_TEXTDOMAIN ), $cloudUser->fullname ) );
-        }
-        else {
-            Flash::error( __( 'Failed to log in.', WP_CLANWARS_TEXTDOMAIN ) );
         }
 
         $view = new View( 'login_complete' );
