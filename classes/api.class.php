@@ -273,12 +273,36 @@ final class API {
         return $ok;
     }
 
+    private static function api_patch($url, $args = array()) {
+        $ok = static::check_client_key();
+
+        if($ok === true)
+        {
+            $response = static::remote_patch( $url, $args );
+
+            return static::get_response_payload( $response );
+        }
+
+        return $ok;
+    }
+
     private static function remote_get($url, $args = array()) {
         return wp_remote_get( $url, static::setup_args( $args ) );
     }
 
     private static function remote_post($url, $args = array()) {
         return wp_remote_post( $url, static::setup_args( $args ) );
+    }
+
+    private static function remote_patch($url, $args = array()) {
+        return wp_remote_request( $url,
+                static::setup_args(
+                    array_merge($args, array(
+                        'method' => 'PATCH'
+                    )
+                )
+            )
+        );
     }
 
     private static function setup_args($args) {
