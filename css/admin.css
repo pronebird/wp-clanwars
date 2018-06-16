@@ -860,7 +860,7 @@ html[xmlns] .wp-clanwars-clearfix {
     align-items: stretch;
     justify-content: center;
     margin-top: 30px;
-    padding: 0 40px;
+    padding: 0 30px;
 }
 
 .wp-clanwars-cloud-update-account-actions {
@@ -870,6 +870,7 @@ html[xmlns] .wp-clanwars-clearfix {
 
 .wp-clanwars-cloud-update-account-picture {
     padding: 1px;
+    height: 50px;
 }
 
 .wp-clanwars-cloud-update-account-fullname {
