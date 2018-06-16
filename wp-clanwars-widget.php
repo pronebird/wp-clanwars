@@ -35,7 +35,14 @@ class WP_ClanWars_Widget extends WP_Widget {
 
     function __construct()
     {
-        $widget_ops = array('classname' => 'widget_clanwars', 'description' => __('ClanWars widget', WP_CLANWARS_TEXTDOMAIN));
+        $wp_theme = wp_get_theme();
+        $wp_theme_name = $wp_theme->get_template();
+        $theme_class = 'widget_clanwars_' . $wp_theme_name;
+
+        $widget_ops = array(
+            'classname' => 'widget_clanwars ' . $theme_class,
+            'description' => __('ClanWars widget', WP_CLANWARS_TEXTDOMAIN)
+        );
         parent::__construct('clanwars', __('ClanWars', WP_CLANWARS_TEXTDOMAIN), $widget_ops);
 
         $this->default_settings = array(
@@ -76,7 +83,7 @@ class WP_ClanWars_Widget extends WP_Widget {
         $t1 = mysql2date('U', $a->date);
         $t2 = mysql2date('U', $b->date);
 
-        if($t1 == $t2) { 
+        if($t1 == $t2) {
             return 0;
         }
 
@@ -107,7 +114,7 @@ class WP_ClanWars_Widget extends WP_Widget {
             'order' => 'asc'
         );
         $_games = \WP_Clanwars\Games::get_game($options);
-        
+
         $from_date = 0;
         if(isset($this->newer_than_options[$instance['hide_older_than']])) {
             $age = (int) $this->newer_than_options[$instance['hide_older_than']]['value'];
@@ -122,19 +129,19 @@ class WP_ClanWars_Widget extends WP_Widget {
                 $from_date = $now - $age;
             }
         }
-            
+
         foreach($_games as $game) {
             $options = array(
-                'from_date' => $from_date, 
-                'game_id' => $game->id, 
-                'limit' => $instance['show_limit'], 
-                'order' => 'desc', 
-                'orderby' => 'date', 
+                'from_date' => $from_date,
+                'game_id' => $game->id,
+                'limit' => $instance['show_limit'],
+                'order' => 'desc',
+                'orderby' => 'date',
                 'sum_tickets' => true
             );
 
             $matchResult = \WP_Clanwars\Matches::get_match( $options );
-            
+
             if( $matchResult->count() ) {
                 $games[] = $game;
                 $matches = array_merge( $matches, $matchResult->getArrayCopy() );
@@ -212,8 +219,8 @@ class WP_ClanWars_Widget extends WP_Widget {
                 $team2_flag = \WP_Clanwars\Utils::get_country_flag($match->team2_country);
 
                 if($instance['display_both_teams']) {
-                    $team_title = sprintf('%s %s vs. %s %s', 
-                        $team1_flag, esc_html($match->team1_title), 
+                    $team_title = sprintf('%s %s vs. %s %s',
+                        $team1_flag, esc_html($match->team1_title),
                         $team2_flag, esc_html($match->team2_title)
                     );
                 }
@@ -257,7 +264,7 @@ class WP_ClanWars_Widget extends WP_Widget {
     ?>
 
         <div class="wp-clanwars-widget-settings">
-    
+
             <p>
                 <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                 <input class="widefat" name="<?php echo $this->get_field_name('title'); ?>" id="<?php echo $this->get_field_id('title'); ?>" value="<?php esc_attr_e($instance['title']); ?>" type="text" />
@@ -268,10 +275,10 @@ class WP_ClanWars_Widget extends WP_Widget {
             </p>
 
             <p>
-                <input class="checkbox" 
-                        name="<?php echo $this->get_field_name('display_both_teams'); ?>" 
-                        id="<?php echo $this->get_field_id('display_both_teams'); ?>" 
-                        value="1" 
+                <input class="checkbox"
+                        name="<?php echo $this->get_field_name('display_both_teams'); ?>"
+                        id="<?php echo $this->get_field_id('display_both_teams'); ?>"
+                        value="1"
                         type="checkbox" <?php checked($instance['display_both_teams'], true)?>/>&nbsp;
                 <label for="<?php echo $this->get_field_id('display_both_teams'); ?>">
                     <?php _e('Display both teams', WP_CLANWARS_TEXTDOMAIN); ?>
@@ -279,9 +286,9 @@ class WP_ClanWars_Widget extends WP_Widget {
             </p>
 
             <p>
-                <input class="checkbox" 
-                        name="<?php echo $this->get_field_name('display_game_icon'); ?>" 
-                        id="<?php echo $this->get_field_id('display_game_icon'); ?>" 
+                <input class="checkbox"
+                        name="<?php echo $this->get_field_name('display_game_icon'); ?>"
+                        id="<?php echo $this->get_field_id('display_game_icon'); ?>"
                         value="1" type="checkbox" <?php checked($instance['display_game_icon'], true)?>/>&nbsp;
                 <label for="<?php echo $this->get_field_id('display_game_icon'); ?>">
                     <?php _e('Display game icon', WP_CLANWARS_TEXTDOMAIN); ?>

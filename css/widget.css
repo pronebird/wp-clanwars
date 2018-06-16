@@ -18,10 +18,6 @@
     along with WP-Clanwars.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-.widget_clanwars {
-	position: relative;
-}
-
 .widget_clanwars ul.clanwar-list  {
 	list-style: none;
 	margin: 0;
@@ -36,6 +32,7 @@
 .widget_clanwars ul.clanwar-list li.clanwar-item {
 	margin: 0;
 	padding: 0.4688em 0;
+	clear: right;
 }
 
 .no-js .widget_clanwars .tabs {
@@ -82,7 +79,6 @@
 	margin: 0;
 	padding: 0;
 	display: inline-block;
-	margin-left: -20px;
 	width: 16px;
 	height: 16px;
 }
@@ -98,12 +94,9 @@
 	font-size: 0.8em;
 	font-weight: normal;
 	letter-spacing: 0.5px;
-	/*text-shadow: 0 1px 0 #222;*/
 	text-transform: uppercase;
-
-	position: absolute;
+	float: right;
 	padding: 5px;
-	right: 0;
 	margin: 0;
 }
 
@@ -170,10 +163,6 @@
 	display: block;
 }
 
-.widget_clanwars ul.clanwar-list.shows-game-icon .opponent-team {
-	padding-left: 20px;
-}
-
 .widget_clanwars .scores.win
 {
 	color: #fff;
@@ -193,4 +182,19 @@
 
 .widget_clanwars li.clanwar-item a:hover {
 	border-bottom: 0;
+}
+
+/*
+Tweaks for Twenty Fifteen
+*/
+.widget_clanwars_twentyfifteen {
+	padding-right: 0;
+}
+
+.widget_clanwars_twentyfifteen ul.clanwar-list.shows-game-icon .opponent-team {
+	/* padding-left: 20px; */
+}
+
+.widget_clanwars_twentyfifteen ul.clanwar-list li.clanwar-item .icon {
+	margin-left: -20px;
 }
