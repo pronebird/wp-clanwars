@@ -314,12 +314,12 @@ final class API {
 
         $headers['X-Client-Key'] = static::get_client_key();
 
-        $_args = array(
+        $base_args = array(
             'user-agent' => static::get_user_agent(),
             'headers' => $headers
         );
 
-        return array_merge_recursive($_args, $args);
+        return array_merge($base_args, $args);
     }
 
     private static function get_response_payload($response) {
