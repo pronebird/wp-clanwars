@@ -46,6 +46,7 @@ final class API {
         $checked = true;
 
         $args = array(
+            'user-agent' => static::get_user_agent(),
             'body' => array(
                 'siteUrl' => site_url()
             )
@@ -184,6 +185,7 @@ final class API {
         $data = array();
 
         $headers = array(
+            'User-Agent: ' . static::get_user_agent(),
             'Content-Type: multipart/form-data',
             'X-Client-Key: ' . static::get_client_key(),
             'Authorization: Bearer ' . static::get_access_token()
