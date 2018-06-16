@@ -83,17 +83,17 @@ final class API {
     static function update_access_token($access_token) {
         $status = static::get_auth_status($access_token);
 
-        if(!is_wp_error($status) && is_object($status) && isset($status->socialId)) {
+        if ( is_wp_error($status) ) {
+            static::set_access_token('');
+            static::set_user_info('');
+
+            return $status;
+        } else {
             static::set_access_token($access_token);
             static::set_user_info($status);
 
             return true;
         }
-
-        static::set_access_token('');
-        static::set_user_info('');
-
-        return false;
     }
 
     private static function get_access_token() {
