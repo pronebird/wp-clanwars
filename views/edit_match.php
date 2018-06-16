@@ -3,11 +3,11 @@ jQuery(document).ready(function ($) {
     // add maps
     var maps_payload = <?php echo json_encode($scores); ?>;
     $.each(maps_payload, function (i, item) {
-        var match = wpMatchManager.addMap(i, item.map_id);
+        var match = wpMatchManager.addMap(item.map_id);
         var len = item.team1.length;
-        for(var j = 0; j < len; j++) {
+        $.each(item.team1, function (j) {
             match.addRound(item.team1[j], item.team2[j], item.round_id[j]);
-        }
+        });
     });
 
     // add gallery
@@ -145,9 +145,9 @@ jQuery(document).ready(function ($) {
                         <select name="gallery[size]" id="gallery-size" class="select2" data-minimum-results-for-search="-1">
                         <?php
                         $sizes = array(
-                            'thumbnail' => __('Thumbnail', WP_CLANWARS_TEXTDOMAIN), 
-                            'medium' => __('Medium', WP_CLANWARS_TEXTDOMAIN), 
-                            'large' => __('Large', WP_CLANWARS_TEXTDOMAIN), 
+                            'thumbnail' => __('Thumbnail', WP_CLANWARS_TEXTDOMAIN),
+                            'medium' => __('Medium', WP_CLANWARS_TEXTDOMAIN),
+                            'large' => __('Large', WP_CLANWARS_TEXTDOMAIN),
                             'full' => __('Full Size', WP_CLANWARS_TEXTDOMAIN)
                         );
                         $size = isset($gallery['size']) ? $gallery['size'] : 'thumbnail';
@@ -161,7 +161,7 @@ jQuery(document).ready(function ($) {
                         <label for="gallery-columns"><?php _e('Columns:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                         <select name="gallery[columns]" id="gallery-columns" class="select2" data-minimum-results-for-search="-1" >
                         <?php
-                        $columns = isset($gallery['columns']) ? $gallery['columns'] : 3; 
+                        $columns = isset($gallery['columns']) ? $gallery['columns'] : 3;
                         for($i = 1; $i < 10; $i++) : ?>
                             <option value="<?php esc_attr_e($i); ?>"<?php selected($columns, $i, true); ?>><?php esc_html_e($i); ?></option>
                         <?php endfor; ?>
@@ -171,7 +171,7 @@ jQuery(document).ready(function ($) {
                     <div class="gallery-option">
                         <label for="gallery-link"><?php _e('Link to: ', WP_CLANWARS_TEXTDOMAIN); ?></label>
                         <select name="gallery[link]" id="gallery-link" class="select2" data-minimum-results-for-search="-1">
-                        <?php 
+                        <?php
                         $links = array(
                             '' => __('Attachment page', WP_CLANWARS_TEXTDOMAIN),
                             'file' => __('Media File', WP_CLANWARS_TEXTDOMAIN),
