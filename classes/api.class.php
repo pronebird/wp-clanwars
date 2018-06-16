@@ -116,16 +116,13 @@ final class API {
         return get_user_meta( $current_user->ID, static::$user_info_usermeta_key, true );
     }
 
-    static function get_auth_status( $access_token = '' ) {
-        $args = array();
+    private static function get_auth_status( $access_token ) {
+        $args = array(
+            'headers' => array(
+                'Authorization' => 'Bearer ' . $access_token
+            )
+        );
 
-        if(!empty($access_token)) {
-            $args = array(
-                'headers' => array(
-                    'Authorization' => 'Bearer ' . $access_token
-                )
-            );
-        }
         return static::api_get( static::$api_url . 'auth/status', $args );
     }
 
