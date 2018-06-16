@@ -107,15 +107,13 @@ class TeamsTable extends \WP_List_Table {
 
     function column_title($item) {
         $output = '';
-        $icon = wp_get_attachment_url($item->logo);
-
-        if($icon !== false) {
-            $output .= '<img src="' . esc_attr($icon) . '" alt="' . esc_attr($item->title) . '" class="icon" />';
-        }
-        else {
-            $output .= '<div class="icon placeholder"></div>';
+        $attachment = wp_get_attachment_image_src($item->logo, array(80, 80));
+        $src = esc_url(WP_CLANWARS_URL . '/images/no-team-logo.png');
+        if (is_array($attachment)) {
+            $src = $attachment[0];
         }
 
+        $output .= '<img src="' . esc_attr($src) . '" alt="' . esc_attr($item->title) . '" class="icon" />';
         $output .= esc_html($item->title);
 
         if($item->home_team) {

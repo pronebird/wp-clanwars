@@ -87,7 +87,7 @@
 
 .widget_clanwars .scores,
 .widget_clanwars .upcoming,
-.widget_clanwars .playing
+.widget_clanwars .live
 {
 	text-align: center;
 	min-width: 20px;
@@ -142,7 +142,7 @@
 	}
 }
 
-.widget_clanwars .playing {
+.widget_clanwars .live {
 	color: #fff;
 	background-color: #6492ac;
 	letter-spacing: 0;

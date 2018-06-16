@@ -174,6 +174,8 @@ SQL;
             tt2.title AS team2_title,
             tt1.country AS team1_country,
             tt2.country AS team2_country,
+            tt1.logo AS team1_logo,
+            tt2.logo AS team2_logo,
             $subquery
 
         FROM `$matches_table` AS t1

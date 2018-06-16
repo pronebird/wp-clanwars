@@ -2274,9 +2274,31 @@ EOT;
         $team1_flag = Utils::get_country_flag($match->team1_country);
         $team2_flag = Utils::get_country_flag($match->team2_country);
 
+        $team1_logo_attachment = wp_get_attachment_image_src($match->team1_logo, array(80, 80));
+        $team2_logo_attachment = wp_get_attachment_image_src($match->team2_logo, array(80, 80));
+
+        if (is_array($team1_logo_attachment)) {
+            list($src, $width, $height, $is_intermediate) = $team1_logo_attachment;
+            $team1_logo = (object) compact('src', 'width', 'height', 'is_intermediate');
+        } else {
+            $team1_logo = false;
+        }
+
+        if (is_array($team2_logo_attachment)) {
+            list($src, $width, $height, $is_intermediate) = $team2_logo_attachment;
+            $team2_logo = (object) compact('src', 'width', 'height', 'is_intermediate');
+        } else {
+            $team2_logo = false;
+        }
+
         $view = new View( 'match_view' );
 
-        $context = compact('match', 'rounds', 'match_status_text', 'team1_flag', 'team2_flag');
+        $context = compact(
+            'match', 'rounds',
+            'match_status_text',
+            'team1_flag', 'team2_flag',
+            'team1_logo', 'team2_logo'
+        );
 
         return $view->render( $context, false );
     }
@@ -2361,7 +2383,7 @@ EOT;
             if($is_upcoming) :
                 $output .= '<div class="upcoming">' . __('Upcoming', WP_CLANWARS_TEXTDOMAIN) . '</div>';
             elseif($is_playing) :
-                $output .= '<div class="playing">' . __('Playing', WP_CLANWARS_TEXTDOMAIN) . '</div>';
+                $output .= '<div class="live">' . __('Live', WP_CLANWARS_TEXTDOMAIN) . '</div>';
             else :
                 $output .= '<div class="scores ' . $wld_class . '">' . sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2) . '</div>';
             endif;

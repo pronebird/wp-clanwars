@@ -191,7 +191,7 @@ class WP_ClanWars_Widget extends WP_Widget {
             $game_icon = wp_get_attachment_url($match->game_icon);
 
             $is_upcoming = $timestamp > $now;
-            $is_playing = ($now > $timestamp && $now < $timestamp + 3600) && ($t1 == 0 && $t2 == 0);
+            $is_playing = ($now > $timestamp && $now < ($timestamp + 3600));
 
             $item_classes = [ 'clanwar-item', 'game-' . $match->game_id ];
 
@@ -204,7 +204,7 @@ class WP_ClanWars_Widget extends WP_Widget {
             <?php if($is_upcoming) : ?>
             <div class="upcoming"><?php _e('Upcoming', WP_CLANWARS_TEXTDOMAIN); ?></div>
             <?php elseif($is_playing) : ?>
-            <div class="playing"><?php _e('Playing', WP_CLANWARS_TEXTDOMAIN); ?></div>
+            <div class="live"><?php _e('Live', WP_CLANWARS_TEXTDOMAIN); ?></div>
             <?php else : ?>
             <div class="scores <?php echo $wld_class; ?>"><?php echo sprintf(__('%d:%d', WP_CLANWARS_TEXTDOMAIN), $t1, $t2); ?></div>
             <?php endif; ?>
