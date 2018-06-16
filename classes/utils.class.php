@@ -142,7 +142,7 @@ class Utils {
         $day = '<input type="text" name="'.$prefix.'[jj]" value="' . $jj . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
         $hour = '<input type="text" name="'.$prefix.'[hh]" value="' . $hh . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
         $minute = '<input type="text" name="'.$prefix.'[mn]" value="' . $mn . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
-        $year = '<input type="text" name="'.$prefix.'[yy]" value="' . $yy . '" size="3" maxlength="4"' . $tab_index_attribute . ' autocomplete="off"  />';
+        $year = '<input type="text" name="'.$prefix.'[yy]" value="' . $yy . '" size="4" maxlength="4"' . $tab_index_attribute . ' autocomplete="off"  />';
 
         printf(before_last_bar(__('%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input', WP_CLANWARS_TEXTDOMAIN)), $month, $day, $hour, $minute, $year);
     }
