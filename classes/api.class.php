@@ -76,6 +76,26 @@ final class API {
         static::set_user_info('');
     }
 
+    static function update_account($account_info) {
+        $update_response = static::api_patch( static::$api_url . 'user', array(
+            'body' => $account_info
+        ) );
+
+        if ( is_wp_error($update_response) ) {
+            return $update_response;
+        }
+
+        $access_token = static::get_access_token();
+        $status = static::get_auth_status($access_token);
+        if ( is_wp_error($status) ) {
+            return $status;
+        }
+
+        static::set_user_info($status);
+
+        return true;
+    }
+
     static function get_login_url($service, $callbackUrl) {
         return static::$api_url . 'auth/' . $service . '?returnTo=' . urlencode($callbackUrl);
     }
