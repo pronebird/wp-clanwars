@@ -202,16 +202,6 @@ class WP_ClanWars {
     }
 
     /**
-     * Plugin deactivation hook
-     *
-     * @return void
-     */
-
-    public function on_deactivate()
-    {
-    }
-
-    /**
      * Plugin uninstallation hook
      */
     public function on_uninstall() {
@@ -2902,7 +2892,6 @@ EOT;
 $wpClanWars = new WP_ClanWars();
 
 register_activation_hook( __FILE__, array(&$wpClanWars, 'on_activate'));
-register_deactivation_hook( __FILE__, array(&$wpClanWars, 'on_deactivate'));
 
 /**
  * Uninstall function
