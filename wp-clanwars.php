@@ -42,6 +42,7 @@ define('WP_CLANWARS_COUNTRIES_TEXTDOMAIN', 'wp-clanwars-countries');
 
 define('WP_CLANWARS_CATEGORY', '_wp_clanwars_category');
 define('WP_CLANWARS_DEFAULTCSS', '_wp_clanwars_defaultcss');
+define('WP_CLANWARS_DBVERSION', '_wp_clanwars_dbversion');
 
 define('WP_CLANWARS_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
 
@@ -102,6 +103,9 @@ class WP_ClanWars {
 
         add_action('widgets_init', array($this, 'on_widgets_init'));
         add_action('init', array($this, 'on_init'));
+
+        // run database migrations when all plugins are loaded
+        add_action('plugins_loaded', array($this, 'maybe_upgrade_database'));
     }
 
     /**
@@ -122,7 +126,6 @@ class WP_ClanWars {
      * @param bool $networkwide - network wide activation on wp multisite
      * @return void
      */
-
     public function on_activate($networkwide = false)
     {
         global $wpdb;
@@ -152,26 +155,37 @@ class WP_ClanWars {
      */
     function activate_single_site()
     {
-        global $wpdb;
+        $this->maybe_upgrade_database();
+    }
 
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    /**
+     * Checks database version and runs schema migration if needed
+     *
+     * @return void
+     */
+    function maybe_upgrade_database() {
+        $installed_dbversion = get_option( WP_CLANWARS_DBVERSION );
 
-        $charset_collate = $wpdb->get_charset_collate();
+        if ( $installed_dbversion !== WP_CLANWARS_VERSION ) {
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-        $dbstruct = array();
-        $dbstruct[] = \WP_Clanwars\Games::schema();
-        $dbstruct[] = \WP_Clanwars\Maps::schema();
-        $dbstruct[] = \WP_Clanwars\Matches::schema();
-        $dbstruct[] = \WP_Clanwars\Rounds::schema();
-        $dbstruct[] = \WP_Clanwars\Teams::schema();
+            $dbstruct = array();
+            $dbstruct[] = \WP_Clanwars\Games::schema();
+            $dbstruct[] = \WP_Clanwars\Maps::schema();
+            $dbstruct[] = \WP_Clanwars\Matches::schema();
+            $dbstruct[] = \WP_Clanwars\Rounds::schema();
+            $dbstruct[] = \WP_Clanwars\Teams::schema();
 
-        add_option(WP_CLANWARS_CATEGORY, -1);
-        add_option(WP_CLANWARS_DEFAULTCSS, true);
+            add_option(WP_CLANWARS_CATEGORY, -1);
+            add_option(WP_CLANWARS_DEFAULTCSS, true);
 
-        $dbstruct = implode("\n", $dbstruct);
+            $dbstruct = implode("\n", $dbstruct);
 
-        // update database
-        dbDelta($dbstruct);
+            // update database
+            dbDelta($dbstruct);
+
+            update_option( WP_CLANWARS_DBVERSION, WP_CLANWARS_VERSION );
+        }
     }
 
     /**
