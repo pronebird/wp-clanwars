@@ -2116,7 +2116,7 @@ EOT;
             for($i = 0; $i < $num_rounds; $i++) {
                 $model = array(
                     'match_id' => $match_id,
-                    'group_n' => abs($round_group),
+                    'group_n' => $round_group,
                     'map_id' => $r['map_id'],
                     'tickets1' => $r['team1'][$i],
                     'tickets2' => $r['team2'][$i]
@@ -2176,7 +2176,7 @@ EOT;
 
         \WP_Clanwars\Matches::update_match( $id, $model );
 
-        $rounds_not_in = array();
+        \WP_Clanwars\Rounds::delete_rounds_by_match( $id );
 
         foreach($scores as $round_group => $r) {
             $num_rounds = sizeof($r['team1']);
@@ -2185,28 +2185,15 @@ EOT;
                 $round_id = $r['round_id'][$i];
                 $model = array(
                     'match_id' => $id,
-                    'group_n' => abs($round_group),
+                    'group_n' => $round_group,
                     'map_id' => $r['map_id'],
                     'tickets1' => $r['team1'][$i],
                     'tickets2' => $r['team2'][$i]
                 );
 
-                if($round_id > 0) {
-                    \WP_Clanwars\Rounds::update_round($round_id, $model);
-
-                    $rounds_not_in[] = $round_id;
-                }
-                else {
-                    $new_round = \WP_Clanwars\Rounds::add_round($model);
-
-                    if($new_round !== false) {
-                        $rounds_not_in[] = $new_round;
-                    }
-                }
+                \WP_Clanwars\Rounds::add_round($model);
             }
         }
-
-        \WP_Clanwars\Rounds::delete_rounds_not_in($id, $rounds_not_in);
 
         \WP_Clanwars\Matches::update_match_post($id, $gallery);
 
