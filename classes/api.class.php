@@ -153,14 +153,10 @@ final class API {
     static function download_game($id, $filename) {
         $zip_url = static::$api_url . 'games/download/' . $id;
 
-        $response = wp_remote_get( $zip_url, array(
-            'timeout' => static::TIMEOUT,
+        $response = wp_remote_get( $zip_url, static::setup_args(array(
             'stream' => true,
-            'filename' => $filename,
-            'headers' => array(
-                'X-Client-Key' => static::get_client_key()
-            )
-        ) );
+            'filename' => $filename
+        ) ) );
 
         if( is_wp_error( $response ) ) {
             return $response;
