@@ -27,6 +27,8 @@ final class API {
 
     private static $client_key_option_key = 'wp-clanwars-server-clientkey';
 
+    private static $client_key_option_key = '_wp-clanwars-server-clientkey';
+
     private static $access_token_usermeta_key = 'wp-clanwars-server-accesstoken';
     private static $user_info_usermeta_key = 'wp-clanwars-server-userinfo';
 
