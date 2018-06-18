@@ -26,7 +26,8 @@ final class API {
     // 15s timeout for API requests
     const TIMEOUT = 15;
 
-    private static $client_key_option_key = 'wp-clanwars-server-clientkey';
+    // private static $api_url = 'http://localhost:3000/api/v1/';
+    private static $api_url = 'https://wp-clanwars.herokuapp.com/api/v1/';
 
     private static $client_key_option_key = '_wp-clanwars-server-clientkey';
 
