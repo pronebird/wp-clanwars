@@ -23,7 +23,8 @@ namespace WP_Clanwars;
 
 final class API {
 
-    private static $api_url = 'http://localhost:3000/api/v1/';
+    // 15s timeout for API requests
+    const TIMEOUT = 15;
 
     private static $client_key_option_key = 'wp-clanwars-server-clientkey';
 
@@ -152,7 +153,7 @@ final class API {
         $zip_url = static::$api_url . 'games/download/' . $id;
 
         $response = wp_remote_get( $zip_url, array(
-            'timeout' => 15,
+            'timeout' => static::TIMEOUT,
             'stream' => true,
             'filename' => $filename,
             'headers' => array(
@@ -215,6 +216,7 @@ final class API {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, static::TIMEOUT);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_USERAGENT, static::get_user_agent());
@@ -335,7 +337,8 @@ final class API {
 
         $base_args = array(
             'user-agent' => static::get_user_agent(),
-            'headers' => $headers
+            'headers' => $headers,
+            'timeout' => static::TIMEOUT
         );
 
         return array_merge($base_args, $args);
