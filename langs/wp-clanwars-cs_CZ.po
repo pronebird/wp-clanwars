@@ -1,0 +1,1111 @@
+# Copyright (C) 2018 WP-ClanWars
+# This file is distributed under the same license as the WP-ClanWars package.
+# Translators:
+# Andrei Mihailov <and@codeispoetry.ru>, 2018
+# Roman Ace Klima <klima.r81@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-ClanWars\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
+"POT-Creation-Date: 2018-06-18 15:38:01+00:00\n"
+"PO-Revision-Date: 2018-06-18 15:38+0000\n"
+"Last-Translator: Andrei Mihailov <and@codeispoetry.ru>\n"
+"Language-Team: Czech (http://www.transifex.com/code-is-poetry/wp-clanwars/language/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: classes/acl.class.php:101
+msgid "Manage matches"
+msgstr "Upravit zápasy"
+
+#: classes/acl.class.php:102
+msgid "Manage games"
+msgstr "Upravit hry"
+
+#: classes/acl.class.php:103
+msgid "Manage teams"
+msgstr "Upravit týmy"
+
+#: classes/api.class.php:166
+msgid "File is not found on server."
+msgstr "Soubor nenalezen."
+
+#: classes/api.class.php:252
+msgid "Authorization required."
+msgstr "Autorizace potřeba"
+
+#: classes/games_table.class.php:58
+msgid "Games per page"
+msgstr ""
+
+#: classes/games_table.class.php:67 classes/maps_table.class.php:69
+#: classes/match_table.class.php:68 classes/teams_table.class.php:68
+#: views/edit_game.php:15 views/edit_map.php:15 views/edit_match.php:59
+#: views/edit_team.php:14 wp-clanwars.php:1098
+msgid "Title"
+msgstr "Název"
+
+#: classes/games_table.class.php:68 views/edit_game.php:22
+msgid "Game tag"
+msgstr "TAG hry"
+
+#: classes/games_table.class.php:92 views/cloud_published_games.php:10
+#: views/import_browse.php:10
+msgid "No games found."
+msgstr "Žádná hra nenalezena."
+
+#: classes/games_table.class.php:131 classes/maps_table.class.php:132
+#: classes/match_table.class.php:163 classes/teams_table.class.php:145
+msgid "Edit"
+msgstr "Upravit"
+
+#: classes/games_table.class.php:132
+msgid "Maps"
+msgstr "Mapy"
+
+#: classes/games_table.class.php:133
+msgid "Export"
+msgstr "Exportovat"
+
+#: classes/games_table.class.php:134 classes/maps_table.class.php:89
+#: classes/maps_table.class.php:133 classes/match_table.class.php:97
+#: classes/match_table.class.php:164 classes/teams_table.class.php:90
+#: classes/teams_table.class.php:146 views/settings.php:47
+#: views/settings.php:122
+msgid "Delete"
+msgstr "Smazat"
+
+#: classes/maps_table.class.php:58
+msgid "Maps per page"
+msgstr ""
+
+#: classes/maps_table.class.php:68 views/edit_map.php:22
+msgid "Screenshot"
+msgstr "Screenshot"
+
+#: classes/maps_table.class.php:94
+msgid "No maps found."
+msgstr ""
+
+#: classes/match_table.class.php:58
+msgid "Matches per page"
+msgstr ""
+
+#: classes/match_table.class.php:69 views/edit_match.php:48
+msgid "Game"
+msgstr "Hra"
+
+#: classes/match_table.class.php:70 views/edit_match.php:95
+msgid "Date"
+msgstr "Datum"
+
+#: classes/match_table.class.php:71
+msgid "Status"
+msgstr ""
+
+#: classes/match_table.class.php:72
+msgid "Team 1"
+msgstr "Tým 1"
+
+#: classes/match_table.class.php:73
+msgid "Team 2"
+msgstr "Tým 2"
+
+#: classes/match_table.class.php:74
+msgid "Tickets"
+msgstr "Tikety"
+
+#: classes/match_table.class.php:102
+msgid "No matches found."
+msgstr ""
+
+#: classes/match_table.class.php:143 wp-clanwars.php:252
+msgid "PCW"
+msgstr "PCW"
+
+#: classes/match_table.class.php:144 wp-clanwars.php:253
+msgid "Official"
+msgstr "Oficiální"
+
+#: classes/match_table.class.php:150
+msgid "%s:%s"
+msgstr "%s:%s"
+
+#: classes/matches.class.php:232
+msgid "%s vs. %s"
+msgstr "%s vs. %s"
+
+#: classes/matches.class.php:235
+msgctxt "match_excerpt"
+msgid "%s vs. %s"
+msgstr "%s vs. %s"
+
+#: classes/matches.class.php:236 wp-clanwars-widget.php:209
+#: wp-clanwars.php:2379
+msgid "%d:%d"
+msgstr "%d:%d"
+
+#: classes/teams_table.class.php:58
+msgid "Teams per page"
+msgstr ""
+
+#: classes/teams_table.class.php:69 views/edit_team.php:21
+#: wp-clanwars.php:1099
+msgid "Country"
+msgstr "Země"
+
+#: classes/teams_table.class.php:95
+msgid "No teams found."
+msgstr ""
+
+#: classes/teams_table.class.php:120
+msgid "Home Team"
+msgstr ""
+
+#: classes/teams_table.class.php:149
+msgid "Set As Home Team"
+msgstr "Nastav jako DOMÁCÍ"
+
+#: classes/utils.class.php:147
+msgid ""
+"%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: "
+"minute input, 5: year input"
+msgstr "%1$s%5$s %2$s @ %3$s : %4$s|1: měsíc, 2: den, 3: hod, 4: min, 5: rok"
+
+#: views/cloud_published_games.php:35
+msgid "Approved"
+msgstr ""
+
+#: views/cloud_published_games.php:37
+msgid "Pending review"
+msgstr ""
+
+#: views/edit_game.php:15 views/edit_map.php:15 views/edit_team.php:14
+msgid "required"
+msgstr "potřeba"
+
+#: views/edit_game.php:25
+msgid "For example: for Left 4 Dead 2 it can be L4D2."
+msgstr "Například: Pro Left 4 Dead 2 lze použít L4D2"
+
+#: views/edit_game.php:30
+msgid "Icon"
+msgstr "Ikona"
+
+#: views/edit_game.php:37
+msgid "Delete Icon"
+msgstr "Smazat Ikonu"
+
+#: views/edit_map.php:29
+msgid "Delete Screenshot"
+msgstr "Smazat Screenshot"
+
+#: views/edit_match.php:30
+msgid "Edit post"
+msgstr "Upravit příspěvek"
+
+#: views/edit_match.php:31
+msgid "View post"
+msgstr "Prohlédnout příspěvek"
+
+#: views/edit_match.php:32
+msgid "%d Comment"
+msgid_plural "%d Comments"
+msgstr[0] "%d komentář"
+msgstr[1] "%d komenty"
+msgstr[2] "%d Comments"
+msgstr[3] "%d Comments"
+
+#: views/edit_match.php:61
+msgid "For example: ESL Winter League"
+msgstr "Například: ESL liga"
+
+#: views/edit_match.php:66
+msgid "Description"
+msgstr "Popis"
+
+#: views/edit_match.php:68
+msgid "Optional: Drop a line or two about match."
+msgstr "Doporučení: Napiš informace o zápasu"
+
+#: views/edit_match.php:73
+msgid "External URL"
+msgstr "Adresa z Internetu"
+
+#: views/edit_match.php:77
+msgid "Enter league or external match URL."
+msgstr "Vlož odkaz nebo název ligy"
+
+#: views/edit_match.php:82
+msgid "Match status"
+msgstr "Výsledek"
+
+#: views/edit_match.php:111
+msgid "vs"
+msgstr "vs"
+
+#: views/edit_match.php:119
+msgid ""
+"or type in the name of the opponent team and it will be automatically "
+"created:"
+msgstr ""
+
+#: views/edit_match.php:121 wp-clanwars.php:888
+msgid "New Team"
+msgstr "Nový Tým"
+
+#: views/edit_match.php:127
+msgid "Add map"
+msgstr "Přidat mapu"
+
+#: views/edit_match.php:135
+msgid "Gallery"
+msgstr "Galerie"
+
+#: views/edit_match.php:139 wp-clanwars.php:2045
+msgid "Add images"
+msgstr "Přidat obrázek"
+
+#: views/edit_match.php:144
+msgid "Gallery size:"
+msgstr "Velikost galerie"
+
+#: views/edit_match.php:148
+msgid "Thumbnail"
+msgstr "Miniatura"
+
+#: views/edit_match.php:149
+msgid "Medium"
+msgstr "Střední"
+
+#: views/edit_match.php:150
+msgid "Large"
+msgstr "Veliký"
+
+#: views/edit_match.php:151
+msgid "Full Size"
+msgstr "Plná velikost"
+
+#: views/edit_match.php:161
+msgid "Columns:"
+msgstr "Sloupce"
+
+#: views/edit_match.php:172
+msgid "Link to: "
+msgstr "Odkaz na:"
+
+#: views/edit_match.php:176
+msgid "Attachment page"
+msgstr "Příloha"
+
+#: views/edit_match.php:177
+msgid "Media File"
+msgstr "Mediální soubor"
+
+#: views/edit_match.php:178 wp-clanwars.php:2716
+msgid "None"
+msgstr "Není"
+
+#: views/edit_team.php:28 wp-clanwars.php:1097
+msgid "Logo"
+msgstr "Logo"
+
+#: views/edit_team.php:35
+msgid "Delete Logo"
+msgstr "Smazat Logo"
+
+#: views/game_table.php:2 wp-clanwars.php:406 wp-clanwars.php:407
+msgid "Games"
+msgstr "Hry"
+
+#: views/game_table.php:4 views/map_table.php:3 views/match_table.php:3
+#: views/team_table.php:3
+msgid "Add New"
+msgstr "Přidat novou"
+
+#: views/import_publish.php:5
+msgid "You can share created games with others."
+msgstr "Lze sdílet vytvořené hry s ostatními."
+
+#: views/import_publish.php:9
+msgid ""
+"Upload may take some time. Please do not refresh browser when in progress."
+msgstr "Nahrávání může trvat nějakou dobu.Prosíme neobnovujte stránku v prohlížeči."
+
+#: views/import_publish.php:18
+msgid "ZIP file"
+msgstr "ZIP soubor"
+
+#: views/import_publish.php:26
+msgid ""
+"I agree that the contents I share will be available to other users free of "
+"charge."
+msgstr ""
+
+#: views/import_publish.php:31
+msgid "Publish Now"
+msgstr "Publikovat nyní"
+
+#: views/import_publish.php:38
+msgid "Please log in first."
+msgstr ""
+
+#: views/import_upload.php:2 views/partials/cloud_nav.php:4
+msgid "Install from ZIP"
+msgstr ""
+
+#: views/import_upload.php:3
+msgid "Back to Cloud"
+msgstr ""
+
+#: views/import_upload.php:5
+msgid ""
+"If you have a game pack in a .zip format, you may install it by uploading it"
+" here."
+msgstr "Pokud máte balíče hry v .ZIP, můžete jej nainstalovat zde."
+
+#: views/import_upload.php:6
+msgid ""
+"Import may take some time. Please do not refresh browser when in progress."
+msgstr "Importování bude chvilku trvat. Prosíme Vás neobnovujte stránku ve vašem prohlížeči."
+
+#: views/import_upload.php:14
+msgid "Install Now"
+msgstr "Instalovat nyní"
+
+#: views/map_table.php:2
+msgid "Maps / %s"
+msgstr "Mapy / %s"
+
+#: views/match_table.php:2 wp-clanwars.php:388 wp-clanwars.php:389
+msgid "Matches"
+msgstr "Zápasy"
+
+#: views/match_view.php:43 wp-clanwars-widget.php:205 wp-clanwars.php:2375
+msgid "Upcoming"
+msgstr "již brzy"
+
+#: views/match_view.php:45 wp-clanwars-widget.php:207 wp-clanwars.php:2377
+msgid "Live"
+msgstr ""
+
+#: views/match_view.php:47
+msgid "Final"
+msgstr ""
+
+#: views/partials/account_header.php:12
+msgid "Log out"
+msgstr ""
+
+#: views/partials/account_header.php:21
+msgid "Log in"
+msgstr ""
+
+#: views/partials/account_header.php:22
+msgid "Log in to vote and share games! More stuff will be added later!"
+msgstr ""
+
+#: views/partials/account_header.php:22
+msgid "Why should I?"
+msgstr ""
+
+#: views/partials/browse_game_item.php:11
+msgid "INSTALLED"
+msgstr "NAINSTALOVÁNO"
+
+#: views/partials/browse_game_item.php:20
+msgid "GET"
+msgstr "Získej"
+
+#: views/partials/browse_game_item.php:52
+msgctxt "Number of ratings"
+msgid "(%d)"
+msgstr "(%d)"
+
+#: views/partials/browse_game_item.php:56
+msgid "Published:"
+msgstr "Vytvořeno:"
+
+#: views/partials/browse_game_item.php:59
+msgctxt "Number of downloads"
+msgid "%d install"
+msgid_plural "%d installs"
+msgstr[0] "%d Instalace"
+msgstr[1] "%d Instalace"
+msgstr[2] "%d Instalací"
+msgstr[3] "%d Instalací"
+
+#: views/partials/browse_games_error.php:1
+msgid "Cannot connect to API."
+msgstr "Nelze se spojit s API."
+
+#: views/partials/browse_games_error.php:2
+msgid "Error: %s"
+msgstr ""
+
+#: views/partials/cloud_nav.php:3 views/partials/login_box.php:5
+#: wp-clanwars.php:415 wp-clanwars.php:416
+msgid "Clanwars Cloud"
+msgstr ""
+
+#: views/partials/cloud_nav.php:12
+msgid "Search Results"
+msgstr "Výsledek hledání"
+
+#: views/partials/cloud_nav.php:15
+msgid "Popular"
+msgstr "Populární"
+
+#: views/partials/cloud_nav.php:17
+msgid "Published"
+msgstr ""
+
+#: views/partials/cloud_nav.php:19
+msgid "Publish"
+msgstr "Publikovat"
+
+#: views/partials/login_box.php:9
+msgid "Log in with Steam"
+msgstr "Přihlásit se pomocí STEAM účtu"
+
+#: views/partials/login_box.php:10
+msgid "Log in with Facebook"
+msgstr "Přihlásit se pomocí Facebooku"
+
+#: views/partials/update_account_box.php:5
+msgid "wp-clanwars-update-cloud-account"
+msgstr ""
+
+#: views/partials/update_account_box.php:19
+msgid "Enter your display name"
+msgstr ""
+
+#: views/settings.php:3 wp-clanwars.php:424 wp-clanwars.php:425
+msgid "Settings"
+msgstr "Nastavení"
+
+#: views/settings.php:12
+msgid "Matches Category"
+msgstr "Kategorie zápasů"
+
+#: views/settings.php:18
+msgid "Enable default styles"
+msgstr "Povolit původní styl"
+
+#: views/settings.php:26
+msgid "Save Changes"
+msgstr "Uložit změny"
+
+#: views/settings.php:32
+msgid "User Access"
+msgstr "Uživatelský přístup"
+
+#: views/settings.php:46 views/settings.php:121
+msgid "Actions"
+msgstr "Akce"
+
+#: views/settings.php:49 views/settings.php:124
+msgid "Apply"
+msgstr "Potvrdit"
+
+#: views/settings.php:73
+msgid "No items found."
+msgstr "Nic nenalezeno."
+
+#: views/settings.php:92
+msgid "Yes"
+msgstr "Ano"
+
+#: views/settings.php:92
+msgid "No"
+msgstr "Ne"
+
+#: views/settings.php:98 wp-clanwars-widget.php:167 wp-clanwars-widget.php:168
+#: wp-clanwars.php:2339 wp-clanwars.php:2340 wp-clanwars.php:2734
+#: wp-clanwars.php:2735
+msgid "All"
+msgstr "Vše"
+
+#: views/settings.php:139
+msgid "Add New User"
+msgstr "Přidat Nového uživatele"
+
+#: views/settings.php:146
+msgid "User"
+msgstr "Uživatel"
+
+#: views/settings.php:151
+msgid "Allow user manage specified games only:"
+msgstr "Povolit uživateli spravovat pouze dané hry:"
+
+#: views/settings.php:157
+msgid ""
+"Users that can manage all games, can also create the new ones.</strong>"
+msgstr ""
+
+#: views/settings.php:161
+msgid "Allow user:"
+msgstr "Povolit uživatele:"
+
+#: views/settings.php:173
+msgid "Add User"
+msgstr "Přidat uživatele"
+
+#: views/setup_games.php:3 views/setup_team.php:3 wp-clanwars.php:696
+msgid "Get started with WP-Clanwars"
+msgstr "Začínáme s WP-Clanwars"
+
+#: views/setup_games.php:7
+msgid "Install games"
+msgstr "Instalovat hry"
+
+#: views/setup_games.php:15
+msgid "Choose one of the options:"
+msgstr "Vyber jednu z možností:"
+
+#: views/setup_games.php:18
+msgid "Upload previously saved game (ZIP file)"
+msgstr "Nahraj předchozí uloženou hru (ZIP)"
+
+#: views/setup_games.php:23
+msgid "Create a new game"
+msgstr "Vytvoř novou hru"
+
+#: views/setup_games.php:24
+msgid ""
+"<i>Not finding your game?</i> You can create your own!<br/>We'll take you to"
+" map editing right away."
+msgstr "<i>Nenašel jsi svoji hru?</i>Vytvoř svou vlastní<br/>"
+
+#: views/setup_games.php:25
+msgid "Type in a new game's name"
+msgstr "Napiš jméno nové hry"
+
+#: views/setup_team.php:4
+msgid "Setup your team"
+msgstr "Nastav svůj tým"
+
+#: views/setup_team.php:12
+msgid "Hey there! Just a couple of things to complete your installation."
+msgstr "Halóó! Ještě pár věcí než bude dokončena instalace."
+
+#: views/setup_team.php:14
+msgid "What is the name of your team?"
+msgstr "Jak se jmenuje tvůj tým ?"
+
+#: views/setup_team.php:16
+msgid "Type in your team's name"
+msgstr "Napiš jméno tvého týmu."
+
+#: views/setup_team.php:19
+msgid "Where is it from?"
+msgstr "Odkud je?"
+
+#: views/team_table.php:2 wp-clanwars.php:397 wp-clanwars.php:398
+msgid "Teams"
+msgstr "Týmy"
+
+#: wp-clanwars-widget.php:44
+msgid "ClanWars widget"
+msgstr "ClanWars widget"
+
+#: wp-clanwars-widget.php:46 wp-clanwars-widget.php:49
+#: wp-clanwars-widget.php:106 wp-clanwars.php:377 wp-clanwars.php:378
+msgid "ClanWars"
+msgstr "Clanové Války"
+
+#: wp-clanwars-widget.php:60
+msgid "Custom"
+msgstr ""
+
+#: wp-clanwars-widget.php:61
+msgid "Show all"
+msgstr "Ukaž vše"
+
+#: wp-clanwars-widget.php:62
+msgid "1 day"
+msgstr ""
+
+#: wp-clanwars-widget.php:63
+msgid "2 days"
+msgstr ""
+
+#: wp-clanwars-widget.php:64
+msgid "3 days"
+msgstr ""
+
+#: wp-clanwars-widget.php:65
+msgid "1 week"
+msgstr "1 týden"
+
+#: wp-clanwars-widget.php:66
+msgid "2 weeks"
+msgstr "2 týdny"
+
+#: wp-clanwars-widget.php:67
+msgid "3 weeks"
+msgstr "3 týdny"
+
+#: wp-clanwars-widget.php:68
+msgid "1 month"
+msgstr "1 měsíc"
+
+#: wp-clanwars-widget.php:69
+msgid "2 months"
+msgstr "2 měsíce"
+
+#: wp-clanwars-widget.php:70
+msgid "3 months"
+msgstr "3 měsíce"
+
+#: wp-clanwars-widget.php:71
+msgid "6 months"
+msgstr "6 měsíců"
+
+#: wp-clanwars-widget.php:72
+msgid "1 year"
+msgstr "1 rok"
+
+#: wp-clanwars-widget.php:269
+msgid "Title:"
+msgstr "Název:"
+
+#: wp-clanwars-widget.php:274
+msgid "Hide title"
+msgstr "Skrýt název"
+
+#: wp-clanwars-widget.php:284
+msgid "Display both teams"
+msgstr ""
+
+#: wp-clanwars-widget.php:294
+msgid "Display game icon"
+msgstr ""
+
+#: wp-clanwars-widget.php:298
+msgid "Show games:"
+msgstr "Zobraz hry:"
+
+#: wp-clanwars-widget.php:304
+msgid "Do not check any game if you want to show all games."
+msgstr "Neoznačuj žádnou hru pokud chceš zobrazit všechny"
+
+#: wp-clanwars-widget.php:307
+msgid "Show matches:"
+msgstr "Zobraz zápasy:"
+
+#: wp-clanwars-widget.php:312
+msgid "Hide matches older than"
+msgstr ""
+
+#: wp-clanwars-widget.php:320
+msgid "hidden"
+msgstr ""
+
+#: wp-clanwars-widget.php:321
+msgid "Custom (days): "
+msgstr ""
+
+#: wp-clanwars.php:451
+msgid "Are you sure you want to delete this map?"
+msgstr "Opravdu chceš smazat tuto mapu?"
+
+#: wp-clanwars.php:452
+msgid "Are you sure you want to delete this game?"
+msgstr "Opravdu chceš smazat tuto hru ?"
+
+#: wp-clanwars.php:453
+msgid "Are you sure you want to delete this team?"
+msgstr "Opravdu chceš smazat tento tým ?"
+
+#: wp-clanwars.php:454
+msgid "Are you sure you want to delete this match?"
+msgstr "Opravdu chceš smazat tento zápas ?"
+
+#: wp-clanwars.php:523
+msgid "Continue"
+msgstr "Pokračuj"
+
+#: wp-clanwars.php:526
+msgid "Get started"
+msgstr "Začínáme"
+
+#: wp-clanwars.php:591 wp-clanwars.php:615 wp-clanwars.php:840
+#: wp-clanwars.php:872 wp-clanwars.php:935 wp-clanwars.php:1041
+#: wp-clanwars.php:1121 wp-clanwars.php:1530 wp-clanwars.php:1696
+#: wp-clanwars.php:1779 wp-clanwars.php:1868 wp-clanwars.php:1903
+#: wp-clanwars.php:2020 wp-clanwars.php:2024 wp-clanwars.php:2055
+#: wp-clanwars.php:2214 wp-clanwars.php:2491 wp-clanwars.php:2512
+#: wp-clanwars.php:2539 wp-clanwars.php:2566 wp-clanwars.php:2605
+msgid "Cheatin&#8217; uh?"
+msgstr "Cheatin&#8217; uh?"
+
+#: wp-clanwars.php:607
+msgid "Please fill in all required fields."
+msgstr "Prosím vyplň požadovaná pole."
+
+#: wp-clanwars.php:639 wp-clanwars.php:2581 wp-clanwars.php:2596
+msgid "Imported game."
+msgstr "Importované hry."
+
+#: wp-clanwars.php:643 wp-clanwars.php:2585 wp-clanwars.php:2630
+msgid "Failed to upload file."
+msgstr "Chyna při nahrávání souboru."
+
+#: wp-clanwars.php:658
+msgid "Failed to create a game."
+msgstr "Chyba při vytváření hry."
+
+#: wp-clanwars.php:660
+msgid "Created a game."
+msgstr "Hra vytvořena."
+
+#: wp-clanwars.php:667
+msgid "Please fill in the game name."
+msgstr "Prosím vyplň jméno hry."
+
+#: wp-clanwars.php:764
+msgid ""
+"The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
+"<code>php.ini</code>."
+msgstr "Nahraný soubor je příliš veliký"
+
+#: wp-clanwars.php:765
+msgid ""
+"The uploaded file exceeds the <em>MAX_FILE_SIZE</em> directive that was "
+"specified in the HTML form."
+msgstr "Nahraný soubor je příliš veliký."
+
+#: wp-clanwars.php:766
+msgid "The uploaded file was only partially uploaded."
+msgstr "Nahraný soubor se uložil jen z části."
+
+#: wp-clanwars.php:767
+msgid "No file was uploaded."
+msgstr "Nic nebylo nahráno."
+
+#: wp-clanwars.php:768
+msgid "Missing a temporary folder."
+msgstr "Chybí dočasný adresář."
+
+#: wp-clanwars.php:769
+msgid "Failed to write file to disk."
+msgstr "Chyba při zápisu na disk."
+
+#: wp-clanwars.php:770
+msgid "File upload stopped by extension."
+msgstr "Nahrávání bylo přerušeno."
+
+#: wp-clanwars.php:771
+msgid "File type does not meet security guidelines. Try another."
+msgstr "Typ souboru neodpovídá požadavkům."
+
+#: wp-clanwars.php:785
+msgid "Unknown upload error: %d"
+msgstr "Neznámá chyba při nahrávání: %d"
+
+#: wp-clanwars.php:826
+msgid "Failed to save attachment in database."
+msgstr "Chyba při ukládání přílohy."
+
+#: wp-clanwars.php:859 wp-clanwars.php:1050
+msgid "Failed to delete a team. Error: %s"
+msgstr "Mazání týmu. Chyba: %s"
+
+#: wp-clanwars.php:862 wp-clanwars.php:1053
+msgid "Deleted %d team."
+msgid_plural "Deleted %d teams."
+msgstr[0] "Smazán %d tým"
+msgstr[1] "Smazány %d tým"
+msgstr[2] "Samzáno %d týmů"
+msgstr[3] "Samzáno %d týmů"
+
+#: wp-clanwars.php:888
+msgid "Add Team"
+msgstr "Přidat tým"
+
+#: wp-clanwars.php:895
+msgid "Edit Team"
+msgstr "Upravit tým"
+
+#: wp-clanwars.php:895
+msgid "Update Team"
+msgstr "Doplnit tým"
+
+#: wp-clanwars.php:970 wp-clanwars.php:1008
+msgid "Team title is a required field."
+msgstr "Název týmu je potřeba."
+
+#: wp-clanwars.php:989
+msgid "Added a new team."
+msgstr "Nový tým přidán."
+
+#: wp-clanwars.php:994
+msgid "Failed to add a team."
+msgstr "Chyba při přidávání nového týmu."
+
+#: wp-clanwars.php:1027
+msgid "Updated a team."
+msgstr "Tým doplněn."
+
+#: wp-clanwars.php:1033
+msgid "Failed to update a team."
+msgstr "Chyba při doplňování týmu."
+
+#: wp-clanwars.php:1082 wp-clanwars.php:2472
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: wp-clanwars.php:1083 wp-clanwars.php:2473
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: wp-clanwars.php:1088 wp-clanwars.php:2328
+msgid "Displaying %s&#8211;%s of %s"
+msgstr "Zobrazeno %s&#8211;%s z %s"
+
+#: wp-clanwars.php:1145
+msgid "Failed to delete games. Error: %s"
+msgstr "Mazání hry. Chyba: %s"
+
+#: wp-clanwars.php:1148
+msgid "Deleted %d game."
+msgid_plural "Deleted %d games."
+msgstr[0] "Smazána %d hra."
+msgstr[1] "Smazány %d hry."
+msgstr[2] "Smazáno %d her."
+msgstr[3] "Smazáno %d her."
+
+#: wp-clanwars.php:1393
+msgid "Unable to unzip file: %s"
+msgstr "Nelze rozbalit soubor: %s"
+
+#: wp-clanwars.php:1413
+msgid "Metadata file is not found in ZIP."
+msgstr ""
+
+#: wp-clanwars.php:1420 wp-clanwars.php:1449
+msgid "Corrupted or missing contents from ZIP file."
+msgstr "Poškozený nebo chybějící obsah."
+
+#: wp-clanwars.php:1440
+msgid ""
+"Unsupported document version (%d). The current supported version is (%d)"
+msgstr ""
+
+#: wp-clanwars.php:1469
+msgid "Failed to add game."
+msgstr "Chyba při přidávání hry."
+
+#: wp-clanwars.php:1489
+msgid "New Game"
+msgstr "Nová hra"
+
+#: wp-clanwars.php:1489
+msgid "Add Game"
+msgstr "Přidat hru"
+
+#: wp-clanwars.php:1496
+msgid "Edit Game"
+msgstr "Upravit hru"
+
+#: wp-clanwars.php:1496
+msgid "Update Game"
+msgstr "Doplnit hru"
+
+#: wp-clanwars.php:1566 wp-clanwars.php:1599
+msgid "Game title is a required field."
+msgstr "Název hry je potřeba."
+
+#: wp-clanwars.php:1581
+msgid "Added a new game."
+msgstr "Nová hra přidána."
+
+#: wp-clanwars.php:1586
+msgid "Failed to add a game."
+msgstr "Chyba při přidávání hry."
+
+#: wp-clanwars.php:1618
+msgid "Updated a game."
+msgstr "Hra doplněna."
+
+#: wp-clanwars.php:1623
+msgid "Failed to update a game."
+msgstr "Chyba při doplňování hry."
+
+#: wp-clanwars.php:1633 wp-clanwars.php:1665
+msgid "Map title is a required field."
+msgstr "Název mapy je potřeba."
+
+#: wp-clanwars.php:1648
+msgid "Added a map."
+msgstr "Mapa přidána."
+
+#: wp-clanwars.php:1653
+msgid "Failed to add a map."
+msgstr "Chyba při přidávání mapy."
+
+#: wp-clanwars.php:1684
+msgid "Updated a map."
+msgstr "Mapa doplněna."
+
+#: wp-clanwars.php:1688
+msgid "Failed to update a map."
+msgstr "Chyba při doplňování mapy."
+
+#: wp-clanwars.php:1705 wp-clanwars.php:1797
+msgid "Failed to delete maps. Error: %s"
+msgstr "Mazání mapy. Chyba: %s"
+
+#: wp-clanwars.php:1708 wp-clanwars.php:1800
+msgid "Deleted %d map."
+msgid_plural "Deleted %d maps."
+msgstr[0] "Smazána %d mapa."
+msgstr[1] "Smazány %d mapy."
+msgstr[2] "Smazáno %d map."
+msgstr[3] "Smazáno %d map."
+
+#: wp-clanwars.php:1826
+msgid "Add Map"
+msgstr "Přidat mapu"
+
+#: wp-clanwars.php:1833
+msgid "Edit Map"
+msgstr "Upravit mapu"
+
+#: wp-clanwars.php:1833
+msgid "Update Map"
+msgstr "Upravit mapu"
+
+#: wp-clanwars.php:1878 wp-clanwars.php:2223
+msgid "Failed to delete matches. Error: %s"
+msgstr "Mazání zápasů. Chyba: %s"
+
+#: wp-clanwars.php:1881 wp-clanwars.php:2226
+msgid "Deleted %d match."
+msgid_plural "Deleted %d matches."
+msgstr[0] "Smazán %d zápas."
+msgstr[1] "Smazány %d zápasy."
+msgstr[2] "Smazáno %d zápasů."
+msgstr[3] "Smazáno %d zápasů."
+
+#: wp-clanwars.php:1890
+msgid "Add Match"
+msgstr "Přidat zápas"
+
+#: wp-clanwars.php:1897
+msgid "Edit Match"
+msgstr "Upravit zápas"
+
+#: wp-clanwars.php:1897
+msgid "Update Match"
+msgstr "Doplnit zápas"
+
+#: wp-clanwars.php:2011
+msgid "Add match"
+msgstr ""
+
+#: wp-clanwars.php:2014
+msgid "Edit match"
+msgstr ""
+
+#: wp-clanwars.php:2042
+msgid "Add Round"
+msgstr "Přidat kolo"
+
+#: wp-clanwars.php:2043
+msgid "Exclude map from match"
+msgstr "Vyjmout mapy ze zápasu"
+
+#: wp-clanwars.php:2044
+msgid "Remove round"
+msgstr "Odebrat kolo"
+
+#: wp-clanwars.php:2046
+msgid "Are you sure you want to delete this screenshot?"
+msgstr "Opravdu chceš smazat tento screenshot ?"
+
+#: wp-clanwars.php:2113
+msgid "Failed to add a match."
+msgstr "Chyba při přidávání zápasu."
+
+#: wp-clanwars.php:2135
+msgid "Added a match."
+msgstr "Zápas přidán."
+
+#: wp-clanwars.php:2204
+msgid "Updated a match."
+msgstr "Zápas doplněn."
+
+#: wp-clanwars.php:2322
+msgid "&larr;"
+msgstr "&larr;"
+
+#: wp-clanwars.php:2323
+msgid "&rarr;"
+msgstr "&rarr;"
+
+#: wp-clanwars.php:2505 wp-clanwars.php:2532 wp-clanwars.php:2559
+msgid "Settings saved."
+msgstr "Nastavení uloženo."
+
+#: wp-clanwars.php:2622
+msgid ""
+"The game has been published and will be publicly available shortly after "
+"review."
+msgstr ""
+
+#: wp-clanwars.php:2626
+msgid "You must agree to the licensing terms."
+msgstr "Musíš souhlasit s podmínkami."
+
+#: wp-clanwars.php:2647
+msgid "Failed to log in: %s"
+msgstr ""
+
+#: wp-clanwars.php:2650
+msgid "Logged in as %s."
+msgstr ""
+
+#: wp-clanwars.php:2677
+msgid "Failed to update the account info: %s"
+msgstr ""
+
+#: wp-clanwars.php:2679
+msgid "Updated account."
+msgstr ""
+
+#: wp-clanwars.php:2709
+msgid "User Login"
+msgstr "Přihlášení uživatele"
+
+#: wp-clanwars.php:2710
+msgid "Permissions"
+msgstr "Povolení"
+
+#. Plugin Name of the plugin/theme
+msgid "WP-ClanWars"
+msgstr "WP-ClanWars"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/pronebird/wp-clanwars"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Content manager for e-sports teams and communities"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Andrej Mihajlov"
+msgstr "Andrej Mihajlov"
+
+#. Author URI of the plugin/theme
+msgid "http://www.codeispoetry.ru/"
+msgstr "http://www.codeispoetry.ru/"
+
+#. Tags of the plugin/theme
+msgid "esport, clanwar, team, clan, game, gaming, sport, match"
+msgstr ""

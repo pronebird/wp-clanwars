@@ -23,32 +23,26 @@ namespace WP_Clanwars;
 
 class Games {
 
-	/**
-	 * Get a database table
-	 * @return String
-	 */
-	static function table() {
-		static $table = null;
-		global $wpdb;
+    /**
+     * Get a database table
+     * @return String
+     */
+    static function table() {
+        global $wpdb;
+        return $wpdb->prefix . 'cw_games';
+    }
 
-		if($table === null) {
-			$table = $wpdb->prefix . 'cw_games';
-		}
+    /**
+     * Get a database schema SQL
+     * @return String
+     */
+    static function schema() {
+        global $wpdb;
 
-		return $table;
-	}
+        $table = self::table();
+        $charset_collate = $wpdb->get_charset_collate();
 
-	/**
-	 * Get a database schema SQL
-	 * @return String
-	 */
-	static function schema() {
-		global $wpdb;
-
-		$table = self::table();
-		$charset_collate = $wpdb->get_charset_collate();
-
-		$schema = "
+        $schema = "
 
 CREATE TABLE $table (
  id int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -65,113 +59,109 @@ CREATE TABLE $table (
 
 ";
 
-		return trim($schema);
-	}
+        return trim($schema);
+    }
 
-	static function get_game($options) {
-		global $wpdb;
+    static function get_game($options) {
+        global $wpdb;
 
-		$defaults = array(
-			'id' => false,
-			'limit' => 0,
-			'offset' => 0,
-			'orderby' => 'id',
-			'order' => 'ASC'
-		);
+        $defaults = array(
+            'id' => false,
+            'limit' => 0,
+            'offset' => 0,
+            'orderby' => 'id',
+            'order' => 'ASC'
+        );
 
-		extract( \WP_Clanwars\Utils::extract_args($options, $defaults) );
+        extract( \WP_Clanwars\Utils::extract_args($options, $defaults) );
 
-		$where_query = '';
-		$limit_query = '';
-		$order_query = '';
+        $where_query = '';
+        $limit_query = '';
+        $order_query = '';
 
-		$order = strtolower($order);
-		if($order != 'asc' && $order != 'desc') {
-			$order = 'asc';
-		}
+        $order = strtolower($order);
+        if($order != 'asc' && $order != 'desc') {
+            $order = 'asc';
+        }
 
-		$order_query = "ORDER BY `$orderby` $order";
+        $order_query = "ORDER BY `$orderby` $order";
 
-		if($id != 'all' && $id !== false) {
-			if(!is_array($id)) {
-				$id = array($id);
-			}
-			$id = array_map('intval', $id);
-			$where_query[] = 'id IN (' . implode(', ', $id) . ')';
-		}
+        if($id != 'all' && $id !== false) {
+            if(!is_array($id)) {
+                $id = array($id);
+            }
+            $id = array_map('intval', $id);
+            $where_query = 'WHERE id IN (' . implode(', ', $id) . ')';
+        }
 
-		if($limit > 0) {
-			$limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
-		}
+        if($limit > 0) {
+            $limit_query = $wpdb->prepare('LIMIT %d, %d', $offset, $limit);
+        }
 
-		if(!empty($where_query)) {
-			$where_query = 'WHERE ' . implode(' AND ', $where_query);
-		}
-
-		$games_table = static::table();
+        $games_table = static::table();
 
 $query = <<<SQL
 
-	SELECT *
-	FROM `$games_table` 
-	$where_query
-	$order_query
-	$limit_query
+    SELECT *
+    FROM `$games_table`
+    $where_query
+    $order_query
+    $limit_query
 
 SQL;
 
-		return \WP_Clanwars\DB::get_results( $query );
-	}
+        return \WP_Clanwars\DB::get_results( $query );
+    }
 
-	static function add_game($options) {
-		global $wpdb;
+    static function add_game($options) {
+        global $wpdb;
 
-		$defaults = array('title' => '', 'abbr' => '', 'icon' => 0, 'store_id' => '');
-		$data = \WP_Clanwars\Utils::extract_args($options, $defaults);
+        $defaults = array('title' => '', 'abbr' => '', 'icon' => 0, 'store_id' => '');
+        $data = \WP_Clanwars\Utils::extract_args($options, $defaults);
 
-		if( $wpdb->insert( self::table(), $data, array('%s', '%s', '%d', '%s') ) ) {
-			return $wpdb->insert_id;
-		}
+        if( $wpdb->insert( self::table(), $data, array('%s', '%s', '%d', '%s') ) ) {
+            return $wpdb->insert_id;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	static function update_game($id, $options) {
-		global $wpdb;
+    static function update_game($id, $options) {
+        global $wpdb;
 
-		$fields = array('title' => '%s', 'abbr' => '%s', 'icon' => '%d');
-		$data = wp_parse_args($options, array());
+        $fields = array('title' => '%s', 'abbr' => '%s', 'icon' => '%d');
+        $data = wp_parse_args($options, array());
 
-		$update_data = array();
-		$update_mask = array();
+        $update_data = array();
+        $update_mask = array();
 
-		foreach($fields as $fld => $mask) {
-			if(isset($data[$fld])) {
-				$update_data[$fld] = $data[$fld];
-				$update_mask[] = $mask;
-			}
-		}
+        foreach($fields as $fld => $mask) {
+            if(isset($data[$fld])) {
+                $update_data[$fld] = $data[$fld];
+                $update_mask[] = $mask;
+            }
+        }
 
-		return $wpdb->update(self::table(), $update_data, array('id' => $id), $update_mask, array('%d'));
-	}
+        return $wpdb->update(self::table(), $update_data, array('id' => $id), $update_mask, array('%d'));
+    }
 
-	static function delete_game($id) {
-		global $wpdb;
-		
-		$table = self::table();
+    static function delete_game($id) {
+        global $wpdb;
 
-		if(!is_array($id)) {
-			$id = array($id);
-		}
+        $table = self::table();
 
-		$id = array_map('intval', $id);
+        if(!is_array($id)) {
+            $id = array($id);
+        }
 
-		\WP_Clanwars\Maps::delete_map_by_game($id);
-		\WP_Clanwars\Matches::delete_match_by_game($id);
+        $id = array_map('intval', $id);
 
-		$id_list = implode(',', $id);
-		return $wpdb->query( "DELETE FROM `$table` WHERE id IN($id_list)" );
-	}
+        \WP_Clanwars\Maps::delete_map_by_game($id);
+        \WP_Clanwars\Matches::delete_match_by_game($id);
+
+        $id_list = implode(',', $id);
+        return $wpdb->query( "DELETE FROM `$table` WHERE id IN($id_list)" );
+    }
 
 };
 

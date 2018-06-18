@@ -11,14 +11,14 @@
             <button type="button" class="button wp-clanwars-install-button" disabled="disabled"><?php _e( 'INSTALLED', WP_CLANWARS_TEXTDOMAIN ); ?></button>
         <?php else : ?>
             <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
-            
+
             <input type="hidden" name="action" value="<?php esc_attr_e( $install_action ); ?>" />
             <input type="hidden" name="remote_id" value="<?php esc_attr_e( $game->_id ); ?>" />
 
             <?php wp_nonce_field( $install_action ); ?>
 
             <button type="submit" class="button wp-clanwars-install-button" data-text-toggle="<?php esc_attr_e( __( 'INSTALL NOW', WP_CLANWARS_TEXTDOMAIN ) ); ?>"><?php _e( 'GET', WP_CLANWARS_TEXTDOMAIN ); ?></button>
-            
+
             </form>
         <?php endif; ?>
         </div>
@@ -38,7 +38,7 @@
             <?php
             for($i = 1; $i <= 5; $i++) :
                 $star_class = 'empty';
-                
+
                 if( $game->rating >= $i ) {
                     $star_class = 'full';
                 }
@@ -50,10 +50,11 @@
             <?php endfor; ?>
         </div>
         <span class="num-ratings"><?php echo sprintf( _x('(%d)', 'Number of ratings', WP_CLANWARS_TEXTDOMAIN), $game->votes ); ?></span>
+        <div class="spinner"></div>
     </div>
     <div class="wp-clanwars-cloud-item-column-published">
         <strong><?php _e('Published:', WP_CLANWARS_TEXTDOMAIN); ?></strong>
-        <span><?php esc_html_e( mysql2date(get_option('date_format'), $game->updatedAt, true) ); ?></span>
+        <span><?php esc_html_e( mysql2date(get_option('date_format'), $game->createdAt, true) ); ?></span>
     </div>
     <div class="wp-clanwars-cloud-item-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), $game->downloads ); ?></div>
     <div class="wp-clanwars-cloud-item-column-author">

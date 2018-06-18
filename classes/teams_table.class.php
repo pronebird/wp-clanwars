@@ -65,7 +65,6 @@ class TeamsTable extends \WP_List_Table {
     function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />',
-            'logo' => __('Logo', WP_CLANWARS_TEXTDOMAIN),
             'title' => __('Title', WP_CLANWARS_TEXTDOMAIN),
             'country' => __('Country', WP_CLANWARS_TEXTDOMAIN)
         );
@@ -74,7 +73,7 @@ class TeamsTable extends \WP_List_Table {
 
     function get_sortable_columns() {
         $sortable_columns = array(
-            'title' => 'title', 
+            'title' => 'title',
             'country' => 'country'
         );
         return $sortable_columns;
@@ -106,26 +105,19 @@ class TeamsTable extends \WP_List_Table {
         }
     }
 
-    function column_logo($item) {
-        $output = '';
-
-        $icon = wp_get_attachment_url($item->logo);
-
-        if($icon !== false) {
-            $output .= '<img src="' . esc_attr($icon) . '" alt="' . esc_attr($item->title) . '" class="icon" /> ';
-        }
-        else {
-            $output .= '<div class="icon placeholder"></div>';
-        }
-
-        return $output;
-    }
-
     function column_title($item) {
-        $output = esc_html($item->title);
+        $output = '';
+        $attachment = wp_get_attachment_image_src($item->logo, array(80, 80));
+        $src = esc_url(WP_CLANWARS_URL . '/images/no-team-logo.png');
+        if (is_array($attachment)) {
+            $src = $attachment[0];
+        }
+
+        $output .= '<img src="' . esc_attr($src) . '" alt="' . esc_attr($item->title) . '" class="icon" />';
+        $output .= esc_html($item->title);
 
         if($item->home_team) {
-            $output .= ' <strong>' . __('(Home Team)', WP_CLANWARS_TEXTDOMAIN) . '</strong>';
+            $output .= ' <span class="home-team">' . __('Home Team', WP_CLANWARS_TEXTDOMAIN) . '</span>';
         }
 
         return $output;
@@ -171,16 +163,16 @@ class TeamsTable extends \WP_List_Table {
         $limit = $per_page;
 
         $args = array(
-            'id' => 'all', 
-            'order' => $order, 
-            'orderby' => $orderby, 
+            'id' => 'all',
             'order' => $order,
-            'limit' => $limit, 
+            'orderby' => $orderby,
+            'order' => $order,
+            'limit' => $limit,
             'offset' => ($limit * ($current_page-1))
         );
 
         $teams = \WP_Clanwars\Teams::get_team($args);
-        
+
         $pagination = $teams->get_pagination();
 
         $this->set_pagination_args(array(

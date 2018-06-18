@@ -61,7 +61,7 @@
                             </div>\n\
                             <br class="clear"/>\n\
                         </div>');
-            
+
             this._mapElement
                 .on('click', '.remove-matchmap', function (evt) {
                     self.remove();
@@ -74,7 +74,7 @@
                 });
 
             this._mapElement.find('.select2').select2();
-            
+
             this._mapsContainer.append(this._mapElement);
 
             this._getMapList();
@@ -132,7 +132,7 @@
             if(self._mapID > 0) {
                 select.find('option[value=' + self._mapID + ']')
                     .attr('selected', 'selected').trigger('change');
-            } 
+            }
             else {
                 select.find('option:first').trigger('change');
             }
@@ -146,7 +146,7 @@
         remove: function () {
             this._mapElement.remove();
         },
-        
+
         /**
          * Remove a round.
          * @param {String} id
@@ -174,18 +174,18 @@
 
             var x = ++this._roundID;
             var n = $('<div class="round">\n\
-                            <input type="text" name="scores[' + this._id + '][team1][]" class="small-text" value="0" />\n\
-                            <input type="text" name="scores[' + this._id + '][team2][]" class="small-text" value="0" />\n\
-                            <input type="hidden" name="scores[' + this._id + '][round_id][]" value="' + round_id + '" />\n\
-                            <a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><span class="dashicons dashicons-trash"></span></a>\n\
-                        </div>');
+                        <input type="text" name="scores[' + this._id + '][team1][]" class="small-text" value="0" autocomplete="off" />\n\
+                        <input type="text" name="scores[' + this._id + '][team2][]" class="small-text" value="0" autocomplete="off" />\n\
+                        <input type="hidden" name="scores[' + this._id + '][round_id][]" value="' + round_id + '" />\n\
+                        <a href="#" title="' + wpCWL10n.removeRound + '" class="remove"><span class="dashicons dashicons-trash"></span></a>\n\
+                    </div>');
             var i = n.find('input');
 
             i.eq(0).val(score1);
             i.eq(1).val(score2);
 
             n.insertBefore(this._mapElement.find('.add-round'));
-            
+
             this._rounds[x] = n;
 
             n.find('.remove').click(function (e) {
@@ -212,7 +212,7 @@
         _init: function () {
             var self = this;
 
-            this._last_id = userSettings.time * -1;
+            this._last_id = 0;
             this._matchSite = $('#matchsite');
             this._maps = {};
 
@@ -243,14 +243,11 @@
          * @param {String} field_id
          * @param {map_id} map_id
          */
-        addMap: function (field_id, map_id) {
-            if(typeof(field_id) === 'undefined') {
-                field_id = --this._last_id;
-            }
-
+        addMap: function (map_id) {
+            var field_id = this._last_id++;
             var game_id = $('#game_id').val();
             var map = new MatchMap(field_id, game_id, map_id);
-            
+
             this._maps[field_id] = map;
 
             return map;

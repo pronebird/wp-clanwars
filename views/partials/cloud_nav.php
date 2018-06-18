@@ -1,6 +1,8 @@
 <div class="wp-clanwars-clearfix">
     <?php $partial('partials/account_header', compact('cloud_account', 'logged_into_cloud')); ?>
-    <h2><?php _e('Clanwars Cloud', WP_CLANWARS_TEXTDOMAIN); ?> <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-cloud&tab=upload' ); ?>" class="upload add-new-h2"><?php _e('Install from ZIP', WP_CLANWARS_TEXTDOMAIN); ?></a></h2>
+    <h1 class="wp-heading-inline"><?php _e('Clanwars Cloud', WP_CLANWARS_TEXTDOMAIN); ?></h1>
+    <a href="<?php echo admin_url( 'admin.php?page=wp-clanwars-cloud&tab=upload' ); ?>" class="page-title-action"><?php _e('Install from ZIP', WP_CLANWARS_TEXTDOMAIN); ?></a>
+    <hr class="wp-header-end" />
 </div>
 
 <div class="wp-filter">
@@ -11,7 +13,11 @@
         <?php endif; ?>
 
             <a href="<?php echo admin_url('admin.php?page=wp-clanwars-cloud'); ?>"<?php if($active_tab == 'popular') : ?> class="current"<?php endif; ?>><?php _e( 'Popular', WP_CLANWARS_TEXTDOMAIN ); ?></a>
+            <?php if($logged_into_cloud) : ?>
+            <a href="<?php echo admin_url('admin.php?page=wp-clanwars-cloud&tab=published'); ?>"<?php if($active_tab == 'published') : ?> class="current"<?php endif; ?>><?php _e( 'Published', WP_CLANWARS_TEXTDOMAIN ); ?></a>
+            <?php endif; ?>
             <a href="<?php echo admin_url('admin.php?page=wp-clanwars-cloud&tab=publish'); ?>"<?php if($active_tab == 'publish') : ?> class="current"<?php endif; ?>><?php _e( 'Publish', WP_CLANWARS_TEXTDOMAIN ); ?></a>
+
         </li>
     </ul>
     <form class="search-form" method="get" action="<?php echo admin_url( 'admin.php' ); ?>">

@@ -23,192 +23,211 @@ namespace WP_Clanwars;
 
 class Utils {
 
-	static function get_list_table_action() {
-	    if(isset($_REQUEST['action']) && (int)$_REQUEST['action'] !== -1) {
-	        return $_REQUEST['action'];
-	    }
-	    
-	    if(isset($_REQUEST['action2']) && (int)$_REQUEST['action2'] !== -1) {
-	        return $_REQUEST['action2'];
-	    }
+    static function create_uuid() {
+        return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+                mt_rand( 0, 0xffff ),
+                mt_rand( 0, 0x0C2f ) | 0x4000,
+                mt_rand( 0, 0x3fff ) | 0x8000,
+                mt_rand( 0, 0x2Aff ), mt_rand( 0, 0xffD3 ), mt_rand( 0, 0xff4B )
+        );
+    }
 
-	    return false;
-	}
+    static function get_wpmu_sites() {
+        global $wpdb;
+        if(function_exists('get_sites')) { // WP 4.6+
+            return get_sites();
+        } else {
+            return $wpdb->get_results("SELECT * FROM $wpdb->blogs");
+        }
+    }
 
-	/**
-	 * Parse arguments and restrict a list of values to keys defined in defaults
-	 *
-	 * @param array|string $args Input values
-	 * @param array $defaults Array of default values
-	 * @return array Merged array. Same behaviour as wp_parse_args except it generates array which only consists of keys from $defaults array
-	 */
-	static function extract_args($args, $defaults) {
-		$options = wp_parse_args($args, $defaults);
-		$result = array();
+    static function get_list_table_action() {
+        if(isset($_REQUEST['action']) && (int)$_REQUEST['action'] !== -1) {
+            return $_REQUEST['action'];
+        }
 
-		if(is_array($defaults)) {
-			foreach(array_keys($defaults) as $key) {
-				$result[$key] = $options[$key];
-			}
-		}
+        if(isset($_REQUEST['action2']) && (int)$_REQUEST['action2'] !== -1) {
+            return $_REQUEST['action2'];
+        }
 
-		return $result;
-	}
+        return false;
+    }
 
-	/**
-	 * Detect whether POST request was sent to server.
-	 * @return boolean true if POST request, otherwise false.
-	 */
-	static function is_post() {
-		return 'POST' == $_SERVER['REQUEST_METHOD'];
-	}
+    /**
+     * Parse arguments and restrict a list of values to keys defined in defaults
+     *
+     * @param array|string $args Input values
+     * @param array $defaults Array of default values
+     * @return array Merged array. Same behaviour as wp_parse_args except it generates array which only consists of keys from $defaults array
+     */
+    static function extract_args($args, $defaults) {
+        $options = wp_parse_args($args, $defaults);
+        $result = array();
 
-	static function current_time_fixed( $type, $gmt = 0 ) {
-		$t = ( $gmt ) ? gmdate( 'Y-m-d H:i:s' ) : gmdate( 'Y-m-d H:i:s', ( time() + ( get_option( 'gmt_offset' ) * 3600 ) ) );
-		switch ( $type ) {
-			case 'mysql':
-				return $t;
-				break;
-			case 'timestamp':
-				return strtotime($t);
-				break;
-		}
-	}
+        if(is_array($defaults)) {
+            foreach(array_keys($defaults) as $key) {
+                $result[$key] = $options[$key];
+            }
+        }
 
-	static function all_countries() {
-		static $countries = null;
-		if($countries === null) {
-			@include( realpath(dirname(__FILE__) . '/../countries.php') );
-		}
-		return $countries;
-	}
+        return $result;
+    }
 
-	static function html_date_helper( $prefix, $time = 0, $tab_index = 0, $select_class = '' )
-	{
-		global $wp_locale;
+    /**
+     * Detect whether POST request was sent to server.
+     * @return boolean true if POST request, otherwise false.
+     */
+    static function is_post() {
+        return 'POST' == $_SERVER['REQUEST_METHOD'];
+    }
 
-		$tab_index_attribute = '';
-		$tab_index = (int)$tab_index;
-		if( $tab_index > 0 ) {
-			$tab_index_attribute = " tabindex=\"$tab_index\"";
-		}
+    static function current_time_fixed( $type, $gmt = 0 ) {
+        $t = ( $gmt ) ? gmdate( 'Y-m-d H:i:s' ) : gmdate( 'Y-m-d H:i:s', ( time() + ( get_option( 'gmt_offset' ) * 3600 ) ) );
+        switch ( $type ) {
+            case 'mysql':
+                return $t;
+                break;
+            case 'timestamp':
+                return strtotime($t);
+                break;
+        }
+    }
 
-		$select_class_attribute = '';
-		if( !empty($select_class) ) {
-			$select_class_attribute = ' class="' . esc_attr($select_class) . '"';
-		}
+    static function all_countries() {
+        static $countries = null;
+        if($countries === null) {
+            @include( realpath(dirname(__FILE__) . '/../countries.php') );
+        }
+        return $countries;
+    }
 
-		if($time == 0) {
-			$time_adj = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
-		}
-		else {
-			$time_adj = $time;
-		}
+    static function html_date_helper( $prefix, $time = 0, $tab_index = 0, $select_class = '' )
+    {
+        global $wp_locale;
 
-		$jj = date( 'd', $time_adj );
-		$mm = date( 'm', $time_adj );
-		$hh = date( 'H', $time_adj );
-		$mn = date( 'i', $time_adj );
-		$yy = date( 'Y', $time_adj );
+        $tab_index_attribute = '';
+        $tab_index = (int)$tab_index;
+        if( $tab_index > 0 ) {
+            $tab_index_attribute = " tabindex=\"$tab_index\"";
+        }
 
-		$month = "<select name=\"{$prefix}[mm]\"$select_class_attribute$tab_index_attribute>\n";
-		for ( $i = 1; $i < 13; $i = $i +1 ) {
-				$month .= "\t\t\t" . '<option value="' . zeroise($i, 2) . '"';
-				if ( $i == $mm )
-						$month .= ' selected="selected"';
-				$month .= '>' . $wp_locale->get_month( $i ) . "</option>\n";
-		}
-		$month .= '</select>';
+        $select_class_attribute = '';
+        if( !empty($select_class) ) {
+            $select_class_attribute = ' class="' . esc_attr($select_class) . '"';
+        }
 
-		$day = '<input type="text" name="'.$prefix.'[jj]" value="' . $jj . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
-		$hour = '<input type="text" name="'.$prefix.'[hh]" value="' . $hh . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
-		$minute = '<input type="text" name="'.$prefix.'[mn]" value="' . $mn . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
-		$year = '<input type="text" name="'.$prefix.'[yy]" value="' . $yy . '" size="3" maxlength="4"' . $tab_index_attribute . ' autocomplete="off"  />';
+        if($time == 0) {
+            $time_adj = \WP_Clanwars\Utils::current_time_fixed('timestamp', 0);
+        }
+        else {
+            $time_adj = $time;
+        }
 
-		printf(before_last_bar(__('%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input', WP_CLANWARS_TEXTDOMAIN)), $month, $day, $hour, $minute, $year);
-	}
+        $jj = date( 'd', $time_adj );
+        $mm = date( 'm', $time_adj );
+        $hh = date( 'H', $time_adj );
+        $mn = date( 'i', $time_adj );
+        $yy = date( 'Y', $time_adj );
 
-	static function html_country_select_helper($p = array(), $print = true)
-	{
-		$all_countries = self::all_countries();
-		extract(\WP_Clanwars\Utils::extract_args($p, array(
-			'select' => '',
-			'name' => '',
-			'id' => '',
-			'class' => '',
-			'show_popular' => false
-		)));
+        $month = "<select name=\"{$prefix}[mm]\"$select_class_attribute$tab_index_attribute>\n";
+        for ( $i = 1; $i < 13; $i = $i +1 ) {
+                $month .= "\t\t\t" . '<option value="' . zeroise($i, 2) . '"';
+                if ( $i == $mm )
+                        $month .= ' selected="selected"';
+                $month .= '>' . $wp_locale->get_month( $i ) . "</option>\n";
+        }
+        $month .= '</select>';
 
-		ob_start();
+        $day = '<input type="text" name="'.$prefix.'[jj]" value="' . $jj . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
+        $hour = '<input type="text" name="'.$prefix.'[hh]" value="' . $hh . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
+        $minute = '<input type="text" name="'.$prefix.'[mn]" value="' . $mn . '" size="2" maxlength="2"' . $tab_index_attribute . ' autocomplete="off"  />';
+        $year = '<input type="text" name="'.$prefix.'[yy]" value="' . $yy . '" size="4" maxlength="4"' . $tab_index_attribute . ' autocomplete="off"  />';
 
-		$attrs = array();
+        printf(before_last_bar(__('%1$s%5$s %2$s @ %3$s : %4$s|1: month input, 2: day input, 3: hour input, 4: minute input, 5: year input', WP_CLANWARS_TEXTDOMAIN)), $month, $day, $hour, $minute, $year);
+    }
 
-		if(!empty($id))
-			$attrs[] = 'id="' . esc_attr($id) . '"';
+    static function html_country_select_helper($p = array(), $print = true)
+    {
+        $all_countries = self::all_countries();
+        extract(\WP_Clanwars\Utils::extract_args($p, array(
+            'select' => '',
+            'name' => '',
+            'id' => '',
+            'class' => '',
+            'show_popular' => false
+        )));
 
-		if(!empty($name))
-			$attrs[] = 'name="' . esc_attr($name) . '"';
+        ob_start();
 
-		if(!empty($class))
-			$attrs[] = 'class="' . esc_attr($class) . '"';
+        $attrs = array();
 
-		$attrstr = implode(' ', $attrs);
-		if(!empty($attrstr)) $attrstr = ' ' . $attrstr;
+        if(!empty($id))
+            $attrs[] = 'id="' . esc_attr($id) . '"';
 
-		echo '<select' . $attrstr . '>';
+        if(!empty($name))
+            $attrs[] = 'name="' . esc_attr($name) . '"';
 
-		if($show_popular) {
-			$popular = \WP_Clanwars\Teams::most_popular_countries();
+        if(!empty($class))
+            $attrs[] = 'class="' . esc_attr($class) . '"';
 
-			if(!empty($popular)) {
-				foreach($popular as $i => $data) :
-					$abbr = $data['country'];
-					$title = isset($all_countries[$abbr]) ? $all_countries[$abbr] : $abbr;
+        $attrstr = implode(' ', $attrs);
+        if(!empty($attrstr)) $attrstr = ' ' . $attrstr;
 
-					echo '<option value="' . esc_attr($abbr) . '">' . esc_html($title) . '</option>';
-				endforeach;
-				echo '<optgroup label="-----------------" style="font-family: monospace;"></optgroup>';
-			}
-		}
+        echo '<select' . $attrstr . '>';
 
-		// copy array with array_merge so we don't sort global array
-		$sorted_countries = array_merge(array(), $all_countries);
-		asort($sorted_countries);
+        if($show_popular) {
+            $popular = \WP_Clanwars\Teams::most_popular_countries();
 
-		foreach($sorted_countries as $abbr => $title) :
-			echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
-		endforeach;
-		echo '</select>';
+            if(!empty($popular)) {
+                foreach($popular as $i => $data) :
+                    $abbr = $data['country'];
+                    $title = isset($all_countries[$abbr]) ? $all_countries[$abbr] : $abbr;
 
-		$output = ob_get_clean();
+                    echo '<option value="' . esc_attr($abbr) . '">' . esc_html($title) . '</option>';
+                endforeach;
+                echo '<optgroup label="-----------------" style="font-family: monospace;"></optgroup>';
+            }
+        }
 
-		if($print) {
-			echo $output;
-			return;
-		}
+        // copy array with array_merge so we don't sort global array
+        $sorted_countries = array_merge(array(), $all_countries);
+        asort($sorted_countries);
 
-		return $output;
-	}
+        foreach($sorted_countries as $abbr => $title) :
+            echo '<option value="' . esc_attr($abbr) . '"' . selected($abbr, $select, false) . '>' . esc_html($title) . '</option>';
+        endforeach;
+        echo '</select>';
 
-	static function get_country_flag($country) {
-		return '<span class="flag ' . esc_attr($country) . '"><br/></span>';
-	}
+        $output = ob_get_clean();
 
-	static function get_country_title($country) {
-		$all_countries = self::all_countries();
-		if(isset($all_countries[$country])) {
-			return $all_countries[$country];
-		}
-		return false;
-	}
+        if($print) {
+            echo $output;
+            return;
+        }
 
-	static function date_array2time_helper($date)
-	{
-		if(is_array($date) && isset($date['hh'], $date['mn'], $date['mm'], $date['jj'], $date['yy'])) {
-			return mktime((int)$date['hh'], (int)$date['mn'], 0, (int)$date['mm'], (int)$date['jj'], (int)$date['yy']);
-		}
-		return $date;
-	}
+        return $output;
+    }
+
+    static function get_country_flag($country) {
+        return '<span class="flag ' . esc_attr($country) . '"><br/></span>';
+    }
+
+    static function get_country_title($country) {
+        $all_countries = self::all_countries();
+        if(isset($all_countries[$country])) {
+            return $all_countries[$country];
+        }
+        return false;
+    }
+
+    static function date_array2time_helper($date)
+    {
+        if(is_array($date) && isset($date['hh'], $date['mn'], $date['mm'], $date['jj'], $date['yy'])) {
+            return mktime((int)$date['hh'], (int)$date['mn'], 0, (int)$date['mm'], (int)$date['jj'], (int)$date['yy']);
+        }
+        return $date;
+    }
 
 };
 

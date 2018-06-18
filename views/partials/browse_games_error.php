@@ -1,2 +1,2 @@
 <p class="wp-clanwars-api-error"><?php _e( 'Cannot connect to API.', WP_CLANWARS_TEXTDOMAIN ); ?></p>
-<p class="wp-clanwars-api-error small"><?php echo sprintf( __( 'Error: %s.', WP_CLANWARS_TEXTDOMAIN ), $api_error_message ); ?></p>
+<p class="wp-clanwars-api-error small"><?php echo sprintf( __( 'Error: %s', WP_CLANWARS_TEXTDOMAIN ), $api_error_message ); ?></p>

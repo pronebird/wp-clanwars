@@ -91,7 +91,7 @@ class MapsTable extends \WP_List_Table {
     }
 
     function no_items() {
-        _e('No games found.', WP_CLANWARS_TEXTDOMAIN);
+        _e('No maps found.', WP_CLANWARS_TEXTDOMAIN);
     }
 
     function column_cb($item) {
@@ -148,12 +148,11 @@ class MapsTable extends \WP_List_Table {
         $game_id = $_REQUEST['game_id'];
 
         $args = array(
-            'id' => 'all', 
+            'id' => 'all',
             'game_id' => $game_id,
-            'order' => $order, 
-            'orderby' => $orderby, 
             'order' => $order,
-            'limit' => $limit, 
+            'orderby' => $orderby,
+            'limit' => $limit,
             'offset' => ($limit * ($current_page-1))
         );
 
