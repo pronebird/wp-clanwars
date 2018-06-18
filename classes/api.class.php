@@ -63,7 +63,7 @@ final class API {
         }
 
         if(!isset($payload->clientKey)) {
-            return new WP_Error( 'api-error', 0, 'Invalid client key.' );
+            return new \WP_Error( 'api-error', 0, 'Invalid client key.' );
         }
 
         update_option( static::$client_key_option_key, $payload->clientKey );
@@ -167,7 +167,7 @@ final class API {
         }
 
         if( wp_remote_retrieve_response_code($response) !== 200 ) {
-            return new WP_Error( 'download-error', __('File is not found on server.', WP_CLANWARS_TEXTDOMAIN) );
+            return new \WP_Error( 'download-error', __('File is not found on server.', WP_CLANWARS_TEXTDOMAIN) );
         }
 
         return true;
@@ -199,7 +199,7 @@ final class API {
 
     static function publish($zip_file) {
         if(!function_exists('curl_init')) {
-            return new WP_Error( 'api-error', 0, 'Unable to locate cURL extension.' );
+            return new \WP_Error( 'api-error', 0, 'Unable to locate cURL extension.' );
         }
 
         $zip_file = realpath($zip_file);
@@ -247,7 +247,7 @@ final class API {
         if($response === false) {
             $err = curl_error($ch);
             $code = curl_errno($ch);
-            return new WP_Error( 'api-error-curl', $code, $err );
+            return new \WP_Error( 'api-error-curl', $code, $err );
         }
 
         $info = curl_getinfo($ch);
