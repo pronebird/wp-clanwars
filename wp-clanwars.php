@@ -1988,17 +1988,17 @@ EOT;
     }
 
     function quick_pick_team($title, $country) {
-        $team = \WP_Clanwars\Teams::get_team(array('title' => $title, 'limit' => 1));
-        $team_id = 0;
-        if(empty($team)) {
+        $result = \WP_Clanwars\Teams::get_team(array('title' => $title, 'limit' => 1));
+        if(count($result) === 0) {
             $new_team_id = \WP_Clanwars\Teams::add_team(array('title' => $title, 'country' => $country));
-            if($new_team_id !== false)
-                $team_id = $new_team_id;
+            if($new_team_id !== false) {
+                return $new_team_id;
+            }
         } else {
-            $team_id = $team[0]->id;
+            return $result[0]->id;
         }
 
-        return $team_id;
+        return 0;
     }
 
     function on_load_manage_matches()
