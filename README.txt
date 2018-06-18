@@ -13,7 +13,7 @@ WP-ClanWars is a match organizer plugin for gaming communities and teams.
 
 Wanna see WP-ClanWars in your language? Help out to translate it!
 
-https://www.transifex.com/projects/p/wp-clanwars/
+[https://www.transifex.com/projects/p/wp-clanwars/](https://www.transifex.com/projects/p/wp-clanwars/)
 
 == Description ==
 
