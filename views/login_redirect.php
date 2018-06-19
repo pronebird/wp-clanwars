@@ -1,6 +1,6 @@
 <html>
     <body>
-        <form id="form" action="<?php esc_attr_e($_SERVER['REQUEST_URI']); ?>" method="post">
+        <form id="form" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>" method="post">
             <input id="token" type="hidden" name="token" value="" />
         </form>
         <script type="text/javascript">

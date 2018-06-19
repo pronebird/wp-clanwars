@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
-"POT-Creation-Date: 2018-06-19 09:17:39+00:00\n"
-"PO-Revision-Date: 2018-06-19 09:17+0000\n"
-"Last-Translator: Andrei Mihailov <and@codeispoetry.ru>\n"
+"POT-Creation-Date: 2018-06-19 10:24:26+00:00\n"
+"PO-Revision-Date: 2018-06-19 10:26+0000\n"
+"Last-Translator: J. Felipe Molina <jfelipe.molina@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/code-is-poetry/wp-clanwars/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -416,6 +416,10 @@ msgid "INSTALLED"
 msgstr ""
 
 #: views/partials/browse_game_item.php:20
+msgid "INSTALL NOW"
+msgstr ""
+
+#: views/partials/browse_game_item.php:20
 msgid "GET"
 msgstr ""
 
@@ -463,6 +467,10 @@ msgstr ""
 #: views/partials/cloud_nav.php:19
 msgid "Publish"
 msgstr ""
+
+#: views/partials/cloud_nav.php:25 views/setup_games.php:41
+msgid "Search Games"
+msgstr "Buscar juegos"
 
 #: views/partials/login_box.php:9
 msgid "Log in with Steam"

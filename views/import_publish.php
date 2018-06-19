@@ -10,7 +10,7 @@
 
     <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" enctype="multipart/form-data" class="wp-clanwars-publish-form">
 
-        <input type="hidden" name="action" value="<?php esc_attr_e( $publish_action ); ?>" />
+        <input type="hidden" name="action" value="<?php echo esc_attr( $publish_action ); ?>" />
         <?php wp_nonce_field( $publish_action ); ?>
 
         <table class="form-table">

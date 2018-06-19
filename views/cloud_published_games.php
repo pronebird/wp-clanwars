@@ -29,7 +29,7 @@
         $item_classes[] = $game->approved ? 'wp-clanwars-cloud-item-approved' : 'wp-clanwars-cloud-item-pending';
 
     ?>
-    <li class="<?php esc_attr_e(join(' ', $item_classes)) ?>" data-remote-id="<?php esc_attr_e($game->_id); ?>">
+    <li class="<?php echo esc_attr(join(' ', $item_classes)) ?>" data-remote-id="<?php echo esc_attr($game->_id); ?>">
         <div class="wp-clanwars-review-status"><?php
             if($game->approved) :
                 _e('Approved', WP_CLANWARS_TEXTDOMAIN);

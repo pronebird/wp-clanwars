@@ -5,8 +5,8 @@
 
     <div class="wp-clanwars-cloud-account">
         <div class="wp-clanwars-cloud-account-username">
-            <img src="<?php esc_attr_e($cloud_account->photo); ?>" alt="<?php esc_attr_e($cloud_account->fullname); ?>" />
-            <a href="/#TB_inline?width=320&amp;height=400&amp;inlineId=wp-clanwars-cloud-update-account-holder" class="thickbox"><?php esc_html_e($cloud_account->fullname); ?></a>
+            <img src="<?php echo esc_attr($cloud_account->photo); ?>" alt="<?php echo esc_attr($cloud_account->fullname); ?>" />
+            <a href="/#TB_inline?width=320&amp;height=400&amp;inlineId=wp-clanwars-cloud-update-account-holder" class="thickbox"><?php echo esc_html($cloud_account->fullname); ?></a>
         </div>
         <div class="wp-clanwars-cloud-account-logout">
             <span>|</span> <a href="<?php echo wp_nonce_url('admin-post.php?action=wp-clanwars-logout&amp;_wp_http_referer=' . urlencode($_SERVER['REQUEST_URI']), 'wp-clanwars-logout'); ?>"><?php _e( 'Log out', WP_CLANWARS_TEXTDOMAIN ); ?></a>

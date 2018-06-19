@@ -27,7 +27,7 @@
         }
 
     ?>
-    <li class="<?php esc_attr_e(join(' ', $item_classes)) ?>" data-remote-id="<?php esc_attr_e($game->_id); ?>">
+    <li class="<?php echo esc_attr(join(' ', $item_classes)) ?>" data-remote-id="<?php echo esc_attr($game->_id); ?>">
         <?php $partial('partials/browse_game_item', compact('game', 'install_action', 'logged_into_cloud')); ?>
     </li>
     <?php endforeach; ?>
