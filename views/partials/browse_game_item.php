@@ -2,7 +2,7 @@
     <div class="wp-clanwars-cloud-item-header wp-clanwars-clearfix">
         <div class="wp-clanwars-cloud-item-column-title">
             <h4>
-                <img src="<?php esc_attr_e($game->iconUrl); ?>" alt="<?php esc_attr_e($game->title); ?>" class="wp-clanwars-cloud-item-icon" />
+                <img src="<?php echo esc_attr($game->iconUrl); ?>" alt="<?php echo esc_attr($game->title); ?>" class="wp-clanwars-cloud-item-icon" />
                 <span class="game-title"><?php esc_html_e($game->title); ?></span>
             </h4>
         </div>
@@ -12,12 +12,12 @@
         <?php else : ?>
             <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
 
-            <input type="hidden" name="action" value="<?php esc_attr_e( $install_action ); ?>" />
-            <input type="hidden" name="remote_id" value="<?php esc_attr_e( $game->_id ); ?>" />
+            <input type="hidden" name="action" value="<?php echo esc_attr( $install_action ); ?>" />
+            <input type="hidden" name="remote_id" value="<?php echo esc_attr( $game->_id ); ?>" />
 
             <?php wp_nonce_field( $install_action ); ?>
 
-            <button type="submit" class="button wp-clanwars-install-button" data-text-toggle="<?php esc_attr_e( __( 'INSTALL NOW', WP_CLANWARS_TEXTDOMAIN ) ); ?>"><?php _e( 'GET', WP_CLANWARS_TEXTDOMAIN ); ?></button>
+            <button type="submit" class="button wp-clanwars-install-button" data-text-toggle="<?php esc_attr_e( 'INSTALL NOW', WP_CLANWARS_TEXTDOMAIN ); ?>"><?php _e( 'GET', WP_CLANWARS_TEXTDOMAIN ); ?></button>
 
             </form>
         <?php endif; ?>
@@ -26,7 +26,7 @@
     <ul class="maps">
     <?php foreach($game->maps as $map) : ?>
         <li>
-            <img class="screenshot" src="<?php esc_attr_e($map->imageUrl); ?>" alt="<?php esc_attr_e($map->title); ?>" draggable="false" />
+            <img class="screenshot" src="<?php echo esc_attr($map->imageUrl); ?>" alt="<?php echo esc_attr($map->title); ?>" draggable="false" />
             <div class="title"><?php esc_html_e($map->title); ?></div>
         </li>
     <?php endforeach; ?>

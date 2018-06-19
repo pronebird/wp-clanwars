@@ -23,9 +23,9 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
         <div class="wp-clanwars-match-card-header-item">
 <?php if (is_object($team1_logo)) : ?>
             <img src="<?php echo esc_url($team1_logo->src); ?>"
-                width="<?php esc_attr_e($team1_logo->width); ?>"
-                height="<?php esc_attr_e($team1_logo->height); ?>"
-                    alt="<?php esc_attr_e($match->team1_title); ?>" />
+                width="<?php echo esc_attr($team1_logo->width); ?>"
+                height="<?php echo esc_attr($team1_logo->height); ?>"
+                    alt="<?php echo esc_attr($match->team1_title); ?>" />
 <?php else : ?>
             <div class="wp-clanwars-match-card-header-item-no-logo-team-wrap">
                 <img src="<?php echo esc_url(WP_CLANWARS_URL . '/images/no-team-logo-light.png'); ?>" width="80" />
@@ -55,9 +55,9 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
         <div class="wp-clanwars-match-card-header-item">
 <?php if (is_object($team2_logo)) : ?>
             <img src="<?php echo esc_url($team2_logo->src); ?>"
-                width="<?php esc_attr_e($team2_logo->width); ?>"
-                height="<?php esc_attr_e($team2_logo->height); ?>"
-                alt="<?php esc_attr_e($match->team2_title); ?>" />
+                width="<?php echo esc_attr($team2_logo->width); ?>"
+                height="<?php echo esc_attr($team2_logo->height); ?>"
+                alt="<?php echo esc_attr($match->team2_title); ?>" />
 <?php else : ?>
             <div class="wp-clanwars-match-card-header-item-no-logo-team-wrap">
                 <img src="<?php echo esc_url(WP_CLANWARS_URL . '/images/no-team-logo-light.png'); ?>" width="80" />
@@ -79,10 +79,10 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
         <th class="wp-clanwars-scores-table-column-heading" colspan="2" style="width: <?php echo $col_width; ?>%">
             <div class="wp-clanwars-scores-table-visual">
 <?php if (!empty($image_src)) : ?>
-                <img src="<?php esc_attr_e($image_src); ?>"
-                    alt="<?php esc_attr_e($first->title); ?>"
+                <img src="<?php echo esc_attr($image_src); ?>"
+                    alt="<?php echo esc_attr($first->title); ?>"
                     class="wp-clanwars-scores-table-image"
-                    width="<?php esc_attr_e($width); ?>" />
+                    width="<?php echo esc_attr($width); ?>" />
 <?php endif; ?>
                 <div class="wp-clanwars-scores-table-image-caption"><?php esc_html_e($first->title); ?></div>
             </div>

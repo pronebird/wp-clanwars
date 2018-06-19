@@ -1,7 +1,7 @@
 <div id="wp-clanwars-cloud-login-holder" class="hidden">
     <div class="wp-clanwars-cloud-login">
         <div class="wp-clanwars-cloud-login-header">
-            <img src="<?php esc_attr_e(WP_CLANWARS_URL . '/images/cloud-icon.svg'); ?>" width="100" alt="" />
+            <img src="<?php echo esc_attr(WP_CLANWARS_URL . '/images/cloud-icon.svg'); ?>" width="100" alt="" />
             <h3><?php _e( 'Clanwars Cloud', WP_CLANWARS_TEXTDOMAIN ); ?></h3>
         </div>
         <div class="wp-clanwars-cloud-login-content">

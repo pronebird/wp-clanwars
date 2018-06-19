@@ -7,7 +7,7 @@
 
     <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" enctype="multipart/form-data" class="wp-clanwars-upload-form">
 
-        <input type="hidden" name="action" value="<?php esc_attr_e( $install_action ); ?>" />
+        <input type="hidden" name="action" value="<?php echo esc_attr( $install_action ); ?>" />
         <?php wp_nonce_field( $install_action ); ?>
 
         <input type="file" name="userfile" />

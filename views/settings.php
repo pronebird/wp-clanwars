@@ -101,7 +101,7 @@
                                 <?php foreach($item->user_games as $game) : ?>
 
                                 <?php if($game->icon_url !== false) : ?>
-                                    <img src="<?php esc_attr_e($game->icon_url); ?>" alt="<?php esc_attr_e($game->title); ?>" class="game icon" />
+                                    <img src="<?php echo esc_attr($game->icon_url); ?>" alt="<?php echo esc_attr($game->title); ?>" class="game icon" />
                                 <?php else : ?>
                                     <span class="game"><?php esc_html_e(empty($game->abbr) ? $game->title : $game->abbr); ?></span>
                                 <?php endif; ?>
@@ -151,7 +151,7 @@
                     <label><?php _e('Allow user manage specified games only:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                     <ul>
                         <?php foreach($games as $game) : ?>
-                        <li><label for="game_<?php esc_attr_e($game->id); ?>"><input type="checkbox" name="games[]" id="game_<?php esc_attr_e($game->id); ?>" value="<?php esc_attr_e($game->id); ?>" /> <?php esc_html_e($game->title); ?></label></li>
+                        <li><label for="game_<?php echo esc_attr($game->id); ?>"><input type="checkbox" name="games[]" id="game_<?php echo esc_attr($game->id); ?>" value="<?php echo esc_attr($game->id); ?>" /> <?php esc_html_e($game->title); ?></label></li>
                         <?php endforeach; ?>
                     </ul>
                     <p class="description"><?php _e('Users that can manage all games, can also create the new ones.', WP_CLANWARS_TEXTDOMAIN); ?></p>
@@ -163,7 +163,7 @@
                         <?php foreach($acl_keys as $key => $title) : ?>
 
                         <li>
-                            <label for="<?php echo esc_attr($key); ?>"><input type="checkbox" class="check" name="permissions[<?php esc_attr_e($key); ?>]" value="1" id="<?php esc_attr_e($key); ?>" /> <?php echo $title; ?></label>
+                            <label for="<?php echo esc_attr($key); ?>"><input type="checkbox" class="check" name="permissions[<?php echo esc_attr($key); ?>]" value="1" id="<?php echo esc_attr($key); ?>" /> <?php echo $title; ?></label>
                         </li>
 
                         <?php endforeach; ?>

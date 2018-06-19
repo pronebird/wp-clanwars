@@ -22,7 +22,7 @@
         </p>
 
         <p class="submit">
-            <input type="submit" class="button button-primary" value="<?php esc_attr_e($page_submit); ?>" />
+            <input type="submit" class="button button-primary" value="<?php echo esc_attr($page_submit); ?>" />
         </p>
 
     </form>

@@ -5,7 +5,7 @@
 
     <div class="wp-clanwars-cloud-account">
         <div class="wp-clanwars-cloud-account-username">
-            <img src="<?php esc_attr_e($cloud_account->photo); ?>" alt="<?php esc_attr_e($cloud_account->fullname); ?>" />
+            <img src="<?php echo esc_attr($cloud_account->photo); ?>" alt="<?php echo esc_attr($cloud_account->fullname); ?>" />
             <a href="/#TB_inline?width=320&amp;height=400&amp;inlineId=wp-clanwars-cloud-update-account-holder" class="thickbox"><?php esc_html_e($cloud_account->fullname); ?></a>
         </div>
         <div class="wp-clanwars-cloud-account-logout">
