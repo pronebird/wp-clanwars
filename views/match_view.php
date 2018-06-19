@@ -12,10 +12,10 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
         <?php echo mysql2date(get_option('date_format') . ' ' . get_option('time_format'), $match->date); ?> |
 <?php if (!empty($match->external_url)) : ?>
         <a target="_blank" href="<?php echo esc_url($match->external_url); ?>"><?php
-            esc_html_e($match_status_text);
+            echo esc_html($match_status_text);
         ?></a>
 <?php else: ?>
-        <?php esc_html_e($match_status_text); ?>
+        <?php echo esc_html($match_status_text); ?>
 <?php endif; ?>
     </div>
 
@@ -29,13 +29,13 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
 <?php else : ?>
             <div class="wp-clanwars-match-card-header-item-no-logo-team-wrap">
                 <img src="<?php echo esc_url(WP_CLANWARS_URL . '/images/no-team-logo-light.png'); ?>" width="80" />
-                <div class="wp-clanwars-match-card-header-item-team-name"><?php esc_html_e($match->team1_title); ?></div>
+                <div class="wp-clanwars-match-card-header-item-team-name"><?php echo esc_html($match->team1_title); ?></div>
             </div>
 <?php endif; ?>
         </div>
 
         <div class="wp-clanwars-match-card-header-item wp-clanwars-match-card-home-team-score"><?php
-            esc_html_e( $match->team1_tickets );
+            echo esc_html( $match->team1_tickets );
         ?></div>
 
         <div class="wp-clanwars-match-card-header-item wp-clanwars-match-card-status-caption"><?php
@@ -49,7 +49,7 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
         ?></div>
 
         <div class="wp-clanwars-match-card-header-item wp-clanwars-match-card-visiting-team-score"><?php
-            esc_html_e( $match->team2_tickets );
+            echo esc_html( $match->team2_tickets );
         ?></div>
 
         <div class="wp-clanwars-match-card-header-item">
@@ -61,7 +61,7 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
 <?php else : ?>
             <div class="wp-clanwars-match-card-header-item-no-logo-team-wrap">
                 <img src="<?php echo esc_url(WP_CLANWARS_URL . '/images/no-team-logo-light.png'); ?>" width="80" />
-                <div class="wp-clanwars-match-card-header-item-team-name"><?php esc_html_e($match->team2_title); ?></div>
+                <div class="wp-clanwars-match-card-header-item-team-name"><?php echo esc_html($match->team2_title); ?></div>
             </div>
 <?php endif; ?>
         </div>
@@ -84,7 +84,7 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
                     class="wp-clanwars-scores-table-image"
                     width="<?php echo esc_attr($width); ?>" />
 <?php endif; ?>
-                <div class="wp-clanwars-scores-table-image-caption"><?php esc_html_e($first->title); ?></div>
+                <div class="wp-clanwars-scores-table-image-caption"><?php echo esc_html($first->title); ?></div>
             </div>
         </th>
 <?php endforeach; ?>
@@ -106,15 +106,15 @@ $is_playing_match = ($current_unixtime > $match_unixtime && $current_unixtime < 
 <?php if ($is_first_column) : $is_first_column = false; ?>
         <td class="wp-clanwars-scores-table-row-heading"><?php
             /* translators: the heading for round number column. */
-            esc_html_e( sprintf(_x('#%d', WP_CLANWARS_TEXTDOMAIN), $current_round + 1) );
+            echo esc_html( sprintf(_x('#%d', WP_CLANWARS_TEXTDOMAIN), $current_round + 1) );
         ?></td>
 <?php endif; ?>
 <?php if ($current_round < count($map_group)) : ?>
         <td class="wp-clanwars-scores-table-cell"><?php
-            esc_html_e( $map_group[$current_round]->tickets1 );
+            echo esc_html( $map_group[$current_round]->tickets1 );
         ?></td>
         <td class="wp-clanwars-scores-table-cell"><?php
-            esc_html_e( $map_group[$current_round]->tickets2 );
+            echo esc_html( $map_group[$current_round]->tickets2 );
         ?></td>
 <?php else : ?>
         <td class="wp-clanwars-scores-table-cell"></td>

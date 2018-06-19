@@ -3,7 +3,7 @@
         <div class="wp-clanwars-cloud-item-column-title">
             <h4>
                 <img src="<?php echo esc_attr($game->iconUrl); ?>" alt="<?php echo esc_attr($game->title); ?>" class="wp-clanwars-cloud-item-icon" />
-                <span class="game-title"><?php esc_html_e($game->title); ?></span>
+                <span class="game-title"><?php echo esc_html($game->title); ?></span>
             </h4>
         </div>
         <div class="wp-clanwars-cloud-item-column-install">
@@ -27,7 +27,7 @@
     <?php foreach($game->maps as $map) : ?>
         <li>
             <img class="screenshot" src="<?php echo esc_attr($map->imageUrl); ?>" alt="<?php echo esc_attr($map->title); ?>" draggable="false" />
-            <div class="title"><?php esc_html_e($map->title); ?></div>
+            <div class="title"><?php echo esc_html($map->title); ?></div>
         </li>
     <?php endforeach; ?>
     </ul>
@@ -54,10 +54,10 @@
     </div>
     <div class="wp-clanwars-cloud-item-column-published">
         <strong><?php _e('Published:', WP_CLANWARS_TEXTDOMAIN); ?></strong>
-        <span><?php esc_html_e( mysql2date(get_option('date_format'), $game->createdAt, true) ); ?></span>
+        <span><?php echo esc_html( mysql2date(get_option('date_format'), $game->createdAt, true) ); ?></span>
     </div>
     <div class="wp-clanwars-cloud-item-column-downloaded"><?php echo sprintf( _nx('%d install', '%d installs', $game->downloads, 'Number of downloads', WP_CLANWARS_TEXTDOMAIN ), $game->downloads ); ?></div>
     <div class="wp-clanwars-cloud-item-column-author">
-        <?php esc_html_e($game->owner->fullname); ?>
+        <?php echo esc_html($game->owner->fullname); ?>
     </div>
 </div>

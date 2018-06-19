@@ -298,7 +298,7 @@ class WP_ClanWars_Widget extends WP_Widget {
             <p><?php _e('Show games:', WP_CLANWARS_TEXTDOMAIN); ?></p>
             <p>
                 <?php foreach($games as $item) : ?>
-                <label for="<?php echo $this->get_field_id('visible_games-' . $item->id); ?>"><input type="checkbox" name="<?php echo $this->get_field_name('visible_games'); ?>[]" id="<?php echo $this->get_field_id('visible_games-' . $item->id); ?>" value="<?php echo esc_attr($item->id); ?>" <?php checked(true, in_array($item->id, $instance['visible_games'])); ?>/> <?php esc_html_e($item->title); ?></label><br/>
+                <label for="<?php echo $this->get_field_id('visible_games-' . $item->id); ?>"><input type="checkbox" name="<?php echo $this->get_field_name('visible_games'); ?>[]" id="<?php echo $this->get_field_id('visible_games-' . $item->id); ?>" value="<?php echo esc_attr($item->id); ?>" <?php checked(true, in_array($item->id, $instance['visible_games'])); ?>/> <?php echo esc_html($item->title); ?></label><br/>
                 <?php endforeach; ?>
             </p>
             <p><?php _e('Do not check any game if you want to show all games.', WP_CLANWARS_TEXTDOMAIN); ?></p>
@@ -312,7 +312,7 @@ class WP_ClanWars_Widget extends WP_Widget {
                 <label for="<?php echo $this->get_field_id('hide_older_than'); ?>"><?php _e('Hide matches older than', WP_CLANWARS_TEXTDOMAIN); ?></label>
                 <select name="<?php echo $this->get_field_name('hide_older_than'); ?>" id="<?php echo $this->get_field_id('hide_older_than'); ?>">
                     <?php foreach($this->newer_than_options as $key => $option) : ?>
-                        <option value="<?php echo esc_attr($key); ?>"<?php selected($key, $instance['hide_older_than']); ?>><?php esc_html_e($option['title']); ?></option>
+                        <option value="<?php echo esc_attr($key); ?>"<?php selected($key, $instance['hide_older_than']); ?>><?php echo esc_html($option['title']); ?></option>
                     <?php endforeach; ?>
                 </select>
             </p>

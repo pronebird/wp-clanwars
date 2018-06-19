@@ -81,9 +81,9 @@
                         <tr<?php if($index % 2 == 0) : ?> class="alternate"<?php endif; ?>>
                             <th class="check-column"><input type="checkbox" class="check" name="users[]" value="<?php echo $item->user->ID; ?>" /></th>
                             <td class="column-user_login">
-                                <div class="display-name"><?php esc_html_e($item->user->display_name); ?></div>
+                                <div class="display-name"><?php echo esc_html($item->user->display_name); ?></div>
                                 <?php if($item->user->display_name !== $item->user->user_login) : ?>
-                                <div class="login"><?php esc_html_e($item->user->user_login); ?></div>
+                                <div class="login"><?php echo esc_html($item->user->user_login); ?></div>
                                 <?php endif; ?>
                             </td>
                             <td class="column-permissions">
@@ -103,7 +103,7 @@
                                 <?php if($game->icon_url !== false) : ?>
                                     <img src="<?php echo esc_attr($game->icon_url); ?>" alt="<?php echo esc_attr($game->title); ?>" class="game icon" />
                                 <?php else : ?>
-                                    <span class="game"><?php esc_html_e(empty($game->abbr) ? $game->title : $game->abbr); ?></span>
+                                    <span class="game"><?php echo esc_html(empty($game->abbr) ? $game->title : $game->abbr); ?></span>
                                 <?php endif; ?>
 
                                 <?php endforeach; ?>
@@ -151,7 +151,7 @@
                     <label><?php _e('Allow user manage specified games only:', WP_CLANWARS_TEXTDOMAIN); ?></label>
                     <ul>
                         <?php foreach($games as $game) : ?>
-                        <li><label for="game_<?php echo esc_attr($game->id); ?>"><input type="checkbox" name="games[]" id="game_<?php echo esc_attr($game->id); ?>" value="<?php echo esc_attr($game->id); ?>" /> <?php esc_html_e($game->title); ?></label></li>
+                        <li><label for="game_<?php echo esc_attr($game->id); ?>"><input type="checkbox" name="games[]" id="game_<?php echo esc_attr($game->id); ?>" value="<?php echo esc_attr($game->id); ?>" /> <?php echo esc_html($game->title); ?></label></li>
                         <?php endforeach; ?>
                     </ul>
                     <p class="description"><?php _e('Users that can manage all games, can also create the new ones.', WP_CLANWARS_TEXTDOMAIN); ?></p>

@@ -49,7 +49,7 @@ jQuery(document).ready(function ($) {
             <td>
                 <select id="game_id" class="select2" name="game_id">
                     <?php foreach($games as $item) : ?>
-                    <option value="<?php echo esc_attr($item->id); ?>"<?php selected($item->id, $game_id); ?>><?php esc_html_e($item->title); ?></option>
+                    <option value="<?php echo esc_attr($item->id); ?>"<?php selected($item->id, $game_id); ?>><?php echo esc_html($item->title); ?></option>
                     <?php endforeach; ?>
                 </select>
             </td>
@@ -65,7 +65,7 @@ jQuery(document).ready(function ($) {
         <tr class="form-field">
             <th scope="row" valign="top"><label for="description"><?php _e('Description', WP_CLANWARS_TEXTDOMAIN); ?></label></th>
             <td>
-                <textarea name="description" id="description" placeholder="<?php _e('Optional: Drop a line or two about match.', WP_CLANWARS_TEXTDOMAIN); ?>"><?php esc_html_e($description); ?></textarea>
+                <textarea name="description" id="description" placeholder="<?php _e('Optional: Drop a line or two about match.', WP_CLANWARS_TEXTDOMAIN); ?>"><?php echo esc_html($description); ?></textarea>
             </td>
         </tr>
 
@@ -106,11 +106,11 @@ jQuery(document).ready(function ($) {
                     <div class="teams">
                     <select name="team1" class="select2 team-select">
                     <?php foreach($teams as $team) : ?>
-                        <option value="<?php echo $team->id; ?>"<?php selected(true, $team1 > 0 ? ($team->id == $team1) : $team->home_team, true); ?>><?php esc_html_e($team->title); ?></option>
+                        <option value="<?php echo $team->id; ?>"<?php selected(true, $team1 > 0 ? ($team->id == $team1) : $team->home_team, true); ?>><?php echo esc_html($team->title); ?></option>
                     <?php endforeach; ?>
                     </select>&nbsp;<?php _e('vs', WP_CLANWARS_TEXTDOMAIN); ?>&nbsp;<select name="team2" class="select2 team-select">
                     <?php foreach($teams as $team) : ?>
-                        <option value="<?php echo $team->id; ?>"<?php selected(true, $team->id==$team2, true); ?>><?php esc_html_e($team->title); ?></option>
+                        <option value="<?php echo $team->id; ?>"<?php selected(true, $team->id==$team2, true); ?>><?php echo esc_html($team->title); ?></option>
                     <?php endforeach; ?>
                     </select>
                     </div>
@@ -152,7 +152,7 @@ jQuery(document).ready(function ($) {
                         );
                         $size = isset($gallery['size']) ? $gallery['size'] : 'thumbnail';
                         foreach($sizes as $key => $title) : ?>
-                            <option value="<?php echo esc_attr($key); ?>"<?php selected($size, $key, true); ?>><?php esc_html_e($title); ?></option>
+                            <option value="<?php echo esc_attr($key); ?>"<?php selected($size, $key, true); ?>><?php echo esc_html($title); ?></option>
                         <?php endforeach; ?>
                         </select>
                     </div>
@@ -163,7 +163,7 @@ jQuery(document).ready(function ($) {
                         <?php
                         $columns = isset($gallery['columns']) ? $gallery['columns'] : 3;
                         for($i = 1; $i < 10; $i++) : ?>
-                            <option value="<?php echo esc_attr($i); ?>"<?php selected($columns, $i, true); ?>><?php esc_html_e($i); ?></option>
+                            <option value="<?php echo esc_attr($i); ?>"<?php selected($columns, $i, true); ?>><?php echo esc_html($i); ?></option>
                         <?php endfor; ?>
                         </select>
                     </div>
@@ -179,7 +179,7 @@ jQuery(document).ready(function ($) {
                         );
                         $link = isset($gallery['link']) ? $gallery['link'] : '';
                         foreach($links as $key => $title) : ?>
-                            <option value="<?php echo esc_attr($key); ?>"<?php selected($link, $key, true); ?>><?php esc_html_e($title); ?></option>
+                            <option value="<?php echo esc_attr($key); ?>"<?php selected($link, $key, true); ?>><?php echo esc_html($title); ?></option>
                         <?php endforeach; ?>
                         </select>
                     </div>
