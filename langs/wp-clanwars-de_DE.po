@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
-"POT-Creation-Date: 2018-06-18 15:38:01+00:00\n"
-"PO-Revision-Date: 2018-06-18 15:38+0000\n"
+"POT-Creation-Date: 2018-06-19 09:17:39+00:00\n"
+"PO-Revision-Date: 2018-06-19 09:17+0000\n"
 "Last-Translator: Andrei Mihailov <and@codeispoetry.ru>\n"
 "Language-Team: German (http://www.transifex.com/code-is-poetry/wp-clanwars/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -471,10 +471,6 @@ msgstr ""
 msgid "Log in with Facebook"
 msgstr ""
 
-#: views/partials/update_account_box.php:5
-msgid "wp-clanwars-update-cloud-account"
-msgstr ""
-
 #: views/partials/update_account_box.php:19
 msgid "Enter your display name"
 msgstr ""
@@ -538,8 +534,7 @@ msgid "Allow user manage specified games only:"
 msgstr "Erlaube es Benutzern nur spezielle Spiele zu bearbeiten:"
 
 #: views/settings.php:157
-msgid ""
-"Users that can manage all games, can also create the new ones.</strong>"
+msgid "Users that can manage all games, can also create the new ones."
 msgstr ""
 
 #: views/settings.php:161
@@ -695,10 +690,6 @@ msgstr "Zeuge Matches:"
 
 #: wp-clanwars-widget.php:312
 msgid "Hide matches older than"
-msgstr ""
-
-#: wp-clanwars-widget.php:320
-msgid "hidden"
 msgstr ""
 
 #: wp-clanwars-widget.php:321
