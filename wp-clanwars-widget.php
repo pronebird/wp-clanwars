@@ -317,7 +317,7 @@ class WP_ClanWars_Widget extends WP_Widget {
                 </select>
             </p>
 
-            <p class="widget-setting-custom-hide-duration <?php if( $instance['hide_older_than'] !== 'custom' ) esc_attr_e('hidden'); ?>">
+            <p class="widget-setting-custom-hide-duration <?php if( $instance['hide_older_than'] !== 'custom' ) echo esc_attr('hidden'); ?>">
                 <label for="<?php echo $this->get_field_id('custom_hide_duration'); ?>"><?php _e('Custom (days): ', WP_CLANWARS_TEXTDOMAIN); ?></label>
                 <input type="text" size="3" name="<?php echo $this->get_field_name('custom_hide_duration'); ?>" id="<?php echo $this->get_field_id('custom_hide_duration'); ?>" value="<?php esc_attr_e($instance['custom_hide_duration']); ?>" />
             </p>

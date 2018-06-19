@@ -2,7 +2,7 @@
     <div class="wp-clanwars-cloud-update-account">
 
         <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" class="wp-clanwars-cloud-update-account-wrap">
-            <input type="hidden" name="action" value="<?php esc_attr_e('wp-clanwars-update-cloud-account'); ?>" />
+            <input type="hidden" name="action" value="<?php echo esc_attr('wp-clanwars-update-cloud-account'); ?>" />
             <?php wp_nonce_field( 'wp-clanwars-update-cloud-account' ); ?>
 
             <div class="wp-clanwars-cloud-update-account-header">

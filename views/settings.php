@@ -154,7 +154,7 @@
                         <li><label for="game_<?php esc_attr_e($game->id); ?>"><input type="checkbox" name="games[]" id="game_<?php esc_attr_e($game->id); ?>" value="<?php esc_attr_e($game->id); ?>" /> <?php esc_html_e($game->title); ?></label></li>
                         <?php endforeach; ?>
                     </ul>
-                    <p class="description"><?php _e('Users that can manage all games, can also create the new ones.</strong>', WP_CLANWARS_TEXTDOMAIN); ?></p>
+                    <p class="description"><?php _e('Users that can manage all games, can also create the new ones.', WP_CLANWARS_TEXTDOMAIN); ?></p>
                 </div>
 
                 <div class="form-field">
