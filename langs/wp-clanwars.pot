@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars 2.0.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
-"POT-Creation-Date: 2018-06-19 09:17:39+00:00\n"
+"POT-Creation-Date: 2018-06-19 10:24:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -409,6 +409,10 @@ msgid "INSTALLED"
 msgstr ""
 
 #: views/partials/browse_game_item.php:20
+msgid "INSTALL NOW"
+msgstr ""
+
+#: views/partials/browse_game_item.php:20
 msgid "GET"
 msgstr ""
 
@@ -455,6 +459,10 @@ msgstr ""
 
 #: views/partials/cloud_nav.php:19
 msgid "Publish"
+msgstr ""
+
+#: views/partials/cloud_nav.php:25 views/setup_games.php:41
+msgid "Search Games"
 msgstr ""
 
 #: views/partials/login_box.php:9

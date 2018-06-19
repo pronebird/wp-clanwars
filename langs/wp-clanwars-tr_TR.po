@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-ClanWars\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-clanwars\n"
-"POT-Creation-Date: 2018-06-19 09:17:39+00:00\n"
-"PO-Revision-Date: 2018-06-19 09:17+0000\n"
+"POT-Creation-Date: 2018-06-19 10:24:26+00:00\n"
+"PO-Revision-Date: 2018-06-19 10:26+0000\n"
 "Last-Translator: Andrei Mihailov <and@codeispoetry.ru>\n"
 "Language-Team: Turkish (http://www.transifex.com/code-is-poetry/wp-clanwars/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -416,6 +416,10 @@ msgid "INSTALLED"
 msgstr "Yüklendi"
 
 #: views/partials/browse_game_item.php:20
+msgid "INSTALL NOW"
+msgstr ""
+
+#: views/partials/browse_game_item.php:20
 msgid "GET"
 msgstr "Al"
 
@@ -463,6 +467,10 @@ msgstr ""
 #: views/partials/cloud_nav.php:19
 msgid "Publish"
 msgstr "Yayınla"
+
+#: views/partials/cloud_nav.php:25 views/setup_games.php:41
+msgid "Search Games"
+msgstr "Arama oyunları"
 
 #: views/partials/login_box.php:9
 msgid "Log in with Steam"
