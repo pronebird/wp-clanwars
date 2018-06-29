@@ -2250,9 +2250,6 @@ EOT;
         }
 
         $match_status_text = $this->match_status[$match->match_status];
-        $team1_flag = Utils::get_country_flag($match->team1_country);
-        $team2_flag = Utils::get_country_flag($match->team2_country);
-
         $team1_logo_attachment = wp_get_attachment_image_src($match->team1_logo, array(80, 80));
         $team2_logo_attachment = wp_get_attachment_image_src($match->team2_logo, array(80, 80));
 
@@ -2275,8 +2272,8 @@ EOT;
         $context = compact(
             'match', 'rounds',
             'match_status_text',
-            'team1_flag', 'team2_flag',
-            'team1_logo', 'team2_logo'
+            'team1_logo',
+            'team2_logo'
         );
 
         return $view->render( $context, false );
