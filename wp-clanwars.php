@@ -145,6 +145,8 @@ class WP_ClanWars {
     function activate_single_site()
     {
         $this->maybe_upgrade_database();
+
+        CloudAPI::check_client_key();
     }
 
     /**
