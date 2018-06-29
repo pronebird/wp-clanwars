@@ -109,17 +109,6 @@ class WP_ClanWars {
     }
 
     /**
-     * Check if plugin runs within jumpstarter instance
-     *
-     * @return bool true if plugin runs within jumpstarter instance, otherwise false
-     */
-    function is_jumpstarter() {
-        // JS_WP_User is defined in wp-jumpstarter:
-        // see: https://github.com/jumpstarter-io/wp-jumpstarter/blob/master/jumpstarter.php
-        return class_exists('JS_WP_User');
-    }
-
-    /**
      * Plugin activation hook
      *
      * Creates tables if needed
@@ -366,9 +355,6 @@ EOT;
             return;
         }
 
-        // place plugin below dashboard on jumpstarter
-        $menu_position = $this->is_jumpstarter() ? 3 : null;
-
         // prepare SVG data URI image for menu
         $iconData = file_get_contents( dirname(__FILE__) . '/images/plugin-icon.svg' );
         $iconDataURI = 'data:image/svg+xml;base64,' . base64_encode($iconData);
@@ -380,7 +366,7 @@ EOT;
             $top_level_slug,
             null,
             $iconDataURI,
-            $menu_position
+            null
         );
 
         $this->page_hooks['matches'] = add_submenu_page(
@@ -2497,8 +2483,7 @@ EOT;
             update_option( WP_CLANWARS_CATEGORY, (int) $_POST['category'] );
         }
 
-        // keep default styles always enabled on jumpstarter
-        $enable_default_styles = isset( $_POST['enable_default_styles'] ) || $this->is_jumpstarter();
+        $enable_default_styles = isset( $_POST['enable_default_styles'] );
 
         update_option( WP_CLANWARS_DEFAULTCSS, $enable_default_styles );
 
@@ -2722,9 +2707,6 @@ EOT;
 
         $enable_default_styles = get_option(WP_CLANWARS_DEFAULTCSS);
 
-        // hide default styles checkbox on jumpstarter
-        $hide_default_styles = $this->is_jumpstarter();
-
         $gamesResult = \WP_Clanwars\Games::get_game('id=all');
         $acl = \WP_Clanwars\ACL::get();
         $acl_keys = \WP_Clanwars\ACL::all_caps();
@@ -2763,7 +2745,7 @@ EOT;
         $view->add_helper( 'print_table_header', array($this, 'print_table_header') );
 
         $context = compact('table_columns', 'games', 'acl_keys', 'user_acl_info',
-                            'categories_dropdown', 'enable_default_styles', 'hide_default_styles');
+                            'categories_dropdown', 'enable_default_styles');
 
         $view->render( $context );
     }

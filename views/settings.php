@@ -13,12 +13,10 @@
                 <td><?php echo $categories_dropdown; ?></td>
             </tr>
 
-            <?php if(!$hide_default_styles) : ?>
             <tr valign="top">
                 <th scope="row"><?php _e('Enable default styles', WP_CLANWARS_TEXTDOMAIN); ?></th>
                 <td><input type="checkbox" name="enable_default_styles" value="true"<?php checked($enable_default_styles, true); ?> /></td>
             </tr>
-            <?php endif; ?>
 
          </table>
 
