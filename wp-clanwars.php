@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/pronebird/wp-clanwars
  * Description: Content manager for e-sports teams and communities
  * Author: Andrej Mihajlov
- * Version: 2.0.0
+ * Version: 2.0.1
  *
  * Tags: esport, clanwar, team, clan, game, gaming, sport, match
  **/
@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
 
 global $wpClanWars;
 
-define('WP_CLANWARS_VERSION', '2.0.0');
+define('WP_CLANWARS_VERSION', '2.0.1');
 
 define('WP_CLANWARS_TEXTDOMAIN', 'wp-clanwars');
 define('WP_CLANWARS_COUNTRIES_TEXTDOMAIN', 'wp-clanwars-countries');
@@ -145,6 +145,8 @@ class WP_ClanWars {
     function activate_single_site()
     {
         $this->maybe_upgrade_database();
+
+        CloudAPI::check_client_key();
     }
 
     /**

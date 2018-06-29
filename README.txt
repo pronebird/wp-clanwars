@@ -3,7 +3,7 @@ Contributors: andddd
 Tags: cybersport, clanwar, team, clan, cyber, sport, match, gaming, game, community
 Requires at least: 4.3
 Tested up to: 4.9.6
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,6 +47,11 @@ Plugin supports a match browser, which can be displayed for visitors using `[wp-
 4. Edit match
 
 == Changelog ==
+
+= 2.0.1 =
+
+* Minor networking improvements
+* Update localizations
 
 = 2.0.0 =
 
